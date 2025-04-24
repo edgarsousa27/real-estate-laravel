@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('sub_type');
+            $table->string('sub_type')->nullable();
             $table->string('title');
             $table->text('description');
             $table->string('status');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer('garages')->nullable();
             $table->integer('parking_spaces')->nullable();
             $table->integer('floors')->nullable();
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

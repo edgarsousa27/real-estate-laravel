@@ -25,7 +25,8 @@ class Property extends Model
         'kitchens',
         'garages',
         'parking_spaces',
-        'floors'
+        'floors',
+        'image_path'
     ];
 
     public function user()
