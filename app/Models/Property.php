@@ -27,4 +27,9 @@ class Property extends Model
         'parking_spaces',
         'floors'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
