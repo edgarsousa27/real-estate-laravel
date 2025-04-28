@@ -1,0 +1,12 @@
+{
+    "properties-title": "Properties available",
+    "properties-bedroom": "bedrooms",
+    "properties-wc": "WC",
+
+    "authenticated": {
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "logout": "Log Out",
+        "logged": "Welcome back, "
+    }
+}

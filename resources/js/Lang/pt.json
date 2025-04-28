@@ -1,0 +1,12 @@
+{
+    "properties-title": "Properties available",
+    "properties-bedroom": "quartos",
+    "properties-wc": "WC",
+
+    "authenticated": {
+        "dashboard": "Painel de Gestão",
+        "profile": "Perfil",
+        "logout": "Terminar sessão",
+        "logged": "Bem vindo de volta, {{user.name}}"
+    }
+}

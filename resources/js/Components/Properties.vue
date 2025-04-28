@@ -9,18 +9,18 @@
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
                     >
                         <div
-                            class="h-48 sm:h-56 md:h-48 lg:h-56 xl:h-48 overflow-hidden"
+                            class="h-48 sm:h-56 md:h-48 lg:h-56 xl:h-48 overflow-hidden cursor-pointer"
                         >
                             <img
                                 :src="`/storage/${proper.image_path}`"
                                 :alt="proper.title"
-                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                                class="w-full h-full object-cover"
                             />
                         </div>
                         <div class="p-4 sm:p-5 flex-grow flex flex-col">
                             <div class="mb-3 sm:mb-4 flex-grow">
                                 <h2
-                                    class="text-lg sm:text-xl font-bold text-gray-800 hover:text-blue-600 line-clamp-2 mb-1"
+                                    class="text-lg sm:text-xl font-bold text-gray-800 hover:text-blue-600 line-clamp-2 mb-1 cursor-pointer"
                                 >
                                     {{ proper.title }}
                                 </h2>
@@ -45,17 +45,19 @@
                                 <div
                                     class="flex items-center bg-gray-100 px-2 py-1 rounded"
                                 >
-                                    {{ proper.square_meters }} m²
+                                    {{ proper.square_meters + "m²" }}
                                 </div>
                                 <div
                                     class="flex items-center bg-gray-100 px-2 py-1 rounded"
                                 >
-                                    {{ proper.bedrooms }} quartos
+                                    {{ proper.bedrooms }}
+                                    {{ t("properties-bedroom") }}
                                 </div>
                                 <div
                                     class="flex items-center bg-gray-100 px-2 py-1 rounded"
                                 >
-                                    {{ proper.bathrooms }} WC
+                                    {{ proper.bathrooms }}
+                                    {{ t("properties-wc") }}
                                 </div>
                             </div>
 
@@ -65,7 +67,7 @@
                                 <span
                                     class="text-lg sm:text-xl font-bold text-blue-600"
                                 >
-                                    {{ proper.price }} €
+                                    {{ formatPrice(proper.price) + "€" }}
                                 </span>
                             </div>
                         </div>
@@ -77,5 +79,12 @@
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+
 const props = defineProps(["properties"]);
+const { t } = useI18n();
+
+const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 </script>
