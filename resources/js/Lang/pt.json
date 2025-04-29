@@ -1,12 +1,17 @@
 {
-    "properties-title": "Properties available",
+    "properties-page": "Imóveis",
+    "properties-title": "Imóveis disponíveis",
     "properties-bedroom": "quartos",
     "properties-wc": "WC",
 
     "authenticated": {
-        "dashboard": "Painel de Gestão",
+        "dashboard": "Dashboard",
         "profile": "Perfil",
         "logout": "Terminar sessão",
-        "logged": "Bem vindo de volta, {{user.name}}"
+        "logged": "Bem vindo, "
+    },
+
+    "default": {
+        "welcome": "Home"
     }
 }

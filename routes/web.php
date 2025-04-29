@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -11,19 +10,19 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->middleware(['verified'])->name('dashboard');
-    Route::get('dashboard/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('dashboard/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('dashboard/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::prefix('properties')->group(function () {
-    Route::get('/', [PropertyController::class, 'index'])->name('properties.index');
+    Route::get('/', [PropertyController::class, 'index'])->name('properties');
 });
 
 require __DIR__.'/auth.php';
