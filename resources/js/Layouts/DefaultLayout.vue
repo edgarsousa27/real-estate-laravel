@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="border-b border-gray-100 bg-white">
+        <div class="min-h-screen bg-white">
+            <nav class="border-b bg-white">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 justify-between">
+                    <div class="flex h-20 justify-between">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
@@ -17,14 +17,41 @@
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden sm:-my-px sm:ms-10 sm:flex sm:items-center sm:space-x-8"
                             >
-                                <NavLink
-                                    :href="route('properties')"
-                                    :active="route().current('properties')"
-                                >
-                                    {{ t("properties.page") }}
-                                </NavLink>
+                                <Dropdown align="center" width="48">
+                                    <template #trigger>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center px-3 py-2 text-md font-medium text-gray-700 hover:text-gray-900 focus:outline-none transition duration-150 ease-in-out group"
+                                        >
+                                            {{ t("buttons.buy") }}
+                                            <svg
+                                                class="ml-1 h-4 w-4 text-gray-500 group-hover:text-gray-700 transition duration-150 ease-in-out"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </template>
+
+                                    <template #content>
+                                        <div class="py-1">
+                                            <DropdownLink
+                                                :href="route('properties')"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                            >
+                                                {{ t("buttons.houses") }}
+                                            </DropdownLink>
+                                        </div>
+                                    </template>
+                                </Dropdown>
                             </div>
                         </div>
 
@@ -42,7 +69,6 @@
                                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
                                                 {{ $page.props.auth.user.name }}
-
                                                 <svg
                                                     class="-me-0.5 ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +101,12 @@
                                     </template>
                                 </Dropdown>
                             </div>
-                            <ChangeLanguage></ChangeLanguage>
+                            <div v-else>
+                                <NavLink :href="route('register')">
+                                    Minha conta
+                                </NavLink>
+                            </div>
+                            <ChangeLanguage class="pl-5"></ChangeLanguage>
                         </div>
 
                         <!-- Hamburger -->
@@ -134,7 +165,7 @@
                             :href="route('properties')"
                             :active="route().current('properties')"
                         >
-                            {{ t("properties.page") }}
+                            Comprar
                         </ResponsiveNavLink>
                     </div>
 

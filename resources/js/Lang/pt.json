@@ -6,6 +6,11 @@
         "wc": "WC"
     },
 
+    "buttons": {
+        "buy": "Comprar",
+        "houses": "Casas"
+    },
+
     "authenticated": {
         "dashboard": "Dashboard",
         "profile": "Perfil",
