@@ -17,7 +17,7 @@
                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                             />
                             <div
-                                class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-red-600"
+                                class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-blue-500 cursor-pointer transition-colors duration-150"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@
                                 </svg>
                             </div>
                             <div
-                                class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg text-white px-4 py-2 flex items-center justify-between"
+                                class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg px-4 py-2 flex"
                             >
                                 <span
                                     class="text-lg sm:text-xl font-bold text-blue-600"
@@ -46,36 +46,72 @@
                         </div>
 
                         <div class="p-4 sm:p-5 flex-grow flex flex-col">
-                            <div class="flex gap-1">
-                                <h1
-                                    class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                            <div
+                                class="flex gap-1 justify-between items-center"
+                            >
+                                <div class="flex gap-1">
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-if="proper.category_id === 1"
+                                    >
+                                        {{ t("category.house") }}
+                                    </h1>
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-else-if="proper.category_id === 2"
+                                    >
+                                        {{ t("category.apartment") }}
+                                    </h1>
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-else
+                                    >
+                                        {{ t("category.land") }}
+                                    </h1>
+                                    <span
+                                        v-if="proper.bedrooms != null"
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{
+                                            proper.bedrooms +
+                                            " " +
+                                            t("properties.bedroom")
+                                        }}
+                                    </span>
+                                    <span
+                                        v-if="proper.bathrooms != null"
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{
+                                            proper.bathrooms +
+                                            " " +
+                                            t("properties.wc")
+                                        }}
+                                    </span>
+                                    <span
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{ proper.square_meters + " m2" }}
+                                    </span>
+                                </div>
+                                <!-- Envelope icon moved here -->
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="w-6 h-6 text-gray-500 hover:text-blue-500 cursor-pointer"
                                 >
-                                    {{ proper.title }}
-                                </h1>
-                                <span
-                                    v-if="proper.bedrooms != null"
-                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
-                                >
-                                    {{
-                                        proper.bedrooms +
-                                        " " +
-                                        t("properties.bedroom")
-                                    }}
-                                </span>
-                                <span
-                                    v-if="proper.bathrooms != null"
-                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
-                                >
-                                    {{
-                                        proper.bathrooms +
-                                        " " +
-                                        t("properties.wc")
-                                    }}
-                                </span>
-                                <span
-                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
-                                    >{{ proper.square_meters + " m2" }}
-                                </span>
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                    />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
                             </div>
                             <div class="flex-grow">
                                 <h2
@@ -95,10 +131,22 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 
-const props = defineProps(["properties"]);
+const props = defineProps({
+    properties: Array,
+    categories: Array,
+});
+
 const { t } = useI18n();
 
 const formatPrice = (price) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+const showCategories = (category_id) => {
+    const category = props.categories.find((cate) => cate.id === category_id);
+
+    return category.name;
+};
+
+console.log(props.categories);
 </script>

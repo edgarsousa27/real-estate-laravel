@@ -9,7 +9,10 @@
             >
                 {{ t("properties.title") }}
             </h1>
-            <Properties :properties="props.properties" />
+            <Properties
+                :properties="props.properties"
+                :categories="props.categories"
+            />
         </div>
     </DefaultLayout>
 </template>
@@ -20,6 +23,9 @@ import Properties from "@/Components/Properties.vue";
 import { useI18n } from "vue-i18n";
 import { Head } from "@inertiajs/vue3";
 
-const props = defineProps(["properties"]);
+const props = defineProps({
+    properties: Array,
+    categories: Array,
+});
 const { t } = useI18n();
 </script>

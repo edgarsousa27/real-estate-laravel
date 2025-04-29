@@ -9,6 +9,7 @@
 
     "buttons": {
         "buy": "Buy",
+        "rent": "Rent",
         "houses-apartments": "Houses and Apartments",
         "houses": "Houses",
         "apartments": "Apartments",
@@ -52,5 +53,11 @@
 
     "default": {
         "welcome": "Home"
+    },
+
+    "category": {
+        "house": "House",
+        "apartment": "Apartment",
+        "land": "Land"
     }
 }

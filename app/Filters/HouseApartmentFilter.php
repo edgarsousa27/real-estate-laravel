@@ -9,6 +9,6 @@ class HouseApartmentFilter implements Filter
 {
     public function __invoke(Builder $query, $value, string $property): void
     {
-        $query->where('type', 'Casa')->orWhere('type', 'Apartamento');
+        $query->where('category_id', 1)->orWhere('category_id', 2);
     }
 }

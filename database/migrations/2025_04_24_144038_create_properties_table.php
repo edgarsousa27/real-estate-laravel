@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('sub_type')->nullable();
-            $table->string('title');
+            $table->foreignId('category_id')->nullable()->constrained('categories_properties');
             $table->text('description');
             $table->string('status');
             $table->integer('price');

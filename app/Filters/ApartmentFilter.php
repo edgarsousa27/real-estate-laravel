@@ -9,6 +9,6 @@ class ApartmentFilter implements Filter
 {
     public function __invoke(Builder $query, $value, string $property): void
     {
-        $query->where('type', 'Apartamento');
+        $query->where('category_id', '2');
     }
 }

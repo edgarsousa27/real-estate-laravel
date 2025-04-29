@@ -9,9 +9,7 @@ class Property extends Model
     protected $table = 'properties';
 
     protected $fillable = [
-        'type',
-        'sub_type',
-        'title',
+        'category_id',
         'description',
         'status',
         'price',
@@ -32,5 +30,10 @@ class Property extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

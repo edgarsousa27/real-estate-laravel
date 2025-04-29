@@ -12,6 +12,7 @@ use App\Filters\ApartmentFilter;
 use App\Filters\HouseFilter;
 use App\Filters\HouseApartmentFilter;
 use App\Filters\LandsFilter;
+use App\Models\Category;
 
 class PropertyController extends Controller
 {
@@ -29,10 +30,13 @@ class PropertyController extends Controller
             AllowedFilter::custom('lands', new LandsFilter)
         ]);
 
-        $properties = $query->select('type','title','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
+        $properties = $query->select('category_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
+
+        $categories = Category::select('id', 'name')->get();
 
         return Inertia::render('Properties/Index', [
-            'properties' => $properties
+            'properties' => $properties,
+            'categories' => $categories
         ]);
     }
 

@@ -9,6 +9,6 @@ class LandsFilter implements Filter
 {
     public function __invoke(Builder $query, $value, string $property): void
     {
-        $query->where('type', 'Terreno');
+        $query->where('category_id', 3);
     }
 }

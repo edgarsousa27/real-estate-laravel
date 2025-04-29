@@ -52,5 +52,11 @@
 
     "default": {
         "welcome": "Home"
+    },
+
+    "category": {
+        "house": "Casa",
+        "apartment": "Apartamento",
+        "land": "Terreno"
     }
 }
