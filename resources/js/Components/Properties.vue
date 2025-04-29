@@ -51,13 +51,13 @@
                                     class="flex items-center bg-gray-100 px-2 py-1 rounded"
                                 >
                                     {{ proper.bedrooms }}
-                                    {{ t("properties-bedroom") }}
+                                    {{ t("properties.bedroom") }}
                                 </div>
                                 <div
                                     class="flex items-center bg-gray-100 px-2 py-1 rounded"
                                 >
                                     {{ proper.bathrooms }}
-                                    {{ t("properties-wc") }}
+                                    {{ t("properties.wc") }}
                                 </div>
                             </div>
 

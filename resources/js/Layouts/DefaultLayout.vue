@@ -23,7 +23,7 @@
                                     :href="route('properties')"
                                     :active="route().current('properties')"
                                 >
-                                    {{ t("properties-page") }}
+                                    {{ t("properties.page") }}
                                 </NavLink>
                             </div>
                         </div>
@@ -134,20 +134,20 @@
                             :href="route('properties')"
                             :active="route().current('properties')"
                         >
-                            {{ t("properties-page") }}
+                            {{ t("properties.page") }}
                         </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="border-t border-gray-200 pb-1 pt-4">
-                        <!-- <div class="px-4">
+                        <div class="px-4" v-if="$page.props.auth.user">
                             <div class="text-base font-medium text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
                             <div class="text-sm font-medium text-gray-500">
                                 {{ $page.props.auth.user.email }}
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">

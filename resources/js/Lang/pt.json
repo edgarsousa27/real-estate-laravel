@@ -1,14 +1,42 @@
 {
-    "properties-page": "Imóveis",
-    "properties-title": "Imóveis disponíveis",
-    "properties-bedroom": "quartos",
-    "properties-wc": "WC",
+    "properties": {
+        "page": "Imóveis",
+        "title": "Imóveis disponíveis",
+        "bedroom": "quartos",
+        "wc": "WC"
+    },
 
     "authenticated": {
         "dashboard": "Dashboard",
         "profile": "Perfil",
         "logout": "Terminar sessão",
         "logged": "Bem vindo, "
+    },
+
+    "profile": {
+        "page": "Perfil",
+        "info": "Informações sobre o perfil",
+        "info-desc": "Atualizar as informações do perfil e o endereço de e-mail da sua conta.",
+        "name": "Nome",
+        "email": "Email",
+        "email-unverified": "O e-mail não foi verificado.",
+        "email-resend": "Clique aqui para reenviar o e-mail de verificação.",
+        "email-new": "Foi enviada uma nova ligação de verificação para o seu e-mail",
+        "save": "Guardar",
+        "saved": "Guardado!",
+
+        "password-info": "Atualizar a palavra-passe",
+        "password-info-desc": "Certifique-se de que a sua conta utiliza uma palavra-passe longa e aleatória para se manter segura.",
+        "current-password": "Palavra-passe atual",
+        "new-password": "Nova palavra-passe",
+        "confirm-password": "Confirmar a palavra-passe",
+
+        "delete-info": "Eliminar a conta",
+        "delete-info-desc": "Quando a sua conta for eliminada, todos os seus recursos e dados serão permanentemente eliminados. Antes de eliminar a sua conta, descarregue todos os dados ou informações que pretenda conservar.",
+        "delete-account": "Eliminar a conta",
+        "delete-confirm": "Tem a certeza de que pretende eliminar a sua conta?",
+
+        "cancel": "Cancelar"
     },
 
     "default": {

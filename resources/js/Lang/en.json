@@ -1,14 +1,42 @@
 {
-    "properties-page": "Properties",
-    "properties-title": "Properties available",
-    "properties-bedroom": "bedrooms",
-    "properties-wc": "WC",
+    "properties": {
+        "page": "Properties",
+        "title": "Properties available",
+        "bedroom": "bedrooms",
+        "wc": "WC"
+    },
 
     "authenticated": {
         "dashboard": "Dashboard",
         "profile": "Profile",
         "logout": "Log Out",
         "logged": "Welcome back, "
+    },
+
+    "profile": {
+        "page": "Profile",
+        "info": "Profile Information",
+        "info-desc": "Update your account's profile information and email address.",
+        "name": "Name",
+        "email": "Email",
+        "email-unverified": "Your email address is unverified.",
+        "email-resend": "Click here to re-send the verification email.",
+        "email-new": "A new verification link has been sent to your email address.",
+        "save": "Save",
+        "saved": "Saved",
+
+        "password-info": "Update Password",
+        "password-info-desc": "Ensure your account is using a long, random password to stay secure.",
+        "current-password": "Current password",
+        "new-password": "New password",
+        "confirm-password": "Confirm passoword",
+
+        "delete-info": "Delete account",
+        "delete-info-desc": "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
+        "delete-account": "Delete account",
+        "delete-confirm": "Are you sure you want to delete your account?",
+
+        "cancel": "Cancel"
     },
 
     "default": {

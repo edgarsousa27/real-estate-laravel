@@ -13,8 +13,8 @@ import pt from "./Lang/pt.json";
 import en from "./Lang/en.json";
 
 const i18n = createI18n({
-    locale: "en",
-    fallbackLocale: "en",
+    locale: "pt",
+    fallbackLocale: "pt",
     messages: {
         pt,
         en,
