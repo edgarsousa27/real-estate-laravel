@@ -3,12 +3,18 @@
         "page": "Imóveis",
         "title": "Imóveis disponíveis",
         "bedroom": "quartos",
-        "wc": "WC"
+        "wc": "WC",
+        "rooms": "divisões"
     },
 
     "buttons": {
         "buy": "Comprar",
-        "houses": "Casas"
+        "houses-apartments": "Casas e Apartamentos",
+        "houses": "Casas",
+        "apartments": "Apartamentos",
+        "land": "Terrenos",
+        "looking-for": "Está à procura de",
+        "my-account": "Minha conta"
     },
 
     "authenticated": {

@@ -43,12 +43,73 @@
 
                                     <template #content>
                                         <div class="py-1">
+                                            <div
+                                                class="flex gap-2 px-4 py-2 text-start font-bold text-xl"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="size-6"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                                    />
+                                                </svg>
+
+                                                <span>{{
+                                                    t("buttons.looking-for")
+                                                }}</span>
+                                            </div>
                                             <DropdownLink
-                                                :href="route('properties')"
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[houses-apartments]':
+                                                            'Casa/Apartamento',
+                                                    })
+                                                "
+                                                >{{
+                                                    t(
+                                                        "buttons.houses-apartments"
+                                                    )
+                                                }}</DropdownLink
+                                            >
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[houses]':
+                                                            'Casa',
+                                                    })
+                                                "
                                                 class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             >
                                                 {{ t("buttons.houses") }}
                                             </DropdownLink>
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[apartments]':
+                                                            'Apartamento',
+                                                    })
+                                                "
+                                            >
+                                                {{ t("buttons.apartments") }}
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[lands]':
+                                                            'Terreno',
+                                                    })
+                                                "
+                                                >{{
+                                                    t("buttons.land")
+                                                }}</DropdownLink
+                                            >
                                         </div>
                                     </template>
                                 </Dropdown>
@@ -102,8 +163,8 @@
                                 </Dropdown>
                             </div>
                             <div v-else>
-                                <NavLink :href="route('register')">
-                                    Minha conta
+                                <NavLink :href="route('login')">
+                                    {{ t("buttons.my-account") }}
                                 </NavLink>
                             </div>
                             <ChangeLanguage class="pl-5"></ChangeLanguage>

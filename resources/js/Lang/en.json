@@ -3,12 +3,18 @@
         "page": "Properties",
         "title": "Properties available",
         "bedroom": "bedrooms",
-        "wc": "WC"
+        "wc": "WC",
+        "rooms": "rooms"
     },
 
     "buttons": {
         "buy": "Buy",
-        "houses": "Houses"
+        "houses-apartments": "Houses and Apartments",
+        "houses": "Houses",
+        "apartments": "Apartments",
+        "land": "Land",
+        "looking-for": "Are you looking for",
+        "my-account": "My account"
     },
 
     "authenticated": {

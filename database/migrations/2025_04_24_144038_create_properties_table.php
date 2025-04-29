@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('status');
-            $table->decimal('price', 10,2);
+            $table->integer('price');
             $table->integer('square_meters');
-            $table->integer('year');
+            $table->integer('year')->nullable();
             $table->text('address')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();

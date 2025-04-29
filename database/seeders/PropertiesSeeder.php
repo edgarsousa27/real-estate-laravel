@@ -15,10 +15,10 @@ class PropertiesSeeder extends Seeder
     {
         foreach([
             [
-                'type' => 'Moradia',
+                'type' => 'Casa',
                 'sub_type' => 'Germinada',
-                'title' => 'Moraria germinada em Santo Tirso',
-                'description' => 'Moraria germinada em Santo Tirso',
+                'title' => 'Casa',
+                'description' => 'Casa germinada em Santo Tirso',
                 'status' => 'Disponível',
                 'price' => 250000,
                 'square_meters' => 100,
@@ -37,7 +37,7 @@ class PropertiesSeeder extends Seeder
             [
                 'type' => 'Apartamento',
                 'sub_type' => null,
-                'title' => 'Apartamento em Lisboa',
+                'title' => 'Apartamento',
                 'description' => 'Apartamento em Lisboa',
                 'status' => 'Disponível',
                 'price' => 500000,
@@ -53,6 +53,26 @@ class PropertiesSeeder extends Seeder
                 'parking_spaces' => 1,
                 'floors' => 1,
                 'image_path' => 'images/casa2.jpg'
+            ],
+            [
+                'type' => 'Terreno',
+                'sub_type' => null,
+                'title' => 'Terreno',
+                'description' => 'Terreno em Lisboa',
+                'status' => 'Disponível',
+                'price' => 90000,
+                'square_meters' => 70,
+                'year' => null,
+                'address' => null,
+                'city' => 'Lisboa',
+                'country' => null,
+                'bathrooms' => null,
+                'bedrooms' => null,
+                'kitchens' => null,
+                'garages' => null,
+                'parking_spaces' => null,
+                'floors' => null,
+                'image_path' => 'images/terreno1.jpg'
             ]
         ] as $properties)
 

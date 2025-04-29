@@ -1,74 +1,88 @@
 <template>
     <div class="py-8 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-6xl max-h-6xl mx-auto">
             <ul
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"
             >
                 <li v-for="proper in properties" :key="proper.id">
                     <div
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
                     >
                         <div
-                            class="h-48 sm:h-56 md:h-48 lg:h-56 xl:h-48 overflow-hidden cursor-pointer"
+                            class="relative h-56 sm:h-56 md:h-72 lg:h-72 xl:h-72"
                         >
                             <img
                                 :src="`/storage/${proper.image_path}`"
                                 :alt="proper.title"
-                                class="w-full h-full object-cover"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                             />
-                        </div>
-                        <div class="p-4 sm:p-5 flex-grow flex flex-col">
-                            <div class="mb-3 sm:mb-4 flex-grow">
-                                <h2
-                                    class="text-lg sm:text-xl font-bold text-gray-800 hover:text-blue-600 line-clamp-2 mb-1 cursor-pointer"
-                                >
-                                    {{ proper.title }}
-                                </h2>
-                                <p
-                                    class="text-gray-600 text-xs sm:text-sm line-clamp-2"
-                                >
-                                    {{ proper.description }}
-                                </p>
-                            </div>
-
                             <div
-                                class="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-700"
+                                class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-red-600"
                             >
-                                <div
-                                    class="flex items-center bg-gray-100 px-2 py-1 rounded"
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="gray"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="gray"
+                                    class="size-6"
                                 >
-                                    <span
-                                        class="truncate max-w-[80px] sm:max-w-none"
-                                        >{{ proper.city }}</span
-                                    >
-                                </div>
-                                <div
-                                    class="flex items-center bg-gray-100 px-2 py-1 rounded"
-                                >
-                                    {{ proper.square_meters + "m²" }}
-                                </div>
-                                <div
-                                    class="flex items-center bg-gray-100 px-2 py-1 rounded"
-                                >
-                                    {{ proper.bedrooms }}
-                                    {{ t("properties.bedroom") }}
-                                </div>
-                                <div
-                                    class="flex items-center bg-gray-100 px-2 py-1 rounded"
-                                >
-                                    {{ proper.bathrooms }}
-                                    {{ t("properties.wc") }}
-                                </div>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                                    />
+                                </svg>
                             </div>
-
                             <div
-                                class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto"
+                                class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg text-white px-4 py-2 flex items-center justify-between"
                             >
                                 <span
                                     class="text-lg sm:text-xl font-bold text-blue-600"
                                 >
-                                    {{ formatPrice(proper.price) + "€" }}
+                                    {{ "€" + formatPrice(proper.price) }}
                                 </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 sm:p-5 flex-grow flex flex-col">
+                            <div class="flex gap-1">
+                                <h1
+                                    class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                >
+                                    {{ proper.title }}
+                                </h1>
+                                <span
+                                    v-if="proper.bedrooms != null"
+                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                >
+                                    {{
+                                        proper.bedrooms +
+                                        " " +
+                                        t("properties.bedroom")
+                                    }}
+                                </span>
+                                <span
+                                    v-if="proper.bathrooms != null"
+                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                >
+                                    {{
+                                        proper.bathrooms +
+                                        " " +
+                                        t("properties.wc")
+                                    }}
+                                </span>
+                                <span
+                                    class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >{{ proper.square_meters + " m2" }}
+                                </span>
+                            </div>
+                            <div class="flex-grow">
+                                <h2
+                                    class="text-md sm:text-md text-gray-500 mb-1 cursor-pointer"
+                                >
+                                    {{ proper.city }}
+                                </h2>
                             </div>
                         </div>
                     </div>
