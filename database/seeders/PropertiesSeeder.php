@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Property;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Carbon\Carbon;
 class PropertiesSeeder extends Seeder
 {
     /**
@@ -31,7 +31,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => 1,
                 'parking_spaces' => 1,
                 'floors' => 1,
-                'image_path' => 'images/casa1.jpg'
+                'image_path' => 'images/casa1.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
             [
                 'category_id' => 2,
@@ -50,7 +51,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => 1,
                 'parking_spaces' => 1,
                 'floors' => 1,
-                'image_path' => 'images/casa2.jpg'
+                'image_path' => 'images/casa2.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
             [
                 'category_id' => 3,
@@ -69,7 +71,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => null,
                 'parking_spaces' => null,
                 'floors' => null,
-                'image_path' => 'images/terreno1.jpg'
+                'image_path' => 'images/terreno1.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
             [
                 'category_id' => 2,
@@ -88,7 +91,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => 1,
                 'parking_spaces' => 1,
                 'floors' => 1,
-                'image_path' => 'images/casa2.jpg'
+                'image_path' => 'images/casa2.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
             [
                 'category_id' => 1,
@@ -107,7 +111,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => 1,
                 'parking_spaces' => 1,
                 'floors' => 1,
-                'image_path' => 'images/casa1.jpg'
+                'image_path' => 'images/casa1.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
             [
                 'category_id' => 3,
@@ -126,7 +131,8 @@ class PropertiesSeeder extends Seeder
                 'garages' => null,
                 'parking_spaces' => null,
                 'floors' => null,
-                'image_path' => 'images/terreno1.jpg'
+                'image_path' => 'images/terreno1.jpg',
+                'created_at' => Carbon::now()->subMinutes(rand(1, 1440)),
             ],
         ] as $properties)
 

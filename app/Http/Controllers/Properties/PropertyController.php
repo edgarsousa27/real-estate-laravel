@@ -12,8 +12,12 @@ use App\Filters\ApartmentFilter;
 use App\Filters\HouseFilter;
 use App\Filters\HouseApartmentFilter;
 use App\Filters\LandsFilter;
+use App\Sorts\SortByPrice;
 use App\Filters\TransactionFilter;
 use App\Models\Category;
+use App\Sorts\SortByDate;
+use App\Sorts\SortBySurfaceArea;
+use Spatie\QueryBuilder\AllowedSort;
 
 class PropertyController extends Controller
 {
@@ -30,6 +34,11 @@ class PropertyController extends Controller
             AllowedFilter::custom('houses-apartments', new HouseApartmentFilter),
             AllowedFilter::custom('lands', new LandsFilter),
             AllowedFilter::custom('transaction', new TransactionFilter)
+        ])
+        ->allowedSorts([
+            AllowedSort::custom('price', new SortbyPrice(), 'price'),
+            AllowedSort::custom('date', new SortByDate(), 'created_at'),
+            AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
         ]);
 
         $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();

@@ -9,6 +9,7 @@
             >
                 {{ t("properties.title") }}
             </h1>
+            <Sort></Sort>
             <Properties
                 :properties="props.properties"
                 :categories="props.categories"
@@ -20,6 +21,7 @@
 <script setup>
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import Properties from "@/Components/Properties.vue";
+import Sort from "@/Components/Sort.vue";
 import { useI18n } from "vue-i18n";
 import { Head } from "@inertiajs/vue3";
 

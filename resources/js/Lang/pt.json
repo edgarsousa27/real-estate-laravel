@@ -60,5 +60,15 @@
         "house": "Casa",
         "apartment": "Apartamento",
         "land": "Terreno"
+    },
+
+    "filters": {
+        "sort-by": "Ordenar por",
+        "price-up": "Preço mais alto",
+        "price-down": "Preço mais baixo",
+        "date-up": "Mais recentes",
+        "date-down": "Mais antigos",
+        "surface-up": "Maior área de superfície",
+        "surface-down": "Menor área de superfície"
     }
 }

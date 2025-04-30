@@ -60,5 +60,15 @@
         "house": "House",
         "apartment": "Apartment",
         "land": "Land"
+    },
+
+    "filters": {
+        "sort-by": "Sort by",
+        "price-up": "Highest price",
+        "price-down": "Lowest price",
+        "date-up": "Newest",
+        "date-down": "Oldest",
+        "surface-up": "Larger surface area",
+        "surface-down": "Smaller surface area"
     }
 }
