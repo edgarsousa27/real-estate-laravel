@@ -19,11 +19,15 @@
                             <div
                                 class="hidden sm:-my-px sm:ms-10 sm:flex sm:items-center sm:space-x-8"
                             >
-                                <Dropdown align="center" width="48">
+                                <Dropdown
+                                    align="center"
+                                    width="48"
+                                    class="hover:bg-blue-200 rounded-full"
+                                >
                                     <template #trigger>
                                         <button
                                             type="button"
-                                            class="inline-flex items-center px-3 py-2 text-md font-medium text-gray-700 hover:text-gray-900 focus:outline-none transition duration-150 ease-in-out group"
+                                            class="inline-flex items-center px-3 py-2 text-md font-medium transition duration-150 ease-in-out group hover:text-lime-400"
                                         >
                                             {{ t("buttons.buy") }}
                                             <svg
@@ -69,7 +73,7 @@
                                                 :href="
                                                     route('properties', {
                                                         'filter[houses-apartments]':
-                                                            'Casa/Apartamento',
+                                                            'houses-apartments',
                                                     })
                                                 "
                                                 >{{
@@ -82,10 +86,9 @@
                                                 :href="
                                                     route('properties', {
                                                         'filter[houses]':
-                                                            'Casa',
+                                                            'houses',
                                                     })
                                                 "
-                                                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             >
                                                 {{ t("buttons.houses") }}
                                             </DropdownLink>
@@ -93,7 +96,7 @@
                                                 :href="
                                                     route('properties', {
                                                         'filter[apartments]':
-                                                            'Apartamento',
+                                                            'apartments',
                                                     })
                                                 "
                                             >
@@ -103,13 +106,102 @@
                                                 :href="
                                                     route('properties', {
                                                         'filter[lands]':
-                                                            'Terreno',
+                                                            'lands',
                                                     })
                                                 "
                                                 >{{
                                                     t("buttons.land")
                                                 }}</DropdownLink
                                             >
+                                        </div>
+                                    </template>
+                                </Dropdown>
+
+                                <!--Rent out dropdrown-->
+
+                                <Dropdown
+                                    align="center"
+                                    width="48"
+                                    class="hover:bg-blue-200 rounded-full"
+                                >
+                                    <template #trigger>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center px-3 py-2 text-md font-medium text-gray-700 hover:text-gray-900 focus:outline-none transition duration-150 ease-in-out group"
+                                        >
+                                            {{ t("buttons.rent") }}
+                                            <svg
+                                                class="ml-1 h-4 w-4 text-gray-500 group-hover:text-gray-700 transition duration-150 ease-in-out"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </template>
+
+                                    <template #content>
+                                        <div class="py-1">
+                                            <div
+                                                class="flex gap-2 px-4 py-2 text-start font-bold text-xl"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="size-6"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                                    />
+                                                </svg>
+
+                                                <span>{{
+                                                    t("buttons.looking-for")
+                                                }}</span>
+                                            </div>
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[houses-apartments]':
+                                                            'houses-apartments',
+                                                    })
+                                                "
+                                                >{{
+                                                    t(
+                                                        "buttons.houses-apartments"
+                                                    )
+                                                }}</DropdownLink
+                                            >
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[houses]':
+                                                            'houses',
+                                                    })
+                                                "
+                                            >
+                                                {{ t("buttons.houses") }}
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[apartments]':
+                                                            'apartments',
+                                                    })
+                                                "
+                                            >
+                                                {{ t("buttons.apartments") }}
+                                            </DropdownLink>
                                         </div>
                                     </template>
                                 </Dropdown>
@@ -226,12 +318,15 @@
                             :href="route('properties')"
                             :active="route().current('properties')"
                         >
-                            Comprar
+                            {{ t("buttons.buy") }}
                         </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="border-t border-gray-200 pb-1 pt-4">
+                    <div
+                        class="border-t border-gray-200 pb-1 pt-4"
+                        v-if="$page.props.auth.user"
+                    >
                         <div class="px-4" v-if="$page.props.auth.user">
                             <div class="text-base font-medium text-gray-800">
                                 {{ $page.props.auth.user.name }}
@@ -253,6 +348,11 @@
                                 {{ t("authenticated.logout") }}
                             </ResponsiveNavLink>
                         </div>
+                    </div>
+                    <div v-else>
+                        <ResponsiveNavLink :href="route('login')">
+                            {{ t("buttons.my-account") }}
+                        </ResponsiveNavLink>
                     </div>
                 </div>
             </nav>

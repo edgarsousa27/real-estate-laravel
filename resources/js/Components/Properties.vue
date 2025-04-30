@@ -91,7 +91,7 @@
                                     <span
                                         class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
                                     >
-                                        {{ proper.square_meters + " m2" }}
+                                        {{ proper.square_meters + "㎡" }}
                                     </span>
                                 </div>
                                 <!-- Envelope icon moved here -->
