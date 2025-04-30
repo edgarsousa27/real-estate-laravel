@@ -38,9 +38,20 @@
                                 class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg px-4 py-2 flex"
                             >
                                 <span
+                                    v-if="proper.transaction_id == 1"
                                     class="text-lg sm:text-xl font-bold text-blue-600"
                                 >
-                                    {{ "€" + formatPrice(proper.price) }}
+                                    {{ formatPrice(proper.price) + "€" }}
+                                </span>
+                                <span
+                                    v-if="proper.transaction_id == 2"
+                                    class="text-lg sm:text-xl font-bold text-blue-600"
+                                >
+                                    {{ formatPrice(proper.price) + "€" }}
+                                    <span
+                                        class="text-xs font-bold text-gray-500"
+                                        >{{ t("properties.per-month") }}</span
+                                    >
                                 </span>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ use App\Filters\ApartmentFilter;
 use App\Filters\HouseFilter;
 use App\Filters\HouseApartmentFilter;
 use App\Filters\LandsFilter;
+use App\Filters\TransactionFilter;
 use App\Models\Category;
 
 class PropertyController extends Controller
@@ -27,7 +28,8 @@ class PropertyController extends Controller
             AllowedFilter::custom('houses', new HouseFilter),
             AllowedFilter::custom('apartments', new ApartmentFilter),
             AllowedFilter::custom('houses-apartments', new HouseApartmentFilter),
-            AllowedFilter::custom('lands', new LandsFilter)
+            AllowedFilter::custom('lands', new LandsFilter),
+            AllowedFilter::custom('transaction', new TransactionFilter)
         ]);
 
         $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();

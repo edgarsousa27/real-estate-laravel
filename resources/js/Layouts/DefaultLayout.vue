@@ -74,6 +74,8 @@
                                                     route('properties', {
                                                         'filter[houses-apartments]':
                                                             'houses-apartments',
+                                                        'filter[transaction]':
+                                                            'buy',
                                                     })
                                                 "
                                                 >{{
@@ -87,6 +89,8 @@
                                                     route('properties', {
                                                         'filter[houses]':
                                                             'houses',
+                                                        'filter[transaction]':
+                                                            'buy',
                                                     })
                                                 "
                                             >
@@ -97,6 +101,8 @@
                                                     route('properties', {
                                                         'filter[apartments]':
                                                             'apartments',
+                                                        'filter[transaction]':
+                                                            'buy',
                                                     })
                                                 "
                                             >
@@ -107,6 +113,8 @@
                                                     route('properties', {
                                                         'filter[lands]':
                                                             'lands',
+                                                        'filter[transaction]':
+                                                            'buy',
                                                     })
                                                 "
                                                 >{{
@@ -174,6 +182,8 @@
                                                     route('properties', {
                                                         'filter[houses-apartments]':
                                                             'houses-apartments',
+                                                        'filter[transaction]':
+                                                            'rent',
                                                     })
                                                 "
                                                 >{{
@@ -187,6 +197,8 @@
                                                     route('properties', {
                                                         'filter[houses]':
                                                             'houses',
+                                                        'filter[transaction]':
+                                                            'rent',
                                                     })
                                                 "
                                             >
@@ -197,11 +209,26 @@
                                                     route('properties', {
                                                         'filter[apartments]':
                                                             'apartments',
+                                                        'filter[transaction]':
+                                                            'rent',
                                                     })
                                                 "
                                             >
                                                 {{ t("buttons.apartments") }}
                                             </DropdownLink>
+                                            <DropdownLink
+                                                :href="
+                                                    route('properties', {
+                                                        'filter[lands]':
+                                                            'lands',
+                                                        'filter[transaction]':
+                                                            'rent',
+                                                    })
+                                                "
+                                                >{{
+                                                    t("buttons.land")
+                                                }}</DropdownLink
+                                            >
                                         </div>
                                     </template>
                                 </Dropdown>

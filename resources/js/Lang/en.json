@@ -4,7 +4,8 @@
         "title": "Properties available",
         "bedroom": "bedrooms",
         "wc": "WC",
-        "rooms": "rooms"
+        "rooms": "rooms",
+        "per-month": "per month"
     },
 
     "buttons": {
