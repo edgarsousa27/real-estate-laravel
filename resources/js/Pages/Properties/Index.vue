@@ -15,14 +15,15 @@
                 <Count
                     :count="props.count"
                     class="text-lg font-bold text-blue-500"
-                ></Count>
-                <Sort></Sort>
+                />
+                <Sort />
             </div>
 
             <Properties
                 :properties="props.properties.data"
                 :categories="props.categories"
             />
+            <Pagination :links="props.properties.links" />
         </div>
     </DefaultLayout>
 </template>
@@ -32,6 +33,7 @@ import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import Properties from "@/Components/Properties.vue";
 import Sort from "@/Components/Sort.vue";
 import Count from "@/Components/Count.vue";
+import Pagination from "@/Components/Pagination.vue";
 import { useI18n } from "vue-i18n";
 import { Head } from "@inertiajs/vue3";
 

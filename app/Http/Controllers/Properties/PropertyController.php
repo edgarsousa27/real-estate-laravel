@@ -41,7 +41,7 @@ class PropertyController extends Controller
             AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
         ]);
 
-        $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
+        $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->paginate(15)->appends(request()->query());
 
         $count = $properties->count();
 
