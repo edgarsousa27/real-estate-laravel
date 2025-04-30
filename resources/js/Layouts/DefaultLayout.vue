@@ -342,10 +342,22 @@
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            :href="route('properties')"
-                            :active="route().current('properties')"
+                            :href="
+                                route('properties', {
+                                    'filter[transaction]': 'buy',
+                                })
+                            "
                         >
                             {{ t("buttons.buy") }}
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="
+                                route('properties', {
+                                    'filter[transaction]': 'rent',
+                                })
+                            "
+                        >
+                            {{ t("buttons.rent") }}
                         </ResponsiveNavLink>
                     </div>
 
@@ -380,6 +392,9 @@
                         <ResponsiveNavLink :href="route('login')">
                             {{ t("buttons.my-account") }}
                         </ResponsiveNavLink>
+                    </div>
+                    <div>
+                        <ChangeLanguage class="px-4 py-4"></ChangeLanguage>
                     </div>
                 </div>
             </nav>

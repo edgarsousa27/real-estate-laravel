@@ -9,9 +9,18 @@
             >
                 {{ t("properties.title") }}
             </h1>
-            <Sort></Sort>
+            <div
+                class="px-2 max-w-6xl max-h-5xl mx-auto flex justify-left items-center gap-3"
+            >
+                <Count
+                    :count="props.count"
+                    class="text-lg font-bold text-blue-500"
+                ></Count>
+                <Sort></Sort>
+            </div>
+
             <Properties
-                :properties="props.properties"
+                :properties="props.properties.data"
                 :categories="props.categories"
             />
         </div>
@@ -22,12 +31,14 @@
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import Properties from "@/Components/Properties.vue";
 import Sort from "@/Components/Sort.vue";
+import Count from "@/Components/Count.vue";
 import { useI18n } from "vue-i18n";
 import { Head } from "@inertiajs/vue3";
 
 const props = defineProps({
-    properties: Array,
+    properties: [Array, Object],
     categories: Array,
+    count: Number,
 });
 const { t } = useI18n();
 </script>

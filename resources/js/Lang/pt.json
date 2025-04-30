@@ -69,6 +69,7 @@
         "date-up": "Mais recentes",
         "date-down": "Mais antigos",
         "surface-up": "Maior área de superfície",
-        "surface-down": "Menor área de superfície"
+        "surface-down": "Menor área de superfície",
+        "results": "resultados"
     }
 }

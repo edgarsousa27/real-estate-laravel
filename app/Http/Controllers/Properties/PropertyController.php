@@ -43,11 +43,14 @@ class PropertyController extends Controller
 
         $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
 
+        $count = $properties->count();
+
         $categories = Category::select('id', 'name')->get();
 
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
-            'categories' => $categories
+            'categories' => $categories,
+            'count' => $count
         ]);
     }
 
