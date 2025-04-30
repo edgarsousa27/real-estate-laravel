@@ -10,6 +10,7 @@ class Property extends Model
 
     protected $fillable = [
         'category_id',
+        'transaction_id',
         'description',
         'status',
         'price',
@@ -35,5 +36,10 @@ class Property extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 }

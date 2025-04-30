@@ -16,6 +16,7 @@ class PropertiesSeeder extends Seeder
         foreach([
             [
                 'category_id' => 1,
+                'transaction_id' => 1,
                 'description' => 'Casa germinada em Santo Tirso',
                 'status' => 'Disponível',
                 'price' => 250000,
@@ -34,6 +35,7 @@ class PropertiesSeeder extends Seeder
             ],
             [
                 'category_id' => 2,
+                'transaction_id' => 1,
                 'description' => 'Apartamento em Lisboa',
                 'status' => 'Disponível',
                 'price' => 500000,
@@ -52,6 +54,7 @@ class PropertiesSeeder extends Seeder
             ],
             [
                 'category_id' => 3,
+                'transaction_id' => 1,
                 'description' => 'Terreno em Lisboa',
                 'status' => 'Disponível',
                 'price' => 90000,

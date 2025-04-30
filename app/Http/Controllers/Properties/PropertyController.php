@@ -30,7 +30,7 @@ class PropertyController extends Controller
             AllowedFilter::custom('lands', new LandsFilter)
         ]);
 
-        $properties = $query->select('category_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
+        $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->get();
 
         $categories = Category::select('id', 'name')->get();
 
