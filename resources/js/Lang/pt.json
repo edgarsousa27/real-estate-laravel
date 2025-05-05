@@ -51,11 +51,11 @@
 
         "cancel": "Cancelar",
         "nationality": "Nacionalidade",
-        "document_type": "Tipo de documento",
-        "identity_card": "Cartão de cidadão",
-        "passport": "Passaporte",
         "identification_number": "Número de cartão de cidadão",
-        "passport_number": "Número de passaporte"
+        "passport_number": "Número de passaporte",
+        "tax_number": "NIF (Número de identificação fiscal)",
+        "phone_number": "Número de telefone",
+        "date_of_birth": "Data de nascimento"
     },
 
     "default": {

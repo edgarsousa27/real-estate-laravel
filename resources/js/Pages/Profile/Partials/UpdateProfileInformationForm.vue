@@ -66,6 +66,85 @@
                 </select>
             </div>
 
+            <div>
+                <InputLabel
+                    for="identification_number"
+                    :value="t('profile.identification_number')"
+                />
+
+                <TextInput
+                    id="identification_number"
+                    type="text"
+                    maxlength="8"
+                    class="mt-1 block w-full"
+                    v-model="form.identification_number"
+                    required
+                    autofocus
+                    autocomplete="identification_number"
+                />
+
+                <InputError
+                    class="mt-2"
+                    :message="form.errors.identification_number"
+                />
+            </div>
+
+            <div>
+                <InputLabel for="tax_number" :value="t('profile.tax_number')" />
+
+                <TextInput
+                    id="tax_number"
+                    type="text"
+                    maxlength="9"
+                    class="mt-1 block w-full"
+                    v-model="form.tax_number"
+                    required
+                    autofocus
+                    autocomplete="tax_number"
+                />
+
+                <InputError class="mt-2" :message="form.errors.tax_number" />
+            </div>
+
+            <div>
+                <InputLabel
+                    for="identification_number"
+                    :value="t('profile.phone_number')"
+                />
+
+                <TextInput
+                    id="phone_number"
+                    type="text"
+                    maxlength="9"
+                    class="mt-1 block w-full"
+                    v-model="form.phone_number"
+                    required
+                    autofocus
+                    autocomplete="identification_number"
+                />
+
+                <InputError class="mt-2" :message="form.errors.phone_number" />
+            </div>
+
+            <div>
+                <InputLabel
+                    for="identification_number"
+                    :value="t('profile.date_of_birth')"
+                />
+
+                <TextInput
+                    id="date_of_birth"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.date_of_birth"
+                    required
+                    autofocus
+                    autocomplete="date_of_birth"
+                />
+
+                <InputError class="mt-2" :message="form.errors.date_of_birth" />
+            </div>
+
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
                 <p class="mt-2 text-sm text-gray-800">
                     {{ t("profile.email-unverified.") }}
@@ -138,5 +217,9 @@ const form = useForm({
     name: user.name,
     email: user.email,
     nationality: user.nationality,
+    identification_number: user.identification_number,
+    tax_number: user.tax_number,
+    phone_number: user.phone_number,
+    date_of_birth: user.date_of_birth,
 });
 </script>

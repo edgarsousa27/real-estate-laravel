@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nationality')->nullable();
-            $table->enum('document', ['passport', 'identity_card'])->nullable();
             $table->integer('identification_number')->unique()->nullable();
-            $table->integer('passport_number')->unique()->nullable();
-            $table->integer('NIF')->unique()->nullable();
+            $table->integer('tax_number')->unique()->nullable();
             $table->date('date_of_birth')->nullable();
             $table->integer('phone_number')->unique()->nullable();
         });

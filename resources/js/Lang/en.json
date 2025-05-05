@@ -52,11 +52,11 @@
         "cancel": "Cancel",
 
         "nationality": "Nationality",
-        "document_type": "Document type",
-        "identity_card": "Identification Card",
-        "passport": "Passport",
         "identification_number": "Identification number",
-        "passport_number": "Passport number"
+        "passport_number": "Passport number",
+        "tax_number": "TIN ( Taxpayer identification number)",
+        "phone_number": "Phone number",
+        "date_of_birth": "Date of birth"
     },
 
     "default": {
