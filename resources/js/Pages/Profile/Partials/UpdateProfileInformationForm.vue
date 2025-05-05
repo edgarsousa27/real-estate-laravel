@@ -31,7 +31,7 @@
             </div>
 
             <div>
-                <InputLabel for="email" :value="t('profile.name')" />
+                <InputLabel for="email" :value="t('profile.email')" />
 
                 <TextInput
                     id="email"
