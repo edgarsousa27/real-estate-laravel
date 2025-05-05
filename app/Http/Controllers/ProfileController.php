@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use Illuminate\Support\Facades\File;
 class ProfileController extends Controller
 {
     /**
@@ -18,7 +18,15 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $json = File::get(resource_path('data/countries.json'));
+        $countries = collect(json_decode($json, true))
+            ->pluck('name') 
+            ->sort()
+            ->values();
+
+        
         return Inertia::render('Profile/Edit', [
+            'countries' => $countries,
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
@@ -36,6 +44,8 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+
+        dd($request->user());
 
         return Redirect::route('profile.edit');
     }

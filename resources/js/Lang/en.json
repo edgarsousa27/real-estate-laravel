@@ -49,7 +49,14 @@
         "delete-account": "Delete account",
         "delete-confirm": "Are you sure you want to delete your account?",
 
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+
+        "nationality": "Nationality",
+        "document_type": "Document type",
+        "identity_card": "Identification Card",
+        "passport": "Passport",
+        "identification_number": "Identification number",
+        "passport_number": "Passport number"
     },
 
     "default": {

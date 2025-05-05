@@ -14,6 +14,7 @@
                         <UpdateProfileInformationForm
                             :must-verify-email="mustVerifyEmail"
                             :status="status"
+                            :countries="countries"
                             class="max-w-xl"
                         />
                     </div>
@@ -46,6 +47,9 @@ defineProps({
     },
     status: {
         type: String,
+    },
+    countries: {
+        type: Array,
     },
 });
 </script>

@@ -39,10 +39,31 @@
                     class="mt-1 block w-full"
                     v-model="form.email"
                     required
-                    autocomplete="username"
+                    autocomplete="email"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel
+                    for="nationality"
+                    :value="t('profile.nationality')"
+                />
+
+                <select
+                    name="nationality"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    v-model="form.nationality"
+                >
+                    <option
+                        v-for="country in countries"
+                        :key="country"
+                        :value="country"
+                    >
+                        {{ country }}
+                    </option>
+                </select>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -106,6 +127,9 @@ defineProps({
     status: {
         type: String,
     },
+    countries: {
+        type: Array,
+    },
 });
 
 const user = usePage().props.auth.user;
@@ -113,5 +137,6 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    nationality: user.nationality,
 });
 </script>
