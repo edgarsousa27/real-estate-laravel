@@ -46,103 +46,153 @@
             </div>
 
             <div>
-                <InputLabel
-                    for="nationality"
-                    :value="t('profile.nationality')"
-                />
-
-                <select
-                    name="nationality"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    v-model="form.nationality"
+                <button
+                    @click.prevent="display = !display"
+                    class="flex items-center gap-2 text-gray-700"
                 >
-                    <option
-                        v-for="country in countries"
-                        :key="country"
-                        :value="country"
+                    <span class="font-medium">{{
+                        t("profile.advanced_options")
+                    }}</span>
+                    <span
+                        class="w-5 h-5 transform transition-transform duration-200"
+                        :class="{ 'rotate-180': display }"
                     >
-                        {{ country }}
-                    </option>
-                </select>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                            />
+                        </svg>
+                    </span>
+                </button>
             </div>
 
-            <div>
-                <InputLabel
-                    for="identification_number"
-                    :value="t('profile.identification_number')"
-                />
+            <div v-if="display">
+                <p class="text-sm text-gray-600">
+                    {{ t("profile.advanced_options_info") }}
+                </p>
 
-                <TextInput
-                    id="identification_number"
-                    type="text"
-                    maxlength="8"
-                    class="mt-1 block w-full"
-                    v-model="form.identification_number"
-                    required
-                    autofocus
-                    autocomplete="identification_number"
-                />
+                <div
+                    id="advanced-options-section"
+                    class="space-y-6 mt-4 p-6 bg-gray-50 rounded-lg border border-gray-200"
+                >
+                    <!-- Nationality -->
+                    <div>
+                        <InputLabel
+                            for="nationality"
+                            :value="t('profile.nationality')"
+                            required
+                        />
+                        <select
+                            id="nationality"
+                            name="nationality"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                            v-model="form.nationality"
+                        >
+                            <option
+                                v-for="country in countries"
+                                :key="country"
+                                :value="country"
+                            >
+                                {{ country }}
+                            </option>
+                        </select>
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.nationality"
+                        />
+                    </div>
 
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.identification_number"
-                />
-            </div>
+                    <!-- Identification Number -->
+                    <div>
+                        <InputLabel
+                            for="identification_number"
+                            :value="t('profile.identification_number')"
+                            required
+                        />
+                        <TextInput
+                            id="identification_number"
+                            type="text"
+                            maxlength="8"
+                            class="mt-1 block w-full"
+                            v-model="form.identification_number"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.identification_number"
+                        />
+                    </div>
 
-            <div>
-                <InputLabel for="tax_number" :value="t('profile.tax_number')" />
+                    <!-- Tax Number -->
+                    <div>
+                        <InputLabel
+                            for="tax_number"
+                            :value="t('profile.tax_number')"
+                        />
+                        <TextInput
+                            id="tax_number"
+                            type="text"
+                            maxlength="9"
+                            class="mt-1 block w-full"
+                            v-model="form.tax_number"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.tax_number"
+                        />
+                    </div>
 
-                <TextInput
-                    id="tax_number"
-                    type="text"
-                    maxlength="9"
-                    class="mt-1 block w-full"
-                    v-model="form.tax_number"
-                    required
-                    autofocus
-                    autocomplete="tax_number"
-                />
+                    <!-- Phone Number -->
+                    <div>
+                        <InputLabel
+                            for="phone_number"
+                            :value="t('profile.phone_number')"
+                        />
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span
+                                class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500"
+                                >+351</span
+                            >
+                            <TextInput
+                                id="phone_number"
+                                type="tel"
+                                maxlength="9"
+                                class="block w-full rounded-none rounded-r-md"
+                                v-model="form.phone_number"
+                            />
+                        </div>
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.phone_number"
+                        />
+                    </div>
 
-                <InputError class="mt-2" :message="form.errors.tax_number" />
-            </div>
-
-            <div>
-                <InputLabel
-                    for="identification_number"
-                    :value="t('profile.phone_number')"
-                />
-
-                <TextInput
-                    id="phone_number"
-                    type="text"
-                    maxlength="9"
-                    class="mt-1 block w-full"
-                    v-model="form.phone_number"
-                    required
-                    autofocus
-                    autocomplete="identification_number"
-                />
-
-                <InputError class="mt-2" :message="form.errors.phone_number" />
-            </div>
-
-            <div>
-                <InputLabel
-                    for="identification_number"
-                    :value="t('profile.date_of_birth')"
-                />
-
-                <TextInput
-                    id="date_of_birth"
-                    type="date"
-                    class="mt-1 block w-full"
-                    v-model="form.date_of_birth"
-                    required
-                    autofocus
-                    autocomplete="date_of_birth"
-                />
-
-                <InputError class="mt-2" :message="form.errors.date_of_birth" />
+                    <!-- Date of Birth -->
+                    <div>
+                        <InputLabel
+                            for="date_of_birth"
+                            :value="t('profile.date_of_birth')"
+                        />
+                        <TextInput
+                            id="date_of_birth"
+                            type="date"
+                            class="mt-1 block w-full"
+                            v-model="form.date_of_birth"
+                            max="2024-12-31"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.date_of_birth"
+                        />
+                    </div>
+                </div>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
@@ -196,6 +246,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { ref } from "vue";
 
 const { t } = useI18n();
 
@@ -222,4 +273,6 @@ const form = useForm({
     phone_number: user.phone_number,
     date_of_birth: user.date_of_birth,
 });
+
+const display = ref(false);
 </script>

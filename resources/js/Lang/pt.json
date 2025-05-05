@@ -50,6 +50,8 @@
         "delete-confirm": "Tem a certeza de que pretende eliminar a sua conta?",
 
         "cancel": "Cancelar",
+        "advanced_options": "Opções avançadas",
+        "advanced_options_info": "Adicione mais pormenores para que os vendedores o possam conhecer melhor. Também o ajuda a obter propriedades mais relevantes com base na sua nacionalidade.",
         "nationality": "Nacionalidade",
         "identification_number": "Número de cartão de cidadão",
         "passport_number": "Número de passaporte",

@@ -50,7 +50,8 @@
         "delete-confirm": "Are you sure you want to delete your account?",
 
         "cancel": "Cancel",
-
+        "advanced_options": "Advanced options",
+        "advanced_options_info": "Add more details so sellers can know you better. It also helps you get more relevant properties based on your nacionality.",
         "nationality": "Nationality",
         "identification_number": "Identification number",
         "passport_number": "Passport number",
