@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('categories_properties');
             $table->text('description');
-            $table->string('status');
             $table->integer('price');
             $table->integer('square_meters');
             $table->integer('year')->nullable();

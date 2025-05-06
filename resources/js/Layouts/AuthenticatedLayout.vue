@@ -25,6 +25,15 @@
                                 >
                                     {{ t("authenticated.dashboard") }}
                                 </NavLink>
+                                <NavLink
+                                    :href="route('properties.create')"
+                                    :active="
+                                        route().current('properties.create')
+                                    "
+                                    >{{
+                                        t("authenticated.properties")
+                                    }}</NavLink
+                                >
                             </div>
                         </div>
 
@@ -133,6 +142,13 @@
                         >
                             {{ t("authenticated.dashboard") }}
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('properties.create')"
+                            :active="route().current('properties.create')"
+                            >{{
+                                t("authenticated.properties")
+                            }}</ResponsiveNavLink
+                        >
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -158,6 +174,7 @@
                                 {{ t("authenticated.logout") }}
                             </ResponsiveNavLink>
                         </div>
+                        <ChangeLanguage class="pl-5"></ChangeLanguage>
                     </div>
                 </div>
             </nav>

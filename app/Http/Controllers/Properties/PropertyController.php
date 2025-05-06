@@ -59,7 +59,11 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','country','bathrooms','bedrooms', 'floors', 'image_path');
+
+        return Inertia::render('Properties/Create', [
+            'properties' => $properties
+        ]);
     }
 
     /**
@@ -67,8 +71,24 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Property::create($request->validate([
+            'category_id' => ['required', 'integer'],
+            'transaction_id' => ['required', 'integer'],
+            'description' => ['required'],
+            'address' => ['required'],
+            'price' => ['required', 'integer'],
+            'square_meters' => ['required', 'integer'],
+            'city' => ['required'],
+            'bathrooms' => ['integer'],
+            'bedrooms' => ['integer'],
+            'parking_spaces' => ['integer'],
+            'floors' => ['integer'],
+          ]));
+
+          dd($request->all());
+  
+          return to_route('properties');
+      }
 
     /**
      * Display the specified resource.

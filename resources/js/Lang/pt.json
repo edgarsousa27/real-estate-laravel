@@ -1,7 +1,9 @@
 {
     "properties": {
         "page": "Imóveis",
+        "page-create": "Publicar um imóvel",
         "title": "Imóveis disponíveis",
+        "create-title": "Publicar um imóvel",
         "bedroom": "quartos",
         "wc": "WC",
         "rooms": "divisões",
@@ -22,6 +24,7 @@
     "authenticated": {
         "dashboard": "Dashboard",
         "profile": "Perfil",
+        "properties": "Publicar um imóvel",
         "logout": "Terminar sessão",
         "logged": "Bem vindo, "
     },
