@@ -267,10 +267,16 @@
 
                                     <template #content>
                                         <DropdownLink
+                                            :href="route('dashboard')"
+                                        >
+                                            {{ t("authenticated.dashboard") }}
+                                        </DropdownLink>
+                                        <DropdownLink
                                             :href="route('profile.edit')"
                                         >
                                             {{ t("authenticated.profile") }}
                                         </DropdownLink>
+
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -376,6 +382,9 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <ResponsiveNavLink :href="route('dashboard')">
+                                {{ t("authenticated.dashboard") }}
+                            </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('profile.edit')">
                                 {{ t("authenticated.profile") }}
                             </ResponsiveNavLink>
