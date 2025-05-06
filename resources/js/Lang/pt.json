@@ -2,12 +2,35 @@
     "properties": {
         "page": "Imóveis",
         "page-create": "Publicar um imóvel",
+        "page-my-properties": "Meus imóveis",
         "title": "Imóveis disponíveis",
         "create-title": "Publicar um imóvel",
+        "my-properties-title": "Meus imóveis",
         "bedroom": "quartos",
         "wc": "WC",
         "rooms": "divisões",
         "per-month": "por mês"
+    },
+
+    "properties-form": {
+        "category": "Categoria",
+        "transaction": "Transação",
+        "description": "Descrição",
+        "address": "Morada",
+        "price": "Preço (€)",
+        "price-rent": "Preço da renda (por mês)",
+        "surface": "Área (m²)",
+        "city": "Cidade",
+        "submit": "Anunciar",
+        "house": "Casa",
+        "apartment": "Apartamento",
+        "land": "Terreno",
+        "sell": "Vender",
+        "rent": "Alugar",
+        "bathrooms": "Casas de banho (nº)",
+        "bedrooms": "Quartos (nº)",
+        "parking-spaces": "Lugares de estacionamento (nº)",
+        "floors": "Andares (nº)"
     },
 
     "buttons": {
@@ -25,6 +48,7 @@
         "dashboard": "Dashboard",
         "profile": "Perfil",
         "properties": "Publicar um imóvel",
+        "my-properties": "Meus imóveis",
         "logout": "Terminar sessão",
         "logged": "Bem vindo, "
     },

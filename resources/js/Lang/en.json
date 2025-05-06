@@ -2,12 +2,35 @@
     "properties": {
         "page": "Properties",
         "page-create": "Advertise a property",
+        "page-my-properties": "My properties",
         "title": "Properties available",
         "create-title": "Advertise a property",
+        "my-properties-title": "My properties",
         "bedroom": "bedrooms",
         "wc": "WC",
         "rooms": "rooms",
         "per-month": "per month"
+    },
+
+    "properties-form": {
+        "category": "Category",
+        "transaction": "Transaction",
+        "description": "Description",
+        "address": "Address",
+        "price": "Price (€)",
+        "price-rent": "Price of rent (per month)",
+        "surface": "Surface (m²)",
+        "city": "City",
+        "submit": "Advertise",
+        "house": "House",
+        "apartment": "Apartment",
+        "land": "Land",
+        "sell": "Sell",
+        "rent": "Rent",
+        "bathrooms": "Bathrooms (nº)",
+        "bedrooms": "Bedrooms (nº)",
+        "parking-spaces": "Parking Spaces (nº)",
+        "floors": "Floors (nº)"
     },
 
     "buttons": {
@@ -25,6 +48,7 @@
         "dashboard": "Dashboard",
         "profile": "Profile",
         "properties": "Advertise a property",
+        "my-properties": "My properties",
         "logout": "Log Out",
         "logged": "Welcome back, "
     },

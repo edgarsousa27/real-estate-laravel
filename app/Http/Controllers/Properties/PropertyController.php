@@ -17,6 +17,7 @@ use App\Filters\TransactionFilter;
 use App\Models\Category;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedSort;
 
 class PropertyController extends Controller
@@ -59,7 +60,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','country','bathrooms','bedrooms', 'floors', 'image_path');
+        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','country','bathrooms','bedrooms', 'floors', 'image_path')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties
@@ -71,7 +72,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        Property::create($request->validate([
+        Auth::user()->property()->create($request->validate([
             'category_id' => ['required', 'integer'],
             'transaction_id' => ['required', 'integer'],
             'description' => ['required'],
@@ -84,10 +85,8 @@ class PropertyController extends Controller
             'parking_spaces' => ['integer'],
             'floors' => ['integer'],
           ]));
-
-          dd($request->all());
   
-          return to_route('properties');
+          return to_route('welcome');
       }
 
     /**
@@ -95,7 +94,8 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+
+
     }
 
     /**
