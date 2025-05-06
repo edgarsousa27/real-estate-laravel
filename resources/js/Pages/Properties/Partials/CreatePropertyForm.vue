@@ -81,7 +81,6 @@
                         id="price"
                         v-model="form.price"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
                 <div v-if="form.transaction_id === 1">
@@ -95,7 +94,6 @@
                         id="price"
                         v-model="form.price"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
                 <div
@@ -113,7 +111,6 @@
                         id="square_meters"
                         v-model="form.square_meters"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
             </div>
@@ -133,7 +130,6 @@
                         id="bathrooms"
                         v-model="form.bathrooms"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
                 <div>
@@ -147,7 +143,6 @@
                         id="bedrooms"
                         v-model="form.bedrooms"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
                 <div>
@@ -161,7 +156,6 @@
                         id="parking_spaces"
                         v-model="form.parking_spaces"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        required
                     />
                 </div>
                 <div>
@@ -194,6 +188,21 @@
                 />
             </div>
 
+            <div>
+                <label
+                    for="upload"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >{{ t("properties-form.city") }}</label
+                >
+                <input
+                    type="file"
+                    @change="handleImageChange"
+                    multiple
+                    name="images[]"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
             <button
                 type="submit"
                 :disabled="form.processing"
@@ -210,6 +219,7 @@
 import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useForm } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 
@@ -217,7 +227,7 @@ defineProps({
     properties: [Array, Object],
 });
 
-const form = reactive({
+const form = useForm({
     category_id: null,
     transaction_id: null,
     description: "",
@@ -229,9 +239,17 @@ const form = reactive({
     bedrooms: null,
     parking_spaces: null,
     floors: null,
+    images: [],
 });
 
-function submit() {
-    router.post(route("properties.store"), form);
-}
+const handleImageChange = (e) => {
+    form.images = Array.from(e.target.files);
+};
+
+const submit = () => {
+    form.post(route("properties.store"), {
+        forceFormData: true,
+        onSuccess: () => form.reset(),
+    });
+};
 </script>

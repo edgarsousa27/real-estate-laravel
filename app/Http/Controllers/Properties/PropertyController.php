@@ -40,13 +40,15 @@ class PropertyController extends Controller
             AllowedSort::custom('price', new SortbyPrice(), 'price'),
             AllowedSort::custom('date', new SortByDate(), 'created_at'),
             AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
-        ]);
-
-        $properties = $query->select('category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms', 'image_path')->paginate(15)->appends(request()->query());
+        ])
+        ->with('media');
+        
+        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms')->paginate(15)->appends(request()->query());
 
         $count = $properties->count();
 
         $categories = Category::select('id', 'name')->get();
+
 
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
@@ -72,7 +74,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()->property()->create($request->validate([
+        $validator = $request->validate([
             'category_id' => ['required', 'integer'],
             'transaction_id' => ['required', 'integer'],
             'description' => ['required'],
@@ -80,13 +82,24 @@ class PropertyController extends Controller
             'price' => ['required', 'integer'],
             'square_meters' => ['required', 'integer'],
             'city' => ['required'],
-            'bathrooms' => ['integer'],
-            'bedrooms' => ['integer'],
-            'parking_spaces' => ['integer'],
-            'floors' => ['integer'],
-          ]));
+            'bathrooms' => ['integer', 'nullable'],
+            'bedrooms' => ['integer', 'nullable'],
+            'parking_spaces' => ['integer', 'nullable'],
+            'floors' => ['integer', 'nullable'],
+            'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048']
+          ]);
+
+        $properties = Auth::user()->property()->create($validator);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $properties->addMedia($image)->toMediaCollection('images');
+                }
+            }
+        }
   
-          return to_route('welcome');
+        return to_route('properties');
       }
 
     /**

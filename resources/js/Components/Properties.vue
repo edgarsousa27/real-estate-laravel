@@ -12,8 +12,9 @@
                             class="relative h-56 sm:h-56 md:h-72 lg:h-72 xl:h-72"
                         >
                             <img
-                                :src="`/storage/${proper.image_path}`"
-                                :alt="proper.title"
+                                v-if="proper.media.length > 0"
+                                :src="proper.media[0].original_url"
+                                :alt="'Property image ' + proper.id"
                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                             />
                             <div

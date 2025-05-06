@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Property extends Model
+class Property extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $table = 'properties';
 
     protected $fillable = [
@@ -25,8 +30,12 @@ class Property extends Model
         'garages',
         'parking_spaces',
         'floors',
-        'image_path'
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')->useDisk('public')->singleFile(false);
+    }
 
     public function user()
     {
