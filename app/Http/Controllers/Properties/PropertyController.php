@@ -22,6 +22,20 @@ use Spatie\QueryBuilder\AllowedSort;
 
 class PropertyController extends Controller
 {
+
+    public function welcome()
+    {
+        $properties_buy = Property::select('id')->where('transaction_id', 1);
+        $properties_rent = Property::select('id')->where('transaction_id', 2);
+
+        $count_buy = $properties_buy->count();
+        $count_rent = $properties_rent->count();
+
+        return Inertia::render('Welcome', [
+            'count_buy' => $count_buy,
+            'count_rent' => $count_rent
+        ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -107,7 +121,6 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-
 
     }
 

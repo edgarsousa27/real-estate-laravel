@@ -33,6 +33,19 @@
         "floors": "Andares (nº)"
     },
 
+    "carousel": {
+        "title": "Nós encontramos o",
+        "title-2": "imóvel perfeito",
+        "title-3": "para ti !",
+        "properties-sale": "imóveis à venda",
+        "properties-rent": "imóveis para alugar",
+        "localization": "Localização",
+        "placeholder": "Distrito, cidade ou código postal",
+        "search": "Pesquisar",
+        "tab-buy": "Para comprar",
+        "tab-rent": "Para alugar"
+    },
+
     "buttons": {
         "buy": "Comprar",
         "rent": "Para arrendar",

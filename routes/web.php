@@ -5,12 +5,7 @@ use App\Http\Controllers\Properties\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-})->name('welcome');
+Route::get('/', [PropertyController::class, 'welcome'])->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {

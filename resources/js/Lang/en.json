@@ -33,6 +33,19 @@
         "floors": "Floors (nº)"
     },
 
+    "carousel": {
+        "title": "We've found",
+        "title-2": "the perfect property",
+        "title-3": "for you !",
+        "properties-sale": "properties for sale",
+        "properties-rent": "properties for rent",
+        "localization": "Localization",
+        "placeholder": "District, city or postal code",
+        "search": "Search",
+        "tab-buy": "To buy",
+        "tab-rent": "To rent"
+    },
+
     "buttons": {
         "buy": "Buy",
         "rent": "To rent out",
