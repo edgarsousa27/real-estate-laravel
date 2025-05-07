@@ -92,10 +92,10 @@ class PropertyController extends Controller
         $properties = Auth::user()->property()->create($validator);
 
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                if ($image->isValid()) {
-                    $properties->addMedia($image)->toMediaCollection('images');
-                }
+            foreach ($request->file('images') as  $image) {
+                $properties->addMedia($image)
+                ->withResponsiveImages()
+                ->toMediaCollection('images');
             }
         }
   

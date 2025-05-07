@@ -34,7 +34,9 @@ class Property extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('images')->useDisk('public')->singleFile(false);
+        $this
+        ->addMediaCollection('images')
+        ->useDisk('public');
     }
 
     public function user()

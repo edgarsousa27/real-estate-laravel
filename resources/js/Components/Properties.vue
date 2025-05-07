@@ -11,22 +11,19 @@
                         <div
                             class="relative h-56 sm:h-56 md:h-72 lg:h-72 xl:h-72"
                         >
-                            <img
-                                v-if="proper.media.length > 0"
-                                :src="proper.media[0].original_url"
-                                :alt="'Property image ' + proper.id"
-                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-                            />
+                            <PropertySlideShow
+                                :images="proper.media"
+                                :properties="properties"
+                            ></PropertySlideShow>
                             <div
                                 class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-blue-500 cursor-pointer transition-colors duration-150"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    fill="gray"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    stroke="gray"
-                                    class="size-6"
+                                    stroke="white"
+                                    class="size-6 text-neutral-300 fill-neutral-300"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -142,6 +139,7 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import PropertySlideShow from "@/Components/PropertySlideShow.vue";
 
 const props = defineProps({
     properties: Array,
@@ -152,11 +150,5 @@ const { t } = useI18n();
 
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-const showCategories = (category_id) => {
-    const category = props.categories.find((cate) => cate.id === category_id);
-
-    return category.name;
 };
 </script>
