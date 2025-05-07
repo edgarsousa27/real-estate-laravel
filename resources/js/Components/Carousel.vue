@@ -35,18 +35,34 @@
                         <div>
                             <div>
                                 <h1
-                                    v-if="activeTab == 'buy'"
+                                    v-if="activeTab == 'buy' && count_buy > 1"
                                     class="font-semibold mb-2 text-xl"
                                 >
                                     {{ count_buy }}
                                     {{ t("carousel.properties-sale") }}
                                 </h1>
                                 <h1
-                                    v-if="activeTab == 'rent'"
+                                    v-if="activeTab == 'buy' && count_buy === 1"
+                                    class="font-semibold mb-2 text-xl"
+                                >
+                                    {{ count_buy }}
+                                    {{ t("carousel.properties-sale-1") }}
+                                </h1>
+                                <h1
+                                    v-if="activeTab == 'rent' && count_rent > 1"
                                     class="font-semibold mb-2 text-xl"
                                 >
                                     {{ count_rent }}
                                     {{ t("carousel.properties-rent") }}
+                                </h1>
+                                <h1
+                                    v-if="
+                                        activeTab == 'rent' && count_rent === 1
+                                    "
+                                    class="font-semibold mb-2 text-xl"
+                                >
+                                    {{ count_rent }}
+                                    {{ t("carousel.properties-rent-1") }}
                                 </h1>
                             </div>
                             <label

@@ -88,7 +88,7 @@ class PropertyController extends Controller
 
         $cities = $data['distritos'];
     
-        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->get();
+        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
