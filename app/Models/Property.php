@@ -23,6 +23,7 @@ class Property extends Model implements HasMedia
         'year',
         'address',
         'city',
+        'district',
         'country',
         'bathrooms',
         'bedrooms',

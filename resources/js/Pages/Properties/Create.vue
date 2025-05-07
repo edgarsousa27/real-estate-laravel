@@ -9,7 +9,11 @@
             >
                 {{ t("properties.create-title") }}
             </h1>
-            <CreatePropertyForm :properties="properties"></CreatePropertyForm>
+            <CreatePropertyForm
+                :properties="properties"
+                :district="district"
+                :cities="cities"
+            ></CreatePropertyForm>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -24,5 +28,7 @@ const { t } = useI18n();
 
 defineProps({
     properties: [Array, Object],
+    district: Array,
+    cities: Object,
 });
 </script>

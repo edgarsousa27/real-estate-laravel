@@ -19,6 +19,8 @@ use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedSort;
+use Illuminate\Support\Facades\File;
+
 
 class PropertyController extends Controller
 {
@@ -57,7 +59,7 @@ class PropertyController extends Controller
         ])
         ->with('media');
         
-        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city','bathrooms','bedrooms')->paginate(15)->appends(request()->query());
+        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->paginate(15)->appends(request()->query());
 
         $count = $properties->count();
 
@@ -76,10 +78,22 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','country','bathrooms','bedrooms', 'floors', 'image_path')->get();
+        $json = File::get(resource_path('data/districts.json'));
+        $data = json_decode($json, true);
+    
+        $districts = collect($data['distritos'])
+            ->keys()        
+            ->sort()
+            ->values();
+
+        $cities = $data['distritos'];
+    
+        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->get();
 
         return Inertia::render('Properties/Create', [
-            'properties' => $properties
+            'properties' => $properties,
+            'district' => $districts,
+            'cities' => $cities
         ]);
     }
 
@@ -96,6 +110,7 @@ class PropertyController extends Controller
             'price' => ['required', 'integer'],
             'square_meters' => ['required', 'integer'],
             'city' => ['required'],
+            'district' => ['required'],
             'bathrooms' => ['integer', 'nullable'],
             'bedrooms' => ['integer', 'nullable'],
             'parking_spaces' => ['integer', 'nullable'],

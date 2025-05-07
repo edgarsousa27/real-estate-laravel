@@ -173,22 +173,49 @@
                 <label
                     for="city"
                     class="block text-sm font-medium text-gray-700 mb-1"
+                    >{{ t("properties-form.district") }}</label
+                >
+                <select
+                    id="district"
+                    name="district"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                    v-model="form.district"
+                >
+                    <option v-for="dist in district" :key="dist" :value="dist">
+                        {{ dist }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label
+                    for="city"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    v-if="form.district"
                     >{{ t("properties-form.city") }}</label
                 >
-                <input
-                    type="text"
-                    id="city"
+                <select
+                    id="district"
+                    name="district"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                    v-if="form.district"
                     v-model="form.city"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    required
-                />
+                >
+                    <option
+                        v-for="city in cities[form.district]"
+                        :key="city"
+                        :value="city"
+                    >
+                        {{ city }}
+                    </option>
+                </select>
             </div>
 
             <div>
                 <label
                     for="upload"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >{{ t("properties-form.city") }}</label
+                    >{{ t("properties-form.image") }}</label
                 >
                 <input
                     type="file"
@@ -216,11 +243,14 @@ import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const { t } = useI18n();
 
 defineProps({
     properties: [Array, Object],
+    district: Array,
+    cities: Object,
 });
 
 const form = useForm({
@@ -230,7 +260,9 @@ const form = useForm({
     address: "",
     price: null,
     square_meters: null,
-    city: "",
+    city: ref(""),
+    district: ref(""),
+    postal_code: ref(""),
     bathrooms: null,
     bedrooms: null,
     parking_spaces: null,

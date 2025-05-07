@@ -20,6 +20,7 @@
         "price": "Price (€)",
         "price-rent": "Price of rent (per month)",
         "surface": "Surface (m²)",
+        "district": "District",
         "city": "City",
         "submit": "Advertise",
         "house": "House",
@@ -30,7 +31,8 @@
         "bathrooms": "Bathrooms (nº)",
         "bedrooms": "Bedrooms (nº)",
         "parking-spaces": "Parking Spaces (nº)",
-        "floors": "Floors (nº)"
+        "floors": "Floors (nº)",
+        "image": "Upload of images"
     },
 
     "carousel": {

@@ -20,6 +20,7 @@
         "price": "Preço (€)",
         "price-rent": "Preço da renda (por mês)",
         "surface": "Área (m²)",
+        "district": "Distrito",
         "city": "Cidade",
         "submit": "Anunciar",
         "house": "Casa",
@@ -30,7 +31,8 @@
         "bathrooms": "Casas de banho (nº)",
         "bedrooms": "Quartos (nº)",
         "parking-spaces": "Lugares de estacionamento (nº)",
-        "floors": "Andares (nº)"
+        "floors": "Andares (nº)",
+        "image": "Upload de imagens"
     },
 
     "carousel": {

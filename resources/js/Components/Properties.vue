@@ -126,7 +126,7 @@
                                 <h2
                                     class="text-md sm:text-md text-gray-500 mb-1 cursor-pointer"
                                 >
-                                    {{ proper.city }}
+                                    {{ proper.city }}, {{ proper.district }}
                                 </h2>
                             </div>
                         </div>
