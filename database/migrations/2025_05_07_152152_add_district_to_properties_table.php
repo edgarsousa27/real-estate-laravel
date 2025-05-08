@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('properties', function (Blueprint $table) {
             $table->string('district')->nullable();
+            $table->integer('postal_code');
         });
     }
 

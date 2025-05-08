@@ -95,9 +95,8 @@ class PropertyController extends Controller
                 return ["{$districtName}|{$city['name']}" => $city['postal_code']];
             });
         });
-        
     
-        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors')->get();
+        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
@@ -125,7 +124,8 @@ class PropertyController extends Controller
             'bedrooms' => ['integer', 'nullable'],
             'parking_spaces' => ['integer', 'nullable'],
             'floors' => ['integer', 'nullable'],
-            'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048']
+            'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'postal_code' => ['required', 'integer']
           ]);
 
         $properties = Auth::user()->property()->create($validator);
@@ -137,6 +137,8 @@ class PropertyController extends Controller
                 ->toMediaCollection('images');
             }
         }
+
+        dd($request->all());
   
         return to_route('properties');
       }

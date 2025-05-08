@@ -31,6 +31,7 @@ class Property extends Model implements HasMedia
         'garages',
         'parking_spaces',
         'floors',
+        'postal_code'
     ];
 
     public function registerMediaCollections(): void

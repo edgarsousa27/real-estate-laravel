@@ -218,6 +218,7 @@
                 <input
                     v-model="form.postal_code"
                     type="text"
+                    readonly
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100"
                 />
             </div>
