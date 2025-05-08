@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="min-h-screen bg-white">
-            <nav class="border-b bg-white">
+            <nav class="mt-3">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-20 justify-between">

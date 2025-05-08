@@ -59,7 +59,7 @@
         </div>
 
         <button
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
+            class="w-full sm:1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
             @click="search"
         >
             {{ t("carousel.search") }}

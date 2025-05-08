@@ -4,9 +4,9 @@
             <Link
                 v-if="link.url"
                 :href="link.url"
-                class="px-4 py-2 text-sm text-blue-800 font-medium bg-white border border-gray-300 rounded-full"
+                class="px-4 py-2 text-sm text-blue-700 font-medium bg-white border border-gray-300 rounded-full"
                 :class="{
-                    'bg-blue-100  text-white': link.active,
+                    'bg-blue-200  text-white': link.active,
                 }"
                 v-html="link.label"
             />

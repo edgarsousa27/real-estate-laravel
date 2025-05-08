@@ -2,7 +2,7 @@
     <div>
         <div class="bg-white">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="bg-blue-50 w-full rounded-3xl my-12 py-20">
+                <div class="bg-blue-50 w-full rounded-3xl mt-6 py-20">
                     <h1
                         class="text-2xl sm:text-4xl md:text-5xl text-center mb-8 text-gray-800"
                     >
