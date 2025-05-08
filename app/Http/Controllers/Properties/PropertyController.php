@@ -86,14 +86,24 @@ class PropertyController extends Controller
             ->sort()
             ->values();
 
-        $cities = $data['distritos'];
+        $cities = collect($data['distritos'])->map(function($citiesinDistrict){
+            return collect($citiesinDistrict)->pluck('name');
+        });
+
+        $postalcode = collect($data['distritos'])->mapWithKeys(function ($cities, $districtName) {
+            return collect($cities)->mapWithKeys(function ($city) use ($districtName) {
+                return ["{$districtName}|{$city['name']}" => $city['postal_code']];
+            });
+        });
+        
     
         $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
             'district' => $districts,
-            'cities' => $cities
+            'cities' => $cities,
+            'postal_code' => $postalcode
         ]);
     }
 

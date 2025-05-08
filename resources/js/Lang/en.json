@@ -32,7 +32,8 @@
         "bedrooms": "Bedrooms (nº)",
         "parking-spaces": "Parking Spaces (nº)",
         "floors": "Floors (nº)",
-        "image": "Upload of images"
+        "image": "Upload of images",
+        "postalcode": "Postal code"
     },
 
     "carousel": {

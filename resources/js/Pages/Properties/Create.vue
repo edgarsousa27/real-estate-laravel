@@ -13,6 +13,7 @@
                 :properties="properties"
                 :district="district"
                 :cities="cities"
+                :postal_code="postal_code"
             ></CreatePropertyForm>
         </div>
     </AuthenticatedLayout>
@@ -30,5 +31,6 @@ defineProps({
     properties: [Array, Object],
     district: Array,
     cities: Object,
+    postal_code: Object,
 });
 </script>
