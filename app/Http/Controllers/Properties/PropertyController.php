@@ -32,7 +32,7 @@ class PropertyController extends Controller
         $count_buy = $properties_buy->count();
         $count_rent = $properties_rent->count();
 
-        return Inertia::render('Welcome', [
+        return Inertia::render('Welcome/Index', [
             'count_buy' => $count_buy,
             'count_rent' => $count_rent
         ]);

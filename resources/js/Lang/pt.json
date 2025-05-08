@@ -124,5 +124,15 @@
         "surface-up": "Maior área de superfície",
         "surface-down": "Menor área de superfície",
         "results": "resultados"
+    },
+
+    "services": {
+        "services": "Nossos serviços",
+        "popular": "mais populares",
+        "accessible": "acessível em um clique !",
+        "search": "Pesquisa avançada",
+        "tour": "Visita virtual imersiva",
+        "finance": "Simulador de financiamento",
+        "alerts": "Alertas personalizados"
     }
 }
