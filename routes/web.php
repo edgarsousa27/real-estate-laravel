@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [PropertyController::class, 'welcome'])->name('welcome');
+Route::get('/search', [PropertyController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {

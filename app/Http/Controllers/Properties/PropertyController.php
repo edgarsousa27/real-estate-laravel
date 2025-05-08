@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedSort;
 use Illuminate\Support\Facades\File;
 
-
 class PropertyController extends Controller
 {
 
@@ -37,6 +36,23 @@ class PropertyController extends Controller
             'count_buy' => $count_buy,
             'count_rent' => $count_rent
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $search = Property::search($query)->paginate(15);
+
+        $search->load('media');
+
+        $categories = Category::select('id', 'name')->get();
+
+            return Inertia::render('Properties/Search', [
+                'properties' => $search,
+                'categories' => $categories,
+                'count' => $search->total(),
+            ]);
     }
     /**
      * Display a listing of the resource.
@@ -61,15 +77,12 @@ class PropertyController extends Controller
         
         $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->paginate(15)->appends(request()->query());
 
-        $count = $properties->count();
-
         $categories = Category::select('id', 'name')->get();
-
 
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
             'categories' => $categories,
-            'count' => $count
+            'count' => $properties->count()
         ]);
     }
 
@@ -137,10 +150,8 @@ class PropertyController extends Controller
                 ->toMediaCollection('images');
             }
         }
-
-        dd($request->all());
   
-        return to_route('properties');
+        return to_route('dashboard');
       }
 
     /**
