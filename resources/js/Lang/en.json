@@ -146,5 +146,10 @@
         "count": "properties found in the search on:",
         "search": "Please try a new search",
         "button": "New search"
+    },
+
+    "last-properties": {
+        "title": "Latest properties",
+        "subtitle": "published"
     }
 }

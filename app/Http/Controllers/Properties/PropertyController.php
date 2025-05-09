@@ -29,9 +29,17 @@ class PropertyController extends Controller
         $properties_buy = Property::select('id')->where('transaction_id', 1);
         $properties_rent = Property::select('id')->where('transaction_id', 2);
 
+        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->orderBy('id', 'desc')->take(9)->get();
+
+        $properties->load('media');
+
+        $categories = Category::select('id', 'name')->get();
+
         return Inertia::render('Welcome/Index', [
             'count_buy' => $properties_buy->count(),
-            'count_rent' => $properties_rent->count()
+            'count_rent' => $properties_rent->count(),
+            'properties' => $properties,
+            'categories' => $categories
         ]);
     }
 

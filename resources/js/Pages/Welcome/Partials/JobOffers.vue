@@ -28,7 +28,7 @@
                         <img
                             class="w-full h-full min-h-[200px] object-cover"
                             src="storage/images/persons.jpg"
-                            :alt="t('employees.image_alt')"
+                            alt="employees"
                         />
                     </div>
                 </div>

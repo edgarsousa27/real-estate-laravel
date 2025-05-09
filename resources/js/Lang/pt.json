@@ -146,5 +146,10 @@
         "count": "imóveis encontrados na pesquisa em:",
         "search": "Por favor tente uma nova pesquisa",
         "button": "Nova pesquisa"
+    },
+
+    "last-properties": {
+        "title": "Últimos imóveis",
+        "subtitle": "publicadas"
     }
 }
