@@ -47,6 +47,17 @@ class PropertyController extends Controller
         } else {
             $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 1)->paginate(15);
         }
+
+        if($properties->isEmpty()){
+            return Inertia::render('Properties/NoResults', [
+                'count' => $properties->total(),
+                'query' => $query
+            ]);
+        }
+
+        if($query == 0){
+            redirect(to_route('search.buy'));
+        }
         
         $properties->load('media');
 
@@ -70,6 +81,17 @@ class PropertyController extends Controller
             })->paginate(15);
         } else {
             $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 2)->paginate(15);
+        }
+
+        if($properties->isEmpty()){
+            return Inertia::render('Properties/NoResults', [
+                'count' => $properties->total(),
+                'query' => $query
+            ]);
+        }
+
+        if($query == 0){
+            redirect(to_route('search.buy'));
         }
 
         $properties->load('media');

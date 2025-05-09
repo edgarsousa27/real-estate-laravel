@@ -139,5 +139,12 @@
     "employees": {
         "title": "We're expanding! We are hiring for our real estate agency",
         "button": "Our job offers"
+    },
+
+    "noresults": {
+        "title": "We haven't found the perfect property for you!",
+        "count": "properties found in the search on:",
+        "search": "Please try a new search",
+        "button": "New search"
     }
 }

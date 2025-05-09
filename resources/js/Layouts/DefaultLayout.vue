@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen bg-white overflow-hidden">
             <nav class="mt-3">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -139,5 +139,12 @@
     "employees": {
         "title": "Estamos a expandir-nos! Estamos a contratar para a nossa agência imobiliária",
         "button": "Nossas ofertas de trabalho"
+    },
+
+    "noresults": {
+        "title": "Não encontramos o imóvel perfeito para ti!",
+        "count": "imóveis encontrados na pesquisa em:",
+        "search": "Por favor tente uma nova pesquisa",
+        "button": "Nova pesquisa"
     }
 }
