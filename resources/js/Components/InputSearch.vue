@@ -85,11 +85,12 @@ const activeTab = ref("buy");
 const query = ref("");
 
 const search = () => {
-    router.get(
-        route("search", {
-            "filter[transaction]": activeTab.value,
-            query: query.value,
-        })
-    );
+    if (activeTab.value == "buy") {
+        router.get(route("search.buy", { query: query.value }));
+    }
+
+    if (activeTab.value == "rent") {
+        router.get(route("search.rent", { query: query.value }));
+    }
 };
 </script>

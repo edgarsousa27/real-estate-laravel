@@ -29,29 +29,57 @@ class PropertyController extends Controller
         $properties_buy = Property::select('id')->where('transaction_id', 1);
         $properties_rent = Property::select('id')->where('transaction_id', 2);
 
-        $count_buy = $properties_buy->count();
-        $count_rent = $properties_rent->count();
-
         return Inertia::render('Welcome/Index', [
-            'count_buy' => $count_buy,
-            'count_rent' => $count_rent
+            'count_buy' => $properties_buy->count(),
+            'count_rent' => $properties_rent->count()
         ]);
     }
 
-    public function search(Request $request)
+    public function searchBuy(Request $request)
     {
         $query = $request->input('query');
 
-        $search = Property::search($query)->paginate(15);
-
-        $search->load('media');
+        if($query){
+            $properties = Property::search($query, function ($meilisearch, $query, $options) {
+                $options['filter'] = 'transaction_id = 1';
+                return $meilisearch->search($query, $options);
+            })->paginate(15);
+        } else {
+            $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 1)->paginate(15);
+        }
+        
+        $properties->load('media');
 
         $categories = Category::select('id', 'name')->get();
 
             return Inertia::render('Properties/Search', [
-                'properties' => $search,
+                'properties' => $properties,
                 'categories' => $categories,
-                'count' => $search->total(),
+                'count' => $properties->total(),
+            ]);
+    }
+
+    public function searchRent(Request $request)
+    {
+        $query = $request->input('query');
+
+        if($query){
+            $properties = Property::search($query, function ($meilisearch, $query, $options) {
+                $options['filter'] = 'transaction_id = 2';
+                return $meilisearch->search($query, $options);
+            })->paginate(15);
+        } else {
+            $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 2)->paginate(15);
+        }
+
+        $properties->load('media');
+
+        $categories = Category::select('id', 'name')->get();
+
+            return Inertia::render('Properties/Search', [
+                'properties' => $properties,
+                'categories' => $categories,
+                'count' => $properties->total(),
             ]);
     }
     /**

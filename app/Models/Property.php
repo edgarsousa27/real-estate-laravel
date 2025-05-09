@@ -49,6 +49,7 @@ class Property extends Model implements HasMedia
      */
     public function toSearchableArray(): array
     {
+        
         $array['images'] = $this->getMedia('images')->map(function($media) {
             return [
                 'url' => $media->getUrl(),
@@ -59,7 +60,8 @@ class Property extends Model implements HasMedia
         $search = [
             'district' => $this->district,
             'city' => $this->city,
-            'postal_code' => $this->postal_code
+            'postal_code' => $this->postal_code,
+            'transaction_id' => (int)$this->transaction_id
         ];
  
         return array_merge($array, $search);
