@@ -134,5 +134,10 @@
         "tour": "Visita virtual imersiva",
         "finance": "Simulador de financiamento",
         "alerts": "Alertas personalizados"
+    },
+
+    "employees": {
+        "title": "Estamos a expandir-nos! Estamos a contratar para a nossa agência imobiliária",
+        "button": "Nossas ofertas de trabalho"
     }
 }

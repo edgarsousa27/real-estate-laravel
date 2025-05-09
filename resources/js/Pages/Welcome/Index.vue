@@ -4,7 +4,7 @@
     <DefaultLayout>
         <Carousel :count_buy="props.count_buy" :count_rent="props.count_rent" />
         <Services />
-        <Employees />
+        <JobOffers />
     </DefaultLayout>
 </template>
 
@@ -12,7 +12,7 @@
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import Carousel from "@/Components/Carousel.vue";
 import Services from "./Partials/Services.vue";
-import Employees from "./Partials/Employees.vue";
+import JobOffers from "./Partials/JobOffers.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 

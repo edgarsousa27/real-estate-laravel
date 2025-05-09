@@ -134,5 +134,10 @@
         "tour": "Immersive Virtual Tour",
         "finance": "Financing Simulator",
         "alerts": "Personalized alerts"
+    },
+
+    "employees": {
+        "title": "We're expanding! We are hiring for our real estate agency",
+        "button": "Our job offers"
     }
 }
