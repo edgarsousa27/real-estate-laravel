@@ -164,5 +164,25 @@
         "leaders": "Líderes",
         "sales": "nas vendas de imóveis",
         "sales-portugal": "Em Portugal"
+    },
+
+    "footer": {
+        "contact-title": "Contactos e horários",
+        "hours": "Horário de funcionamento",
+        "mon-fri": "Seg-Sex: 9h-18h",
+        "sab": "Sáb: 9h-14h",
+        "explore": "Explorar",
+        "buy": "Comprar",
+        "rent": "Arrendar",
+        "sale": "Vender",
+        "about-us": "Sobre nós",
+        "team": "A equipa",
+        "partners": "Parceiros",
+        "careers": "Carreiras",
+        "legal": "Legal",
+        "terms": "Termos e condições",
+        "privacy": "Política de privacidade",
+        "complaints-book": "Livro de reclamações",
+        "rights": "2025. Real Estate. Todos os direitos reservados."
     }
 }

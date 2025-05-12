@@ -164,5 +164,25 @@
         "leaders": "Leaders",
         "sales": "in real estate sales",
         "sales-portugal": "In Portugal"
+    },
+
+    "footer": {
+        "contact-title": "Contacts and timetables",
+        "hours": "Opening hours",
+        "mon-fri": "Mon-Fri: 9am-6pm",
+        "sab": "Sat: 9am-2pm",
+        "explore": "Explore",
+        "buy": "Buy",
+        "rent": "Rent",
+        "sale": "Sale",
+        "about-us": "About us",
+        "team": "The team",
+        "partners": "Partners",
+        "careers": "Careers",
+        "legal": "Legal",
+        "terms": "Terms and conditions",
+        "privacy": "Privacy Policy",
+        "complaints-book": "Complaints book",
+        "rights": "2025. Real Estate. All rights reserved."
     }
 }
