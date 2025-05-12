@@ -123,7 +123,8 @@
         "date-down": "Mais antigos",
         "surface-up": "Maior área de superfície",
         "surface-down": "Menor área de superfície",
-        "results": "resultados"
+        "results": "imóveis em",
+        "results-1": "imóvel em"
     },
 
     "services": {

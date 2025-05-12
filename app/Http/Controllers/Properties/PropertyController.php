@@ -75,6 +75,7 @@ class PropertyController extends Controller
                 'properties' => $properties,
                 'categories' => $categories,
                 'count' => $properties->total(),
+                'query' => $query
             ]);
     }
 
@@ -99,7 +100,7 @@ class PropertyController extends Controller
         }
 
         if($query == 0){
-            redirect(to_route('search.buy'));
+            redirect(to_route('search.rent'));
         }
 
         $properties->load('media');
@@ -110,6 +111,7 @@ class PropertyController extends Controller
                 'properties' => $properties,
                 'categories' => $categories,
                 'count' => $properties->total(),
+                'query' => $query
             ]);
     }
     /**
