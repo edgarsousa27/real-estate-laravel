@@ -152,5 +152,17 @@
     "last-properties": {
         "title": "Latest properties",
         "subtitle": "published"
+    },
+
+    "highlights": {
+        "clients": "93% of customers",
+        "clients-satisfied": "satisfied",
+        "clients-text": "Your trust is our pride",
+        "house-million": "1 million",
+        "house-clients": "of people accommodated",
+        "since": "Since 2024",
+        "leaders": "Leaders",
+        "sales": "in real estate sales",
+        "sales-portugal": "In Portugal"
     }
 }

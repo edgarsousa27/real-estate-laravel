@@ -152,5 +152,17 @@
     "last-properties": {
         "title": "Últimos imóveis",
         "subtitle": "publicadas"
+    },
+
+    "highlights": {
+        "clients": "93% dos clientes",
+        "clients-satisfied": "satisfeitos",
+        "clients-text": "A sua confiança é o nosso orgulho",
+        "house-million": "1 milhão",
+        "house-clients": "de pessoas alojadas",
+        "since": "Desde 2024",
+        "leaders": "Líderes",
+        "sales": "nas vendas de imóveis",
+        "sales-portugal": "Em Portugal"
     }
 }
