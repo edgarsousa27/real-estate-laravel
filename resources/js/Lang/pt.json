@@ -2,7 +2,7 @@
     "properties": {
         "page": "Imóveis",
         "page-create": "Publicar um imóvel",
-        "page-my-properties": "Meus imóveis",
+        "page-view": "Seus imóveis",
         "title": "Imóveis disponíveis",
         "create-title": "Publicar um imóvel",
         "my-properties-title": "Meus imóveis",
@@ -184,5 +184,23 @@
         "privacy": "Política de privacidade",
         "complaints-book": "Livro de reclamações",
         "rights": "2025. Real Estate. Todos os direitos reservados."
+    },
+
+    "update-form": {
+        "properties": "Editar imóvel",
+        "delete-properties": "Apagar imóvel",
+        "price": "Preço (€)",
+        "bedrooms": "Quartos (nº)",
+        "bathrooms": "Casas de banho (nº)",
+        "surface": "Área (m²)",
+        "city": "Cidade",
+        "district": "Distrito",
+        "postal_code": "Código Postal",
+        "cancel": "Cancelar",
+        "save": "Atualizar",
+        "update": "Atualizar",
+        "delete": "Apagar",
+        "delete-h1": "Quer apagar este anúncio?",
+        "delete-p": "Quando o post é eliminado, não há volta a dar"
     }
 }

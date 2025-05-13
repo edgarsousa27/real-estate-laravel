@@ -217,9 +217,39 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Property $property)
+    public function show()
     {
+        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->paginate(15);
 
+        $categories = Category::select('id', 'name')->get();
+
+        $properties->load('media');
+
+        $json = File::get(resource_path('data/districts.json'));
+        $data = json_decode($json, true);
+    
+        $districts = collect($data['distritos'])
+            ->keys()        
+            ->sort()
+            ->values();
+
+        $cities = collect($data['distritos'])->map(function($citiesinDistrict){
+            return collect($citiesinDistrict)->pluck('name');
+        });
+
+        $postalcode = collect($data['distritos'])->mapWithKeys(function ($cities, $districtName) {
+            return collect($cities)->mapWithKeys(function ($city) use ($districtName) {
+                return ["{$districtName}|{$city['name']}" => $city['postal_code']];
+            });
+        });
+
+        return Inertia::render('Properties/Show', [
+            'properties' => $properties,
+            'categories' => $categories,
+            'district' => $districts,
+            'cities' => $cities,
+            'postal_code' => $postalcode
+        ]);
     }
 
     /**
@@ -235,14 +265,44 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        //
+        $request->validate([
+            'price' => 'required|numeric',
+            'bedrooms' => 'nullable|integer',
+            'bathrooms' => 'nullable|integer',
+            'square_meters' => 'required|numeric',
+            'city' => 'required',
+            'district' => 'required',
+            'postal_code' => 'required',
+        ]);
+
+        $proper = Property::find($request->id);
+
+        if($proper){
+            $proper->update([
+                'price' => $request->price,
+                'bedrooms' => $request->bedrooms,
+                'bathrooms' => $request->bathrooms,
+                'square_meters' => $request->square_meters,
+                'city' => $request->city,
+                'district' => $request->district,
+                'postal_code' => $request->postal_code
+            ]);
+        }
+                
+        return Inertia::location(route('properties.show'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Property $property)
+    public function destroy(Request $request) 
     {
-        //
+        $properties = Property::find($request->id);
+        
+        if ($properties) {
+            $properties->delete();
+        }
+
+        return Inertia::location(route('properties.show'));
     }
 }

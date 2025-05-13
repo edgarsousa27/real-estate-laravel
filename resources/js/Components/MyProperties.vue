@@ -1,0 +1,499 @@
+<template>
+    <div class="py-4 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl max-h-6xl mx-auto">
+            <ul
+                class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"
+            >
+                <li v-for="proper in properties" :key="proper.id">
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
+                    >
+                        <div
+                            class="relative h-56 sm:h-56 md:h-72 lg:h-72 xl:h-72"
+                        >
+                            <PropertySlideShow
+                                :images="proper.media"
+                                :properties="properties"
+                            ></PropertySlideShow>
+                            <div
+                                class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-blue-500 cursor-pointer transition-colors duration-150"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="white"
+                                    class="size-6 text-neutral-300 fill-neutral-300"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg px-4 py-2 flex"
+                            >
+                                <span
+                                    v-if="proper.transaction_id == 1"
+                                    class="text-lg sm:text-xl font-bold text-blue-600"
+                                >
+                                    {{ formatPrice(proper.price) + "€" }}
+                                </span>
+                                <span
+                                    v-if="proper.transaction_id == 2"
+                                    class="text-lg sm:text-xl font-bold text-blue-600"
+                                >
+                                    {{ formatPrice(proper.price) + "€" }}
+                                    <span
+                                        class="text-xs font-bold text-gray-500"
+                                        >{{ t("properties.per-month") }}</span
+                                    >
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 sm:p-5 flex-grow flex flex-col">
+                            <div
+                                class="flex gap-1 justify-between items-center"
+                            >
+                                <div class="flex gap-1">
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-if="proper.category_id === 1"
+                                    >
+                                        {{ t("category.house") }}
+                                    </h1>
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-else-if="proper.category_id === 2"
+                                    >
+                                        {{ t("category.apartment") }}
+                                    </h1>
+                                    <h1
+                                        class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
+                                        v-else
+                                    >
+                                        {{ t("category.land") }}
+                                    </h1>
+                                    <span
+                                        v-if="proper.bedrooms != null"
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{
+                                            proper.bedrooms +
+                                            " " +
+                                            t("properties.bedroom")
+                                        }}
+                                    </span>
+                                    <span
+                                        v-if="proper.bathrooms != null"
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{
+                                            proper.bathrooms +
+                                            " " +
+                                            t("properties.wc")
+                                        }}
+                                    </span>
+                                    <span
+                                        class="text-md sm:text-md font-bold text-gray-800 mb-1 cursor-pointer"
+                                    >
+                                        {{ proper.square_meters + "㎡" }}
+                                    </span>
+                                </div>
+                                <div class="static">
+                                    <!-- Botão de opções -->
+                                    <button @click="toggleDropdown(proper.id)">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="size-6 cursor-pointer hover:text-blue-500"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                                            />
+                                        </svg>
+                                    </button>
+
+                                    <!-- Dropdown -->
+                                    <div
+                                        v-if="activeDropdownId === proper.id"
+                                        class="absolute mt-2 w-36 bg-white border rounded-md shadow-lg z-40"
+                                    >
+                                        <ul class="py-1 text-sm text-gray-700">
+                                            <li>
+                                                <button
+                                                    @click="
+                                                        openUpdateModal(proper)
+                                                    "
+                                                    class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                                                >
+                                                    {{
+                                                        t("update-form.update")
+                                                    }}
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    @click="
+                                                        openDeleteModal(proper)
+                                                    "
+                                                    class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                                                >
+                                                    {{
+                                                        t("update-form.delete")
+                                                    }}
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h2
+                                    class="text-md sm:text-md text-gray-500 mb-1 cursor-pointer"
+                                >
+                                    {{ proper.city }}, {{ proper.district }}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div
+        v-if="isModalOpen"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-6"
+    >
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        {{ t("update-form.properties") }}
+                    </h3>
+                    <button
+                        @click="closeModal"
+                        class="text-gray-500 hover:text-gray-700"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <form @submit.prevent="updateProperty" class="space-y-4">
+                    <input type="hidden" v-model="selectedProperty.id" />
+
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.price") }}
+                        </label>
+                        <input
+                            v-model="selectedProperty.price"
+                            type="number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div v-if="selectedProperty.bedrooms > 0">
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.bedrooms") }}
+                        </label>
+                        <input
+                            v-model="selectedProperty.bedrooms"
+                            type="number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div v-if="selectedProperty.bathrooms > 0">
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.bathrooms") }}
+                        </label>
+                        <input
+                            v-model="selectedProperty.bathrooms"
+                            type="number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.surface") }}
+                        </label>
+                        <input
+                            v-model="selectedProperty.square_meters"
+                            type="number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.district") }}
+                        </label>
+                        <select
+                            id="district"
+                            name="district"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                            v-model="selectedProperty.district"
+                        >
+                            <option
+                                v-for="dist in district"
+                                :key="dist"
+                                :value="dist"
+                            >
+                                {{ dist }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label
+                            v-if="selectedProperty.district"
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.city") }}
+                        </label>
+                        <select
+                            id="district"
+                            name="district"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                            v-if="selectedProperty.district"
+                            v-model="selectedProperty.city"
+                        >
+                            <option
+                                v-for="city in cities[
+                                    selectedProperty.district
+                                ]"
+                                :key="city"
+                                :value="city"
+                            >
+                                {{ city }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div v-if="selectedProperty.city">
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            {{ t("update-form.postal_code") }}
+                        </label>
+                        <input
+                            v-model="selectedProperty.postal_code"
+                            type="text"
+                            readonly
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100"
+                        />
+                    </div>
+
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button
+                            type="button"
+                            @click="closeModal"
+                            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        >
+                            {{ t("update-form.cancel") }}
+                        </button>
+                        <button
+                            type="submit"
+                            class="px-4 py-2 bg-blue-600 rounded-md text-sm font-medium text-white hover:bg-blue-700"
+                        >
+                            {{ t("update-form.save") }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div
+        v-if="isModalDeleteOpen"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-6 z-50"
+    >
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        {{ t("update-form.delete-properties") }}
+                    </h3>
+                    <button
+                        @click="closeDeleteModal"
+                        class="text-gray-500 hover:text-gray-700"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <form @submit.prevent="deleteProperty" class="space-y-4">
+                    <input type="hidden" v-model="selectedProperty.id" />
+
+                    <div>
+                        <h1>{{ t("update-form.delete-h1") }}</h1>
+                        <p class="text-sm">
+                            {{ t("update-form.delete-p") }}
+                        </p>
+                    </div>
+
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button
+                            type="button"
+                            @click="closeDeleteModal"
+                            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        >
+                            {{ t("update-form.cancel") }}
+                        </button>
+                        <button
+                            type="submit"
+                            class="px-4 py-2 bg-blue-600 rounded-md text-sm font-medium text-white hover:bg-blue-700"
+                        >
+                            {{ t("update-form.delete") }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { useI18n } from "vue-i18n";
+import PropertySlideShow from "@/Components/PropertySlideShow.vue";
+import { ref, watch } from "vue";
+import { router } from "@inertiajs/vue3";
+
+const props = defineProps({
+    properties: [Array, Object],
+    categories: Array,
+    district: Array,
+    cities: Object,
+    postal_code: Object,
+});
+
+const isModalOpen = ref(false);
+const isModalDeleteOpen = ref(false);
+
+const closeModal = () => {
+    isModalOpen.value = false;
+};
+
+const closeDeleteModal = () => {
+    isModalDeleteOpen.value = false;
+};
+
+const selectedProperty = ref({
+    id: null,
+    price: "",
+    bedrooms: "",
+    bathrooms: "",
+    square_meters: "",
+    city: "",
+    district: "",
+    postal_code: "",
+});
+
+const { t } = useI18n();
+
+const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const openUpdateModal = (proper) => {
+    selectedProperty.value = { ...proper };
+    isModalOpen.value = true;
+};
+
+const openDeleteModal = (proper) => {
+    selectedProperty.value = { ...proper };
+    isModalDeleteOpen.value = true;
+};
+
+watch(
+    () => selectedProperty.value.city,
+    (newCity) => {
+        if (newCity && selectedProperty.value.district) {
+            const key = `${selectedProperty.value.district}|${newCity}`;
+            if (props.postal_code[key]) {
+                selectedProperty.value.postal_code = props.postal_code[key];
+            } else {
+                selectedProperty.value.postal_code = "";
+            }
+        }
+    }
+);
+
+watch(
+    () => selectedProperty.value.district,
+    () => {
+        selectedProperty.value.city = "";
+        selectedProperty.value.postal_code = "";
+    }
+);
+
+const updateProperty = () => {
+    router.patch(
+        route("properties.update", {
+            onSuccess: () => closeModal(),
+        }),
+        selectedProperty.value
+    );
+};
+
+const deleteProperty = () => {
+    router.delete(route("properties.destroy", selectedProperty.value.id), {
+        onSuccess: () => closeDeleteModal(),
+    });
+};
+
+const activeDropdownId = ref(null);
+
+const toggleDropdown = (id) => {
+    activeDropdownId.value = activeDropdownId.value === id ? null : id;
+};
+</script>

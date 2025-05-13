@@ -2,6 +2,7 @@
     "properties": {
         "page": "Properties",
         "page-create": "Advertise a property",
+        "page-view": "My properties",
         "page-my-properties": "My properties",
         "title": "Properties available",
         "create-title": "Advertise a property",
@@ -184,5 +185,23 @@
         "privacy": "Privacy Policy",
         "complaints-book": "Complaints book",
         "rights": "2025. Real Estate. All rights reserved."
+    },
+
+    "update-form": {
+        "properties": "Edit property",
+        "delete-properties": "Delete property",
+        "price": "Price (€)",
+        "bedrooms": "Bedrooms (nº)",
+        "bathrooms": "Bathrooms (nº)",
+        "surface": "Surface (m²)",
+        "city": "City",
+        "district": "District",
+        "postal_code": "Postal code",
+        "cancel": "Cancel",
+        "save": "Update",
+        "update": "Update",
+        "delete": "Delete",
+        "delete-h1": "Do you want to delete this post?",
+        "delete-p": "Once post has been eliminated, there's no turning back"
     }
 }
