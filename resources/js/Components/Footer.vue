@@ -16,7 +16,7 @@
                             href="#"
                             rel="noreferrer"
                             target="_blank"
-                            class="text-gray-700 transition hover:opacity-75"
+                            class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                         >
                             <span class="sr-only">Facebook</span>
 
@@ -40,7 +40,7 @@
                             href="#"
                             rel="noreferrer"
                             target="_blank"
-                            class="text-gray-700 transition hover:opacity-75"
+                            class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                         >
                             <span class="sr-only">Instagram</span>
 
@@ -64,7 +64,7 @@
                             href="#"
                             rel="noreferrer"
                             target="_blank"
-                            class="text-gray-700 transition hover:opacity-75"
+                            class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                         >
                             <span class="sr-only">Twitter</span>
 
@@ -111,15 +111,13 @@
                             {{ t("footer.hours") }}
                         </p>
                         <p>
-                            <span
-                                class="text-gray-700 hover:text-blue-500 cursor-pointer"
-                                >{{ t("footer.mon-fri") }}</span
-                            >
+                            <span class="text-gray-700">{{
+                                t("footer.mon-fri")
+                            }}</span>
                             <br />
-                            <span
-                                class="text-gray-700 hover:text-blue-500 cursor-pointer"
-                                >{{ t("footer.sab") }}</span
-                            >
+                            <span class="text-gray-700">{{
+                                t("footer.sab")
+                            }}</span>
                         </p>
                     </ul>
                 </div>
@@ -168,7 +166,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.team") }}
                             </a>
@@ -177,7 +175,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.partners") }}
                             </a>
@@ -186,7 +184,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.careers") }}
                             </a>
@@ -203,7 +201,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.terms") }}
                             </a>
@@ -212,7 +210,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.privacy") }}
                             </a>
@@ -221,7 +219,7 @@
                         <li>
                             <a
                                 href="#"
-                                class="text-gray-700 transition hover:opacity-75"
+                                class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.complaints-book") }}
                             </a>
