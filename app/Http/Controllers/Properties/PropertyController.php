@@ -43,18 +43,37 @@ class PropertyController extends Controller
         ]);
     }
 
+    private function meiliSorts(?string $sort): ?array
+    {
+        if (!$sort) {
+            return null;
+        }
+
+        if (str_starts_with($sort, '-')) {
+            return [substr($sort, 1) . ':desc'];
+        }
+
+        return [$sort . ':asc'];
+    }
+
+
     public function searchBuy(Request $request)
     {
         $query = $request->input('query');
+        $sort = $request->input('sort');
+        $meiliSort = $this->meiliSorts($sort);
 
         if($query){
-            $properties = Property::search($query, function ($meilisearch, $query, $options) {
+            $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort){
                 $options['filter'] = 'transaction_id = 1';
+
+                if($meiliSort){
+                    $options['sort'] = $meiliSort;
+                }
+
                 return $meilisearch->search($query, $options);
             })->paginate(15);
-        } else {
-            $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 1)->paginate(15);
-        }
+        } 
 
         if($properties->isEmpty()){
             return Inertia::render('Properties/NoResults', [
@@ -63,10 +82,6 @@ class PropertyController extends Controller
             ]);
         }
 
-        if($query == 0){
-            redirect(to_route('search.buy'));
-        }
-        
         $properties->load('media');
 
         $categories = Category::select('id', 'name')->get();
@@ -82,25 +97,26 @@ class PropertyController extends Controller
     public function searchRent(Request $request)
     {
         $query = $request->input('query');
+        $sort = $request->input('sort');
+        $meiliSort = $this->meiliSorts($sort);
 
         if($query){
-            $properties = Property::search($query, function ($meilisearch, $query, $options) {
+            $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort) {
                 $options['filter'] = 'transaction_id = 2';
+
+                if($meiliSort){
+                    $options['sort'] = $meiliSort;
+                }
+
                 return $meilisearch->search($query, $options);
             })->paginate(15);
-        } else {
-            $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->where('transaction_id', 2)->paginate(15);
-        }
+        } 
 
         if($properties->isEmpty()){
             return Inertia::render('Properties/NoResults', [
                 'count' => $properties->total(),
                 'query' => $query
             ]);
-        }
-
-        if($query == 0){
-            redirect(to_route('search.rent'));
         }
 
         $properties->load('media');

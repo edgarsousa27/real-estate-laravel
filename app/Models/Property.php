@@ -61,11 +61,16 @@ class Property extends Model implements HasMedia
             'district' => $this->district,
             'city' => $this->city,
             'postal_code' => $this->postal_code,
-            'transaction_id' => (int)$this->transaction_id
+            'transaction_id' => (int)$this->transaction_id,
+            'price' => (float)$this->price,
+            'created_at' => $this->created_at->toISOString(),
+            'square_meters' => (int)$this->square_meters,
         ];
  
         return array_merge($array, $search);
     }
+
+
 
     public function registerMediaCollections(): void
     {

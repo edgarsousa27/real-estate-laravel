@@ -8,10 +8,10 @@
                     @change="applySorts"
                     v-model="selectedFilters.sort"
                 >
-                    <option value="-date">
+                    <option value="-created_at">
                         {{ t("filters.date-up") }}
                     </option>
-                    <option value="date">
+                    <option value="created_at">
                         {{ t("filters.date-down") }}
                     </option>
                     <option value="price">
@@ -20,10 +20,10 @@
                     <option value="-price">
                         {{ t("filters.price-up") }}
                     </option>
-                    <option value="-surface">
+                    <option value="-square_meters">
                         {{ t("filters.surface-up") }}
                     </option>
-                    <option value="surface">
+                    <option value="square_meters">
                         {{ t("filters.surface-down") }}
                     </option>
                 </select>
@@ -43,10 +43,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["update:sort"]);
-
-function updateSort(value) {
-    emit("update:sort", value);
-}
 
 const selectedFilters = ref({
     sort: props.sort,

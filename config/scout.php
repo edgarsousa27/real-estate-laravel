@@ -144,6 +144,7 @@ return [
     'index-settings' => [
         Property::class => [
             'filterableAttributes'=> ['district', 'city', 'postal_code', 'transaction_id'],
+            'sortableAttributes' => ['price', '-price', 'created_at', '-created_at', 'square_meters', '-square_meters']
         ],
     ],
 ],

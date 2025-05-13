@@ -55,10 +55,12 @@
                 v-model="query"
                 @keyup.enter="search"
                 class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                required
             />
         </div>
 
         <button
+            v-if="query"
             class="w-full sm:1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
             @click="search"
         >
@@ -84,13 +86,17 @@ const activeTab = ref("buy");
 
 const query = ref("");
 
+const sort = ref("");
+
 const search = () => {
-    if (activeTab.value == "buy") {
-        router.get(route("search.buy", { query: query.value }));
+    const params = { query: query.value, sort: sort.value };
+
+    if (activeTab.value == "buy" && query.value) {
+        router.get(route("search.buy", params));
     }
 
-    if (activeTab.value == "rent") {
-        router.get(route("search.rent", { query: query.value }));
+    if (activeTab.value == "rent" && query.value) {
+        router.get(route("search.rent", params));
     }
 };
 </script>
