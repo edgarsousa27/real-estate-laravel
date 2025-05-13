@@ -17,6 +17,7 @@
         "category": "Category",
         "transaction": "Transaction",
         "description": "Description",
+        "title": "Title",
         "address": "Address",
         "price": "Price (€)",
         "price-rent": "Price of rent (per month)",

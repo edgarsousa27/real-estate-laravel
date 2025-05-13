@@ -185,7 +185,7 @@ class PropertyController extends Controller
             });
         });
     
-        $properties = Property::select('category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->get();
+        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
@@ -203,6 +203,7 @@ class PropertyController extends Controller
         $validator = $request->validate([
             'category_id' => ['required', 'integer'],
             'transaction_id' => ['required', 'integer'],
+            'title' => ['required'],
             'description' => ['required'],
             'address' => ['required'],
             'price' => ['required', 'integer'],

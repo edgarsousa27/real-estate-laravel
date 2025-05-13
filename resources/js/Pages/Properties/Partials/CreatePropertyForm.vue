@@ -42,17 +42,30 @@
 
             <div>
                 <label
+                    for="address"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >{{ t("properties-form.title") }}</label
+                >
+                <input
+                    type="text"
+                    id="title"
+                    v-model="form.title"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
+            <div>
+                <label
                     for="description"
                     class="block text-sm font-medium text-gray-700 mb-1"
                     >{{ t("properties-form.description") }}</label
                 >
-                <input
-                    type="text"
+                <textarea
                     id="description"
                     v-model="form.description"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     required
-                />
+                ></textarea>
             </div>
 
             <div>
@@ -251,8 +264,6 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import { router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import { useForm } from "@inertiajs/vue3";
 import { watch } from "vue";
@@ -269,6 +280,7 @@ const props = defineProps({
 const form = useForm({
     category_id: null,
     transaction_id: null,
+    title: "",
     description: "",
     address: "",
     price: null,

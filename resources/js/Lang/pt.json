@@ -16,6 +16,7 @@
         "category": "Categoria",
         "transaction": "Transação",
         "description": "Descrição",
+        "title": "Título",
         "address": "Morada",
         "price": "Preço (€)",
         "price-rent": "Preço da renda (por mês)",
