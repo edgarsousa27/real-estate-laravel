@@ -18,21 +18,19 @@ class Property extends Model implements HasMedia
         'category_id',
         'transaction_id',
         'description',
-        'status',
         'price',
         'square_meters',
-        'year',
         'address',
         'city',
         'district',
         'country',
         'bathrooms',
         'bedrooms',
-        'kitchens',
-        'garages',
+        'kitchen',
+        'garage',
         'parking_spaces',
-        'floors',
-        'postal_code'
+        'postal_code',
+        'title'
     ];
 
         /**

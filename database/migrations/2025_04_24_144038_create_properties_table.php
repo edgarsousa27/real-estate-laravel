@@ -17,17 +17,14 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->integer('square_meters');
-            $table->integer('year')->nullable();
             $table->text('address')->nullable();
             $table->string('city')->nullable();
-            $table->string('country')->nullable();
+            $table->string('country')->default('Portugal');
             $table->integer('bathrooms')->nullable();
             $table->integer('bedrooms')->nullable();
-            $table->integer('kitchens')->nullable();
-            $table->integer('garages')->nullable();
+            $table->integer('kitchen')->nullable();
+            $table->integer('garage')->nullable();
             $table->integer('parking_spaces')->nullable();
-            $table->integer('floors')->nullable();
-            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }
