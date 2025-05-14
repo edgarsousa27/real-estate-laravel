@@ -5,7 +5,7 @@
                 <li
                     v-for="proper in properties"
                     :key="proper.id"
-                    class="flex-shrink-0 w-80"
+                    class="flex-shrink-0 w-96"
                 >
                     <div
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col"
@@ -60,7 +60,7 @@
                             <div
                                 class="flex gap-1 justify-between items-center"
                             >
-                                <div class="flex gap-1">
+                                <div class="flex gap-1 text-nowrap">
                                     <h1
                                         class="text-md sm:text-md font-normal text-gray-500 hover:text-blue-600 line-clamp-1 mb-1 cursor-pointer"
                                         v-if="proper.category_id === 1"
