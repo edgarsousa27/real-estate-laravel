@@ -9,25 +9,25 @@
             >
                 {{ t("properties.create-title") }}
             </h1>
-            <CreatePropertyForm
-                :properties="properties"
-                :district="district"
-                :cities="cities"
-                :postal_code="postal_code"
-            ></CreatePropertyForm>
+            <FormWizard
+                :properties="props.properties"
+                :district="props.district"
+                :cities="props.cities"
+                :postal_code="props.postal_code"
+            ></FormWizard>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
-import AuthenticatedLayout from "@/layouts/AuthenticatedLayout.vue";
-import CreatePropertyForm from "./Partials/CreatePropertyForm.vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import FormWizard from "./Partials/FormWizard.vue";
 import { useI18n } from "vue-i18n";
 import { Head } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 
-defineProps({
+const props = defineProps({
     properties: [Array, Object],
     district: Array,
     cities: Object,

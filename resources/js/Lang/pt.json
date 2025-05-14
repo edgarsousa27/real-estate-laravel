@@ -31,7 +31,7 @@
         "rent": "Alugar",
         "bathrooms": "Casas de banho (nº)",
         "bedrooms": "Quartos (nº)",
-        "parking-spaces": "Lugares de estacionamento (nº)",
+        "parking-spaces": "Vagas de estacionamento (nº)",
         "floors": "Andares (nº)",
         "image": "Upload de imagens",
         "postalcode": "Código postal"
@@ -203,5 +203,20 @@
         "delete": "Apagar",
         "delete-h1": "Quer apagar este anúncio?",
         "delete-p": "Quando o post é eliminado, não há volta a dar"
+    },
+
+    "form-errors": {
+        "category": "Categoria requerida",
+        "transaction": "Transação necessária",
+        "title": "Título necessário",
+        "price": "Preço requerido",
+        "square_meters": "Metros quadrados necessários",
+        "description": "Descrição necessária",
+        "bathrooms": "Pelo menos 1 casa de banho",
+        "bedrooms": "Pelo menos 1 quarto",
+        "address": "Morada necessária",
+        "city": "Cidade necessária",
+        "district": "Distrito necessário",
+        "images": "Imagens necessárias"
     }
 }

@@ -185,7 +185,7 @@ class PropertyController extends Controller
             });
         });
     
-        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'postal_code')->get();
+        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code')->get();
 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
@@ -236,7 +236,7 @@ class PropertyController extends Controller
      */
     public function show()
     {
-        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms', 'floors', 'postal_code')->paginate(15);
+        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
