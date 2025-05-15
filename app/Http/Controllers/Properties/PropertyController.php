@@ -254,8 +254,6 @@ class PropertyController extends Controller
             }
         }
 
-        dd($request['kitchen']);
-
         return to_route('dashboard');
       }
 
