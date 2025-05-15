@@ -1,7 +1,9 @@
 <template>
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <div v-if="form.category_id === 1 || form.category_id === 2">
-            <h1 class="text-xl text-center">Localização da propriedade</h1>
+        <div>
+            <h1 class="text-xl text-center">
+                {{ t("properties-form.localization") }}
+            </h1>
             <div class="mt-3">
                 <InputLabel
                     for="address"
@@ -68,7 +70,9 @@
             </div>
         </div>
         <div class="mt-3">
-            <h1 class="text-xl text-center">Upload de imagens</h1>
+            <h1 class="text-xl text-center">
+                {{ t("properties-form.image") }}
+            </h1>
             <InputLabel for="upload" :value="t('properties-form.image')" />
             <input
                 type="file"

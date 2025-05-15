@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('country')->default('Portugal');
             $table->integer('bathrooms')->nullable();
             $table->integer('bedrooms')->nullable();
-            $table->integer('kitchen')->nullable();
-            $table->integer('garage')->nullable();
+            $table->boolean('kitchen')->default(false);
+            $table->boolean('garage')->default(false);
             $table->integer('parking_spaces')->nullable();
             $table->timestamps();
         });

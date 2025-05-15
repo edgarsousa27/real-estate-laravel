@@ -185,8 +185,8 @@ class PropertyController extends Controller
             });
         });
     
-        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code')->get();
-
+        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity')->get();
+ 
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
             'district' => $districts,
@@ -213,9 +213,35 @@ class PropertyController extends Controller
             'bathrooms' => ['integer', 'nullable'],
             'bedrooms' => ['integer', 'nullable'],
             'parking_spaces' => ['integer', 'nullable'],
-            'floors' => ['integer', 'nullable'],
             'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
-            'postal_code' => ['required', 'integer']
+            'postal_code' => ['required', 'integer'],
+            'heating' => ['boolean'],
+            'cooling' => ['boolean'],
+            'kitchen_equipped' => ['boolean'],
+            'double_glazing' => ['boolean'],
+            'security_alarm_system' => ['boolean'],
+            'fire_alarm_system' => ['boolean'],
+            'garden' => ['boolean'],
+            'balcony' => ['boolean'],
+            'terrace' => ['boolean'],
+            'solar_panels' => ['boolean'],
+            'thermal_insulation' => ['boolean'],
+            'fireplace' => ['boolean'],
+            'storage' => ['boolean'],
+            'swimming_pool' => ['boolean'],
+            'sea_view' => ['boolean'],
+            'mountain_view' => ['boolean'],
+            'open_plan_kitchen' => ['boolean'],
+            'smart_home' => ['boolean'],
+            'furnished' => ['boolean'],
+            'building_pool' => ['boolean'],
+            'building_gym' => ['boolean'],
+            'wheelchair_access' => ['boolean'],
+            'elevator' => ['boolean'],
+            'garage' => ['boolean'],
+            'kitchen' => ['boolean'],
+            'well_water' => ['boolean'],
+            'electricity' => ['boolean']
           ]);
 
         $properties = Auth::user()->property()->create($validator);
@@ -227,7 +253,9 @@ class PropertyController extends Controller
                 ->toMediaCollection('images');
             }
         }
-  
+
+        dd($request['kitchen']);
+
         return to_route('dashboard');
       }
 

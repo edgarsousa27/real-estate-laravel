@@ -16,7 +16,8 @@ return new class extends Migration
             $table->boolean('cooling')->default(false); 
             $table->boolean('kitchen_equipped')->default(false); 
             $table->boolean('double_glazing')->default(false); 
-            $table->boolean('alarm_system')->default(false); 
+            $table->boolean('security_alarm_system')->default(false); 
+            $table->boolean('fire_alarm_system')->default(false); 
             $table->boolean('garden')->default(false); 
             $table->boolean('balcony')->default(false);
             $table->boolean('terrace')->default(false);
@@ -34,8 +35,8 @@ return new class extends Migration
             $table->boolean('building_pool')->default(false);
             $table->boolean('building_gym')->default(false);
             $table->boolean('wheelchair_access')->default(false);
-            $table->boolean('private_parking')->default(false);
-
+            $table->boolean('well_water')->default(false);
+            $table->boolean('electricity')->default(false);
         });
     }
 

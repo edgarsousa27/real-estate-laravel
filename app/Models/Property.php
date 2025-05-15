@@ -30,7 +30,33 @@ class Property extends Model implements HasMedia
         'garage',
         'parking_spaces',
         'postal_code',
-        'title'
+        'title',
+
+        'heating',
+        'cooling',
+        'kitchen_equipped',
+        'double_glazing',
+        'security_alarm_system',
+        'fire_alarm_system',
+        'garden',
+        'balcony',
+        'terrace',
+        'solar_panels',
+        'thermal_insulation',
+        'fireplace',
+        'elevator',
+        'storage',
+        'swimming_pool',
+        'sea_view',
+        'mountain_view',
+        'open_plan_kitchen',
+        'smart_home',
+        'furnished',
+        'building_pool',
+        'building_gym',
+        'wheelchair_access',
+        'well_water',
+        'electricity'
     ];
 
         /**

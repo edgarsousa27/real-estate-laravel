@@ -30,14 +30,18 @@
                 v-if="step > 1"
                 class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
-                Back
+                {{ t("properties-form.back") }}
             </button>
             <button
                 @click="nextStep"
                 type="submit"
                 class="px-6 py-2 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
-                {{ step === totalSteps ? "Submit" : "Next" }}
+                {{
+                    step === totalSteps
+                        ? t("properties-form.submit")
+                        : t("properties-form.next")
+                }}
             </button>
         </div>
     </div>
@@ -78,6 +82,34 @@ const form = useForm({
     bedrooms: null,
     parking_spaces: null,
     images: [],
+
+    heating: false,
+    cooling: false,
+    kitchen_equipped: false,
+    double_glazing: false,
+    security_alarm_system: false,
+    fire_alarm_system: false,
+    garden: false,
+    balcony: false,
+    terrace: false,
+    solar_panels: false,
+    thermal_insulation: false,
+    fireplace: false,
+    storage: false,
+    swimming_pool: false,
+    sea_view: false,
+    mountain_view: false,
+    open_plan_kitchen: false,
+    smart_home: false,
+    furnished: false,
+    building_pool: false,
+    building_gym: false,
+    wheelchair_access: false,
+    elevator: false,
+    garage: false,
+    kitchen: false,
+    well_water: false,
+    electricity: false,
 });
 
 const validateStepOne = () => {
@@ -93,15 +125,6 @@ const validateStepOne = () => {
         form.setError("square_meters", t("form-errors.square_meters"));
     if (!form.description)
         form.setError("description", t("form-errors.description"));
-
-    return Object.keys(form.errors).length === 0;
-};
-
-const validateStepTwo = () => {
-    form.clearErrors();
-
-    if (!form.bathrooms) form.setError("bathrooms", t("form-errors.bathrooms"));
-    if (!form.bedrooms) form.setError("bedrooms", t("form-errors.bedrooms"));
 
     return Object.keys(form.errors).length === 0;
 };
@@ -123,7 +146,6 @@ const clearError = (fieldName) => {
 
 const nextStep = () => {
     if (step.value === 1 && !validateStepOne()) return;
-    if (step.value === 2 && !validateStepTwo()) return;
     if (step.value === 3 && !validateThirdStep()) return;
 
     if (step.value < totalSteps) {

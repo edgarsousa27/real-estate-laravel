@@ -1,6 +1,8 @@
 <template>
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h1 class="text-xl text-center">Informações básicas do imóvel</h1>
+        <h1 class="text-xl text-center">
+            {{ t("properties-form.info_property") }}
+        </h1>
 
         <div class="mt-3">
             <InputLabel
