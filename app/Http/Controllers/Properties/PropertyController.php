@@ -207,7 +207,7 @@ class PropertyController extends Controller
             'description' => ['required'],
             'address' => ['required'],
             'price' => ['required', 'integer'],
-            'square_meters' => ['required', 'integer'],
+            'square_meters' => ['required', 'numeric'],
             'city' => ['required'],
             'district' => ['required'],
             'bathrooms' => ['integer', 'nullable'],
