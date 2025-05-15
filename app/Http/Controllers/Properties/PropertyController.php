@@ -260,7 +260,7 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function userProperties()
     {
         $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code')->paginate(15);
 
@@ -286,7 +286,7 @@ class PropertyController extends Controller
             });
         });
 
-        return Inertia::render('Properties/Show', [
+        return Inertia::render('Properties/UserProperties', [
             'properties' => $properties,
             'categories' => $categories,
             'district' => $districts,

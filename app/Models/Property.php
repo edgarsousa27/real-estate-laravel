@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Property extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, Searchable;
+    use HasFactory, InteractsWithMedia, Searchable, HasSlug;
 
     protected $table = 'properties';
 
@@ -59,6 +61,15 @@ class Property extends Model implements HasMedia
         'electricity'
     ];
 
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['title', 'city', 'postal_code'])
+            ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50)
+            ->preventOverwrite();
+    }
         /**
      * Get the name of the index associated with the model.
      */

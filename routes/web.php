@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('properties/list', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties/list', [PropertyController::class, 'store'])->name('properties.store');
-    Route::get('properties/my-properties', [PropertyController::class, 'show'])->name('properties.show');
+    Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.show');
     Route::patch('properties/my-properties', [PropertyController::class, 'update'])->name('properties.update');
     Route::delete('properties/my-properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
