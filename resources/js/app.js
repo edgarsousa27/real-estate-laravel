@@ -6,6 +6,60 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createApp, h } from "vue";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import { createI18n } from "vue-i18n";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+import {
+    faBath,
+    faBed,
+    faRulerCombined,
+    faMountain,
+    faLocationDot,
+    faTemperatureHigh,
+    faSnowflake,
+    faUtensils,
+    faFireBurner,
+    faHouseSignal,
+    faJarWheat,
+    faDumbbell,
+    faWaterLadder,
+    faWheelchair,
+    faCouch,
+    faTree,
+    faSun,
+    faWater,
+    faMountainSun,
+    faSolarPanel,
+    faDroplet,
+    faPlug,
+    faSquareParking,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+    faBath,
+    faBed,
+    faRulerCombined,
+    faMountain,
+    faLocationDot,
+    faTemperatureHigh,
+    faSnowflake,
+    faUtensils,
+    faFireBurner,
+    faHouseSignal,
+    faJarWheat,
+    faDumbbell,
+    faWaterLadder,
+    faWheelchair,
+    faCouch,
+    faTree,
+    faSun,
+    faWater,
+    faMountainSun,
+    faSolarPanel,
+    faDroplet,
+    faPlug,
+    faSquareParking
+);
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";
 
@@ -33,6 +87,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(i18n)
+            .component("font-awesome-icon", FontAwesomeIcon)
             .mount(el);
     },
     progress: {

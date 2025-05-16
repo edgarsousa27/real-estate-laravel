@@ -185,7 +185,7 @@ class PropertyController extends Controller
             });
         });
     
-        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity')->get();
+        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished')->get();
  
         return Inertia::render('Properties/Create', [
             'properties' => $properties,
@@ -297,7 +297,7 @@ class PropertyController extends Controller
 
     public function show($slug)
     {
-        $properties = Property::select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'slug')
+        $properties = Property::select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished')
         ->where('slug', $slug)
         ->firstOrFail();
 
@@ -338,7 +338,7 @@ class PropertyController extends Controller
             ]);
         }
                 
-        return Inertia::location(route('properties.show'));
+        return Inertia::location(route('properties.userProperties'));
     }
 
     /**
@@ -352,6 +352,6 @@ class PropertyController extends Controller
             $properties->delete();
         }
 
-        return Inertia::location(route('properties.show'));
+        return Inertia::location(route('properties.userProperties'));
     }
 }
