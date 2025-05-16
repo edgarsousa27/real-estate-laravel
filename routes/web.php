@@ -25,13 +25,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('properties/list', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties/list', [PropertyController::class, 'store'])->name('properties.store');
-    Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.show');
+    Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.userProperties');
     Route::patch('properties/my-properties', [PropertyController::class, 'update'])->name('properties.update');
     Route::delete('properties/my-properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
 
 Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index'])->name('properties');
+    Route::get('/{slug}', [PropertyController::class, 'show'])->name('properties.show');
 });
 
 require __DIR__.'/auth.php';

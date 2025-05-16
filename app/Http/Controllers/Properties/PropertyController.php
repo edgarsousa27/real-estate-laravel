@@ -295,12 +295,18 @@ class PropertyController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Property $property)
+    public function show($slug)
     {
-        //
+        $properties = Property::select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'slug')
+        ->where('slug', $slug)
+        ->firstOrFail();
+
+        $properties->load('media');
+
+        return Inertia::render('Properties/Show', [
+            'properties' => $properties
+        ]);
+        
     }
 
     /**
