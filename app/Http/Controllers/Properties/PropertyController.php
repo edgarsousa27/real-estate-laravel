@@ -29,7 +29,7 @@ class PropertyController extends Controller
         $properties_buy = Property::select('id')->where('transaction_id', 1);
         $properties_rent = Property::select('id')->where('transaction_id', 2);
 
-        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->orderBy('id', 'desc')->take(9)->get();
+        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->orderBy('id', 'desc')->take(9)->get();
 
         $properties->load('media');
 
@@ -151,7 +151,7 @@ class PropertyController extends Controller
         ])
         ->with('media');
         
-        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms')->paginate(15)->appends(request()->query());
+        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->paginate(15)->appends(request()->query());
 
         $categories = Category::select('id', 'name')->get();
 
@@ -262,7 +262,7 @@ class PropertyController extends Controller
      */
     public function userProperties()
     {
-        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code')->paginate(15);
+        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 

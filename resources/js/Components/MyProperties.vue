@@ -13,24 +13,15 @@
                         >
                             <PropertySlideShow
                                 :images="proper.media"
-                                :properties="properties"
+                                :property="proper"
                             ></PropertySlideShow>
                             <div
                                 class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-blue-500 cursor-pointer transition-colors duration-150"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="white"
-                                    class="size-6 text-neutral-300 fill-neutral-300"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                                    />
-                                </svg>
+                                <font-awesome-icon
+                                    icon="heart"
+                                    class="size-5 text-neutral-300 hover:fill-white"
+                                />
                             </div>
                             <div
                                 class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg px-4 py-2 flex"
@@ -106,20 +97,10 @@
                                 <div class="static">
                                     <!-- Botão de opções -->
                                     <button @click="toggleDropdown(proper.id)">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke-width="1.5"
-                                            stroke="currentColor"
-                                            class="size-6 cursor-pointer hover:text-blue-500"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-                                            />
-                                        </svg>
+                                        <font-awesome-icon
+                                            icon="ellipsis-vertical"
+                                            class="size-5 text-neutral-500 cursor-pointer hover:text-blue-500"
+                                        />
                                     </button>
 
                                     <!-- Dropdown -->

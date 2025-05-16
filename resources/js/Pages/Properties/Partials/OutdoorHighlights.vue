@@ -54,14 +54,17 @@
         </div>
 
         <div
-            v-if="props.properties.parking_spaces > 1"
+            v-if="props.properties.parking_spaces"
             class="flex items-center gap-3 p-3 rounded-lg"
         >
             <font-awesome-icon
                 icon="square-parking"
                 class="size-5 text-indigo-500"
             />
-            <span>{{ props.properties.parking_spaces }} </span>
+            <span
+                >{{ props.properties.parking_spaces }} vaga de
+                estacionamento</span
+            >
         </div>
     </div>
 </template>

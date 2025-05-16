@@ -33,7 +33,20 @@ import {
     faDroplet,
     faPlug,
     faSquareParking,
+    faChevronRight,
+    faChevronLeft,
+    faHeart,
+    faEllipsisVertical,
+    faPhone,
+    faInbox,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import {
+    faFacebook,
+    faInstagram,
+    faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 library.add(
     faBath,
@@ -58,7 +71,17 @@ library.add(
     faSolarPanel,
     faDroplet,
     faPlug,
-    faSquareParking
+    faSquareParking,
+    faChevronRight,
+    faChevronLeft,
+    faHeart,
+    faEnvelope,
+    faEllipsisVertical,
+    faPhone,
+    faInbox,
+    faFacebook,
+    faInstagram,
+    faTwitter
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";
