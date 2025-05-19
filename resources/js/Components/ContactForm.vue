@@ -4,21 +4,23 @@
             <h1 class="text-xl font-semibold">
                 {{ props.properties.user.name }}
             </h1>
-            <button
-                v-if="!number"
-                class="border bg-white border-blue-500 text-blue-500 rounded-full p-1 mt-2 hover:bg-blue-500 hover:text-white"
-                @click="number = !number"
-            >
-                {{ t("contact-form.number") }}
-            </button>
-            <a href="tel:{{ props.properties.user.phone_number }}">
+            <div v-if="props.properties.user.phone_number">
                 <button
-                    v-if="number"
-                    class="border bg-blue-500 border-blue-500 text-white rounded-full p-1 mt-2"
+                    v-if="!number"
+                    class="border bg-white border-blue-500 text-blue-500 rounded-full p-1 mt-2 hover:bg-blue-500 hover:text-white"
+                    @click="number = !number"
                 >
-                    {{ props.properties.user.phone_number }}
+                    {{ t("contact-form.number") }}
                 </button>
-            </a>
+                <a href="tel:{{ props.properties.user.phone_number }}">
+                    <button
+                        v-if="number"
+                        class="border bg-blue-500 border-blue-500 text-white rounded-full p-1 mt-2"
+                    >
+                        {{ props.properties.user.phone_number }}
+                    </button>
+                </a>
+            </div>
         </div>
         <div class="mt-4">
             <h1 class="text-xl font-semibold text-blue-500">
