@@ -252,5 +252,42 @@
         "city": "City required",
         "district": "District required",
         "images": "Images required"
+    },
+
+    "details-page": {
+        "essential": "The essentials",
+        "area": "Useful area",
+        "land": "Land",
+        "bedrooms": "bedrooms",
+        "bedroom": "bedroom",
+        "bathrooms": "bathrooms",
+        "bathroom": "bathroom",
+        "well-water": "Well water",
+        "eletricity": "Electricity",
+
+        "interior": "Inside",
+        "heating": "Central heating",
+        "cooling": "Air conditioning",
+        "kitchen_equipped": "Kitchen equipped",
+        "double_glazing": "Double Glazing",
+        "fireplace": "Fireplace",
+        "storage": "Pantry",
+        "smart_home": "Smart home",
+        "furnished": "Furnished",
+        "building_pool": "Indoor pool",
+        "building_gym": "Gym",
+        "wheelchair_access": "Wheelchair access",
+
+        "outside": "Outside",
+        "garden": "Garden",
+        "terrace": "Terrace",
+        "solar_panels": "Solar panels",
+        "swimming_pool": "Swimming pool",
+        "sea_view": "Sea view",
+        "mountain_view": "Mountain view",
+        "parking-spaces": "parking spaces",
+        "garage": "Garage",
+
+        "description": "Description"
     }
 }

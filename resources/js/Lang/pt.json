@@ -251,5 +251,42 @@
         "city": "Cidade necessária",
         "district": "Distrito necessário",
         "images": "Imagens necessárias"
+    },
+
+    "details-page": {
+        "essential": "O essencial",
+        "area": "Área útil",
+        "land": "Terreno",
+        "bedrooms": "quartos",
+        "bedroom": "quarto",
+        "bathrooms": "casas de banho",
+        "bathroom": "casa de banho",
+        "well-water": "Água do poço",
+        "eletricity": "Eletricidade",
+
+        "interior": "Interior",
+        "heating": "Aquecimento central",
+        "cooling": "Ar condicionado",
+        "kitchen_equipped": "Cozinha equipada",
+        "double_glazing": "Vidros duplos",
+        "fireplace": "Lareira",
+        "storage": "Despensa",
+        "smart_home": "Casa inteligente",
+        "furnished": "Mobilado",
+        "building_pool": "Piscina interna",
+        "building_gym": "Ginásio",
+        "wheelchair_access": "Acesso para cadeirantes",
+
+        "outside": "Fora",
+        "garden": "Jardim",
+        "terrace": "Terraço",
+        "solar_panels": "Painéis solares",
+        "swimming_pool": "Piscina",
+        "sea_view": "Vista para o mar",
+        "mountain_view": "Vista para a montanha",
+        "parking-spaces": "Vagas de estacionamento ",
+        "garage": "Garagem",
+
+        "description": "Descrição"
     }
 }

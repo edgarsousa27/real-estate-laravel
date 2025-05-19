@@ -39,6 +39,8 @@ import {
     faEllipsisVertical,
     faPhone,
     faInbox,
+    faClone,
+    faWarehouse,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -81,7 +83,9 @@ library.add(
     faInbox,
     faFacebook,
     faInstagram,
-    faTwitter
+    faTwitter,
+    faClone,
+    faWarehouse
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

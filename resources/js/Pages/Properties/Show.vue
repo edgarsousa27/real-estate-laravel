@@ -63,7 +63,7 @@
                     <hr class="my-8" />
                     <div class="gap-2 mt-3 ml-3 mb-10 text-gray-600 text-lg">
                         <h1 class="text-xl font-semibold mb-4 mt-4">
-                            Descrição
+                            {{ t("details-page.description") }}
                         </h1>
                         <p>{{ props.properties.description }}</p>
                     </div>
@@ -80,6 +80,8 @@ import EssentialsHighlights from "./Partials/EssentialsHighlights.vue";
 import InteriorHighlights from "./Partials/InteriorHighlights.vue";
 import OutdoorHighlights from "./Partials/OutdoorHighlights.vue";
 import { Head } from "@inertiajs/vue3";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 const props = defineProps({
     properties: Object,
