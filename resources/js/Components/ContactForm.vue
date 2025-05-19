@@ -9,7 +9,7 @@
                 class="border bg-white border-blue-500 text-blue-500 rounded-full p-1 mt-2 hover:bg-blue-500 hover:text-white"
                 @click="number = !number"
             >
-                Mostrar número
+                {{ t("contact-form.number") }}
             </button>
             <a href="tel:{{ props.properties.user.phone_number }}">
                 <button
@@ -22,31 +22,37 @@
         </div>
         <div class="mt-4">
             <h1 class="text-xl font-semibold text-blue-500">
-                Você está interessado nesta propriedade?
+                {{ t("contact-form.title") }}
             </h1>
             <p class="text-sm mb-5">
-                Entre em contato rapidamente com o anunciante para visitá-la!
+                {{ t("contact-form.subtitle") }}
             </p>
         </div>
         <form class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <InputLabel for="firstName" value="Primeiro Nome" />
+                    <InputLabel
+                        for="firstName"
+                        :value="t('contact-form.name')"
+                    />
                     <TextInput type="text" id="firstName" class="w-full" />
                 </div>
                 <div>
-                    <InputLabel for="lastName" value="Sobrenome" />
+                    <InputLabel
+                        for="lastName"
+                        :value="t('contact-form.lastname')"
+                    />
                     <TextInput type="text" id="lastName" class="w-full" />
                 </div>
             </div>
 
             <div>
-                <InputLabel for="email" value="E-mail" />
+                <InputLabel for="email" :value="t('contact-form.email')" />
                 <TextInput type="email" id="email" class="w-full" />
             </div>
 
             <div>
-                <InputLabel for="phone" value="Telemóvel" />
+                <InputLabel for="phone" :value="t('contact-form.phone')" />
                 <TextInput
                     type="tel"
                     id="phone"
@@ -56,7 +62,7 @@
             </div>
 
             <div>
-                <InputLabel for="message" value="Mensagem" />
+                <InputLabel for="message" :value="t('contact-form.message')" />
                 <textarea
                     id="message"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-32"
@@ -68,7 +74,7 @@
                     type="submit"
                     class="bg-blue-600 rounded-full text-white px-6 py-2 hover:bg-blue-700 w-full sm:w-auto"
                 >
-                    Enviar
+                    {{ t("contact-form.send") }}
                 </button>
             </div>
         </form>

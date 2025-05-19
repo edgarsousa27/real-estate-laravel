@@ -288,5 +288,17 @@
         "garage": "Garagem",
 
         "description": "Descrição"
+    },
+
+    "contact-form": {
+        "number": "Mostrar número",
+        "title": "Está interessado neste imóvel?",
+        "subtitle": "Contacte rapidamente o anunciante para visitar!",
+        "name": "Nome",
+        "lastname": "Sobrenome",
+        "email": "Email",
+        "phone": "Telemóvel",
+        "message": "Mensagem",
+        "send": "Enviar"
     }
 }

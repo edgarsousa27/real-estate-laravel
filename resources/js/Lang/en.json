@@ -289,5 +289,17 @@
         "garage": "Garage",
 
         "description": "Description"
+    },
+
+    "contact-form": {
+        "number": "Show number",
+        "title": "Are you interested in this property?",
+        "subtitle": "Contact the advertiser quickly to visit!",
+        "name": "Name",
+        "lastname": "Lastname",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "send": "Send"
     }
 }
