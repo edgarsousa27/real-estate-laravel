@@ -4,7 +4,9 @@
     </Head>
     <DefaultLayout>
         <div class="py-4 md:px-4 w-full sm:px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto">
+            <div
+                class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5 px-4 lg:px-8"
+            >
                 <div
                     class="w-full sm:w-full md:w-full lg:w-2/3 xl:w-2/3 sm:rounded-lg md:rounded-xl overflow-hidden"
                 >
@@ -68,6 +70,9 @@
                         <p>{{ props.properties.description }}</p>
                     </div>
                 </div>
+                <div class="w-full lg:w-1/3">
+                    <ContactForm :properties="props.properties" />
+                </div>
             </div>
         </div>
     </DefaultLayout>
@@ -79,6 +84,7 @@ import PropertiesShow from "@/Components/PropertiesShow.vue";
 import EssentialsHighlights from "./Partials/EssentialsHighlights.vue";
 import InteriorHighlights from "./Partials/InteriorHighlights.vue";
 import OutdoorHighlights from "./Partials/OutdoorHighlights.vue";
+import ContactForm from "@/Components/ContactForm.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
@@ -86,6 +92,7 @@ const { t } = useI18n();
 const props = defineProps({
     properties: Object,
     media: Array,
+    user: Object,
 });
 
 const formatPrice = (price) => {
