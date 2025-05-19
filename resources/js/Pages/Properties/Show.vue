@@ -46,7 +46,13 @@
                         >
                     </div>
                     <EssentialsHighlights :properties="props.properties" />
-                    <hr class="my-8" />
+                    <hr
+                        class="my-8"
+                        v-if="
+                            props.properties.category_id === 1 ||
+                            props.properties.category_id === 2
+                        "
+                    />
                     <InteriorHighlights
                         v-if="
                             props.properties.category_id === 1 ||
@@ -54,7 +60,13 @@
                         "
                         :properties="props.properties"
                     />
-                    <hr class="my-8" />
+                    <hr
+                        class="my-8"
+                        v-if="
+                            props.properties.category_id === 1 ||
+                            props.properties.category_id === 2
+                        "
+                    />
                     <OutdoorHighlights
                         v-if="
                             props.properties.category_id === 1 ||
@@ -71,7 +83,10 @@
                     </div>
                 </div>
                 <div class="w-full lg:w-1/3">
-                    <ContactForm :properties="props.properties" />
+                    <ContactForm
+                        :properties="props.properties"
+                        :contact="props.contact"
+                    />
                 </div>
             </div>
         </div>
@@ -92,7 +107,7 @@ const { t } = useI18n();
 const props = defineProps({
     properties: Object,
     media: Array,
-    user: Object,
+    contact: Object,
 });
 
 const formatPrice = (price) => {
