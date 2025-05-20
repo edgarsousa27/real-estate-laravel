@@ -42,6 +42,7 @@ import {
     faClone,
     faWarehouse,
     faElevator,
+    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -87,7 +88,8 @@ library.add(
     faTwitter,
     faClone,
     faWarehouse,
-    faElevator
+    faElevator,
+    faXmark
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";
