@@ -15,6 +15,7 @@ use App\Filters\LandsFilter;
 use App\Sorts\SortByPrice;
 use App\Filters\TransactionFilter;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\User;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
@@ -298,15 +299,17 @@ class PropertyController extends Controller
 
     public function show($slug)
     {
-        $properties = Property::with('user')->select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished', 'user_id')
+        $properties = Property::with('user')->select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished', 'user_id','slug')
         ->where('slug', $slug)
         ->firstOrFail();
+
+        $contact = Contact::select('property_id','name', 'lastname', 'email', 'phone_number', 'message')->get();
 
         $properties->load('media');
 
         return Inertia::render('Properties/Show', [
             'properties' => $properties,
-            
+            'contact' => $contact
         ]);
         
     }

@@ -128,4 +128,9 @@ class Property extends Model implements HasMedia
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    public function contact()
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

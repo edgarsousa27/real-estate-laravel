@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -28,11 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.userProperties');
     Route::patch('properties/my-properties', [PropertyController::class, 'update'])->name('properties.update');
     Route::delete('properties/my-properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+    Route::get('/notifications', [ContactController::class, 'show'])->name('notifications');
 });
 
 Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index'])->name('properties');
     Route::get('/{slug}', [PropertyController::class, 'show'])->name('properties.show');
+    Route::post('/{property:slug}/contact', [ContactController::class, 'store'])->name('properties.contact');
 });
 
 require __DIR__.'/auth.php';
