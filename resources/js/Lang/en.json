@@ -301,5 +301,17 @@
         "phone": "Phone",
         "message": "Message",
         "send": "Send"
+    },
+
+    "notifications-page": {
+        "notifications": "Notifications",
+        "property": "Property",
+        "name": "Name",
+        "lastname": "Lastname",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "message-receive": "message received",
+        "messages-receive": "messages received"
     }
 }

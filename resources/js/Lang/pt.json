@@ -300,5 +300,17 @@
         "phone": "Telemóvel",
         "message": "Mensagem",
         "send": "Enviar"
+    },
+
+    "notifications-page": {
+        "notifications": "Notificações",
+        "property": "Imóveis",
+        "name": "Nome",
+        "lastname": "Sobrenome",
+        "email": "Email",
+        "phone": "Telemóvel",
+        "message": "Mensagem",
+        "message-receive": "mensagem recebida",
+        "messages-receive": "mensagens recebidas"
     }
 }

@@ -4,12 +4,24 @@
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-blue-100">
                     <tr>
-                        <th scope="col" class="px-6 py-3">Imóvel</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Last name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">Phone</th>
-                        <th scope="col" class="px-6 py-3">Message</th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.property") }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.name") }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.lastname") }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.email") }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.phone") }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            {{ t("notifications-page.message") }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,8 +84,8 @@
                             {{ props.contacts.length }}
                             {{
                                 props.contacts.length == 1
-                                    ? "mensagem recebida"
-                                    : "mensagens recebidas"
+                                    ? t("notifications-page.message-receive")
+                                    : t("notifications-page.messages-receive")
                             }}
                         </td>
                     </tr>
@@ -86,7 +98,10 @@
 <script setup>
 import { format } from "date-fns";
 import { pt } from "date-fns/locale";
+import { enUS } from "date-fns/locale";
+import { useI18n } from "vue-i18n";
 
+const { t, locale } = useI18n();
 const props = defineProps({
     contacts: Array,
     properties: Object,
@@ -101,6 +116,9 @@ const showPropertiesName = (property_id) => {
 };
 
 const formatDate = (dateStr) => {
-    return format(new Date(dateStr), "dd/MM/yyyy HH:mm", { locale: pt });
+    if (locale.value === "en")
+        return format(new Date(dateStr), "yyyy/MM/dd HH:mm", { locale: enUS });
+    if (locale.value === "pt")
+        return format(new Date(dateStr), "dd/MM/yyyy HH:mm", { locale: pt });
 };
 </script>

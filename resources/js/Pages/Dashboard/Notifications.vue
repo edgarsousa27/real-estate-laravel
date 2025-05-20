@@ -4,7 +4,7 @@
             <h1
                 class="mb-6 text-2xl font-bold text-gray-900 sm:text-4xl lg:mb-8 lg:text-center text-center sm:text-center"
             >
-                Notificações
+                {{ t("notifications-page.notifications") }}
             </h1>
         </div>
         <TableNotificationsContactForm
@@ -17,6 +17,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import TableNotificationsContactForm from "@/Components/TableNotificationsContactForm.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
     contacts: Array,
