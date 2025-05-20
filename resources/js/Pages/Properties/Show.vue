@@ -79,7 +79,11 @@
                         <h1 class="text-xl font-semibold mb-4 mt-4">
                             {{ t("details-page.description") }}
                         </h1>
-                        <p>{{ props.properties.description }}</p>
+                        <p
+                            class="text-justify leading-relaxed text-base text-gray-800 mb-4 whitespace-pre-line"
+                        >
+                            {{ props.properties.description }}
+                        </p>
                     </div>
                 </div>
                 <div class="w-full lg:w-1/3">

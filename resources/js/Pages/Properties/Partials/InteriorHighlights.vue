@@ -102,6 +102,13 @@
             />
             <span>{{ t("details-page.wheelchair_access") }}</span>
         </div>
+        <div
+            v-if="props.properties.elevator === true"
+            class="flex items-center gap-3 p-3 rounded-lg"
+        >
+            <font-awesome-icon icon="elevator" class="size-5 text-indigo-500" />
+            <span>{{ t("details-page.elevator") }}</span>
+        </div>
     </div>
 </template>
 

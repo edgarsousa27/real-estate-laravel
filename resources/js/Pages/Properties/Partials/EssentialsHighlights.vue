@@ -60,7 +60,7 @@
                 {{ props.properties.bathrooms }}
                 {{ t("details-page.bathroom") }}</span
             >
-            <span class="text-gray-700">
+            <span class="text-gray-700" v-else>
                 {{ props.properties.bathrooms }}
                 {{ t("details-page.bathrooms") }}</span
             >

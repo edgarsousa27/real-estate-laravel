@@ -25,7 +25,7 @@
             class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1 rounded-full shadow-md z-10 transition-transform duration-150"
         >
             <font-awesome-icon
-                icon="chevron-right"
+                icon="chevron-left"
                 class="h-4 w-4 text-gray-500"
             />
         </button>

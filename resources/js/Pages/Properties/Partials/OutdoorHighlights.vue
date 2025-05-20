@@ -18,6 +18,24 @@
             <span>{{ t("details-page.terrace") }}</span>
         </div>
         <div
+            v-if="props.properties.balcony === true"
+            class="flex items-center gap-3 p-3 rounded-lg"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 91.18 77.2"
+                width="24"
+                height="24"
+                class="size-5 fill-indigo-500"
+            >
+                <path
+                    class="cls-1"
+                    d="M89.18,61.39h-.3v-22a2,2,0,0,0-2-2H80.35a2,2,0,0,0-2,2v.43h-10V2a2,2,0,0,0-2-2H24.1a2,2,0,0,0-2,2V39.87H12.89v-.43a2,2,0,0,0-2-2H4.36a2,2,0,0,0-2,2v22H2a2,2,0,0,0-2,2V75.2a2,2,0,0,0,2,2H89.18a2,2,0,0,0,2-2V63.39A2,2,0,0,0,89.18,61.39Zm-6.83-20h2.53v20H82.35v-20Zm-4,20h-11V43.87h11ZM25.11,43.87H37.2V61.39H25.11Zm14.09,0H51.29V61.39H39.2Zm14.09,0H65.38V61.39H53.29Zm-7-4V22.93H64.38V39.87ZM64.38,20.93H46.24V4H64.38ZM44.24,4V20.93H26.1V4ZM26.1,22.93H44.24V39.87H26.1Zm-3,20.94V61.39H12.89V43.87ZM6.36,41.44H8.89v20H6.36ZM87.18,73.2H4V65.39H87.18Z"
+                ></path>
+            </svg>
+            <span>{{ t("details-page.balcony") }}</span>
+        </div>
+        <div
             v-if="props.properties.swimming_pool === true"
             class="flex items-center gap-3 p-3 rounded-lg"
         >

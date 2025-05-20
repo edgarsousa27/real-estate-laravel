@@ -276,6 +276,7 @@
         "building_pool": "Piscina interna",
         "building_gym": "Ginásio",
         "wheelchair_access": "Acesso para cadeirantes",
+        "elevator": "Elevador",
 
         "outside": "Fora",
         "garden": "Jardim",
@@ -286,6 +287,7 @@
         "mountain_view": "Vista para a montanha",
         "parking-spaces": "Vagas de estacionamento ",
         "garage": "Garagem",
+        "balcony": "Varanda",
 
         "description": "Descrição"
     },
