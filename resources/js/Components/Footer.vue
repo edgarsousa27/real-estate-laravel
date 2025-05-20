@@ -116,7 +116,11 @@
                     <ul class="mt-6 space-y-4 text-sm">
                         <li>
                             <a
-                                :href="route('search.buy')"
+                                :href="
+                                    route('properties', {
+                                        'filter[transaction]': 'buy',
+                                    })
+                                "
                                 class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.buy") }}
@@ -125,7 +129,11 @@
 
                         <li>
                             <a
-                                :href="route('search.rent')"
+                                :href="
+                                    route('properties', {
+                                        'filter[transaction]': 'rent',
+                                    })
+                                "
                                 class="text-gray-700 transition hover:text-blue-500 cursor-pointer"
                             >
                                 {{ t("footer.rent") }}
