@@ -30,27 +30,42 @@
                 {{ t("contact-form.subtitle") }}
             </p>
         </div>
-        <form class="space-y-4">
+        <form class="space-y-4" @submit.prevent="submit">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <InputLabel
                         for="firstName"
                         :value="t('contact-form.name')"
                     />
-                    <TextInput type="text" id="firstName" class="w-full" />
+                    <TextInput
+                        type="text"
+                        id="firstName"
+                        v-model="form.name"
+                        class="w-full"
+                    />
                 </div>
                 <div>
                     <InputLabel
                         for="lastName"
                         :value="t('contact-form.lastname')"
                     />
-                    <TextInput type="text" id="lastName" class="w-full" />
+                    <TextInput
+                        type="text"
+                        id="lastName"
+                        v-model="form.lastname"
+                        class="w-full"
+                    />
                 </div>
             </div>
 
             <div>
                 <InputLabel for="email" :value="t('contact-form.email')" />
-                <TextInput type="email" id="email" class="w-full" />
+                <TextInput
+                    type="email"
+                    id="email"
+                    class="w-full"
+                    v-model="form.email"
+                />
             </div>
 
             <div>
@@ -60,6 +75,7 @@
                     id="phone"
                     class="w-full"
                     placeholder="912345678"
+                    v-model="form.phone_number"
                 />
             </div>
 
@@ -68,6 +84,7 @@
                 <textarea
                     id="message"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-32"
+                    v-model="form.message"
                 ></textarea>
             </div>
 
@@ -87,7 +104,8 @@
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useI18n } from "vue-i18n";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 const number = ref(false);
 
@@ -95,4 +113,23 @@ const { t } = useI18n();
 const props = defineProps({
     properties: Object,
 });
+
+const form = useForm({
+    property_id: props.properties.id,
+    name: "",
+    lastname: "",
+    email: "",
+    phone_number: "",
+    message: "",
+});
+
+onMounted(() => {
+    form.property_id = props.properties.id;
+});
+
+function submit() {
+    form.post(route("properties.contact", { slug: props.properties.slug }), {
+        onSuccess: () => form.reset(),
+    });
+}
 </script>

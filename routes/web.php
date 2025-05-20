@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index'])->name('properties');
     Route::get('/{slug}', [PropertyController::class, 'show'])->name('properties.show');
+    Route::post('/{property:slug}/contact', [ContactController::class, 'store'])->name('properties.contact');
 });
 
 require __DIR__.'/auth.php';
