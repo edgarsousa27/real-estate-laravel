@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -48,9 +50,18 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $contacts = Contact::whereHas('property', function ($query) {
+        $query->where('user_id', Auth::id());
+        })->get();
+
+        $properties = Property::select('id', 'title')->get();
+
+        return Inertia::render('Dashboard/Notifications', [
+            'contacts' => $contacts,
+            'properties' => $properties
+        ]);
     }
 
     /**

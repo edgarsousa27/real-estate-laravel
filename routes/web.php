@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.userProperties');
     Route::patch('properties/my-properties', [PropertyController::class, 'update'])->name('properties.update');
     Route::delete('properties/my-properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+    Route::get('/notifications', [ContactController::class, 'show'])->name('notifications');
 });
 
 Route::prefix('properties')->group(function () {
