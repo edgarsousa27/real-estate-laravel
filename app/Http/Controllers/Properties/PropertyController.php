@@ -216,6 +216,7 @@ class PropertyController extends Controller
             'bedrooms' => ['integer', 'nullable'],
             'parking_spaces' => ['integer', 'nullable'],
             'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'documents.*' => ['file', 'nullable', 'mimes:pdf,doc,docx,txt', 'max:5120'], 
             'postal_code' => ['required', 'integer'],
             'heating' => ['boolean'],
             'cooling' => ['boolean'],
@@ -253,6 +254,13 @@ class PropertyController extends Controller
                 $properties->addMedia($image)
                 ->withResponsiveImages()
                 ->toMediaCollection('images');
+            }
+        }
+
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as  $documents) {
+                $properties->addMedia($documents)
+                ->toMediaCollection('documents');
             }
         }
 

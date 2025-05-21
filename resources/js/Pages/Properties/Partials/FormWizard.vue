@@ -82,6 +82,7 @@ const form = useForm({
     bedrooms: null,
     parking_spaces: null,
     images: [],
+    documents: [],
 
     heating: false,
     cooling: false,
@@ -134,6 +135,7 @@ const validateThirdStep = () => {
     if (!form.district) form.setError("district", t("form-errors.district"));
     if (!form.city) form.setError("city", t("form-errors.city"));
     if (!form.images) form.setError("images", t("form-errors.images"));
+    if (!form.documents) form.setError("documents", t("form-errors.documents"));
 
     return Object.keys(form.errors).length === 0;
 };
