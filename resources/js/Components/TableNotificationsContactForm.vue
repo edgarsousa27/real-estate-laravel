@@ -101,7 +101,7 @@
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold text-gray-900">
-                            Responder mensagem
+                            {{ t("notifications-page.reply") }}
                         </h3>
                         <button
                             @click="closeModal"
@@ -120,7 +120,7 @@
                         <div>
                             <label
                                 class="block text-md font-semibold text-gray-700"
-                                >Nome</label
+                                >{{ t("notifications-page.name") }}</label
                             >
                             <p class="mt-1 text-sm text-gray-900">
                                 {{ selectedMessage.name }}
@@ -131,7 +131,7 @@
                         <div>
                             <label
                                 class="block text-md font-semibold text-gray-700"
-                                >Contactos</label
+                                >{{ t("notifications-page.contacts") }}</label
                             >
                             <p class="mt-1 text-sm text-gray-900">
                                 {{ selectedMessage.email }}
@@ -144,7 +144,9 @@
                         <div>
                             <label
                                 class="block text-md font-semibold text-gray-700"
-                                >Mensagem do cliente</label
+                                >{{
+                                    t("notifications-page.client-message")
+                                }}</label
                             >
                             <p
                                 class="mt-1 text-sm text-gray-900 whitespace-pre-line"
@@ -157,14 +159,15 @@
                             <label
                                 for="response"
                                 class="block text-md font-semibold text-gray-700"
-                                >Responder</label
+                                >{{
+                                    t("notifications-page.reply-message")
+                                }}</label
                             >
                             <textarea
                                 id="response"
                                 v-model="responseText"
                                 rows="4"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                                placeholder="Escreva a sua resposta aqui..."
                             ></textarea>
                         </div>
 
@@ -174,13 +177,13 @@
                                 @click="closeModal"
                                 class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
-                                {{ t("update-form.cancel") }}
+                                {{ t("notifications-page.cancel") }}
                             </button>
                             <button
                                 type="submit"
                                 class="px-4 py-2 bg-blue-600 rounded-md text-sm font-medium text-white hover:bg-blue-700"
                             >
-                                Enviar
+                                {{ t("notifications-page.send") }}
                             </button>
                         </div>
                     </form>

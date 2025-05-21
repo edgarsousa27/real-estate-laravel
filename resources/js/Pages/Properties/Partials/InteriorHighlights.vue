@@ -38,6 +38,13 @@
             <span>{{ t("details-page.kitchen_equipped") }}</span>
         </div>
         <div
+            v-if="props.properties.fire_alarm_system === true"
+            class="flex items-center gap-3 p-3 rounded-lg"
+        >
+            <font-awesome-icon icon="fire" class="size-5 text-indigo-500" />
+            <span>{{ t("details-page.fire_alarm_system") }}</span>
+        </div>
+        <div
             v-if="props.properties.fireplace === true"
             class="flex items-center gap-3 p-3 rounded-lg"
         >

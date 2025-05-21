@@ -278,6 +278,8 @@
         "building_gym": "Gym",
         "wheelchair_access": "Wheelchair access",
         "elevator": "Elevator",
+        "fire_alarm_system": "Fire alarm",
+        "security_alarm_system": "Security alarm",
 
         "outside": "Outside",
         "garden": "Garden",
@@ -314,6 +316,12 @@
         "phone": "Phone",
         "message": "Message",
         "message-receive": "message received",
-        "messages-receive": "messages received"
+        "messages-receive": "messages received",
+        "reply": "Reply message",
+        "contacts": "Contacts",
+        "client-message": "Client message",
+        "reply-message": "Reply",
+        "send": "Send",
+        "cancel": "Cancel"
     }
 }

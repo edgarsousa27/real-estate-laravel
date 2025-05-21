@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>{{ t("notifications-page.notifications") }}</title>
+    </Head>
     <AuthenticatedLayout>
         <div class="py-8 px-4 sm:px-6 lg:px-8">
             <h1
@@ -18,6 +21,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import TableNotificationsContactForm from "@/Components/TableNotificationsContactForm.vue";
 import { useI18n } from "vue-i18n";
+import { Head } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 

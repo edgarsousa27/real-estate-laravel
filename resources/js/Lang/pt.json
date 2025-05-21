@@ -277,6 +277,7 @@
         "building_gym": "Ginásio",
         "wheelchair_access": "Acesso para cadeirantes",
         "elevator": "Elevador",
+        "fire_alarm_system": "Alarme de incêndio",
 
         "outside": "Fora",
         "garden": "Jardim",
@@ -313,6 +314,12 @@
         "phone": "Telemóvel",
         "message": "Mensagem",
         "message-receive": "mensagem recebida",
-        "messages-receive": "mensagens recebidas"
+        "messages-receive": "mensagens recebidas",
+        "reply": "Responder mensagem",
+        "contacts": "Contactos",
+        "client-message": "Mensagem do cliente",
+        "reply-message": "Responder",
+        "send": "Enviar",
+        "cancel": "Cancelar"
     }
 }
