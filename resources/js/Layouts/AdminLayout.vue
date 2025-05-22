@@ -18,14 +18,16 @@
             "
         >
             <div class="p-4 border-b border-blue-700">
-                <h1 class="text-xl font-bold">
-                    {{ t("admin-dashboard.realestate") }}
-                </h1>
+                <a :href="route('welcome')">
+                    <h1 class="text-xl font-bold">
+                        {{ t("admin-dashboard.realestate") }}
+                    </h1>
+                </a>
             </div>
             <nav class="mt-4">
                 <NavLink
                     :href="route('admin.dashboard')"
-                    :active="route('admin.dashboard')"
+                    :active="$page.url === '/admin/dashboard'"
                 >
                     <font-awesome-icon
                         icon="gauge-high"
@@ -112,7 +114,9 @@
                             <font-awesome-icon icon="bell" />
                         </button>
                         <div class="flex items-center">
-                            <span class="ml-2 text-sm font-medium">[Name]</span>
+                            <span class="ml-2 text-md font-medium">{{
+                                "Olá, " + $page.props.auth.user.name
+                            }}</span>
                         </div>
                     </div>
                 </div>

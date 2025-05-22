@@ -30,47 +30,70 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr
-                        v-for="property in props.recentProperties"
-                        :key="property.id"
-                    >
+                    <tr v-for="property in props.properties" :key="property.id">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
                                     <img
+                                        v-if="
+                                            property.media &&
+                                            property.media.length
+                                        "
+                                        :src="
+                                            property.media.find(
+                                                (m) =>
+                                                    m.collection_name ===
+                                                    'images'
+                                            )?.original_url || ''
+                                        "
+                                        :alt="property.title"
                                         class="h-10 w-10 rounded-full"
-                                        :src="property.image"
-                                        alt=""
+                                        draggable="false"
                                     />
                                 </div>
                                 <div class="ml-4">
                                     <div
                                         class="text-sm font-medium text-gray-900"
                                     >
-                                        {{ property.name }}
+                                        {{ property.title }}
                                     </div>
                                     <div class="text-sm text-gray-500">
-                                        {{ property.location }}
+                                        {{ property.district }},
+                                        {{ property.city }}
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
-                                :class="
-                                    property.status === 'Active'
-                                        ? 'bg-green-100 text-green-800'
-                                        : 'bg-yellow-100 text-yellow-800'
-                                "
+                                v-if="property.status === 'active'"
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
                             >
-                                {{ property.status }}
+                                {{ t("admin-dashboard.active") }}
+                            </span>
+                            <span
+                                v-if="property.status === 'pending'"
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                            >
+                                {{ t("admin-dashboard.pending") }}
+                            </span>
+                            <span
+                                v-if="property.status === 'sold'"
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                            >
+                                {{ t("admin-dashboard.sold") }}
+                            </span>
+                            <span
+                                v-if="property.status === 'rented'"
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                            >
+                                {{ t("admin-dashboard.rented") }}
                             </span>
                         </td>
                         <td
                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                         >
-                            {{ property.price }}
+                            {{ formatPrice(property.price) + "€" }}
                         </td>
                         <td
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium"
@@ -94,6 +117,12 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const props = defineProps({
-    recentProperties: Array,
+    properties: Array,
 });
+
+const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+console.log(props.properties);
 </script>

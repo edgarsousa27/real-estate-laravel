@@ -343,6 +343,11 @@
         "quick-actions": "Ações rápidas",
         "add-new-property": "Adicionar novo imóvel",
         "create-report": "Criar relatórios",
-        "calendar": "Ver calendário"
+        "calendar": "Ver calendário",
+        "active": "Ativo",
+        "pending": "Pendente",
+        "refused": "Recusado",
+        "sold": "Vendido",
+        "rented": "Alugado"
     }
 }

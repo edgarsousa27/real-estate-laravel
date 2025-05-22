@@ -5,12 +5,6 @@
         </h3>
         <div class="space-y-4">
             <button
-                class="w-full flex items-center justify-between p-4 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition"
-            >
-                <span> {{ t("admin-dashboard.add-new-property") }}</span>
-                <font-awesome-icon icon="plus" />
-            </button>
-            <button
                 class="w-full flex items-center justify-between p-4 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition"
             >
                 <span> {{ t("admin-dashboard.create-report") }}</span>

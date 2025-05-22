@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,25 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Index');
+        $properties = Property::select('id','title','price','city','district', 'status')->orderBy('id', 'desc')->get();
+
+        $revenue = $properties->where('status', 'active')->sum('price');
+
+        $total_revenue = $revenue * 0.015;
+
+        $properties->load('media');
+
+        $total_properties = $properties->count();
+        $active_properties = $properties->where('status', 'active')->count();
+        $pending_properties = $properties->where('status', 'pending')->count();
+        
+        return Inertia::render('Admin/Index', [
+            'properties' => $properties,
+            'total_properties' => $total_properties,
+            'active_properties' => $active_properties,
+            'pending_properties' => $pending_properties,
+            'revenue' => $total_revenue
+        ]);
     }
 
     /**

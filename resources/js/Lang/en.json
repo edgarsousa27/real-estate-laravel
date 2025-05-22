@@ -345,6 +345,11 @@
         "quick-actions": "Quick actions",
         "add-new-property": "Add new property",
         "create-report": "Create report",
-        "calendar": "View calendar"
+        "calendar": "View calendar",
+        "active": "Active",
+        "pending": "Pending",
+        "refused": "Refused",
+        "sold": "Sold",
+        "rented": "Rented"
     }
 }

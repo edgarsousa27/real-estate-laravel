@@ -58,7 +58,8 @@ class Property extends Model implements HasMedia
         'building_gym',
         'wheelchair_access',
         'well_water',
-        'electricity'
+        'electricity',
+        'status'
     ];
 
 
