@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
@@ -13,7 +14,7 @@ Route::prefix('search')->group(function () {
     Route::get('/rent', [PropertyController::class, 'searchRent'])->name('search.rent');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:user')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->middleware(['verified'])->name('dashboard');
@@ -23,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:user')->group(function () {
     Route::get('properties/list', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties/list', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.userProperties');
@@ -36,6 +37,10 @@ Route::prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index'])->name('properties');
     Route::get('/{slug}', [PropertyController::class, 'show'])->name('properties.show');
     Route::post('/{property:slug}/contact', [ContactController::class, 'store'])->name('properties.contact');
+});
+
+Route::middleware('auth', 'role:admin')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 require __DIR__.'/auth.php';

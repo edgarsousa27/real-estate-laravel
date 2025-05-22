@@ -267,11 +267,19 @@
 
                                     <template #content>
                                         <DropdownLink
+                                            v-if="isAdmin"
+                                            :href="route('admin.dashboard')"
+                                        >
+                                            Gestão
+                                        </DropdownLink>
+                                        <DropdownLink
+                                            v-if="isUser"
                                             :href="route('dashboard')"
                                         >
                                             {{ t("authenticated.dashboard") }}
                                         </DropdownLink>
                                         <DropdownLink
+                                            v-if="isUser"
                                             :href="route('profile.edit')"
                                         >
                                             {{ t("authenticated.profile") }}
@@ -382,10 +390,22 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('dashboard')">
+                            <ResponsiveNavLink
+                                v-if="isAdmin"
+                                :href="route('admin.dashboard')"
+                            >
+                                Gestão
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                v-if="isUser"
+                                :href="route('dashboard')"
+                            >
                                 {{ t("authenticated.dashboard") }}
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('profile.edit')">
+                            <ResponsiveNavLink
+                                v-if="isUser"
+                                :href="route('profile.edit')"
+                            >
                                 {{ t("authenticated.profile") }}
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
@@ -426,7 +446,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
@@ -435,6 +455,11 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 import Footer from "@/Components/Footer.vue";
+
+const page = usePage();
+const roles = page.props.auth.roles;
+const isAdmin = roles.includes("admin");
+const isUser = roles.includes("user");
 
 const showingNavigationDropdown = ref(false);
 const { t } = useI18n();
