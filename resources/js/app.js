@@ -44,9 +44,23 @@ import {
     faElevator,
     faXmark,
     faFire,
+    faGaugeHigh,
+    faHome,
+    faUsers,
+    faAddressBook,
+    faChartBar,
+    faGear,
+    faBell,
+    faBars,
+    faPlus,
+    faFileExport,
+    faEnvelope,
+    faCalendarDays,
+    faClipboardList,
+    faHandshake,
+    faEuroSign,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import {
     faFacebook,
     faInstagram,
@@ -80,7 +94,6 @@ library.add(
     faChevronRight,
     faChevronLeft,
     faHeart,
-    faEnvelope,
     faEllipsisVertical,
     faPhone,
     faInbox,
@@ -91,7 +104,22 @@ library.add(
     faWarehouse,
     faElevator,
     faXmark,
-    faFire
+    faFire,
+    faGaugeHigh,
+    faHome,
+    faUsers,
+    faAddressBook,
+    faChartBar,
+    faGear,
+    faBell,
+    faBars,
+    faPlus,
+    faFileExport,
+    faEnvelope,
+    faCalendarDays,
+    faClipboardList,
+    faHandshake,
+    faEuroSign
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

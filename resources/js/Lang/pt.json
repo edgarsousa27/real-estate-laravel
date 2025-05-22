@@ -321,5 +321,28 @@
         "reply-message": "Responder",
         "send": "Enviar",
         "cancel": "Cancelar"
+    },
+
+    "admin-dashboard": {
+        "realestate": "Real Estate",
+        "dashboard": "Dashboard",
+        "properties": "Imóveis",
+        "agents": "Agentes",
+        "clients": "Clientes",
+        "reports": "Relatórios",
+        "settings": "Definições",
+        "total-properties": "Total de imóveis",
+        "active-properties": "Imóveis ativos",
+        "pending-properties": "Imóveis pendentes",
+        "total-revenue": "Receita total",
+        "recent-properties": "Imóveis recentes",
+        "status": "Estado",
+        "price": "Preço",
+        "actions": "Ação",
+        "view": "Visualizar",
+        "quick-actions": "Ações rápidas",
+        "add-new-property": "Adicionar novo imóvel",
+        "create-report": "Criar relatórios",
+        "calendar": "Ver calendário"
     }
 }

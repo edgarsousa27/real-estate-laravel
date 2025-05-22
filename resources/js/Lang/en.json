@@ -323,5 +323,28 @@
         "reply-message": "Reply",
         "send": "Send",
         "cancel": "Cancel"
+    },
+
+    "admin-dashboard": {
+        "realestate": "Real Estate",
+        "dashboard": "Dashboard",
+        "properties": "Properties",
+        "agents": "Agents",
+        "clients": "Clients",
+        "reports": "Reports",
+        "settings": "Settings",
+        "total-properties": "Total properties",
+        "active-properties": "Active properties",
+        "pending-properties": "Pending properties",
+        "total-revenue": "Total revenue",
+        "recent-properties": "Recent properties",
+        "status": "Status",
+        "price": "Price",
+        "actions": "Actions",
+        "view": "View",
+        "quick-actions": "Quick actions",
+        "add-new-property": "Add new property",
+        "create-report": "Create report",
+        "calendar": "View calendar"
     }
 }

@@ -1,0 +1,99 @@
+<template>
+    <div class="bg-white rounded-lg shadow p-6 lg:col-span-2">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">
+            {{ t("admin-dashboard.recent-properties") }}
+        </h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            {{ t("admin-dashboard.properties") }}
+                        </th>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            {{ t("admin-dashboard.status") }}
+                        </th>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            {{ t("admin-dashboard.price") }}
+                        </th>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            {{ t("admin-dashboard.actions") }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr
+                        v-for="property in props.recentProperties"
+                        :key="property.id"
+                    >
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img
+                                        class="h-10 w-10 rounded-full"
+                                        :src="property.image"
+                                        alt=""
+                                    />
+                                </div>
+                                <div class="ml-4">
+                                    <div
+                                        class="text-sm font-medium text-gray-900"
+                                    >
+                                        {{ property.name }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        {{ property.location }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                                :class="
+                                    property.status === 'Active'
+                                        ? 'bg-green-100 text-green-800'
+                                        : 'bg-yellow-100 text-yellow-800'
+                                "
+                            >
+                                {{ property.status }}
+                            </span>
+                        </td>
+                        <td
+                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                        >
+                            {{ property.price }}
+                        </td>
+                        <td
+                            class="px-6 py-4 whitespace-nowrap text-sm font-medium"
+                        >
+                            <button
+                                class="text-blue-600 hover:text-blue-900 mr-3"
+                            >
+                                {{ t("admin-dashboard.view") }}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
+const props = defineProps({
+    recentProperties: Array,
+});
+</script>
