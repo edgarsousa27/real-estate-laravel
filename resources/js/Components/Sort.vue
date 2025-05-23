@@ -20,10 +20,10 @@
                     <option value="-price">
                         {{ t("filters.price-up") }}
                     </option>
-                    <option value="-square_meters">
+                    <option value="-surface">
                         {{ t("filters.surface-up") }}
                     </option>
-                    <option value="square_meters">
+                    <option value="surface">
                         {{ t("filters.surface-down") }}
                     </option>
                 </select>

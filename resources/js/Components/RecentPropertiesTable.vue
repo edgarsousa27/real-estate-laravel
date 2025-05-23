@@ -47,7 +47,7 @@
                                             )?.original_url || ''
                                         "
                                         :alt="property.title"
-                                        class="h-10 w-10 rounded-full"
+                                        class="h-10 w-10 rounded-md"
                                         draggable="false"
                                     />
                                 </div>
@@ -66,28 +66,19 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span
-                                v-if="property.status === 'active'"
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                                :class="{
+                                    'bg-green-100 text-green-800':
+                                        property.status === 'active',
+                                    'bg-red-100 text-red-800':
+                                        property.status === 'sold',
+                                    'bg-yellow-100 text-yellow-800':
+                                        property.status === 'pending',
+                                    'bg-blue-100 text-blue-800':
+                                        property.status === 'rented',
+                                }"
                             >
-                                {{ t("admin-dashboard.active") }}
-                            </span>
-                            <span
-                                v-if="property.status === 'pending'"
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
-                            >
-                                {{ t("admin-dashboard.pending") }}
-                            </span>
-                            <span
-                                v-if="property.status === 'sold'"
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
-                            >
-                                {{ t("admin-dashboard.sold") }}
-                            </span>
-                            <span
-                                v-if="property.status === 'rented'"
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
-                            >
-                                {{ t("admin-dashboard.rented") }}
+                                {{ t(`admin-dashboard.${property.status}`) }}
                             </span>
                         </td>
                         <td
@@ -123,6 +114,4 @@ const props = defineProps({
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-
-console.log(props.properties);
 </script>

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Property;
+use App\Sorts\SortByHouseType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminController extends Controller
 {
@@ -14,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id','title','price','city','district', 'status')->orderBy('id', 'desc')->get();
+        $properties = Property::select('id','title','price','city','district', 'status')->orderBy('id', 'desc')->take(5)->get();
 
         $revenue = $properties->where('status', 'active')->sum('price');
 
@@ -22,9 +27,9 @@ class AdminController extends Controller
 
         $properties->load('media');
 
-        $total_properties = $properties->count();
-        $active_properties = $properties->where('status', 'active')->count();
-        $pending_properties = $properties->where('status', 'pending')->count();
+        $total_properties = Property::count();
+        $active_properties = Property::where('status', 'active')->count();
+        $pending_properties = Property::where('status', 'pending')->count();
         
         return Inertia::render('Admin/Index', [
             'properties' => $properties,
@@ -35,6 +40,27 @@ class AdminController extends Controller
         ]);
     }
 
+
+    public function indexProperties(Request $request)
+    {
+        $properties = Property::select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->get();
+
+        $categories = Category::select('id', 'name')->get();
+
+        $query = $request->input('query'); 
+
+        if($query){
+            $properties = Property::search($query)->get();
+        }
+
+        $properties->load('media');
+
+        return Inertia::render('Admin/Properties',[
+            'properties' => $properties,
+            'categories' => $categories,
+            'query' => $query,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

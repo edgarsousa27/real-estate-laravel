@@ -38,7 +38,7 @@
                     >
                 </NavLink>
                 <NavLink
-                    href="/admin/properties"
+                    :href="route('admin.properties')"
                     :active="$page.url.startsWith('/admin/properties')"
                 >
                     <font-awesome-icon icon="home" class="mr-3 text-white" />

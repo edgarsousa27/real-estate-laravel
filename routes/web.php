@@ -41,6 +41,7 @@ Route::prefix('properties')->group(function () {
 
 Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/properties', [AdminController::class, 'indexProperties'])->name('admin.properties');
 });
 
 require __DIR__.'/auth.php';

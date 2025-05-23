@@ -59,6 +59,8 @@ import {
     faClipboardList,
     faHandshake,
     faEuroSign,
+    faPenToSquare,
+    faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -119,7 +121,9 @@ library.add(
     faCalendarDays,
     faClipboardList,
     faHandshake,
-    faEuroSign
+    faEuroSign,
+    faPenToSquare,
+    faTrash
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";
