@@ -160,7 +160,7 @@ class PropertyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Property $property)
     {
         $json = File::get(resource_path('data/districts.json'));
         $data = json_decode($json, true);
@@ -180,10 +180,8 @@ class PropertyController extends Controller
             });
         });
     
-        $properties = Property::select('category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished')->get();
- 
         return Inertia::render('Properties/Create', [
-            'properties' => $properties,
+            'properties' => $property,
             'district' => $districts,
             'cities' => $cities,
             'postal_code' => $postalcode
@@ -298,11 +296,9 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show($slug, Property $property)
     {
-        $properties = Property::with('user')->select('id','category_id', 'transaction_id','title','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','bathrooms','bedrooms', 'postal_code', 'heating', 'cooling', 'kitchen_equipped', 'double_glazing', 'security_alarm_system', 'fire_alarm_system', 'garden', 'balcony', 'terrace', 'thermal_insulation', 'fireplace', 'storage', 'swimming_pool', 'sea_view', 'mountain_view', 'open_plan_kitchen', 'smart_home', 'building_pool', 'building_gym', 'wheelchair_access', 'elevator', 'kitchen', 'garage', 'well_water', 'electricity', 'solar_panels', 'furnished', 'user_id','slug')
-        ->where('slug', $slug)
-        ->firstOrFail();
+        $properties = $property->with('user')->where('slug', $slug)->firstOrFail();
 
         $contact = Contact::select('property_id','name', 'lastname', 'email', 'phone_number', 'message')->get();
 
