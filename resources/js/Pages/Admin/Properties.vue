@@ -24,21 +24,24 @@
                         <InputLabel value="Tipo de imóvel" />
                         <select
                             class="w-full rounded-md border-gray-300 shadow-sm"
+                            v-model="selectedType"
+                            @change="applyFilter"
                         >
                             <option value="">All Types</option>
                             <option value="house">House</option>
                             <option value="apartment">Apartment</option>
                             <option value="land">Land</option>
-                            <option value="commercial">Commercial</option>
                         </select>
                     </div>
                     <div>
                         <InputLabel value="Estado" />
                         <select
                             class="w-full rounded-md border-gray-300 shadow-sm"
+                            v-model="selectedStatus"
+                            @change="applyFilter"
                         >
                             <option value="">All Statuses</option>
-                            <option value="available">Available</option>
+                            <option value="active">Available</option>
                             <option value="sold">Sold</option>
                             <option value="pending">Pending</option>
                             <option value="rented">Rented</option>
@@ -246,5 +249,29 @@ const search = () => {
             preserveScroll: true,
         }
     );
+};
+
+const selectedType = ref("");
+const selectedStatus = ref("");
+
+function applyFilter() {
+    const filters = {};
+
+    if (selectedType.value) {
+        filters["filter[type]"] = selectedType.value;
+    }
+
+    if (selectedStatus.value) {
+        filters["filter[status]"] = selectedStatus.value;
+    }
+
+    router.get(route("admin.properties"), filters, {
+        preserveScroll: true,
+        preserveState: true,
+    });
+}
+
+const resetFilters = () => {
+    router.get(route("admin.properties"));
 };
 </script>

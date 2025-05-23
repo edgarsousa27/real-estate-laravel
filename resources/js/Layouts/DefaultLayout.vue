@@ -72,7 +72,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[houses-apartments]':
+                                                        'filter[type]':
                                                             'houses-apartments',
                                                         'filter[transaction]':
                                                             'buy',
@@ -87,8 +87,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[houses]':
-                                                            'houses',
+                                                        'filter[type]': 'house',
                                                         'filter[transaction]':
                                                             'buy',
                                                     })
@@ -99,8 +98,8 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[apartments]':
-                                                            'apartments',
+                                                        'filter[type]':
+                                                            'apartment',
                                                         'filter[transaction]':
                                                             'buy',
                                                     })
@@ -111,8 +110,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[lands]':
-                                                            'lands',
+                                                        'filter[type]': 'land',
                                                         'filter[transaction]':
                                                             'buy',
                                                     })
@@ -180,7 +178,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[houses-apartments]':
+                                                        'filter[type]':
                                                             'houses-apartments',
                                                         'filter[transaction]':
                                                             'rent',
@@ -195,8 +193,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[houses]':
-                                                            'houses',
+                                                        'filter[type]': 'house',
                                                         'filter[transaction]':
                                                             'rent',
                                                     })
@@ -207,8 +204,8 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[apartments]':
-                                                            'apartments',
+                                                        'filter[type]':
+                                                            'apartment',
                                                         'filter[transaction]':
                                                             'rent',
                                                     })
@@ -219,8 +216,7 @@
                                             <DropdownLink
                                                 :href="
                                                     route('properties', {
-                                                        'filter[lands]':
-                                                            'lands',
+                                                        'filter[type]': 'land',
                                                         'filter[transaction]':
                                                             'rent',
                                                     })

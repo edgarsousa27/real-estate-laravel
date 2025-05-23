@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\StatusPropertyFilter;
+use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
-use App\Sorts\SortByHouseType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminController extends Controller
@@ -43,7 +43,13 @@ class AdminController extends Controller
 
     public function indexProperties(Request $request)
     {
-        $properties = Property::select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->get();
+        $filters = QueryBuilder::for(Property::class)
+        ->allowedFilters([
+            AllowedFilter::custom('type', new TypePropertyFilter),
+            AllowedFilter::custom('status', new StatusPropertyFilter),
+        ]);
+
+        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->get();
 
         $categories = Category::select('id', 'name')->get();
 

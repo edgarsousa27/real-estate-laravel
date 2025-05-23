@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use App\Filters\ApartmentFilter;
-use App\Filters\HouseFilter;
-use App\Filters\HouseApartmentFilter;
-use App\Filters\LandsFilter;
 use App\Sorts\SortByPrice;
 use App\Filters\TransactionFilter;
+use App\Filters\TypePropertyFilter;
 use App\Models\Category;
 use App\Models\Contact;
-use App\Models\User;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
 use Illuminate\Support\Facades\Auth;
@@ -140,10 +136,7 @@ class PropertyController extends Controller
 
         $query = QueryBuilder::for(Property::class)
         ->allowedFilters([
-            AllowedFilter::custom('houses', new HouseFilter),
-            AllowedFilter::custom('apartments', new ApartmentFilter),
-            AllowedFilter::custom('houses-apartments', new HouseApartmentFilter),
-            AllowedFilter::custom('lands', new LandsFilter),
+            AllowedFilter::custom('type', new TypePropertyFilter),
             AllowedFilter::custom('transaction', new TransactionFilter)
         ])
         ->allowedSorts([
