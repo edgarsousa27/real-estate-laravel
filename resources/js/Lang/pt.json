@@ -348,6 +348,22 @@
         "pending": "Pendente",
         "refused": "Recusado",
         "sold": "Vendido",
-        "rented": "Alugado"
+        "rented": "Alugado",
+
+        "properties-admin": "Gestão de propriedades",
+        "placeholder-search": "Distrito, cidade, código postal, ...",
+        "type-all": "Todos os tipos",
+        "type-house": "Casas",
+        "type-apartment": "Apartamentos",
+        "type-land": "Terrenos",
+        "status-all": "Todos os estados",
+        "status-available": "Ativo",
+        "status-pending": "Pendente",
+        "status-sold": "Vendido",
+        "status-rented": "Alugado",
+        "reset-filters": "Redefinir filtros",
+        "search": "Pesquisar",
+        "type-property": "Tipo de imóvel",
+        "type": "Tipo"
     }
 }

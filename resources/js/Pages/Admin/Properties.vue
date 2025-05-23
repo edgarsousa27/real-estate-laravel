@@ -1,50 +1,74 @@
 <template>
     <Head>
-        <title>Properties Management</title>
+        <title>{{ t("admin-dashboard.properties-admin") }}</title>
     </Head>
-    <AdminLayout title="Properties Management">
+    <AdminLayout :title="t('admin-dashboard.properties-admin')">
         <div class="px-6 py-4 bg-white rounded-lg shadow">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Properties</h2>
+                <h2 class="text-2xl font-semibold text-gray-800">
+                    {{ t("admin-dashboard.properties") }}
+                </h2>
             </div>
 
             <!-- Filters -->
             <div class="mb-6 bg-gray-50 p-4 rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                        <InputLabel value="Pesquisar" />
+                        <InputLabel :value="t('admin-dashboard.search')" />
                         <TextInput
-                            placeholder="Address, city..."
+                            :placeholder="
+                                t('admin-dashboard.placeholder-search')
+                            "
                             type="text"
                             v-model="query"
                             @keyup.enter="search"
                         />
                     </div>
                     <div>
-                        <InputLabel value="Tipo de imóvel" />
+                        <InputLabel
+                            :value="t('admin-dashboard.type-property')"
+                        />
                         <select
                             class="w-full rounded-md border-gray-300 shadow-sm"
                             v-model="selectedType"
                             @change="applyFilter"
                         >
-                            <option value="">All Types</option>
-                            <option value="house">House</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="land">Land</option>
+                            <option value="">
+                                {{ t("admin-dashboard.type-all") }}
+                            </option>
+                            <option value="house">
+                                {{ t("admin-dashboard.type-house") }}
+                            </option>
+                            <option value="apartment">
+                                {{ t("admin-dashboard.type-apartment") }}
+                            </option>
+                            <option value="land">
+                                {{ t("admin-dashboard.type-land") }}
+                            </option>
                         </select>
                     </div>
                     <div>
-                        <InputLabel value="Estado" />
+                        <InputLabel :value="t('admin-dashboard.status')" />
                         <select
                             class="w-full rounded-md border-gray-300 shadow-sm"
                             v-model="selectedStatus"
                             @change="applyFilter"
                         >
-                            <option value="">All Statuses</option>
-                            <option value="active">Available</option>
-                            <option value="sold">Sold</option>
-                            <option value="pending">Pending</option>
-                            <option value="rented">Rented</option>
+                            <option value="">
+                                {{ t("admin-dashboard.status-all") }}
+                            </option>
+                            <option value="active">
+                                {{ t("admin-dashboard.status-available") }}
+                            </option>
+                            <option value="sold">
+                                {{ t("admin-dashboard.status-sold") }}
+                            </option>
+                            <option value="pending">
+                                {{ t("admin-dashboard.status-pending") }}
+                            </option>
+                            <option value="rented">
+                                {{ t("admin-dashboard.status-rented") }}
+                            </option>
                         </select>
                     </div>
                     <div class="flex items-end">
@@ -52,7 +76,7 @@
                             @click="resetFilters"
                             class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-md"
                         >
-                            Reset Filters
+                            {{ t("admin-dashboard.reset-filters") }}
                         </button>
                     </div>
                 </div>
@@ -66,33 +90,33 @@
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Property
+                                {{ t("admin-dashboard.properties") }}
                             </th>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Type
+                                {{ t("admin-dashboard.type") }}
                             </th>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Price
+                                {{ t("admin-dashboard.price") }}
                             </th>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Status
+                                {{ t("admin-dashboard.status") }}
                             </th>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Actions
+                                {{ t("admin-dashboard.actions") }}
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr
-                            v-for="property in props.properties"
+                            v-for="property in props.properties.data"
                             :key="property.id"
                         >
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -172,16 +196,13 @@
                             >
                                 <Link
                                     :href="`/admin/properties/${property.id}/edit`"
-                                    class="text-blue-600 hover:text-blue-900 mr-3"
+                                    class="text-blue-500 hover:text-blue-600"
                                 >
-                                    <font-awesome-icon icon="pen-to-square" />
+                                    <font-awesome-icon
+                                        icon="pen-to-square"
+                                        class="size-5"
+                                    />
                                 </Link>
-                                <button
-                                    @click="confirmDelete(property)"
-                                    class="text-red-600 hover:text-red-900"
-                                >
-                                    <font-awesome-icon icon="trash" />
-                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -189,24 +210,7 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-4 flex justify-between items-center">
-                <div class="text-sm text-gray-700">
-                    Showing <span class="font-medium">1</span> to
-                    <span class="font-medium">10</span> of
-                    <span class="font-medium">24</span> results
-                </div>
-                <div class="flex space-x-2">
-                    <button
-                        class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 disabled:opacity-50"
-                        disabled
-                    >
-                        Previous
-                    </button>
-                    <button class="px-3 py-1 rounded-md bg-blue-600 text-white">
-                        Next
-                    </button>
-                </div>
-            </div>
+            <Pagination :links="props.properties.links" />
         </div>
     </AdminLayout>
 </template>
@@ -218,11 +222,12 @@ import { useI18n } from "vue-i18n";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const { t } = useI18n();
 
 const props = defineProps({
-    properties: Array,
+    properties: [Array, Object],
     categories: Array,
     query: String,
 });

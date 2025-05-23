@@ -350,6 +350,22 @@
         "pending": "Pending",
         "refused": "Refused",
         "sold": "Sold",
-        "rented": "Rented"
+        "rented": "Rented",
+
+        "properties-admin": "Properties management",
+        "placeholder-search": "District, city, postal code, ...",
+        "type-all": "All types",
+        "type-house": "Houses",
+        "type-apartment": "Apartments",
+        "type-land": "Lands",
+        "status-all": "All status",
+        "status-available": "Available",
+        "status-pending": "Pending",
+        "status-sold": "Sold",
+        "status-rented": "Rented",
+        "reset-filters": "Reset filters",
+        "search": "Search",
+        "type-property": "Type of property",
+        "type": "Type"
     }
 }

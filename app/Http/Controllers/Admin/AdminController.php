@@ -49,7 +49,7 @@ class AdminController extends Controller
             AllowedFilter::custom('status', new StatusPropertyFilter),
         ]);
 
-        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->get();
+        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
