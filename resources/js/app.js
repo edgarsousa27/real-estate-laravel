@@ -64,6 +64,8 @@ import {
     faExclamationTriangle,
     faCheck,
     faClock,
+    faIdCard,
+    faMap,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -129,7 +131,9 @@ library.add(
     faTrash,
     faExclamationTriangle,
     faCheck,
-    faClock
+    faClock,
+    faIdCard,
+    faMap
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

@@ -104,49 +104,36 @@
                         <div class="grid grid-cols-4 gap-2 mt-2"></div>
                     </div>
 
-                    <!-- Property Details -->
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-medium text-gray-800 mb-4">
-                            {{ t("admin-dashboard.property-details") }}
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <DetailItem
-                                :label="t('admin-dashboard.property-type')"
-                                :value="
-                                    showCategories(props.property.category_id)
-                                "
-                                icon="home"
-                            />
-                            <DetailItem
-                                :label="t('admin-dashboard.price')"
-                                :value="formatPrice(props.property.price)"
-                                icon="euro-sign"
-                            />
-                            <DetailItem
-                                v-if="
-                                    props.property.category_id === 1 ||
-                                    props.property.category_id === 2
-                                "
-                                :label="t('admin-dashboard.bedrooms')"
-                                :value="props.property.bedrooms"
-                                icon="bed"
-                            />
-                            <DetailItem
-                                v-if="
-                                    props.property.category_id === 1 ||
-                                    props.property.category_id === 2
-                                "
-                                :label="t('admin-dashboard.bathrooms')"
-                                :value="props.property.bathrooms"
-                                icon="bath"
-                            />
-                            <DetailItem
-                                :label="t('admin-dashboard.square-meters')"
-                                :value="props.property.square_meters + ' m2'"
-                                icon="ruler-combined"
-                            />
-                        </div>
-                    </div>
+                    <EssentialsHighlights :properties="props.property" />
+                    <hr
+                        class="my-8"
+                        v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "
+                    />
+                    <InteriorHighlights
+                        v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "
+                        :properties="props.property"
+                    />
+                    <hr
+                        class="my-8"
+                        v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "
+                    />
+                    <OutdoorHighlights
+                        v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "
+                        :properties="props.property"
+                    />
+                    <hr class="my-8" />
 
                     <!-- Description -->
                     <div class="mt-6">
@@ -157,26 +144,6 @@
                             {{ props.property.description }}
                         </p>
                     </div>
-
-                    <!-- Amenities -->
-                    <!-- <div class="mt-6">
-                        <h3 class="text-lg font-medium text-gray-800 mb-2">
-                            Amenities
-                        </h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                v-for="amenity in property.amenities"
-                                :key="amenity"
-                                class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm"
-                            >
-                                <font-awesome-icon
-                                    :icon="amenityIcons[amenity] || 'check'"
-                                    class="mr-1"
-                                />
-                                {{ amenity }}
-                            </span>
-                        </div>
-                    </div> -->
                 </div>
 
                 <!-- User Info and Sidebar -->
@@ -207,6 +174,44 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{ props.property.user.email }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="map"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    props.property.user.nationality ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "ID: " +
+                                        props.property.user
+                                            .identification_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "NIF: " + props.property.user.tax_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
                             </div>
                             <div
                                 class="flex items-center text-sm text-gray-600"
@@ -273,7 +278,9 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import PropertiesShow from "@/Components/PropertiesShow.vue";
-import DetailItem from "@/Components/DetailItem.vue";
+import EssentialsHighlights from "../Properties/Partials/EssentialsHighlights.vue";
+import InteriorHighlights from "../Properties/Partials/InteriorHighlights.vue";
+import OutdoorHighlights from "../Properties/Partials/OutdoorHighlights.vue";
 import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
@@ -288,20 +295,11 @@ const props = defineProps({
     downloads: Array,
 });
 
-const formatPrice = (price) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
 const formatDate = (dateStr) => {
     if (locale.value === "en")
         return format(new Date(dateStr), "yyyy/MM/dd HH:mm", { locale: enUS });
     if (locale.value === "pt")
         return format(new Date(dateStr), "dd/MM/yyyy HH:mm", { locale: pt });
-};
-
-const showCategories = (category_id) => {
-    const category = props.categories.find((cate) => cate.id === category_id);
-    return t(`properties-form.${category.name}`);
 };
 
 const form = useForm({
