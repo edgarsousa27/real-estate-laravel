@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\Support\MediaStream;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -19,7 +20,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id','title','price','city','district', 'status')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::select('id','title','price','city','district', 'status', 'slug')->orderBy('id', 'desc')->take(5)->get();
 
         $revenue = $properties->where('status', 'active')->sum('price');
 
@@ -49,7 +50,7 @@ class AdminController extends Controller
             AllowedFilter::custom('status', new StatusPropertyFilter),
         ]);
 
-        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status')->orderBy('id', 'desc')->paginate(15);
+        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status', 'slug')->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -66,6 +67,47 @@ class AdminController extends Controller
             'categories' => $categories,
             'query' => $query,
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Property $property)
+    {
+        $property->load(['media', 'user']);
+
+        $categories = Category::select('id', 'name')->get();
+
+        $downloads = $property->getMedia('downloads');
+        
+        return Inertia::render('Admin/DetailsProperties', [
+            'property' => $property,
+            'categories' => $categories,
+            'downloads' => $downloads
+        ]);
+    }
+
+    public function downloadDocuments(Property $property)
+    {
+        $downloads = $property->getMedia('documents');
+
+        return MediaStream::create('documents.zip')->addMedia($downloads);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Property $property)
+    {
+        $request->validate([
+            'status' => 'required'         
+        ]);
+
+        $property->update([
+            'status' => $request->status,
+        ]);
+                        
+        return Inertia::location(route('admin.properties', $property->slug));
     }
     /**
      * Show the form for creating a new resource.
@@ -84,25 +126,9 @@ class AdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
     {
         //
     }

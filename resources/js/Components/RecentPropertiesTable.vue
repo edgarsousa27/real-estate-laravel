@@ -89,11 +89,19 @@
                         <td
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium"
                         >
-                            <button
-                                class="text-blue-600 hover:text-blue-900 mr-3"
+                            <Link
+                                :href="
+                                    route('admin.properties.show', {
+                                        slug: property.slug,
+                                    })
+                                "
                             >
-                                {{ t("admin-dashboard.view") }}
-                            </button>
+                                <button
+                                    class="text-blue-600 hover:text-blue-900 mr-3"
+                                >
+                                    {{ t("admin-dashboard.view") }}
+                                </button>
+                            </Link>
                         </td>
                     </tr>
                 </tbody>
@@ -104,6 +112,7 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import { Link } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 

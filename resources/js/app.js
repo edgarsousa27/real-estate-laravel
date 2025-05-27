@@ -61,6 +61,9 @@ import {
     faEuroSign,
     faPenToSquare,
     faTrash,
+    faExclamationTriangle,
+    faCheck,
+    faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -123,7 +126,10 @@ library.add(
     faHandshake,
     faEuroSign,
     faPenToSquare,
-    faTrash
+    faTrash,
+    faExclamationTriangle,
+    faCheck,
+    faClock
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

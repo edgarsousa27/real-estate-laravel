@@ -366,6 +366,24 @@
         "reset-filters": "Reset filters",
         "search": "Search",
         "type-property": "Type of property",
-        "type": "Type"
+        "type": "Type",
+
+        "property-details-text": "This property is",
+        "property-details-text2": "pending approval",
+        "property-details-text3": "Please review the details below.",
+        "accept": "Accept",
+        "refuse": "Refuse",
+        "property-details": "Property Details",
+        "property-type": "Property Type",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "square-meters": "Square meters",
+        "description": "Description",
+        "submitted-by": "Submitted By",
+        "submitted-in": "Submitted in",
+        "active-in": "Active in",
+        "not-provided": "Not provided",
+        "documents": "Documents",
+        "download": "Download"
     }
 }

@@ -4,23 +4,41 @@
     </Head>
     <AdminLayout title="Dashboard">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            <StatCard
-                :title="t('admin-dashboard.total-properties')"
-                :value="props.total_properties"
-                icon="home"
-            />
-            <StatCard
-                :title="t('admin-dashboard.active-properties')"
-                :value="props.active_properties"
-                icon="clipboard-list"
-                iconBgColor="bg-green-500"
-            />
-            <StatCard
-                :title="t('admin-dashboard.pending-properties')"
-                :value="props.pending_properties"
-                icon="handshake"
-                iconBgColor="bg-yellow-500"
-            />
+            <Link :href="route('admin.properties')">
+                <StatCard
+                    :title="t('admin-dashboard.total-properties')"
+                    :value="props.total_properties"
+                    icon="home"
+                />
+            </Link>
+            <Link
+                :href="
+                    route('admin.properties', {
+                        'filter[status]': 'active',
+                    })
+                "
+            >
+                <StatCard
+                    :title="t('admin-dashboard.active-properties')"
+                    :value="props.active_properties"
+                    icon="clipboard-list"
+                    iconBgColor="bg-green-500"
+                />
+            </Link>
+            <Link
+                :href="
+                    route('admin.properties', {
+                        'filter[status]': 'pending',
+                    })
+                "
+            >
+                <StatCard
+                    :title="t('admin-dashboard.pending-properties')"
+                    :value="props.pending_properties"
+                    icon="handshake"
+                    iconBgColor="bg-yellow-500"
+                />
+            </Link>
             <StatCard
                 :title="t('admin-dashboard.total-revenue')"
                 :value="formatPrice(props.revenue) + '€'"
@@ -42,7 +60,7 @@ import StatCard from "@/Components/StatCard.vue";
 import RecentPropertiesTable from "@/Components/RecentPropertiesTable.vue";
 import QuickActionsTable from "@/Components/QuickActionsTable.vue";
 import { useI18n } from "vue-i18n";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 

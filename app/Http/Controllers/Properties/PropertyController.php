@@ -24,10 +24,10 @@ class PropertyController extends Controller
 
     public function welcome()
     {
-        $properties_buy = Property::select('id')->where('transaction_id', 1);
-        $properties_rent = Property::select('id')->where('transaction_id', 2);
+        $properties_buy = Property::select('id')->where('transaction_id', 1)->where('status', 'active');
+        $properties_rent = Property::select('id')->where('transaction_id', 2)->where('status', 'active');
 
-        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->orderBy('id', 'desc')->take(9)->get();
+        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->orderBy('id', 'desc')->where('status', 'active')->take(9)->get();
 
         $properties->load('media');
 
@@ -146,7 +146,7 @@ class PropertyController extends Controller
         ])
         ->with('media');
         
-        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->paginate(15)->appends(request()->query());
+        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->where('status', 'active')->paginate(15)->appends(request()->query());
 
         $categories = Category::select('id', 'name')->get();
 
@@ -263,7 +263,7 @@ class PropertyController extends Controller
      */
     public function userProperties()
     {
-        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug')->paginate(15);
+        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug')->where('status', 'active')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -326,19 +326,17 @@ class PropertyController extends Controller
             'postal_code' => 'required',
         ]);
 
-        $proper = Property::find($request->id);
-
-        if($proper){
-            $proper->update([
-                'price' => $request->price,
-                'bedrooms' => $request->bedrooms,
-                'bathrooms' => $request->bathrooms,
-                'square_meters' => $request->square_meters,
-                'city' => $request->city,
-                'district' => $request->district,
-                'postal_code' => $request->postal_code
-            ]);
-        }
+        
+        $property->update([
+            'price' => $request->price,
+            'bedrooms' => $request->bedrooms,
+            'bathrooms' => $request->bathrooms,
+            'square_meters' => $request->square_meters,
+            'city' => $request->city,
+            'district' => $request->district,
+            'postal_code' => $request->postal_code
+        ]);
+        
                 
         return Inertia::location(route('properties.userProperties'));
     }

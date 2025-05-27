@@ -195,7 +195,11 @@
                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium"
                             >
                                 <Link
-                                    :href="`/admin/properties/${property.id}/edit`"
+                                    :href="
+                                        route('admin.properties.show', {
+                                            slug: property.slug,
+                                        })
+                                    "
                                     class="text-blue-500 hover:text-blue-600"
                                 >
                                     <font-awesome-icon
