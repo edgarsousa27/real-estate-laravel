@@ -382,8 +382,12 @@
         "submitted-by": "Submitted By",
         "submitted-in": "Submitted in",
         "active-in": "Active in",
+        "refused-in": "Refused in",
         "not-provided": "Not provided",
         "documents": "Documents",
-        "download": "Download"
+        "download": "Download",
+        "refused-text": "This property was",
+        "refused-owner": "The owner has been contacted with the reason!",
+        "reason": "Reason: "
     }
 }

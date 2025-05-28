@@ -380,8 +380,12 @@
         "submitted-by": "Submetido por",
         "submitted-in": "Submetido em",
         "active-in": "Ativo em",
+        "refused-in": "Recusado em",
         "not-provided": "Não fornecido",
         "documents": "Documentos",
-        "download": "Instalar"
+        "download": "Instalar",
+        "refused-text": "Este imóvel foi",
+        "refused-owner": "O proprietário foi contactado para explicar o motivo!",
+        "reason": "Motivo: "
     }
 }

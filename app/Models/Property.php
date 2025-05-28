@@ -59,7 +59,8 @@ class Property extends Model implements HasMedia
         'wheelchair_access',
         'well_water',
         'electricity',
-        'status'
+        'status',
+        'reason_for_refusal'
     ];
 
 

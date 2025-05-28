@@ -46,6 +46,28 @@
                     </div>
                 </div>
             </div>
+            <div
+                v-if="props.property.status === 'refused'"
+                class="mb-6 p-4 bg-red-50 border-l-4 border-red-400"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="check"
+                            class="h-5 w-5 text-red-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700">
+                            {{ t("admin-dashboard.refused-text") }}
+                            <span class="font-bold"> {{ t("admin-dashboard.refused") }}.</span>
+                             {{ t("admin-dashboard.refused-owner") }}
+                            <p class="text-lg text-red-700">{{ t("admin-dashboard.reason") }} {{ props.property.reason_for_refusal }}
+                            </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Property Header -->
             <div
@@ -74,10 +96,10 @@
                         >
                             <font-awesome-icon icon="check" class="mr-2" />
                             {{ t("admin-dashboard.accept") }}
-                        </button>
+                        </button>    
                         <button
                             type="button"
-                            @click="showRejectionModal = true"
+                            @click="openUpdateModal(property)"
                             class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center"
                         >
                             <font-awesome-icon icon="times" class="mr-2" />
@@ -246,6 +268,17 @@
                                 {{ t("admin-dashboard.active-in") }}:
                                 {{ formatDate(props.property.updated_at) }}
                             </div>
+                            <div
+                                v-if="props.property.status === 'refused'"
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="clock"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ t("admin-dashboard.refused-in") }}:
+                                {{ formatDate(props.property.updated_at) }}
+                            </div>
                         </div>
                     </div>
 
@@ -272,6 +305,37 @@
                 </div>
             </div>
         </div>
+
+        <InputModal
+            :isOpen="isModalOpen"
+            title="Recusar imóvel"
+            @close="closeModal"
+        >
+            <form @submit.prevent="refuseProperty" class="space-y-4">
+                <div>
+                    <h1>Motivo da rescisão</h1>
+                    <InputLabel value="Motivo" />
+                    <TextInput  v-model="selectedProperty.reason_for_refusal" />
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button
+                        type="button"
+                        @click="closeModal"
+                        class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
+                        {{ t("update-form.cancel") }}
+                    </button>
+                    <button
+                        type="submit"
+                        @click="form.status = 'refused'"
+                        class="px-4 py-2 bg-red-600 rounded-md text-sm font-medium text-white hover:bg-red-700"
+                    >
+                        {{ t("admin-dashboard.refused") }}
+                    </button>
+                </div>
+            </form>
+        </InputModal>
     </AdminLayout>
 </template>
 
@@ -281,11 +345,15 @@ import PropertiesShow from "@/Components/PropertiesShow.vue";
 import EssentialsHighlights from "../Properties/Partials/EssentialsHighlights.vue";
 import InteriorHighlights from "../Properties/Partials/InteriorHighlights.vue";
 import OutdoorHighlights from "../Properties/Partials/OutdoorHighlights.vue";
+import InputModal from "@/Components/InputModal.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
 import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
 import { useI18n } from "vue-i18n";
 import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const { locale, t } = useI18n();
 
@@ -295,26 +363,57 @@ const props = defineProps({
     downloads: Array,
 });
 
+const isModalOpen = ref(false);
+
+const closeModal = () => {
+    isModalOpen.value = false;
+};
+
+const openUpdateModal = (property) => {
+    selectedProperty.value = { ...property };
+    isModalOpen.value = true;
+};
+
+const selectedProperty = ref({
+    reason_for_refusal: null,
+});
+
 const formatDate = (dateStr) => {
     if (locale.value === "en")
-        return format(new Date(dateStr), "yyyy/MM/dd HH:mm", { locale: enUS });
+        return format(new Date(dateStr), "MM/dd/yyyy HH:mm", { locale: enUS });
     if (locale.value === "pt")
         return format(new Date(dateStr), "dd/MM/yyyy HH:mm", { locale: pt });
 };
 
 const form = useForm({
     status: props.property.status,
+    reason_for_refusal: null,
 });
 
 const updateProperty = () => {
+    form.status = 'active';
+
+    form.patch(
+        route("admin.properties.accept", { property: props.property.slug }),
+        {
+            preserveScroll: true,
+        },
+    );
+};
+
+const refuseProperty = () => {
+    form.status = 'refused';
+    form.reason_for_refusal = selectedProperty.value.reason_for_refusal;
+
     form.patch(
         route("admin.properties.accept", { property: props.property.slug }),
         {
             preserveScroll: true,
             onSuccess: () => {
-                console.log(props.property.status);
+                closeModal();
             },
         }
     );
 };
+
 </script>

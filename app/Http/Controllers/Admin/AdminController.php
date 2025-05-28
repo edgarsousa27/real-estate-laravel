@@ -100,11 +100,13 @@ class AdminController extends Controller
     public function update(Request $request, Property $property)
     {
         $request->validate([
-            'status' => 'required'         
+            'status' => 'required',
+            'reason_for_refusal' => 'nullable'        
         ]);
 
         $property->update([
             'status' => $request->status,
+            'reason_for_refusal' => $request->reason_for_refusal
         ]);
                         
         return Inertia::location(route('admin.properties', $property->slug));
