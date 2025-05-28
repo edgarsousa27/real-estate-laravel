@@ -111,6 +111,8 @@ const form = useForm({
     kitchen: false,
     well_water: false,
     electricity: false,
+    energy_consumption: null,
+    gas_emission: null,
 });
 
 const validateStepOne = () => {

@@ -143,7 +143,7 @@
                         :properties="props.properties"
                     />
                     <hr class="my-8" />
-                    <div class="gap-2 mt-3 ml-3 mb-10 text-gray-600 text-lg">
+                    <div class="gap-2 mt-3 ml-3 mb-10 text-gray-800 text-lg">
                         <h1 class="text-xl font-semibold mb-4 mt-4">
                             {{ t("details-page.description") }}
                         </h1>
@@ -153,6 +153,14 @@
                             {{ props.properties.description }}
                         </p>
                     </div>
+                    <hr class="my-8" v-if="
+                            props.properties.category_id === 1 ||
+                            props.properties.category_id === 2
+                        " />
+                    <EnergyBalance :properties="props.properties" v-if="
+                            props.properties.category_id === 1 ||
+                            props.properties.category_id === 2
+                        " />
                 </div>
                 <div class="w-full lg:w-1/3">
                     <ContactForm
@@ -172,6 +180,7 @@ import EssentialsHighlights from "./Partials/EssentialsHighlights.vue";
 import InteriorHighlights from "./Partials/InteriorHighlights.vue";
 import OutdoorHighlights from "./Partials/OutdoorHighlights.vue";
 import ContactForm from "@/Components/ContactForm.vue";
+import EnergyBalance from "./Partials/EnergyBalance.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();

@@ -290,7 +290,11 @@
         "garage": "Garagem",
         "balcony": "Varanda",
 
-        "description": "Descrição"
+        "description": "Descrição",
+
+        "energy-balance": "Balanço energético",
+        "energy-consumption": "Consumo de energia",
+        "gas-emission": "Emissão de gás"
     },
 
     "contact-form": {

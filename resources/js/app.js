@@ -66,6 +66,7 @@ import {
     faClock,
     faIdCard,
     faMap,
+    faSortUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -133,7 +134,8 @@ library.add(
     faCheck,
     faClock,
     faIdCard,
-    faMap
+    faMap,
+    faSortUp
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

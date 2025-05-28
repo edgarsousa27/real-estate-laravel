@@ -159,13 +159,20 @@
 
                     <!-- Description -->
                     <div class="mt-6">
-                        <h3 class="text-lg font-medium text-gray-800 mb-2">
+                        <h3 class="text-xl font-semibold mb-4 mt-4 ml-3">
                             {{ t("admin-dashboard.description") }}
                         </h3>
-                        <p class="text-gray-600 whitespace-pre-line">
+                        <p class="mb-4 mt-4 ml-3 text-gray-600 whitespace-pre-line">
                             {{ props.property.description }}
                         </p>
                     </div>
+
+                    <hr class="my-8" />
+
+                    <EnergyBalance  :properties="props.property" v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "/>
                 </div>
 
                 <!-- User Info and Sidebar -->
@@ -348,6 +355,7 @@ import OutdoorHighlights from "../Properties/Partials/OutdoorHighlights.vue";
 import InputModal from "@/Components/InputModal.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import EnergyBalance from "../Properties/Partials/EnergyBalance.vue";
 import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { enUS } from "date-fns/locale";

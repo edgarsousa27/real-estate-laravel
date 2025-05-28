@@ -60,7 +60,9 @@ class Property extends Model implements HasMedia
         'well_water',
         'electricity',
         'status',
-        'reason_for_refusal'
+        'reason_for_refusal',
+        'energy_consumption',
+        'gas_emission'
     ];
 
 

@@ -292,7 +292,11 @@
         "garage": "Garage",
         "balcony": "Balcony",
 
-        "description": "Description"
+        "description": "Description",
+
+        "energy-balance": "Energy Balance",
+        "energy-consumption": "Energy Consumption",
+        "gas-emission": "Gas emission"
     },
 
     "contact-form": {

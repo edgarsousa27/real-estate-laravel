@@ -235,7 +235,9 @@ class PropertyController extends Controller
             'garage' => ['boolean'],
             'kitchen' => ['boolean'],
             'well_water' => ['boolean'],
-            'electricity' => ['boolean']
+            'electricity' => ['boolean'],
+            'energy_consumption' => ['integer', 'nullable'],
+            'gas_emission' => ['integer', 'nullable'],
           ]);
 
         $properties = Auth::user()->property()->create($validator);
