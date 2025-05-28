@@ -263,7 +263,7 @@ class PropertyController extends Controller
      */
     public function userProperties()
     {
-        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug')->where('status', 'active')->paginate(15);
+        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug', 'status')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -306,7 +306,8 @@ class PropertyController extends Controller
 
         return Inertia::render('Properties/Show', [
             'properties' => $properties,
-            'contact' => $contact
+            'contact' => $contact,
+            'authUser' => Auth::id()
         ]);
         
     }

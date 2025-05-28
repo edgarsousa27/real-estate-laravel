@@ -53,7 +53,7 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <font-awesome-icon
-                            icon="check"
+                            icon="xmark"
                             class="h-5 w-5 text-red-400"
                         />
                     </div>

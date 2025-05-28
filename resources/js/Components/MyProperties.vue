@@ -11,6 +11,21 @@
                         <div
                             class="relative h-56 sm:h-56 md:h-72 lg:h-72 xl:h-72"
                         >
+                            <div class="absolute z-40 m-3">
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize"
+                                    :class="{
+                                        'bg-green-100 text-green-800':
+                                            proper.status == 'active',
+                                        'bg-yellow-100 text-yellow-800':
+                                            proper.status == 'pending',
+                                        'bg-red-100 text-red-800':
+                                            proper.status == 'refused',
+                                    }"
+                                >
+                                    {{ t(`admin-dashboard.${proper.status}`) }}
+                                </span>
+                            </div>
                             <PropertySlideShow
                                 :images="proper.media"
                                 :property="proper"

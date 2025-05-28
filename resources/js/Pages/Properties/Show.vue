@@ -5,6 +5,74 @@
     <DefaultLayout>
         <div class="py-4 md:px-4 w-full sm:px-6 lg:px-8">
             <div
+                v-if="
+                    props.properties.status === 'active' &&
+                    props.properties.user_id === props.authUser
+                "
+                class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 max-w-7xl mx-auto"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="check"
+                            class="h-5 w-5 text-green-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-green-700">
+                            {{ t("admin-dashboard.property-details-text") }}
+                            <span class="font-bold">{{
+                                t("admin-dashboard.active")
+                            }}</span
+                            >.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                v-if="props.properties.status === 'pending'"
+                class="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 max-w-7xl mx-auto"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="exclamation-triangle"
+                            class="h-5 w-5 text-yellow-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            {{ t("admin-dashboard.property-details-text") }}
+                            <span class="font-bold">{{
+                                t("admin-dashboard.property-details-text2")
+                            }}</span
+                            >.
+                        </p>
+                    </div>
+                </div>
+            </div>
+                        <div
+                v-if="props.properties.status === 'refused'"
+                class="mb-6 p-4 bg-red-50 border-l-4 border-red-400 max-w-7xl mx-auto"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="xmark"
+                            class="h-5 w-5 text-red-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700">
+                            {{ t("admin-dashboard.refused-text") }}
+                            <span class="font-bold"> {{ t("admin-dashboard.refused") }}.</span>
+                            <p class="text-lg text-red-700">{{ t("admin-dashboard.reason") }} {{ props.properties.reason_for_refusal }}
+                            </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
                 class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5 px-4 lg:px-8"
             >
                 <div
@@ -112,6 +180,7 @@ const props = defineProps({
     properties: Object,
     media: Array,
     contact: Object,
+    authUser: Number,
 });
 
 const formatPrice = (price) => {
