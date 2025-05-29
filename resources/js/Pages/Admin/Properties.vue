@@ -168,24 +168,34 @@
                                 </span>
                             </td>
                             <td
+                                v-if="property.status === 'sold'"
+                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                            >
+                                Vendido por:
+                                {{ formatPrice(property.final_price) + "€" }}
+                            </td>
+
+                            <td
+                                v-else
                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                             >
                                 {{ formatPrice(property.price) + "€" }}
                             </td>
+
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                                     :class="{
                                         'bg-green-100 text-green-800':
                                             property.status === 'active',
-                                        'bg-red-100 text-red-800':
-                                            property.status === 'sold',
                                         'bg-yellow-100 text-yellow-800':
                                             property.status === 'pending',
                                         'bg-blue-100 text-blue-800':
                                             property.status === 'rented',
                                         'bg-red-100 text-red-800':
                                             property.status === 'refused',
+                                        'bg-emerald-200 text-emerald-800':
+                                            property.status === 'sold',
                                     }"
                                 >
                                     {{

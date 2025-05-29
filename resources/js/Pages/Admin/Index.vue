@@ -3,7 +3,7 @@
         <title>Dashboard</title>
     </Head>
     <AdminLayout title="Dashboard">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             <Link :href="route('admin.properties')">
                 <StatCard
                     :title="t('admin-dashboard.total-properties')"
@@ -39,6 +39,35 @@
                     iconBgColor="bg-yellow-500"
                 />
             </Link>
+
+            <Link
+                :href="
+                    route('admin.properties', {
+                        'filter[status]': 'sold',
+                    })
+                "
+            >
+                <StatCard
+                    :title="t('admin-dashboard.sold-properties')"
+                    :value="props.sold_properties"
+                    icon="house-circle-check"
+                    iconBgColor="bg-emerald-500"
+                />
+            </Link>
+            <Link
+                :href="
+                    route('admin.properties', {
+                        'filter[status]': 'rented',
+                    })
+                "
+            >
+                <StatCard
+                    :title="t('admin-dashboard.rented-properties')"
+                    :value="props.rented_properties"
+                    icon="house-user"
+                    iconBgColor="bg-blue-400"
+                />
+            </Link>
             <StatCard
                 :title="t('admin-dashboard.total-revenue')"
                 :value="formatPrice(props.revenue) + '€'"
@@ -69,6 +98,8 @@ const props = defineProps({
     total_properties: Number,
     active_properties: Number,
     pending_properties: Number,
+    sold_properties: Number,
+    rented_properties: Number,
     revenue: Number,
 });
 

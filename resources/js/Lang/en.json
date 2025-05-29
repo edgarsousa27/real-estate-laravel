@@ -340,6 +340,8 @@
         "total-properties": "Total properties",
         "active-properties": "Active properties",
         "pending-properties": "Pending properties",
+        "sold-properties": "Sold properties",
+        "rented-properties": "Rented properties",
         "total-revenue": "Total revenue",
         "recent-properties": "Recent properties",
         "status": "Status",

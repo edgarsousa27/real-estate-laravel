@@ -70,14 +70,14 @@
                                 :class="{
                                     'bg-green-100 text-green-800':
                                         property.status === 'active',
-                                    'bg-red-100 text-red-800':
-                                        property.status === 'sold',
                                     'bg-yellow-100 text-yellow-800':
                                         property.status === 'pending',
                                     'bg-blue-100 text-blue-800':
                                         property.status === 'rented',
                                     'bg-red-100 text-red-800':
                                         property.status === 'refused',
+                                    'bg-emerald-200 text-emerald-800':
+                                        property.status === 'sold',
                                 }"
                             >
                                 {{ t(`admin-dashboard.${property.status}`) }}

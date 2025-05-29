@@ -338,6 +338,8 @@
         "total-properties": "Total de imóveis",
         "active-properties": "Imóveis ativos",
         "pending-properties": "Imóveis pendentes",
+        "sold-properties": "Imóveis vendidos",
+        "rented-properties": "Imóveis alugadas",
         "total-revenue": "Receita total",
         "recent-properties": "Imóveis recentes",
         "status": "Estado",

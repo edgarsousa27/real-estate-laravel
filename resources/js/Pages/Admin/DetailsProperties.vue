@@ -383,10 +383,14 @@
                         <InputLabel value="Cliente" />
                         <select v-model="selectedProperty.sold_to_user_id" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                             <option v-for="user in users" :key="user.id" :value="user.id">
-                                {{ user.name }}
+                                {{ user.name }} - {{  user.identification_number ||  'null' }}
                             </option>
                         </select>
                     </div>
+                    <div class="mt-2">
+                        <InputLabel value="Preço final" />
+                        <TextInput type="number" v-model="selectedProperty.final_price" />
+                     </div>
                 </div>
 
                 <div class="flex justify-end space-x-3 pt-4">
@@ -459,6 +463,7 @@ const openUpdateModal = (property) => {
 const selectedProperty = ref({
     reason_for_refusal: null,
     sold_to_user_id: props.property.sold_to_user_id,
+    final_price: null
 });
 
 const formatDate = (dateStr) => {
@@ -472,6 +477,7 @@ const form = useForm({
     status: props.property.status,
     reason_for_refusal: null,
     sold_to_user_id: props.property.sold_to_user_id,
+    final_price: null,
 });
 
 const activeProperty = () => {
@@ -504,7 +510,8 @@ const updateProperty = () => {
     form.status = selectedProperty.value.status;
     form.sold_to_user_id = selectedProperty.value.sold_to_user_id;
     form.sold_at = selectedProperty.value.sold_at;
-
+    form.final_price = selectedProperty.value.final_price
+ 
     form.patch(
         route("admin.properties.accept", { property: props.property.slug }),
         {

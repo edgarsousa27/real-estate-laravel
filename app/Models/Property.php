@@ -64,6 +64,7 @@ class Property extends Model implements HasMedia
         'energy_consumption',
         'gas_emission',
         'sold_to_user_id',
+        'final_price'
     ];
 
 

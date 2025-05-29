@@ -21,24 +21,28 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id','title','price','city','district', 'status', 'slug')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::select('id','title','price','city','district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->take(5)->get();
 
-        $revenue = $properties->where('status', 'active')->sum('price');
+        $revenue = $properties->whereIn('status', ['sold', 'rented'])->sum('final_price');
 
-        $total_revenue = $revenue * 0.015;
+        $total_revenue = $revenue * 0.05;
 
         $properties->load('media');
 
         $total_properties = Property::count();
         $active_properties = Property::where('status', 'active')->count();
         $pending_properties = Property::where('status', 'pending')->count();
+        $sold_properties = Property::where('status', 'sold')->count();
+        $rented_properties = Property::where('status', 'rented')->count();
         
         return Inertia::render('Admin/Index', [
             'properties' => $properties,
             'total_properties' => $total_properties,
             'active_properties' => $active_properties,
             'pending_properties' => $pending_properties,
-            'revenue' => $total_revenue
+            'revenue' => $total_revenue,
+            'sold_properties' => $sold_properties,
+            'rented_properties' => $rented_properties,
         ]);
     }
 
@@ -51,7 +55,7 @@ class AdminController extends Controller
             AllowedFilter::custom('status', new StatusPropertyFilter),
         ]);
 
-        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status', 'slug')->orderBy('id', 'desc')->paginate(15);
+        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -107,12 +111,14 @@ class AdminController extends Controller
             'status' => 'required|string',
             'reason_for_refusal' => 'nullable|string',
             'sold_to_user_id' => 'nullable',
+            'final_price' => 'numeric|nullable'
         ]);
 
         $property->update([
             'status' => $request->status,
             'reason_for_refusal' => $request->reason_for_refusal,
-            'sold_to_user_id' => $request->sold_to_user_id
+            'sold_to_user_id' => $request->sold_to_user_id,
+            'final_price' => $request->final_price
         ]);
                         
         return Inertia::location(route('admin.properties', $property->slug));
