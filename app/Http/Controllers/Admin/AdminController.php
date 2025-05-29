@@ -125,6 +125,11 @@ class AdminController extends Controller
         if($request->status === 'sold')
         {
             $property->sold_at = Carbon::now();
+
+            if($request->sold_to_user_id){
+                $property->user_id = $request->sold_to_user_id;
+            }
+
         } else {
             $property->sold_at = null;
         }
