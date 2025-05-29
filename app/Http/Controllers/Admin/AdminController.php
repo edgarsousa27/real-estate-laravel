@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\MediaLibrary\Support\MediaStream;
@@ -120,6 +121,15 @@ class AdminController extends Controller
             'sold_to_user_id' => $request->sold_to_user_id,
             'final_price' => $request->final_price
         ]);
+
+        if($request->status === 'sold')
+        {
+            $property->sold_at = Carbon::now();
+        } else {
+            $property->sold_at = null;
+        }
+
+        $property->save();
                         
         return Inertia::location(route('admin.properties', $property->slug));
     }

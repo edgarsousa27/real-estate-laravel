@@ -386,7 +386,9 @@
         "square-meters": "Square meters",
         "description": "Description",
         "submitted-by": "Submitted By",
-        "submitted-in": "Submitted in",
+        "submitted-in": "Submitted in:",
+        "bought-by": "Bought by",
+        "bought-in": "Bought in:",
         "active-in": "Active in",
         "refused-in": "Refused in",
         "not-provided": "Not provided",
@@ -394,6 +396,7 @@
         "download": "Download",
         "refused-text": "This property was",
         "refused-owner": "The owner has been contacted with the reason!",
-        "reason": "Reason: "
+        "reason": "Reason: ",
+        "edit": "Edit"
     }
 }

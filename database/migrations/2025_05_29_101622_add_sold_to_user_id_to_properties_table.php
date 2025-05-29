@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('properties', function (Blueprint $table) {
             $table->foreignId('sold_to_user_id')->nullable()->constrained('users');
+            $table->timestamp('sold_at')->nullable();
         });
     }
 

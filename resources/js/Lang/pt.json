@@ -385,6 +385,8 @@
         "description": "Descrição",
         "submitted-by": "Submetido por",
         "submitted-in": "Submetido em",
+        "bought-by": "Comprado por",
+        "bought-in": "Comprado em:",
         "active-in": "Ativo em",
         "refused-in": "Recusado em",
         "not-provided": "Não fornecido",
@@ -392,6 +394,7 @@
         "download": "Instalar",
         "refused-text": "Este imóvel foi",
         "refused-owner": "O proprietário foi contactado para explicar o motivo!",
-        "reason": "Motivo: "
+        "reason": "Motivo: ",
+        "edit": "Editar"
     }
 }

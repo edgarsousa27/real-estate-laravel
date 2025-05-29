@@ -71,6 +71,28 @@
                     </div>
                 </div>
             </div>
+            <div
+                v-if="props.property.status === 'sold'"
+                class="mb-6 p-4 bg-green-50 border-l-4 border-emerald-400"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="check"
+                            class="h-5 w-5 text-emerald-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-emerald-700">
+                            {{ t("admin-dashboard.property-details-text") }}
+                            <span class="font-bold">{{
+                                t("admin-dashboard.sold")
+                            }}</span
+                            >.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Property Header -->
             <div
@@ -121,7 +143,7 @@
                             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
                         >
                             <font-awesome-icon icon="pen-to-square" class="mr-2" />
-                            Editar
+                            {{t("admin-dashboard.edit")}}
                         </button> 
                 </div>
             </div>
@@ -289,7 +311,7 @@
                                     icon="clock"
                                     class="mr-2 text-gray-400"
                                 />
-                                {{ t("admin-dashboard.active-in") }}:
+                                {{ t("admin-dashboard.active-in") }}
                                 {{ formatDate(props.property.updated_at) }}
                             </div>
                             <div
@@ -302,6 +324,91 @@
                                 />
                                 {{ t("admin-dashboard.refused-in") }}:
                                 {{ formatDate(props.property.updated_at) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="props.property.sold_to_user_id"
+                        class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                    >
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">
+                            {{ t("admin-dashboard.bought-by") }}
+                        </h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div>
+                                <p class="font-medium text-gray-900">
+                                    {{ showBuyers(props.property.sold_to_user_id).name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="envelope"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ showBuyers(props.property.sold_to_user_id).email }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="map"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    showBuyers(props.property.sold_to_user_id).nationality ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "ID: " +
+                                        showBuyers(props.property.sold_to_user_id).identification_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "NIF: " + showBuyers(props.property.sold_to_user_id).tax_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="phone"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    showBuyers(props.property.sold_to_user_id).phone_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="clock"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ t("admin-dashboard.bought-in") }}
+                                {{ formatDate(props.property.sold_at) }}
                             </div>
                         </div>
                     </div>
@@ -438,6 +545,11 @@ const props = defineProps({
     downloads: Array,
     users: Array
 });
+
+const showBuyers = (sold_to_user_id) => {
+    const buyers = props.users.find((buyer) => buyer.id === sold_to_user_id);
+    return buyers;
+};
 
 const isModalOpen = ref(false);
 const isUpdateStatusModalOpen = ref(false);

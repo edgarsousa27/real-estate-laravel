@@ -16,11 +16,15 @@
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize"
                                     :class="{
                                         'bg-green-100 text-green-800':
-                                            proper.status == 'active',
+                                            proper.status === 'active',
                                         'bg-yellow-100 text-yellow-800':
-                                            proper.status == 'pending',
+                                            proper.status === 'pending',
+                                        'bg-blue-100 text-blue-800':
+                                            proper.status === 'rented',
                                         'bg-red-100 text-red-800':
-                                            proper.status == 'refused',
+                                            proper.status === 'refused',
+                                        'bg-emerald-200 text-emerald-800':
+                                            proper.status === 'sold',
                                     }"
                                 >
                                     {{ t(`admin-dashboard.${proper.status}`) }}
