@@ -62,7 +62,8 @@ class Property extends Model implements HasMedia
         'status',
         'reason_for_refusal',
         'energy_consumption',
-        'gas_emission'
+        'gas_emission',
+        'sold_to_user_id',
     ];
 
 

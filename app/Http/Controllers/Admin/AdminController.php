@@ -7,6 +7,7 @@ use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\MediaLibrary\Support\MediaStream;
@@ -76,6 +77,8 @@ class AdminController extends Controller
     {
         $property->load(['media', 'user']);
 
+        $users = User::select('id', 'name', 'email', 'nationality', 'tax_number', 'identification_number', 'phone_number', 'date_of_birth')->get();
+
         $categories = Category::select('id', 'name')->get();
 
         $downloads = $property->getMedia('downloads');
@@ -83,7 +86,8 @@ class AdminController extends Controller
         return Inertia::render('Admin/DetailsProperties', [
             'property' => $property,
             'categories' => $categories,
-            'downloads' => $downloads
+            'downloads' => $downloads,
+            'users' => $users,
         ]);
     }
 
@@ -100,13 +104,15 @@ class AdminController extends Controller
     public function update(Request $request, Property $property)
     {
         $request->validate([
-            'status' => 'required',
-            'reason_for_refusal' => 'nullable'        
+            'status' => 'required|string',
+            'reason_for_refusal' => 'nullable|string',
+            'sold_to_user_id' => 'nullable',
         ]);
 
         $property->update([
             'status' => $request->status,
-            'reason_for_refusal' => $request->reason_for_refusal
+            'reason_for_refusal' => $request->reason_for_refusal,
+            'sold_to_user_id' => $request->sold_to_user_id
         ]);
                         
         return Inertia::location(route('admin.properties', $property->slug));
