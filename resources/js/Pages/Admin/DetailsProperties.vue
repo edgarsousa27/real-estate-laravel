@@ -475,14 +475,13 @@
 
         <InputModal
             :isOpen="isModalOpen"
-            title="Recusar imóvel"
+            :title="t('admin-dashboard.refuse-property')"
             @close="closeModal"
         >
             <form @submit.prevent="refuseProperty" class="space-y-4">
                 <div>
-                    <h1>Motivo da rescisão</h1>
-                    <InputLabel value="Motivo" />
-                    <TextInput  v-model="selectedProperty.reason_for_refusal" />
+                    <InputLabel :value="t('admin-dashboard.reason')" />
+                    <TextInput  v-model="form.reason_for_refusal" required />
                 </div>
 
                 <div class="flex justify-end space-x-3 pt-4">
@@ -498,7 +497,7 @@
                         @click="form.status = 'refused'"
                         class="px-4 py-2 bg-red-600 rounded-md text-sm font-medium text-white hover:bg-red-700"
                     >
-                        {{ t("admin-dashboard.refused") }}
+                        {{ t("admin-dashboard.refuse") }}
                     </button>
                 </div>
             </form>
@@ -554,17 +553,9 @@ const closeModal = () => {
 };
 
 const openUpdateModal = (property) => {
-    selectedProperty.value = { ...property };
+    form.value = { ...property };
     isModalOpen.value = true;
 };
-
-const selectedProperty = ref({
-    reason_for_refusal: null,
-    sold_to_user_id: props.property.sold_to_user_id,
-    final_price: null,
-    inicial_date: null,
-    final_date: null
-});
 
 const formatDate = (dateStr) => {
     if (locale.value === "en")
@@ -577,7 +568,6 @@ const form = useForm({
     status: props.property.status,
     reason_for_refusal: null,
     sold_to_user_id: props.property.sold_to_user_id,
-    final_price: null,
 });
 
 const activeProperty = () => {
@@ -593,7 +583,6 @@ const activeProperty = () => {
 
 const refuseProperty = () => {
     form.status = 'refused';
-    form.reason_for_refusal = selectedProperty.value.reason_for_refusal;
 
     form.patch(
         route("admin.properties.accept", { property: props.property.slug }),
