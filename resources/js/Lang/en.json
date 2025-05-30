@@ -395,10 +395,36 @@
         "refused-text": "This property was",
         "refused-owner": "The owner has been contacted with the reason!",
         "reason": "Reason: ",
-        "edit": "Edit",
+        "edit": "Start the sales process",
         "property-price": "Property price:",
         "buyers-price": "Buyer's price:",
         "final-price": "Final price for the seller (-5% of our commission):",
         "property-rent-price": "Rental price:"
+    },
+
+    "purchase-form": {
+        "title": "Procurement contract management",
+        "back-to-properties": "Back to Properties",
+        "new-purchase-contract": "New purchase contract",
+        "property-info": "Information about the property",
+        "property-owner": "Information about the owner",
+        "property": "Property",
+        "owner": "Owner",
+        "address": "Address",
+        "cc-number": "Citizen card number",
+        "sale-price": "Selling price",
+        "final-price": "Final price agreed",
+        "nif": "Tax identification number",
+        "email": "Email",
+        "phone": "Phone number",
+        "date-birth": "Date of birth",
+        "buyer-info": "Buyer information",
+        "buyer": "Buyer",
+        "buyer-name": "Full Name",
+        "select-buyer": "Select a buyer",
+        "cancel": "Cancel",
+        "create-contract": "Create contract",
+        "processing": "Processing...",
+        "purchase-details": "Purchase details"
     }
 }

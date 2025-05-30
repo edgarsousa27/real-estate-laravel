@@ -44,7 +44,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/properties', [AdminController::class, 'indexProperties'])->name('admin.properties');
     Route::get('/admin/properties/{property:slug}', [AdminController::class, 'show'])->name('admin.properties.show');
     Route::get('/admin/properties/{property:slug}/documents', [AdminController::class, 'downloadDocuments'])->name('admin.properties.documents');
-    Route::patch('/admin/properties/{property:slug}/accept', [AdminController::class, 'update'])->name('admin.properties.accept');
+    Route::patch('/admin/properties/{property:slug}/contract/upload', [AdminController::class, 'update'])->name('admin.properties.accept');
+    Route::get('/admin/properties/{property:slug}/contract/purchase', [AdminController::class, 'registerSale'])->name('admin.properties.registersale');
 });
 
 require __DIR__.'/auth.php';

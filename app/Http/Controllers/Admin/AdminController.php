@@ -82,7 +82,7 @@ class AdminController extends Controller
     {
         $property->load(['media', 'user']);
 
-        $users = User::select('id', 'name', 'email', 'nationality', 'tax_number', 'identification_number', 'phone_number', 'date_of_birth')->get();
+        $buyers = User::select('id', 'name', 'email', 'nationality', 'tax_number', 'identification_number', 'phone_number', 'date_of_birth')->get();
 
         $categories = Category::select('id', 'name')->get();
 
@@ -92,7 +92,7 @@ class AdminController extends Controller
             'property' => $property,
             'categories' => $categories,
             'downloads' => $downloads,
-            'users' => $users,
+            'buyers' => $buyers,
         ]);
     }
 
@@ -103,6 +103,19 @@ class AdminController extends Controller
         return MediaStream::create('documents.zip')->addMedia($downloads);
     }
 
+    public function registerSale(Property $property)
+    {
+        $property->load('user');
+
+        $buyers = User::where('id', '!=', $property->user_id)->where('name', '!=', 'Admin')->get();
+
+        return Inertia::render('Admin/PropertyRegisterSaleForm', [
+            'property' => $property,
+            'buyers' => $buyers,
+            'owner' => $property->user
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -111,14 +124,14 @@ class AdminController extends Controller
         $request->validate([
             'status' => 'required|string',
             'reason_for_refusal' => 'nullable|string',
-            'sold_to_user_id' => 'nullable',
+            'buyer_id' => 'nullable',
             'final_price' => 'numeric|nullable'
         ]);
 
         $property->update([
             'status' => $request->status,
             'reason_for_refusal' => $request->reason_for_refusal,
-            'sold_to_user_id' => $request->sold_to_user_id,
+            'buyer_id' => $request->buyer_id,
             'final_price' => $request->final_price
         ]);
 
@@ -126,8 +139,8 @@ class AdminController extends Controller
         {
             $property->sold_at = Carbon::now();
 
-            if($request->sold_to_user_id){
-                $property->user_id = $request->sold_to_user_id;
+            if($request->buyer_id){
+                $property->user_id = $request->buyer_id;
             }
 
         } else {

@@ -137,14 +137,15 @@
                     class="flex space-x-3 mt-4 md:mt-0"
                     v-if="props.property.status === 'active'"
                 >
-                        <button
-                            type="button"
-                            @click="openUpdateStatusModal(property)"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
-                        >
-                            <font-awesome-icon icon="pen-to-square" class="mr-2" />
-                            {{t("admin-dashboard.edit")}}
-                        </button> 
+                        <Link :href="route('admin.properties.registersale', { property: props.property.slug })">
+                            <button
+                                type="button"
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                            >
+                                <font-awesome-icon icon="plus" class="mr-2" />
+                                {{t("admin-dashboard.edit")}}
+                            </button>
+                        </Link>
                 </div>
             </div>
 
@@ -335,7 +336,7 @@
                                     icon="clock"
                                     class="mr-2 text-gray-400"
                                 />
-                                {{ t("admin-dashboard.submitted-in") }}:
+                                {{ t("admin-dashboard.submitted-in") }}
                                 {{ formatDate(props.property.created_at) }}
                             </div>
                             <div
@@ -502,56 +503,6 @@
                 </div>
             </form>
         </InputModal>
-
-
-        <InputModal
-            :isOpen="isUpdateStatusModalOpen"
-            title="Atualizar Imóvel"
-            @close="closeUpdateStatusModal"
-        >
-            <form @submit.prevent="updateProperty" class="space-y-4">
-                <div>
-                    <InputLabel value="Estado do imóvel" />
-                    <select v-model="selectedProperty.status" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" >
-                        <option v-if="props.property.transaction_id == 1" value="sold">Vendido</option>
-                        <option v-if="props.property.transaction_id == 2" value="rented">Alugado</option>
-                        <option value="refused">Recusado</option>
-                        <option value="pending">Pendente</option>
-                    </select>
-                </div>
-
-                <div v-if="selectedProperty.status === 'sold'">
-                    <div class="mt-2">
-                        <InputLabel value="Cliente" />
-                        <select v-model="selectedProperty.sold_to_user_id" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option v-for="user in users" :key="user.id" :value="user.id">
-                                {{ user.name }} - {{  user.identification_number ||  'null' }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="mt-2">
-                        <InputLabel value="Preço final" />
-                        <TextInput type="number" v-model="selectedProperty.final_price" />
-                     </div>
-                </div>
-
-                <div class="flex justify-end space-x-3 pt-4">
-                    <button
-                        type="button"
-                        @click="closeUpdateStatusModal"
-                        class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        {{ t("update-form.cancel") }}
-                    </button>
-                    <button
-                        type="submit"
-                        class="px-4 py-2 bg-blue-600 rounded-md text-sm font-medium text-white hover:bg-blue-700"
-                    >
-                        Atualizar
-                    </button>
-                </div>
-            </form>
-        </InputModal>
     </AdminLayout>
 </template>
 
@@ -569,7 +520,7 @@ import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
 import { useI18n } from "vue-i18n";
-import { useForm, Head } from "@inertiajs/vue3";
+import { useForm, Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const { locale, t } = useI18n();
@@ -597,19 +548,9 @@ const finalPriceforSeller = () => {
 }
 
 const isModalOpen = ref(false);
-const isUpdateStatusModalOpen = ref(false);
 
 const closeModal = () => {
     isModalOpen.value = false;
-};
-
-const closeUpdateStatusModal = () => {
-    isUpdateStatusModalOpen.value = false;
-};
-
-const openUpdateStatusModal = (property) => {
-    selectedProperty.value = { ...property };
-    isUpdateStatusModalOpen.value = true;
 };
 
 const openUpdateModal = (property) => {
@@ -654,23 +595,6 @@ const refuseProperty = () => {
     form.status = 'refused';
     form.reason_for_refusal = selectedProperty.value.reason_for_refusal;
 
-    form.patch(
-        route("admin.properties.accept", { property: props.property.slug }),
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                closeModal();
-            },
-        }
-    );
-};
-
-const updateProperty = () => {
-    form.status = selectedProperty.value.status;
-    form.sold_to_user_id = selectedProperty.value.sold_to_user_id;
-    form.sold_at = selectedProperty.value.sold_at;
-    form.final_price = selectedProperty.value.final_price
- 
     form.patch(
         route("admin.properties.accept", { property: props.property.slug }),
         {

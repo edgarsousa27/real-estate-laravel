@@ -393,10 +393,36 @@
         "refused-text": "Este imóvel foi",
         "refused-owner": "O proprietário foi contactado para explicar o motivo!",
         "reason": "Motivo: ",
-        "edit": "Editar",
+        "edit": "Iniciar Processo de venda",
         "property-price": "Preço do imóvel:",
         "buyers-price": "Preço do comprador:",
         "final-price": "Preço final para o vendedor (-5% da nossa comissão):",
         "property-rent-price": "Preço do aluguer:"
+    },
+
+    "purchase-form": {
+        "title": "Gestão de contratos de aquisição",
+        "back-to-properties": "Voltar a Propriedades",
+        "new-purchase-contract": "Novo contrato de compra",
+        "property-info": "Informações sobre o imóvel",
+        "property-owner": "Informações sobre o proprietário",
+        "property": "Imóvel",
+        "owner": "Proprietário",
+        "address": "Morada",
+        "cc-number": "Número de cartão de cidadão",
+        "sale-price": "Preço de venda",
+        "final-price": "Preço final acordado",
+        "nif": "Número de identificação fiscal",
+        "email": "Email",
+        "phone": "Número de telefone",
+        "date-birth": "Data de Nascimento",
+        "buyer-info": "Informações do comprador",
+        "buyer": "Comprador",
+        "buyer-name": "Nome Completo",
+        "select-buyer": "Selecionar comprador",
+        "cancel": "Cancelar",
+        "create-contract": "Criar contrato",
+        "processing": "A processar...",
+        "purchase-details": "Detalhes da compra"
     }
 }
