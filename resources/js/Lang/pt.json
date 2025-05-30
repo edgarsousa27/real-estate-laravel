@@ -355,7 +355,6 @@
         "refused": "Recusado",
         "sold": "Vendido",
         "rented": "Alugado",
-
         "properties-admin": "Gestão de propriedades",
         "placeholder-search": "Distrito, cidade, código postal, ...",
         "type-all": "Todos os tipos",
@@ -371,7 +370,6 @@
         "search": "Pesquisar",
         "type-property": "Tipo de imóvel",
         "type": "Tipo",
-
         "property-details-text": "Este imóvel está",
         "property-details-text2": "aprovação pendente",
         "property-details-text3": "Consulte os pormenores abaixo.",
@@ -395,6 +393,10 @@
         "refused-text": "Este imóvel foi",
         "refused-owner": "O proprietário foi contactado para explicar o motivo!",
         "reason": "Motivo: ",
-        "edit": "Editar"
+        "edit": "Editar",
+        "property-price": "Preço do imóvel:",
+        "buyers-price": "Preço do comprador:",
+        "final-price": "Preço final para o vendedor (-5% da nossa comissão):",
+        "property-rent-price": "Preço do aluguer:"
     }
 }

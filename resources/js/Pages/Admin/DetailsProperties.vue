@@ -165,6 +165,44 @@
                         <div class="grid grid-cols-4 gap-2 mt-2"></div>
                     </div>
 
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <font-awesome-icon icon="sack-dollar" class="gap-3 mr-2 size-5 text-indigo-500"/>
+                        {{ t("admin-dashboard.price") }}
+                    </h3>
+                <ul class="space-y-3">
+                    <div v-if="props.property.transaction_id == 1">
+                        <li class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.property-price")}}</span>
+                            <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }}</span>
+                        </li>
+                        
+                        <li v-if="props.property.status === 'sold'" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.buyers-price")}}</span>
+                            <span class="text-blue-600 font-bold">{{ formatPrice(props.property.final_price) + '€' }}</span>
+                        </li>
+                        <li v-if="props.property.status === 'sold'" class="flex justify-between py-2">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.final-price")}}</span>
+                            <span class="text-green-600 font-bold">{{ finalPriceforSeller(props.property.final_price) + '€' }}</span>
+                        </li>
+                    </div>
+                    <div v-if="props.property.transaction_id == 2">
+                        <li class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.property-rent-price")}}</span>
+                            <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }} <span class="text-sm text-gray-400">{{t("properties.per-month")}}</span></span>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+
+                    <hr
+                        class="my-8"
+                        v-if="
+                            props.property.category_id === 1 ||
+                            props.property.category_id === 2
+                        "
+                    />
+
                     <EssentialsHighlights :properties="props.property" />
                     <hr
                         class="my-8"
@@ -217,7 +255,7 @@
                 <!-- User Info and Sidebar -->
                 <div class="space-y-6">
                     <!-- Owner/Agent Info -->
-                    <div
+                    <div v-if="!props.property.sold_to_user_id"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
                         <h3 class="text-lg font-medium text-gray-800 mb-4">
@@ -227,9 +265,6 @@
                             <div>
                                 <p class="font-medium text-gray-900">
                                     {{ props.property.user.name }}
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    {{ props.property.user.role }}
                                 </p>
                             </div>
                         </div>
@@ -478,8 +513,8 @@
                 <div>
                     <InputLabel value="Estado do imóvel" />
                     <select v-model="selectedProperty.status" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" >
-                        <option value="sold">Vendido</option>
-                        <option value="rented">Alugado</option>
+                        <option v-if="props.property.transaction_id == 1" value="sold">Vendido</option>
+                        <option v-if="props.property.transaction_id == 2" value="rented">Alugado</option>
                         <option value="refused">Recusado</option>
                         <option value="pending">Pendente</option>
                     </select>
@@ -551,6 +586,16 @@ const showBuyers = (sold_to_user_id) => {
     return buyers;
 };
 
+const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const finalPriceforSeller = () => {
+    const priceWithTaxes = props.property.final_price * 0.05;
+    const finalPrice = props.property.final_price - priceWithTaxes;
+    return finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const isModalOpen = ref(false);
 const isUpdateStatusModalOpen = ref(false);
 
@@ -575,7 +620,9 @@ const openUpdateModal = (property) => {
 const selectedProperty = ref({
     reason_for_refusal: null,
     sold_to_user_id: props.property.sold_to_user_id,
-    final_price: null
+    final_price: null,
+    inicial_date: null,
+    final_date: null
 });
 
 const formatDate = (dateStr) => {

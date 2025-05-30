@@ -69,6 +69,7 @@ import {
     faSortUp,
     faHouseCircleCheck,
     faHouseUser,
+    faSackDollar,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -139,7 +140,8 @@ library.add(
     faMap,
     faSortUp,
     faHouseCircleCheck,
-    faHouseUser
+    faHouseUser,
+    faSackDollar
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

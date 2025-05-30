@@ -357,7 +357,6 @@
         "refused": "Refused",
         "sold": "Sold",
         "rented": "Rented",
-
         "properties-admin": "Properties management",
         "placeholder-search": "District, city, postal code, ...",
         "type-all": "All types",
@@ -373,7 +372,6 @@
         "search": "Search",
         "type-property": "Type of property",
         "type": "Type",
-
         "property-details-text": "This property is",
         "property-details-text2": "pending approval",
         "property-details-text3": "Please review the details below.",
@@ -397,6 +395,10 @@
         "refused-text": "This property was",
         "refused-owner": "The owner has been contacted with the reason!",
         "reason": "Reason: ",
-        "edit": "Edit"
+        "edit": "Edit",
+        "property-price": "Property price:",
+        "buyers-price": "Buyer's price:",
+        "final-price": "Final price for the seller (-5% of our commission):",
+        "property-rent-price": "Rental price:"
     }
 }
