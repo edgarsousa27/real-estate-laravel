@@ -63,12 +63,12 @@ class Property extends Model implements HasMedia
         'reason_for_refusal',
         'energy_consumption',
         'gas_emission',
-        'sold_to_user_id',
+        'buyer_id',
         'final_price',
         'sold_at'
     ];
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom(['title', 'city', 'postal_code'])
@@ -76,7 +76,7 @@ class Property extends Model implements HasMedia
             ->slugsShouldBeNoLongerThan(50)
             ->preventOverwrite();
     }
-        /**
+    /**
      * Get the name of the index associated with the model.
      */
     public function searchableAs(): string
@@ -84,14 +84,14 @@ class Property extends Model implements HasMedia
         return 'properties_index';
     }
 
-        /**
+    /**
      * Get the indexable data array for the model.
      *
      */
     public function toSearchableArray(): array
     {
-        
-        $array['images'] = $this->getMedia('images')->map(function($media) {
+
+        $array['images'] = $this->getMedia('images')->map(function ($media) {
             return [
                 'url' => $media->getUrl(),
                 'name' => $media->name
@@ -107,7 +107,7 @@ class Property extends Model implements HasMedia
             'created_at' => $this->created_at->toISOString(),
             'square_meters' => (int)$this->square_meters,
         ];
- 
+
         return array_merge($array, $search);
     }
 
@@ -116,8 +116,8 @@ class Property extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this
-        ->addMediaCollection('images', 'documents')
-        ->useDisk('public');
+            ->addMediaCollection('images', 'documents')
+            ->useDisk('public');
     }
 
     public function user()

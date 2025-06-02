@@ -256,7 +256,7 @@
                 <!-- User Info and Sidebar -->
                 <div class="space-y-6">
                     <!-- Owner/Agent Info -->
-                    <div v-if="!props.property.sold_to_user_id"
+                    <div v-if="!props.property.buyer_id"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
                         <h3 class="text-lg font-medium text-gray-800 mb-4">
@@ -364,7 +364,7 @@
                         </div>
                     </div>
 
-                    <div v-if="props.property.sold_to_user_id"
+                    <div v-if="props.property.buyer_id"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
                         <h3 class="text-lg font-medium text-gray-800 mb-4">
@@ -373,7 +373,7 @@
                         <div class="flex items-center space-x-4 mb-4">
                             <div>
                                 <p class="font-medium text-gray-900">
-                                    {{ showBuyers(props.property.sold_to_user_id).name }}
+                                    {{ showBuyers(props.property.buyer_id).name }}
                                 </p>
                             </div>
                         </div>
@@ -385,7 +385,7 @@
                                     icon="envelope"
                                     class="mr-2 text-gray-400"
                                 />
-                                {{ showBuyers(props.property.sold_to_user_id).email }}
+                                {{ showBuyers(props.property.buyer_id).email }}
                             </div>
                             <div
                                 class="flex items-center text-sm text-gray-600"
@@ -395,7 +395,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    showBuyers(props.property.sold_to_user_id).nationality ||
+                                    showBuyers(props.property.buyer_id).nationality ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -408,7 +408,7 @@
                                 />
                                 {{
                                     "ID: " +
-                                        showBuyers(props.property.sold_to_user_id).identification_number ||
+                                        showBuyers(props.property.buyer_id).identification_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -420,7 +420,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    "NIF: " + showBuyers(props.property.sold_to_user_id).tax_number ||
+                                    "NIF: " + showBuyers(props.property.buyer_id).tax_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -432,7 +432,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    showBuyers(props.property.sold_to_user_id).phone_number ||
+                                    showBuyers(props.property.buyer_id).phone_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -528,12 +528,11 @@ const props = defineProps({
     property: Object,
     categories: Array,
     downloads: Array,
-    users: Array
+    buyers: Array
 });
 
-const showBuyers = (sold_to_user_id) => {
-    const buyers = props.users.find((buyer) => buyer.id === sold_to_user_id);
-    return buyers;
+const showBuyers = (buyer_id) => {
+    return props.buyers.find((b) => b.id === buyer_id);
 };
 
 const formatPrice = (price) => {
@@ -567,7 +566,7 @@ const formatDate = (dateStr) => {
 const form = useForm({
     status: props.property.status,
     reason_for_refusal: null,
-    sold_to_user_id: props.property.sold_to_user_id,
+    buyer_id: props.property.buyer_id,
 });
 
 const activeProperty = () => {
