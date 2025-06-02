@@ -39,6 +39,9 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Edgar',
             'email' => 'test@example.com',
+            'tax_number' => 302612691,
+            'identification_number' => '12345678 1 AB 2',
+            'phone_number' => 912345678,
             'password' => bcrypt('123')
         ]);
 

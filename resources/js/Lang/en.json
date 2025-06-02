@@ -427,5 +427,22 @@
         "create-contract": "Create contract",
         "processing": "Processing...",
         "purchase-details": "Purchase details"
+    },
+
+    "register-login": {
+        "register-title": "Register",
+        "login-title": "Log in",
+        "name": "Name",
+        "email": "Email",
+        "identification_number": "Identification number",
+        "tax_number": "TIN ( Taxpayer identification number)",
+        "phone_number": "Phone number",
+        "password": "Password",
+        "confirm-password": "Confirm password",
+        "already-register": "Already registered?",
+        "register": "Register",
+        "remember-me": "Remember me",
+        "forgot-password": "Forgot your password?",
+        "login": "Log in"
     }
 }

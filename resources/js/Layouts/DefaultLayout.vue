@@ -292,7 +292,7 @@
                                 </Dropdown>
                             </div>
                             <div v-else>
-                                <NavLink :href="route('login')">
+                                <NavLink :href="route('register')">
                                     {{ t("buttons.my-account") }}
                                 </NavLink>
                             </div>
