@@ -7,8 +7,7 @@ use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Models\SalesContract;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\MediaLibrary\Support\MediaStream;
@@ -22,7 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id','title','price','city','district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->take(5)->get();
 
         $revenue = $properties->whereIn('status', ['sold', 'rented'])->sum('final_price');
 
@@ -35,7 +34,7 @@ class AdminController extends Controller
         $pending_properties = Property::where('status', 'pending')->count();
         $sold_properties = Property::where('status', 'sold')->count();
         $rented_properties = Property::where('status', 'rented')->count();
-        
+
         return Inertia::render('Admin/Index', [
             'properties' => $properties,
             'total_properties' => $total_properties,
@@ -51,24 +50,24 @@ class AdminController extends Controller
     public function indexProperties(Request $request)
     {
         $filters = QueryBuilder::for(Property::class)
-        ->allowedFilters([
-            AllowedFilter::custom('type', new TypePropertyFilter),
-            AllowedFilter::custom('status', new StatusPropertyFilter),
-        ]);
+            ->allowedFilters([
+                AllowedFilter::custom('type', new TypePropertyFilter),
+                AllowedFilter::custom('status', new StatusPropertyFilter),
+            ]);
 
-        $properties = $filters->select('id','category_id','title','price','address','city','district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->paginate(15);
+        $properties = $filters->select('id', 'category_id', 'title', 'price', 'address', 'city', 'district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
-        $query = $request->input('query'); 
+        $query = $request->input('query');
 
-        if($query){
+        if ($query) {
             $properties = Property::search($query)->get();
         }
 
         $properties->load('media');
 
-        return Inertia::render('Admin/Properties',[
+        return Inertia::render('Admin/Properties', [
             'properties' => $properties,
             'categories' => $categories,
             'query' => $query,
@@ -82,17 +81,17 @@ class AdminController extends Controller
     {
         $property->load(['media', 'user']);
 
-        $buyers = User::select('id', 'name', 'email', 'nationality', 'tax_number', 'identification_number', 'phone_number', 'date_of_birth')->get();
-
         $categories = Category::select('id', 'name')->get();
 
+        $sales_contract = SalesContract::with(['owner', 'buyer'])->get();
+
         $downloads = $property->getMedia('downloads');
-        
+
         return Inertia::render('Admin/DetailsProperties', [
             'property' => $property,
             'categories' => $categories,
             'downloads' => $downloads,
-            'buyers' => $buyers,
+            'sales_contract' => $sales_contract,
         ]);
     }
 
@@ -103,52 +102,21 @@ class AdminController extends Controller
         return MediaStream::create('documents.zip')->addMedia($downloads);
     }
 
-    public function registerSale(Property $property)
-    {
-        $property->load('user');
 
-        $buyers = User::where('id', '!=', $property->user_id)->where('name', '!=', 'Admin')->get();
-
-        return Inertia::render('Admin/PropertyRegisterSaleForm', [
-            'property' => $property,
-            'buyers' => $buyers,
-            'owner' => $property->user
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Property $property)
     {
         $request->validate([
             'status' => 'required|string',
             'reason_for_refusal' => 'nullable|string',
-            'buyer_id' => 'nullable',
-            'final_price' => 'numeric|nullable'
         ]);
 
         $property->update([
             'status' => $request->status,
             'reason_for_refusal' => $request->reason_for_refusal,
-            'buyer_id' => $request->buyer_id,
-            'final_price' => $request->final_price
         ]);
 
-        if($request->status === 'sold')
-        {
-            $property->sold_at = Carbon::now();
-
-            if($request->buyer_id){
-                $property->user_id = $request->buyer_id;
-            }
-
-        } else {
-            $property->sold_at = null;
-        }
-
         $property->save();
-                        
+
         return Inertia::location(route('admin.properties', $property->slug));
     }
     /**

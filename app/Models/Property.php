@@ -63,9 +63,7 @@ class Property extends Model implements HasMedia
         'reason_for_refusal',
         'energy_consumption',
         'gas_emission',
-        'buyer_id',
         'final_price',
-        'sold_at'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -138,5 +136,9 @@ class Property extends Model implements HasMedia
     public function contact()
     {
         return $this->hasMany(Contact::class);
+    }
+    public function sales_contract()
+    {
+        return $this->hasOne(SalesContract::class);
     }
 }

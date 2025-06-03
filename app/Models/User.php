@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Property::class);
     }
+
+    public function sales_contract(): HasMany
+    {
+        return  $this->hasMany(SalesContract::class, 'owner_id');
+    }
 }

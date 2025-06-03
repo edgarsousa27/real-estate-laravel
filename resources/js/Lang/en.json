@@ -426,7 +426,11 @@
         "cancel": "Cancel",
         "create-contract": "Create contract",
         "processing": "Processing...",
-        "purchase-details": "Purchase details"
+        "purchase-details": "Purchase details",
+        "select-payment-method": "Select payment method",
+        "bank-transfer": "Bank transfer",
+        "cheque": "Cheque",
+        "cash": "Cash"
     },
 
     "register-login": {

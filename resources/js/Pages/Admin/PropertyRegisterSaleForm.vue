@@ -206,6 +206,29 @@
                                 required
                             />
                         </div>
+                        <div>
+                            <InputLabel value="Métodos de pagamento" />
+                            <select
+                                v-model="form.payment_method"
+                                class="w-full rounded-md border-gray-300 shadow-sm"
+                                required
+                            >
+                                <option value="">
+                                    {{
+                                        t("purchase-form.select-payment-method")
+                                    }}
+                                </option>
+                                <option value="bank_transfer">
+                                    {{ t("purchase-form.bank-transfer") }}
+                                </option>
+                                <option value="cheque">
+                                    {{ t("purchase-form.cheque") }}
+                                </option>
+                                <option value="cash">
+                                    {{ t("purchase-form.cash") }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -257,12 +280,14 @@ const props = defineProps({
 
 const form = useForm({
     buyer_id: props.property.buyer_id,
+    property_id: props.property.id,
     final_price: null,
     status: "sold",
+    payment_method: "",
 });
 
 const formatPrice = (price) => {
-    return new Intl.NumberFormat("en-US").format(price);
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 const showBuyersInfo = () => {
@@ -270,7 +295,7 @@ const showBuyersInfo = () => {
 };
 
 const submitForm = () => {
-    form.patch(
+    form.post(
         route("admin.properties.accept", { property: props.property.slug }),
         {
             preserveScroll: true,

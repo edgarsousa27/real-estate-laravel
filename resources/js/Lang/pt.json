@@ -424,7 +424,11 @@
         "cancel": "Cancelar",
         "create-contract": "Criar contrato",
         "processing": "A processar...",
-        "purchase-details": "Detalhes da compra"
+        "purchase-details": "Detalhes da compra",
+        "select-payment-method": "Selecione método de pagamento",
+        "bank-transfer": "Transferência bancária",
+        "cheque": "Cheque",
+        "cash": "Numerário"
     },
 
     "register-login": {

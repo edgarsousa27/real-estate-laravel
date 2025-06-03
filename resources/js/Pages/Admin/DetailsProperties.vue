@@ -256,16 +256,16 @@
                 <!-- User Info and Sidebar -->
                 <div class="space-y-6">
                     <!-- Owner/Agent Info -->
-                    <div v-if="!props.property.buyer_id"
+                    <div v-if="props.property.status === 'active'"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
-                        <h3 class="text-lg font-medium text-gray-800 mb-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4"> 
                             {{ t("admin-dashboard.submitted-by") }}
                         </h3>
                         <div class="flex items-center space-x-4 mb-4">
                             <div>
                                 <p class="font-medium text-gray-900">
-                                    {{ props.property.user.name }}
+                                    {{ showOwner(props.property).name }}                                                     
                                 </p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                     icon="envelope"
                                     class="mr-2 text-gray-400"
                                 />
-                                {{ props.property.user.email }}
+                                {{ showOwner(props.property).email }}                
                             </div>
                             <div
                                 class="flex items-center text-sm text-gray-600"
@@ -287,7 +287,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    props.property.user.nationality ||
+                                    showOwner(props.property).nationality ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -300,8 +300,7 @@
                                 />
                                 {{
                                     "ID: " +
-                                        props.property.user
-                                            .identification_number ||
+                                        showOwner(props.property).identification_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -313,7 +312,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    "NIF: " + props.property.user.tax_number ||
+                                    "NIF: " + showOwner(props.property).tax_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -325,7 +324,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    props.property.user.phone_number ||
+                                    showOwner(props.property).phone_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -364,16 +363,17 @@
                         </div>
                     </div>
 
-                    <div v-if="props.property.buyer_id"
+
+                    <div v-if="props.property.status === 'sold'"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
-                        <h3 class="text-lg font-medium text-gray-800 mb-4">
-                            {{ t("admin-dashboard.bought-by") }}
+                        <h3 class="text-lg font-medium text-gray-800 mb-4"> 
+                            {{ t("admin-dashboard.submitted-by") }}
                         </h3>
                         <div class="flex items-center space-x-4 mb-4">
                             <div>
                                 <p class="font-medium text-gray-900">
-                                    {{ showBuyers(props.property.buyer_id).name }}
+                                    {{ showContract(props.property.id).owner.name }}
                                 </p>
                             </div>
                         </div>
@@ -385,7 +385,7 @@
                                     icon="envelope"
                                     class="mr-2 text-gray-400"
                                 />
-                                {{ showBuyers(props.property.buyer_id).email }}
+                                {{ showContract(props.property.id).owner.email }}
                             </div>
                             <div
                                 class="flex items-center text-sm text-gray-600"
@@ -395,7 +395,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    showBuyers(props.property.buyer_id).nationality ||
+                                    showContract(props.property.id).owner.nationality ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -408,7 +408,7 @@
                                 />
                                 {{
                                     "ID: " +
-                                        showBuyers(props.property.buyer_id).identification_number ||
+                                        showContract(props.property.id).owner.identification_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -420,7 +420,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    "NIF: " + showBuyers(props.property.buyer_id).tax_number ||
+                                    "NIF: " + showContract(props.property.id).owner.tax_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -432,7 +432,114 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{
-                                    showBuyers(props.property.buyer_id).phone_number ||
+                                    showContract(props.property.id).owner.phone_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="clock"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ t("admin-dashboard.submitted-in") }}
+                                {{ formatDate(props.property.created_at) }}
+                            </div>
+                            <div
+                                v-if="props.property.status === 'active'"
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="clock"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ t("admin-dashboard.active-in") }}
+                                {{ formatDate(props.property.updated_at) }}
+                            </div>
+                            <div
+                                v-if="props.property.status === 'refused'"
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="clock"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ t("admin-dashboard.refused-in") }}:
+                                {{ formatDate(props.property.updated_at) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="props.property.status === 'sold'"
+                        class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                    >
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">
+                            {{ t("admin-dashboard.bought-by") }}
+                        </h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div>
+                                <p class="font-medium text-gray-900">
+                                     {{ showContract(props.property.id).buyer.name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="envelope"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{ showContract(props.property.id).buyer.email }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="map"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    showContract(props.property.id).buyer.nationality ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "ID: " +
+                                        showContract(props.property.id).buyer.identification_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="id-card"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    "NIF: " + showContract(props.property.id).buyer.tax_number ||
+                                    t("admin-dashboard.not-provided")
+                                }}
+                            </div>
+                            <div
+                                class="flex items-center text-sm text-gray-600"
+                            >
+                                <font-awesome-icon
+                                    icon="phone"
+                                    class="mr-2 text-gray-400"
+                                />
+                                {{
+                                    showContract(props.property.id).buyer.phone_number ||
                                     t("admin-dashboard.not-provided")
                                 }}
                             </div>
@@ -444,7 +551,7 @@
                                     class="mr-2 text-gray-400"
                                 />
                                 {{ t("admin-dashboard.bought-in") }}
-                                {{ formatDate(props.property.sold_at) }}
+                                {{ formatDate(showContract(props.property.id).offer_date) }}
                             </div>
                         </div>
                     </div>
@@ -528,12 +635,16 @@ const props = defineProps({
     property: Object,
     categories: Array,
     downloads: Array,
-    buyers: Array
+    sales_contract: Array,
 });
 
-const showBuyers = (buyer_id) => {
-    return props.buyers.find((b) => b.id === buyer_id);
-};
+const showContract = (property_id) => {
+    return props.sales_contract.find((c) => c.property_id === property_id);
+}
+
+const showOwner = () => {
+    return props.property.user
+}
 
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -566,14 +677,13 @@ const formatDate = (dateStr) => {
 const form = useForm({
     status: props.property.status,
     reason_for_refusal: null,
-    buyer_id: props.property.buyer_id,
 });
 
 const activeProperty = () => {
     form.status = 'active';
 
     form.patch(
-        route("admin.properties.accept", { property: props.property.slug }),
+        route("admin.properties.update", { property: props.property.slug }),
         {
             preserveScroll: true,
         },
@@ -584,7 +694,7 @@ const refuseProperty = () => {
     form.status = 'refused';
 
     form.patch(
-        route("admin.properties.accept", { property: props.property.slug }),
+        route("admin.properties.update", { property: props.property.slug }),
         {
             preserveScroll: true,
             onSuccess: () => {
