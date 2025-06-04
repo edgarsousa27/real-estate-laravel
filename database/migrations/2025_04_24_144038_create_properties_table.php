@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('categories_properties');
             $table->text('description');
-            $table->integer('price');
+            $table->decimal('price', 10, 2);
             $table->float('square_meters');
             $table->text('address')->nullable();
             $table->string('city')->nullable();

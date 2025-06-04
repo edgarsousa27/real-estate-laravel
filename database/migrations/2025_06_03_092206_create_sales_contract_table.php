@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('property_id')->constrained('properties');
             $table->foreignId('owner_id')->constrained('users');
             $table->foreignId('buyer_id')->constrained('users');
-            $table->timestamp('offer_date');
+            $table->date('offer_date');
             $table->string('payment_method');
-            $table->integer('final_price');
+            $table->decimal('final_price', 10, 2);
             $table->timestamps();
         });
     }

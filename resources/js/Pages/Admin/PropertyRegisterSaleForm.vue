@@ -80,7 +80,10 @@
                     <div>
                         <InputLabel :value="t('purchase-form.date-birth')" />
                         <p class="text-gray-900">
-                            {{ owner.date_of_birth }}
+                            {{
+                                owner.date_of_birth ||
+                                t("purchase-form.undisclosed")
+                            }}
                         </p>
                     </div>
                 </div>
@@ -113,7 +116,7 @@
                                     {{ buyer.name }} -
                                     {{
                                         "NIF: " + buyer.identification_number ||
-                                        "null"
+                                        t("purchase-form.undisclosed")
                                     }}
                                 </option>
                             </select>
@@ -161,7 +164,8 @@
                                     <p class="text-gray-900">
                                         {{
                                             showBuyersInfo(form.buyer_id)
-                                                .date_of_birth
+                                                .date_of_birth ||
+                                            t("purchase-form.undisclosed")
                                         }}
                                     </p>
                                 </div>
@@ -207,7 +211,9 @@
                             />
                         </div>
                         <div>
-                            <InputLabel value="Métodos de pagamento" />
+                            <InputLabel
+                                :value="t('purchase-form.payment_methods')"
+                            />
                             <select
                                 v-model="form.payment_method"
                                 class="w-full rounded-md border-gray-300 shadow-sm"
@@ -228,6 +234,17 @@
                                     {{ t("purchase-form.cash") }}
                                 </option>
                             </select>
+                        </div>
+
+                        <div>
+                            <InputLabel value="Comissão" />
+                            <TextInput
+                                type="number"
+                                v-model="form.commission"
+                                class="w-full"
+                                required
+                                placeholder="5"
+                            />
                         </div>
                     </div>
                 </div>
@@ -284,6 +301,7 @@ const form = useForm({
     final_price: null,
     status: "sold",
     payment_method: "",
+    commission: null,
 });
 
 const formatPrice = (price) => {

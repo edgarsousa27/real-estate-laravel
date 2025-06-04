@@ -211,24 +211,37 @@
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.property-price")}}</span>
                             <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }}</span>
                         </li>
-                        
-                        <li  class="flex justify-between py-2 border-b border-gray-100">
+                        <li v-if="showContract(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.buyers-price")}}</span>
-                            <span class="text-blue-600 font-bold">{{ formatPrice(props.property.final_price) + '€' }}</span>
+                            <span class="text-blue-600 font-bold">{{ formatPrice(showContract(props.property.id).final_price + '€') }}</span>
                         </li>
-                        <li  class="flex justify-between py-2">
+                        <li v-if="showContract(props.property.id)"  class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.commission")}}</span>
+                            <span class="text-blue-600 font-bold">{{ showContract(props.property.id).commission + '%' }}</span>
+                        </li>
+                        <li v-if="showContract(props.property.id)"  class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.final-price")}}</span>
-                            <span class="text-green-600 font-bold">{{ finalPriceforSeller(props.property.final_price) + '€' }}</span>
+                            <span class="text-green-600 font-bold">{{ formatPrice(showContract(props.property.id).final_price_for_seller + '€') }}</span>
+                        </li>
+                        <li v-if="showContract(props.property.id)"  class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.our-total-revenue")}}</span>
+                            <span class="text-green-600 font-bold">{{ formatPrice(showContract(props.property.id).total_revenue + '€') }}</span>
                         </li>
                     </div>
+
+
                     <div v-if="props.property.transaction_id == 2">
                         <li class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.property-rent-price")}}</span>
                             <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }} <span class="text-sm text-gray-400">{{t("properties.per-month")}}</span></span>
                         </li>
                         <li v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.price-agreed")}}</span>
+                            <span class="text-gray-800 font-bold">{{ showContractRent(props.property.id).price + '€' }}</span>
+                        </li>
+                        <li v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.months-contract")}}</span>
-                            <span class="text-blue-600 font-bold">{{ showContractRent(props.property.id).months_contract }}</span>
+                            <span class="text-gray-800 font-bold">{{ showContractRent(props.property.id).months_contract }}</span>
                         </li>
                         <li v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.total-contract")}}</span>
@@ -917,12 +930,6 @@ const showOwner = () => {
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-
-const finalPriceforSeller = () => {
-    const priceWithTaxes = props.property.final_price * 0.05;
-    const finalPrice = props.property.final_price - priceWithTaxes;
-    return finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 const isModalOpen = ref(false);
 

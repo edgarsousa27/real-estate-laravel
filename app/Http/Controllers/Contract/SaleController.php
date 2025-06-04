@@ -32,8 +32,12 @@ class SaleController extends Controller
             'status' => 'required|string',
             'buyer_id' => 'required',
             'payment_method' => 'required|string',
-            'final_price' => 'required|numeric'
+            'final_price' => 'required|numeric',
+            'commission' => 'required|numeric|max:100'
         ]);
+
+        $finalPriceTaxes = $request->final_price * $request->commission / 100;
+        $finalPriceForSeller = $request->final_price - $finalPriceTaxes;
 
         SalesContract::create([
             'property_id' => $request->property_id,
@@ -41,7 +45,10 @@ class SaleController extends Controller
             'owner_id' => $property->user_id,
             'payment_method' => $request->payment_method,
             'final_price' => $request->final_price,
-            'offer_date' => Carbon::now()
+            'offer_date' => Carbon::now(),
+            'commission' => $request->commission,
+            'final_price_for_seller' => $finalPriceForSeller,
+            'total_revenue' => $finalPriceTaxes
         ]);
 
         $property->update([

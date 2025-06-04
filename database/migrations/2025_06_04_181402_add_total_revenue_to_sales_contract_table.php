@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
-            $table->decimal('final_price', 10, 2)->nullable();
+        Schema::table('sales_contract', function (Blueprint $table) {
+            $table->decimal('total_revenue', 10, 2);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
+        Schema::table('sales_contract', function (Blueprint $table) {
             //
         });
     }

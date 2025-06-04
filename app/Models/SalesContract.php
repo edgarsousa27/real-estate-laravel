@@ -14,7 +14,10 @@ class SalesContract extends Model
         'buyer_id',
         'offer_date',
         'payment_method',
-        'final_price'
+        'final_price',
+        'final_price_for_seller',
+        'commission',
+        'total_revenue'
     ];
 
     public function property()
