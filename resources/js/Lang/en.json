@@ -400,7 +400,18 @@
         "property-price": "Property price:",
         "buyers-price": "Buyer's price:",
         "final-price": "Final price for the seller (-5% of our commission):",
-        "property-rent-price": "Rental price:"
+        "property-rent-price": "Rental price:",
+
+        "initial-rent-process": "Start the rental process",
+        "months-contract": "Contract months",
+        "total-contract": "Total contract value",
+        "commission": "Our commission",
+        "revenue-landlord": "Total revenue for the landlord",
+        "our-total-revenue": "Our total revenue",
+        "our-total-revenue-per-month": "Our total revenue per month",
+        "rented-by": "Rented By",
+        "start-contract": "Start of contract",
+        "end-contract": "End of contract"
     },
 
     "purchase-form": {
@@ -430,7 +441,19 @@
         "select-payment-method": "Select payment method",
         "bank-transfer": "Bank transfer",
         "cheque": "Cheque",
-        "cash": "Cash"
+        "cash": "Cash",
+        "new-rent-contract": "New rental contract",
+        "price-rent-per-month": "Rental price (per month)",
+        "landlord-info": "Information about the landlord",
+        "landlord": "Landlord",
+        "undisclosed": "Undisclosed",
+        "tenant-info": "Information about the tenant",
+        "tenant": "Tenant",
+        "select-tenant": "Select tenant",
+        "payment_methods": "Payment methods",
+        "start-contract": "Start of contract",
+        "end-contract": "End of contract",
+        "commission": "Commission"
     },
 
     "register-login": {
@@ -439,7 +462,7 @@
         "name": "Name",
         "email": "Email",
         "identification_number": "Identification number",
-        "tax_number": "TIN ( Taxpayer identification number)",
+        "tax_number": "TIN (Taxpayer identification number)",
         "phone_number": "Phone number",
         "password": "Password",
         "confirm-password": "Confirm password",

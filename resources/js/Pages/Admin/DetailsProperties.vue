@@ -94,6 +94,27 @@
                 </div>
             </div>
 
+            <div
+                v-if="props.property.status === 'rented'"
+                class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400"
+            >
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <font-awesome-icon
+                            icon="check"
+                            class="h-5 w-5 text-blue-400"
+                        />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                           {{t("admin-dashboard.property-details-text")}}
+                            <span class="font-bold">{{t("admin-dashboard.rented")}}</span
+                            >.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Property Header -->
             <div
                 class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6"
@@ -137,15 +158,28 @@
                     class="flex space-x-3 mt-4 md:mt-0"
                     v-if="props.property.status === 'active'"
                 >
-                        <Link :href="route('admin.properties.registersale', { property: props.property.slug })">
-                            <button
-                                type="button"
-                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
-                            >
-                                <font-awesome-icon icon="plus" class="mr-2" />
-                                {{t("admin-dashboard.edit")}}
-                            </button>
-                        </Link>
+                        <div v-if="props.property.transaction_id === 1">
+                            <Link :href="route('admin.properties.registersale', { property: props.property.slug })">
+                                <button
+                                    type="button"
+                                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                                >
+                                    <font-awesome-icon icon="plus" class="mr-2" />
+                                    {{t("admin-dashboard.edit")}}
+                                </button>
+                            </Link>
+                        </div>
+                        <div v-if="props.property.transaction_id === 2">
+                            <Link :href="route('admin.properties.registerrent', { property: props.property.slug })">
+                                <button
+                                    type="button"
+                                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                                >
+                                    <font-awesome-icon icon="plus" class="mr-2" />
+                                    {{t("admin-dashboard.initial-rent-process")}}
+                                </button>
+                            </Link>
+                        </div>
                 </div>
             </div>
 
@@ -178,11 +212,11 @@
                             <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }}</span>
                         </li>
                         
-                        <li v-if="props.property.status === 'sold'" class="flex justify-between py-2 border-b border-gray-100">
+                        <li  class="flex justify-between py-2 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.buyers-price")}}</span>
                             <span class="text-blue-600 font-bold">{{ formatPrice(props.property.final_price) + '€' }}</span>
                         </li>
-                        <li v-if="props.property.status === 'sold'" class="flex justify-between py-2">
+                        <li  class="flex justify-between py-2">
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.final-price")}}</span>
                             <span class="text-green-600 font-bold">{{ finalPriceforSeller(props.property.final_price) + '€' }}</span>
                         </li>
@@ -192,6 +226,31 @@
                             <span class="text-gray-600 font-medium">{{t("admin-dashboard.property-rent-price")}}</span>
                             <span class="text-gray-800 font-semibold">{{ formatPrice(props.property.price) + '€' }} <span class="text-sm text-gray-400">{{t("properties.per-month")}}</span></span>
                         </li>
+                        <li v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.months-contract")}}</span>
+                            <span class="text-blue-600 font-bold">{{ showContractRent(props.property.id).months_contract }}</span>
+                        </li>
+                        <li v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.total-contract")}}</span>
+                            <span class="text-blue-600 font-bold">{{ formatPrice(showContractRent(props.property.id).total_price_contract + '€') }}</span>
+                        </li>
+                        <li  v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.commission")}}</span>
+                            <span class="text-blue-600 font-bold">{{ showContractRent(props.property.id).commission + '%' }}</span>
+                        </li>
+                        <li  v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{ t("admin-dashboard.revenue-landlord") }}</span>
+                            <span class="text-green-600 font-bold">{{ formatPrice(showContractRent(props.property.id).total_landlord_revenue + '€')}}</span>
+                        </li>
+                        <li  v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.our-total-revenue")}}</span>
+                            <span class="text-green-600 font-bold">{{ formatPrice(showContractRent(props.property.id).total_revenue + '€') }}</span>
+                        </li>
+                        <li  v-if="showContractRent(props.property.id)" class="flex justify-between py-2 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium">{{t("admin-dashboard.our-total-revenue-per-month")}}</span>
+                            <span class="text-green-600 font-bold">{{ formatPrice(showContractRent(props.property.id).total_revenue_per_month + '€') }} <span class="text-sm text-gray-400">{{t("properties.per-month")}}</span> </span>
+                        </li>
+                        
                     </div>
                 </ul>
             </div>
@@ -363,195 +422,399 @@
                         </div>
                     </div>
 
-
-                    <div v-if="props.property.status === 'sold'"
-                        class="bg-white border border-gray-200 rounded-lg shadow p-4"
-                    >
-                        <h3 class="text-lg font-medium text-gray-800 mb-4"> 
-                            {{ t("admin-dashboard.submitted-by") }}
-                        </h3>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div>
-                                <p class="font-medium text-gray-900">
-                                    {{ showContract(props.property.id).owner.name }}
-                                </p>
+                    <!--Sold-->
+                    <div v-if="props.property.status === 'sold'">
+                        <div 
+                            class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                        >
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                {{ t("admin-dashboard.submitted-by") }}
+                            </h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div>
+                                    <p class="font-medium text-gray-900">
+                                        {{ showContract(props.property.id).owner.name }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="envelope"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ showContract(props.property.id).owner.email }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="map"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContract(props.property.id).owner.nationality ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "ID: " +
+                                            showContract(props.property.id).owner.identification_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "NIF: " + showContract(props.property.id).owner.tax_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="phone"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContract(props.property.id).owner.phone_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.submitted-in") }}
+                                    {{ formatDate(props.property.created_at) }}
+                                </div>
+                                <div
+                                    v-if="props.property.status === 'active'"
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.active-in") }}
+                                    {{ formatDate(props.property.updated_at) }}
+                                </div>
+                                <div
+                                    v-if="props.property.status === 'refused'"
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.refused-in") }}:
+                                    {{ formatDate(props.property.updated_at) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="envelope"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ showContract(props.property.id).owner.email }}
+                        <div 
+                            class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                        >
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                {{ t("admin-dashboard.bought-by") }}
+                            </h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div>
+                                    <p class="font-medium text-gray-900">
+                                         {{ showContract(props.property.id).buyer.name }}
+                                    </p>
+                                </div>
                             </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="map"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    showContract(props.property.id).owner.nationality ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="id-card"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    "ID: " +
-                                        showContract(props.property.id).owner.identification_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="id-card"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    "NIF: " + showContract(props.property.id).owner.tax_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="phone"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    showContract(props.property.id).owner.phone_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="clock"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ t("admin-dashboard.submitted-in") }}
-                                {{ formatDate(props.property.created_at) }}
-                            </div>
-                            <div
-                                v-if="props.property.status === 'active'"
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="clock"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ t("admin-dashboard.active-in") }}
-                                {{ formatDate(props.property.updated_at) }}
-                            </div>
-                            <div
-                                v-if="props.property.status === 'refused'"
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="clock"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ t("admin-dashboard.refused-in") }}:
-                                {{ formatDate(props.property.updated_at) }}
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="envelope"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ showContract(props.property.id).buyer.email }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="map"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContract(props.property.id).buyer.nationality ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "ID: " +
+                                            showContract(props.property.id).buyer.identification_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "NIF: " + showContract(props.property.id).buyer.tax_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="phone"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContract(props.property.id).buyer.phone_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.bought-in") }}
+                                    {{ formatDate(showContract(props.property.id).offer_date) }}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div v-if="props.property.status === 'sold'"
-                        class="bg-white border border-gray-200 rounded-lg shadow p-4"
-                    >
-                        <h3 class="text-lg font-medium text-gray-800 mb-4">
-                            {{ t("admin-dashboard.bought-by") }}
-                        </h3>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div>
-                                <p class="font-medium text-gray-900">
-                                     {{ showContract(props.property.id).buyer.name }}
-                                </p>
+                    <!--Rented-->
+                    <div v-if="props.property.status === 'rented'">
+                        <div 
+                            class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                        >
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                {{ t("admin-dashboard.submitted-by") }}
+                            </h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div>
+                                    <p class="font-medium text-gray-900">
+                                        {{ showContractRent(props.property.id).landlord.name }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="envelope"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ showContractRent(props.property.id).landlord.email }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="map"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContractRent(props.property.id).landlord.nationality ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "ID: " +
+                                            showContractRent(props.property.id).landlord.identification_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "NIF: " + showContractRent(props.property.id).landlord.tax_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="phone"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContractRent(props.property.id).landlord.phone_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.submitted-in") }}
+                                    {{ formatDate(props.property.created_at) }}
+                                </div>
+                                <div
+                                    v-if="props.property.status === 'active'"
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.active-in") }}
+                                    {{ formatDate(props.property.updated_at) }}
+                                </div>
+                                <div
+                                    v-if="props.property.status === 'refused'"
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ t("admin-dashboard.refused-in") }}:
+                                    {{ formatDate(props.property.updated_at) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="envelope"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ showContract(props.property.id).buyer.email }}
+                        <div 
+                            class="bg-white border border-gray-200 rounded-lg shadow p-4"
+                        >
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                {{t("admin-dashboard.rented-by")}}                            </h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div>
+                                    <p class="font-medium text-gray-900">
+                                         {{ showContractRent(props.property.id).tenant.name }}
+                                    </p>
+                                </div>
                             </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="map"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    showContract(props.property.id).buyer.nationality ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="id-card"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    "ID: " +
-                                        showContract(props.property.id).buyer.identification_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="id-card"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    "NIF: " + showContract(props.property.id).buyer.tax_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="phone"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{
-                                    showContract(props.property.id).buyer.phone_number ||
-                                    t("admin-dashboard.not-provided")
-                                }}
-                            </div>
-                            <div
-                                class="flex items-center text-sm text-gray-600"
-                            >
-                                <font-awesome-icon
-                                    icon="clock"
-                                    class="mr-2 text-gray-400"
-                                />
-                                {{ t("admin-dashboard.bought-in") }}
-                                {{ formatDate(showContract(props.property.id).offer_date) }}
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="envelope"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{ showContractRent(props.property.id).tenant.email }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="map"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContractRent(props.property.id).tenant.nationality ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "ID: " +
+                                            showContractRent(props.property.id).tenant.identification_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="id-card"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        "NIF: " + showContractRent(props.property.id).tenant.tax_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="phone"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{
+                                        showContractRent(props.property.id).tenant.phone_number ||
+                                        t("admin-dashboard.not-provided")
+                                    }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{t("admin-dashboard.start-contract")}}
+                                    {{ formatDate(showContractRent(props.property.id).start_contract) }}
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-600"
+                                >
+                                    <font-awesome-icon
+                                        icon="clock"
+                                        class="mr-2 text-gray-400"
+                                    />
+                                    {{t("admin-dashboard.end-contract")}}
+                                    {{ formatDate(showContractRent(props.property.id).end_contract) }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -635,11 +898,16 @@ const props = defineProps({
     property: Object,
     categories: Array,
     downloads: Array,
-    sales_contract: Array,
+    sales_contract: Object,
+    rents_contract: Object
 });
 
 const showContract = (property_id) => {
     return props.sales_contract.find((c) => c.property_id === property_id);
+}
+
+const showContractRent = (property_id) => {
+    return props.rents_contract.find((c) => c.property_id === property_id);
 }
 
 const showOwner = () => {
@@ -669,9 +937,9 @@ const openUpdateModal = (property) => {
 
 const formatDate = (dateStr) => {
     if (locale.value === "en")
-        return format(new Date(dateStr), "MM/dd/yyyy HH:mm", { locale: enUS });
+        return format(new Date(dateStr), "MM/dd/yyyy", { locale: enUS });
     if (locale.value === "pt")
-        return format(new Date(dateStr), "dd/MM/yyyy HH:mm", { locale: pt });
+        return format(new Date(dateStr), "dd/MM/yyyy", { locale: pt });
 };
 
 const form = useForm({

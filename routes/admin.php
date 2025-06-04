@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Contract\RentController;
 use App\Http\Controllers\Contract\SaleController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/properties/{property:slug}/contract/purchase', [SaleController::class, 'index'])
         ->name('admin.properties.registersale');
+
+    Route::get('/admin/properties/{property:slug}/contract/rent', [RentController::class, 'index'])
+        ->name('admin.properties.registerrent');
+
+    Route::post('/admin/properties/{property:slug}/contract/rent', [RentController::class, 'store'])
+        ->name('admin.properties.acceptrent');
 });

@@ -141,4 +141,8 @@ class Property extends Model implements HasMedia
     {
         return $this->hasOne(SalesContract::class);
     }
+    public function rents_contract()
+    {
+        return $this->hasOne(RentsContract::class);
+    }
 }

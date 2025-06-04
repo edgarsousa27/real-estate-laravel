@@ -7,6 +7,7 @@ use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
+use App\Models\RentsContract;
 use App\Models\SalesContract;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,8 +26,6 @@ class AdminController extends Controller
 
         $revenue = $properties->whereIn('status', ['sold', 'rented'])->sum('final_price');
 
-        $total_revenue = $revenue * 0.05;
-
         $properties->load('media');
 
         $total_properties = Property::count();
@@ -40,7 +39,7 @@ class AdminController extends Controller
             'total_properties' => $total_properties,
             'active_properties' => $active_properties,
             'pending_properties' => $pending_properties,
-            'revenue' => $total_revenue,
+            'revenue' => $revenue,
             'sold_properties' => $sold_properties,
             'rented_properties' => $rented_properties,
         ]);
@@ -85,6 +84,8 @@ class AdminController extends Controller
 
         $sales_contract = SalesContract::with(['owner', 'buyer'])->get();
 
+        $rents_contract = RentsContract::with(['tenant', 'landlord'])->get();
+
         $downloads = $property->getMedia('downloads');
 
         return Inertia::render('Admin/DetailsProperties', [
@@ -92,6 +93,7 @@ class AdminController extends Controller
             'categories' => $categories,
             'downloads' => $downloads,
             'sales_contract' => $sales_contract,
+            'rents_contract' => $rents_contract
         ]);
     }
 

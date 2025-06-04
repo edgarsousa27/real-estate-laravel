@@ -398,7 +398,18 @@
         "property-price": "Preço do imóvel:",
         "buyers-price": "Preço do comprador:",
         "final-price": "Preço final para o vendedor (-5% da nossa comissão):",
-        "property-rent-price": "Preço do aluguer:"
+        "property-rent-price": "Preço do aluguer:",
+
+        "initial-rent-process": "Iniciar o processo de arrendamento",
+        "months-contract": "Meses de contrato",
+        "total-contract": "Valor total do contrato",
+        "commission": "A nossa comissão",
+        "revenue-landlord": "Total das receitas do senhorio",
+        "our-total-revenue": "As nossas receitas totais",
+        "our-total-revenue-per-month": "A nossa receita total por mês",
+        "rented-by": "Arrendado por",
+        "start-contract": "Início do contrato",
+        "end-contract": "Fim do contrato"
     },
 
     "purchase-form": {
@@ -428,7 +439,19 @@
         "select-payment-method": "Selecione método de pagamento",
         "bank-transfer": "Transferência bancária",
         "cheque": "Cheque",
-        "cash": "Numerário"
+        "cash": "Numerário",
+        "new-rent-contract": "Novo contrato de arrendamento",
+        "price-rent-per-month": "Preço de arrendamento (por mês)",
+        "landlord-info": "Informações sobre o senhorio",
+        "landlord": "Senhorio",
+        "undisclosed": "Não divulgado",
+        "tenant-info": "Informações sobre o inquilino",
+        "tenant": "Inquilino",
+        "select-tenant": "Selecionar inquilino",
+        "payment_methods": "Métodos de pagamento",
+        "start-contract": "Início do contrato",
+        "end-contract": "Fim do contrato",
+        "commission": "Comissão"
     },
 
     "register-login": {
