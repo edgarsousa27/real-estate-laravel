@@ -8,7 +8,9 @@ use App\Models\SalesContract;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
+use Spatie\Browsershot\Browsershot;
 
 class SaleController extends Controller
 {
@@ -39,7 +41,7 @@ class SaleController extends Controller
         $finalPriceTaxes = $request->final_price * $request->commission / 100;
         $finalPriceForSeller = $request->final_price - $finalPriceTaxes;
 
-        SalesContract::create([
+        $contract = SalesContract::create([
             'property_id' => $request->property_id,
             'buyer_id' => $request->buyer_id,
             'owner_id' => $property->user_id,
@@ -63,7 +65,26 @@ class SaleController extends Controller
         }
 
         $property->save();
+        $contract->load(['property', 'owner', 'buyer']);
+
+        if ($contract) {
+            $html = view('contracts.sale', ['sales_contract' => $contract])->render();
+
+            $path = storage_path("app/public/property-contract-sale-{$contract->id}.pdf");
+
+            Browsershot::html($html)
+                ->format('A4')
+                ->save($path);
+
+            return Inertia::location(route('contract.sale.download', $contract->id));
+        }
 
         return Inertia::location(route('admin.properties', $property->slug));
+    }
+
+    public function downloadSalesContracts($id)
+    {
+        $path = storage_path("app/public/property-contract-sale-{$id}.pdf");
+        return Response::download($path)->deleteFileAfterSend(true);
     }
 }

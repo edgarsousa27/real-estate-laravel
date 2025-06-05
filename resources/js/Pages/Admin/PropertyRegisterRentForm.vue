@@ -230,13 +230,13 @@
                                         t("purchase-form.select-payment-method")
                                     }}
                                 </option>
-                                <option value="bank_transfer">
+                                <option value="Transferência bancária">
                                     {{ t("purchase-form.bank-transfer") }}
                                 </option>
-                                <option value="cheque">
+                                <option value="Cheque">
                                     {{ t("purchase-form.cheque") }}
                                 </option>
-                                <option value="cash">
+                                <option value="Numerário">
                                     {{ t("purchase-form.cash") }}
                                 </option>
                             </select>

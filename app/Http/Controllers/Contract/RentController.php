@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Response;
+use Spatie\Browsershot\Browsershot;
 
 class RentController extends Controller
 {
@@ -48,7 +50,7 @@ class RentController extends Controller
         $totalLandlordRevenue = $totalPriceContract - $totalContractTaxes;
         $totalRevenuePerMonth = $totalContractTaxes / $months;
 
-        RentsContract::create([
+        $contract = RentsContract::create([
             'tenant_id' => $request->tenant_id,
             'property_id' => $request->property_id,
             'landlord_id' => $request->landlord_id,
@@ -76,7 +78,26 @@ class RentController extends Controller
         }
 
         $property->save();
+        $contract->load(['property', 'tenant', 'landlord']);
+
+        if ($contract) {
+            $html = view('contracts.rent', ['rental_contract' => $contract])->render();
+
+            $path = storage_path("app/public/property-contract-rent-{$contract->id}.pdf");
+
+            Browsershot::html($html)
+                ->format('A4')
+                ->save($path);
+
+            return Inertia::location(route('contract.rent.download', $contract->id));
+        }
 
         return Inertia::location(route('admin.properties', $property->slug));
+    }
+
+    public function downloadRentContracts($id)
+    {
+        $path = storage_path("app/public/property-contract-rent-{$id}.pdf");
+        return Response::download($path)->deleteFileAfterSend(true);
     }
 }

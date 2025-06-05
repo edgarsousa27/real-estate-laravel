@@ -32,4 +32,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::post('/admin/properties/{property:slug}/contract/rent', [RentController::class, 'store'])
         ->name('admin.properties.acceptrent');
+
+    Route::get('/admin/properties/{contract}/contract-sale/download', [SaleController::class, 'downloadSalesContracts'])
+        ->name('contract.sale.download');
+
+    Route::get('/admin/properties/{contract}/contract-rent/download', [RentController::class, 'downloadRentContracts'])
+        ->name('contract.rent.download');
 });
