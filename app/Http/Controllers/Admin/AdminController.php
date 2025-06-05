@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\StatusPropertyFilter;
 use App\Filters\TypePropertyFilter;
+use App\Http\Controllers\Contract\SaleController;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;
@@ -22,9 +23,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id')->orderBy('id', 'desc')->take(5)->get();
 
-        $revenue = $properties->whereIn('status', ['sold', 'rented'])->sum('final_price');
+        $revenueSales = SalesContract::sum('total_revenue');
+        $revenueRents = RentsContract::sum('total_revenue');
+        $total_revenue = $revenueRents + $revenueSales;
 
         $properties->load('media');
 
@@ -39,7 +42,7 @@ class AdminController extends Controller
             'total_properties' => $total_properties,
             'active_properties' => $active_properties,
             'pending_properties' => $pending_properties,
-            'revenue' => $revenue,
+            'revenue' => $total_revenue,
             'sold_properties' => $sold_properties,
             'rented_properties' => $rented_properties,
         ]);
@@ -54,7 +57,7 @@ class AdminController extends Controller
                 AllowedFilter::custom('status', new StatusPropertyFilter),
             ]);
 
-        $properties = $filters->select('id', 'category_id', 'title', 'price', 'address', 'city', 'district', 'status', 'slug', 'final_price')->orderBy('id', 'desc')->paginate(15);
+        $properties = $filters->select('id', 'category_id', 'title', 'price', 'address', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id')->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 

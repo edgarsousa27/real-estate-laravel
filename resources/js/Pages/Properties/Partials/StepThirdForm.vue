@@ -1,16 +1,21 @@
 <template>
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <div>
-            <h1 class="text-xl text-center">
-                Consumo de Energia e Emissão de gás
-            </h1>
-            <div class="mt-3">
-                <InputLabel for="name" value="Consumo de energia" />
-                <TextInput type="number" v-model="form.energy_consumption" />
-            </div>
-            <div class="mt-3">
-                <InputLabel for="name" value="Emissão de gás" />
-                <TextInput type="number" v-model="form.gas_emission" />
+            <div v-if="form.category_id === 1 || form.category_id === 2">
+                <h1 class="text-xl text-center">
+                    Consumo de Energia e Emissão de gás
+                </h1>
+                <div class="mt-3">
+                    <InputLabel for="name" value="Consumo de energia" />
+                    <TextInput
+                        type="number"
+                        v-model="form.energy_consumption"
+                    />
+                </div>
+                <div class="mt-3">
+                    <InputLabel for="name" value="Emissão de gás" />
+                    <TextInput type="number" v-model="form.gas_emission" />
+                </div>
             </div>
             <h1 class="text-xl text-center">
                 {{ t("properties-form.localization") }}

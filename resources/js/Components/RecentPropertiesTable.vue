@@ -84,9 +84,20 @@
                             </span>
                         </td>
                         <td
+                            v-if="property.transaction_id === 1"
                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                         >
                             {{ formatPrice(property.price) + "€" }}
+                        </td>
+                        <td
+                            v-if="property.transaction_id === 2"
+                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                        >
+                            {{
+                                formatPrice(property.price) +
+                                "€ " +
+                                t("properties.per-month")
+                            }}
                         </td>
                         <td
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium"

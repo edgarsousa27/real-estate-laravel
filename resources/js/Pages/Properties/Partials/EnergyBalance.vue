@@ -3,171 +3,31 @@
         {{ t("details-page.energy-balance") }}
     </h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
+        <!-- Energy Consumption -->
+        <div class="overflow-x-auto">
             <h1 class="text-lg font-semibold mt-4 ml-3">
                 {{ t("details-page.energy-consumption") }}
             </h1>
             <div class="text-center gap-1 items-start mb-4 mt-4 ml-3">
-                <ul class="flex text-white gap-1">
-                    <li class="relative flex flex-col items-center">
+                <ul class="flex text-white gap-1 min-w-max">
+                    <li
+                        v-for="(grade, index) in energyGrades"
+                        :key="index"
+                        class="relative flex flex-col items-center"
+                    >
                         <div
-                            class="bg-emerald-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption <= 45,
-                            }"
+                            class="rounded-lg w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
+                            :class="[
+                                grade.bgColor,
+                                {
+                                    'py-6 sm:py-6': isEnergyGradeActive(index),
+                                },
+                            ]"
                         >
-                            A+
+                            {{ grade.label }}
                         </div>
                         <div
-                            v-if="props.properties.energy_consumption <= 45"
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-emerald-500 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 45 &&
-                                    props.properties.energy_consumption <= 80,
-                            }"
-                        >
-                            A
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.energy_consumption > 45 &&
-                                props.properties.energy_consumption <= 80
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-lime-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 80 &&
-                                    props.properties.energy_consumption <= 130,
-                            }"
-                        >
-                            B
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.energy_consumption > 80 &&
-                                props.properties.energy_consumption <= 130
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-yellow-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 130 &&
-                                    props.properties.energy_consumption <= 200,
-                            }"
-                        >
-                            C
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.energy_consumption > 130 &&
-                                props.properties.energy_consumption <= 200
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-orange-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 200 &&
-                                    props.properties.energy_consumption <= 260,
-                            }"
-                        >
-                            D
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.energy_consumption > 200 &&
-                                props.properties.energy_consumption <= 260
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-orange-600 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 260 &&
-                                    props.properties.energy_consumption <= 320,
-                            }"
-                        >
-                            E
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.energy_consumption > 260 &&
-                                props.properties.energy_consumption <= 320
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.energy_consumption }}
-                            </strong>
-                            <p class="text-tiny">kWh/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-red-600 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.energy_consumption > 320,
-                            }"
-                        >
-                            F
-                        </div>
-                        <div
-                            v-if="props.properties.energy_consumption > 320"
+                            v-if="isEnergyGradeActive(index)"
                             class="top-full mt-1 flex flex-col items-center text-black"
                         >
                             <font-awesome-icon icon="sort-up" class="text-xs" />
@@ -181,193 +41,31 @@
             </div>
         </div>
 
-        <div>
+        <!-- Gas Emission -->
+        <div class="overflow-x-auto">
             <h1 class="text-lg font-semibold mb-4 mt-4 ml-3">
                 {{ t("details-page.gas-emission") }}
             </h1>
             <div class="flex text-center gap-1 items-start mb-4 mt-4 ml-3">
-                <ul class="flex text-white gap-1">
-                    <li class="relative flex flex-col items-center">
+                <ul class="flex text-white gap-1 min-w-max">
+                    <li
+                        v-for="(grade, index) in gasGrades"
+                        :key="index"
+                        class="relative flex flex-col items-center"
+                    >
                         <div
-                            class="bg-emerald-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6': props.properties.gas_emission <= 4,
-                            }"
+                            class="rounded-lg w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
+                            :class="[
+                                grade.bgColor,
+                                {
+                                    'py-6 sm:py-6': isGasGradeActive(index),
+                                },
+                            ]"
                         >
-                            A+
+                            {{ grade.label }}
                         </div>
                         <div
-                            v-if="props.properties.gas_emission <= 4"
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-emerald-500 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 4 &&
-                                    props.properties.gas_emission <= 6,
-                            }"
-                        >
-                            A
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 4 &&
-                                props.properties.gas_emission <= 6
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-lime-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 6 &&
-                                    props.properties.gas_emission <= 10,
-                            }"
-                        >
-                            B
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 6 &&
-                                props.properties.gas_emission <= 10
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-yellow-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 10 &&
-                                    props.properties.gas_emission <= 15,
-                            }"
-                        >
-                            C
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 10 &&
-                                props.properties.gas_emission <= 15
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-orange-400 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 15 &&
-                                    props.properties.gas_emission <= 25,
-                            }"
-                        >
-                            D
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 15 &&
-                                props.properties.gas_emission <= 25
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-orange-600 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 25 &&
-                                    props.properties.gas_emission <= 35,
-                            }"
-                        >
-                            E
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 25 &&
-                                props.properties.gas_emission <= 35
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-red-600 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6':
-                                    props.properties.gas_emission > 35 &&
-                                    props.properties.gas_emission <= 55,
-                            }"
-                        >
-                            F
-                        </div>
-                        <div
-                            v-if="
-                                props.properties.gas_emission > 35 &&
-                                props.properties.gas_emission <= 55
-                            "
-                            class="top-full mt-1 flex flex-col items-center text-black"
-                        >
-                            <font-awesome-icon icon="sort-up" class="text-xs" />
-                            <strong class="text-sm">
-                                {{ props.properties.gas_emission }}
-                            </strong>
-                            <p class="text-tiny">kgCO₂/m²</p>
-                        </div>
-                    </li>
-                    <li class="relative flex flex-col items-center">
-                        <div
-                            class="bg-red-800 rounded-lg w-10 h-10 flex items-center justify-center"
-                            :class="{
-                                'py-6': props.properties.gas_emission > 55,
-                            }"
-                        >
-                            G
-                        </div>
-                        <div
-                            v-if="props.properties.gas_emission > 55"
+                            v-if="isGasGradeActive(index)"
                             class="top-full mt-1 flex flex-col items-center text-black"
                         >
                             <font-awesome-icon icon="sort-up" class="text-xs" />
@@ -391,4 +89,43 @@ const { t } = useI18n();
 const props = defineProps({
     properties: Object,
 });
+
+const energyGrades = [
+    { label: "A+", max: 45, bgColor: "bg-emerald-400" },
+    { label: "A", min: 45, max: 80, bgColor: "bg-emerald-500" },
+    { label: "B", min: 80, max: 130, bgColor: "bg-lime-400" },
+    { label: "C", min: 130, max: 200, bgColor: "bg-yellow-400" },
+    { label: "D", min: 200, max: 260, bgColor: "bg-orange-400" },
+    { label: "E", min: 260, max: 320, bgColor: "bg-orange-600" },
+    { label: "F", min: 320, bgColor: "bg-red-600" },
+];
+
+const gasGrades = [
+    { label: "A+", max: 4, bgColor: "bg-emerald-400" },
+    { label: "A", min: 4, max: 6, bgColor: "bg-emerald-500" },
+    { label: "B", min: 6, max: 10, bgColor: "bg-lime-400" },
+    { label: "C", min: 10, max: 15, bgColor: "bg-yellow-400" },
+    { label: "D", min: 15, max: 25, bgColor: "bg-orange-400" },
+    { label: "E", min: 25, max: 35, bgColor: "bg-orange-600" },
+    { label: "F", min: 35, max: 55, bgColor: "bg-red-600" },
+    { label: "G", min: 55, bgColor: "bg-red-800" },
+];
+
+const isEnergyGradeActive = (index) => {
+    const value = props.properties.energy_consumption;
+    const grade = energyGrades[index];
+
+    if (index === 0 && value <= grade.max) return true;
+    if (index === energyGrades.length - 1 && value > grade.min) return true;
+    return value > grade.min && value <= grade.max;
+};
+
+const isGasGradeActive = (index) => {
+    const value = props.properties.gas_emission;
+    const grade = gasGrades[index];
+
+    if (index === 0 && value <= grade.max) return true;
+    if (index === gasGrades.length - 1 && value > grade.min) return true;
+    return value > grade.min && value <= grade.max;
+};
 </script>
