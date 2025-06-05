@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Filters\StatusPropertyFilter;
 use App\Filters\TypePropertyFilter;
-use App\Http\Controllers\Contract\SaleController;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Property;

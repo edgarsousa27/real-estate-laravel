@@ -470,5 +470,17 @@
         "remember-me": "Lembrar-me",
         "forgot-password": "Esqueceu-se da sua palavra-passe?",
         "login": "Iniciar sessão"
+    },
+
+    "clients": {
+        "title": "Clientes",
+        "all-clients": "Todos os clientes",
+        "name": "Nome",
+        "id-number": "Número cartão de cidadão",
+        "tax-number": "Número de contribuinte",
+        "email": "Email",
+        "actions": "Ações",
+        "view-properties": "Visualizar imóveis",
+        "edit": "Editar"
     }
 }

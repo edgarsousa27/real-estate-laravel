@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Contract\RentController;
 use App\Http\Controllers\Contract\SaleController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/properties/{contract}/contract-rent/download', [RentController::class, 'downloadRentContracts'])
         ->name('contract.rent.download');
+
+    Route::get('/admin/clients', [ClientController::class, 'index'])
+        ->name('admin.clients');
 });

@@ -472,5 +472,17 @@
         "remember-me": "Remember me",
         "forgot-password": "Forgot your password?",
         "login": "Log in"
+    },
+
+    "clients": {
+        "title": "Clients",
+        "all-clients": "All clients",
+        "name": "Name",
+        "id-number": "Identification number",
+        "tax-number": "Tax number",
+        "email": "Email",
+        "actions": "Actions",
+        "view-properties": "View properties",
+        "edit": "Edit"
     }
 }

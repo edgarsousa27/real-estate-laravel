@@ -56,7 +56,7 @@
                     }}</span>
                 </NavLink>
                 <NavLink
-                    href="/admin/clients"
+                    :href="route('admin.clients')"
                     :active="$page.url.startsWith('/admin/clients')"
                 >
                     <font-awesome-icon
