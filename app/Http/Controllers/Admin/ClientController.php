@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,22 +15,29 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $users = User::select(
-            'name',
-            'email',
-            'nationality',
-            'tax_number',
-            'identification_number',
-            'phone_number',
-            'date_of_birth',
-        )->where('name', '!=', 'Admin')->paginate(15);
-
-        $users->load('property');
+        $clients = User::where('id', '!=', 1)->paginate(15);
 
         return Inertia::render('Admin/Clients', [
-            'users' => $users
+            'clients' => $clients,
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $client)
+    {
+        $client->load('property');
+
+        $categories = Category::select('id', 'name')->get();
+
+        return Inertia::render('Admin/DetailsClients', [
+            'client' => $client,
+            'categories' => $categories,
+        ]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,13 +55,6 @@ class ClientController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

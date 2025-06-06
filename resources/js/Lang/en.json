@@ -484,5 +484,18 @@
         "actions": "Actions",
         "view-properties": "View properties",
         "edit": "Edit"
+    },
+
+    "clients-details": {
+        "title": "Client details",
+        "back-to-clients": "Back to Clients",
+        "client-info": "Client information",
+        "name": "Name",
+        "id-number": "Citizen card number",
+        "tax-number": "Tax number",
+        "email": "Email",
+        "phone": "Phone number",
+        "date_of_birth": "Date of birth",
+        "properties": "Properties"
     }
 }

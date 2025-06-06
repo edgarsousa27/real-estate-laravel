@@ -20,72 +20,59 @@
 
             <!-- Property Info -->
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                <h3 class="text-lg font-medium text-gray-800 mb-3">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                    <font-awesome-icon icon="home" class="mr-2" />
                     {{ t("purchase-form.property-info") }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel :value="t('purchase-form.property')" />
-                        <p class="text-gray-900">{{ property.title }}</p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.address')" />
-                        <p class="text-gray-900">
-                            {{ property.address }}, {{ property.city }},
-                            {{ property.district }}, {{ property.postal_code }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.sale-price')" />
-                        <p class="text-gray-900">
-                            {{ formatPrice(property.price) }}€
-                        </p>
-                    </div>
+                    <DetailItem
+                        :label="t('purchase-form.property')"
+                        :value="property.title"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.address')"
+                        :value="`${property.address}, ${property.city}, ${property.district}, ${property.postal_code}`"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.sale-price')"
+                        :value="formatPrice(property.price + '€')"
+                    />
                 </div>
             </div>
 
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                <h3 class="text-lg font-medium text-gray-800 mb-3">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                    <font-awesome-icon icon="user" class="mr-2" />
                     {{ t("purchase-form.property-owner") }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel :value="t('purchase-form.owner')" />
-                        <p class="text-gray-900">{{ owner.name }}</p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.cc-number')" />
-                        <p class="text-gray-900">
-                            {{ owner.identification_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.nif')" />
-                        <p class="text-gray-900">
-                            {{ owner.tax_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.email')" />
-                        <p class="text-gray-900">
-                            {{ owner.email }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.phone')" />
-                        <p class="text-gray-900">
-                            {{ owner.phone_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.date-birth')" />
-                        <p class="text-gray-900">
-                            {{
-                                owner.date_of_birth ||
-                                t("purchase-form.undisclosed")
-                            }}
-                        </p>
-                    </div>
+                    <DetailItem
+                        :label="t('purchase-form.owner')"
+                        :value="owner.name"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.cc-number')"
+                        :value="owner.identification_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.nif')"
+                        :value="owner.tax_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.email')"
+                        :value="owner.email"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.phone')"
+                        :value="owner.phone_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.date-birth')"
+                        :value="
+                            owner.date_of_birth ||
+                            t('purchase-form.undisclosed')
+                        "
+                    />
                 </div>
             </div>
 
@@ -127,69 +114,42 @@
                             class="bg-gray-50 rounded-lg p-4"
                         >
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.buyer-name')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{ showBuyersInfo(form.buyer_id).name }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.cc-number')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.buyer_id)
-                                                .identification_number
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.nif')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.buyer_id)
-                                                .tax_number
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.date-birth')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.buyer_id)
-                                                .date_of_birth ||
-                                            t("purchase-form.undisclosed")
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.email')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.buyer_id).email
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.phone')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.buyer_id)
-                                                .phone_number
-                                        }}
-                                    </p>
-                                </div>
+                                <DetailItem
+                                    :label="t('purchase-form.buyer-name')"
+                                    :value="showBuyersInfo(form.buyer_id).name"
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.cc-number')"
+                                    :value="
+                                        showBuyersInfo(form.buyer_id)
+                                            .identification_number
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.nif')"
+                                    :value="
+                                        showBuyersInfo(form.buyer_id).tax_number
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.date-birth')"
+                                    :value="
+                                        showBuyersInfo(form.buyer_id)
+                                            .date_of_birth ||
+                                        t('purchase-form.undisclosed')
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.email')"
+                                    :value="showBuyersInfo(form.buyer_id).email"
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.phone')"
+                                    :value="
+                                        showBuyersInfo(form.buyer_id)
+                                            .phone_number
+                                    "
+                                />
                             </div>
                         </div>
                     </div>
@@ -286,6 +246,7 @@ import { useI18n } from "vue-i18n";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import DetailItem from "@/Components/DetailItem.vue";
 
 const { t } = useI18n();
 

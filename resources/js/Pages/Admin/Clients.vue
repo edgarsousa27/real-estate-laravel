@@ -5,7 +5,7 @@
     <AdminLayout :title="t('clients.title')">
         <div class="px-4 sm:px-6 py-4 bg-white rounded-lg shadow">
             <!-- Users Table -->
-            <div v-if="!selectedUser">
+            <div>
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">
                         {{ t("clients.all-clients") }}
@@ -36,53 +36,43 @@
                                 >
                                     {{ t("clients.email") }}
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    {{ t("clients.actions") }}
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="user in users.data" :key="user.id">
+                            <tr
+                                @click="redirectsTopage(client)"
+                                v-for="client in clients.data"
+                                :key="client.id"
+                                class="cursor-pointer hover:bg-gray-50"
+                            >
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div
                                         class="text-sm font-medium text-gray-900"
                                     >
-                                        {{ user.name }}
+                                        {{ client.name }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-500">
-                                        {{ user.identification_number }}
+                                        {{ client.identification_number }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-500">
-                                        {{ user.tax_number }}
+                                        {{ client.tax_number }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-500">
-                                        {{ user.email }}
+                                        {{ client.email }}
                                     </div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium"
-                                >
-                                    <button
-                                        @click="selectUser(user)"
-                                        class="text-blue-600 hover:text-blue-900 mr-3"
-                                    >
-                                        {{ t("clients.view-properties") }}
-                                    </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <Pagination :links="users.links" class="mt-4" />
+                <Pagination :links="clients.links" class="mt-4" />
             </div>
         </div>
     </AdminLayout>
@@ -97,6 +87,14 @@ import Pagination from "@/Components/Pagination.vue";
 const { t } = useI18n();
 
 const props = defineProps({
-    users: [Object, Array],
+    clients: [Object, Array],
 });
+
+const redirectsTopage = (client) => {
+    console.log("client.id:", client.id);
+
+    return (window.location.href = route("admin.clients.show", {
+        client: client.id,
+    }));
+};
 </script>

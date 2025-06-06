@@ -42,4 +42,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/clients', [ClientController::class, 'index'])
         ->name('admin.clients');
+
+    Route::get('/admin/clients/{client}', [ClientController::class, 'show'])
+        ->name('admin.clients.show');
 });

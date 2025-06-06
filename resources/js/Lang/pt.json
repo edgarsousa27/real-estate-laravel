@@ -482,5 +482,18 @@
         "actions": "Ações",
         "view-properties": "Visualizar imóveis",
         "edit": "Editar"
+    },
+
+    "clients-details": {
+        "title": "Detalhes do cliente",
+        "back-to-clients": "Voltar a Clientes",
+        "client-info": "Informações sobre o cliente",
+        "name": "Nome",
+        "id-number": "Número cartão de cidadão",
+        "tax-number": "Número de contribuinte",
+        "email": "Email",
+        "phone": "Número de telefone",
+        "date_of_birth": "Data de nascimento",
+        "properties": "Imóveis"
     }
 }

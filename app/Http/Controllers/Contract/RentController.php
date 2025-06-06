@@ -68,7 +68,7 @@ class RentController extends Controller
 
         $property->update([
             'status' => $request->status,
-            'final_price' => $totalContractTaxes
+            'final_price' => $request->price
         ]);
 
         if ($request->status === 'rented') {

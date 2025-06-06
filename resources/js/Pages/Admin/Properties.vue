@@ -84,179 +84,40 @@
 
             <!-- Properties Table -->
             <div class="overflow-x-auto bg-white rounded-lg shadow">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                {{ t("admin-dashboard.properties") }}
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                {{ t("admin-dashboard.type") }}
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                {{ t("admin-dashboard.price") }}
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                {{ t("admin-dashboard.status") }}
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                {{ t("admin-dashboard.actions") }}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr
-                            v-for="property in props.properties.data"
-                            :key="property.id"
+                <PropertyTable
+                    :properties="props.properties.data"
+                    :categories="props.categories"
+                    :headers="[
+                        t('admin-dashboard.properties'),
+                        t('admin-dashboard.type'),
+                        t('admin-dashboard.price'),
+                        t('admin-dashboard.status'),
+                        t('admin-dashboard.actions'),
+                    ]"
+                    :action-url="
+                        (property) =>
+                            route('admin.properties.show', {
+                                slug: property.slug,
+                            })
+                    "
+                >
+                    <template #actions="{ property }">
+                        <Link
+                            :href="
+                                route('admin.properties.show', {
+                                    slug: property.slug,
+                                })
+                            "
+                            class="text-blue-500 hover:text-blue-600 mr-2"
                         >
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
-                                        <img
-                                            v-if="
-                                                property.media &&
-                                                property.media.length
-                                            "
-                                            :src="
-                                                property.media.find(
-                                                    (m) =>
-                                                        m.collection_name ===
-                                                        'images'
-                                                )?.original_url || ''
-                                            "
-                                            :alt="property.title"
-                                            class="h-10 w-10 rounded-md object-cover"
-                                            draggable="false"
-                                        />
-                                    </div>
-                                    <div class="ml-4">
-                                        <div
-                                            class="text-sm font-medium text-gray-900"
-                                        >
-                                            {{ property.title }}
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            {{ property.district }},
-                                            {{ property.city }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full capitalize"
-                                    :class="{
-                                        'bg-blue-100 text-blue-800':
-                                            property.category_id === 1,
-                                        'bg-green-100 text-green-800':
-                                            property.category_id === 2,
-                                        'bg-yellow-100 text-yellow-800':
-                                            property.category_id === 3,
-                                    }"
-                                >
-                                    {{ showCategories(property.category_id) }}
-                                </span>
-                            </td>
-                            <td
-                                v-if="property.status === 'sold'"
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                            >
-                                Vendido por:
-                                {{ formatPrice(property.final_price) + "€" }}
-                            </td>
-
-                            <td
-                                v-if="property.status === 'rented'"
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                            >
-                                {{
-                                    formatPrice(property.final_price) +
-                                    "€ " +
-                                    t("properties.per-month")
-                                }}
-                            </td>
-
-                            <td
-                                v-if="
-                                    (property.status === 'active' &&
-                                        property.transaction_id === 2) ||
-                                    (property.status === 'pending' &&
-                                        property.transaction_id === 2)
-                                "
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                            >
-                                {{
-                                    formatPrice(property.price) +
-                                    "€ " +
-                                    t("properties.per-month")
-                                }}
-                            </td>
-
-                            <td
-                                v-if="
-                                    (property.status === 'active' &&
-                                        property.transaction_id === 1) ||
-                                    (property.status === 'pending' &&
-                                        property.transaction_id === 1)
-                                "
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                            >
-                                {{ formatPrice(property.price) + "€ " }}
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
-                                    :class="{
-                                        'bg-green-100 text-green-800':
-                                            property.status === 'active',
-                                        'bg-yellow-100 text-yellow-800':
-                                            property.status === 'pending',
-                                        'bg-blue-100 text-blue-800':
-                                            property.status === 'rented',
-                                        'bg-red-100 text-red-800':
-                                            property.status === 'refused',
-                                        'bg-emerald-200 text-emerald-800':
-                                            property.status === 'sold',
-                                    }"
-                                >
-                                    {{
-                                        t(`admin-dashboard.${property.status}`)
-                                    }}
-                                </span>
-                            </td>
-                            <td
-                                class="px-6 py-4 whitespace-nowrap text-sm font-medium"
-                            >
-                                <Link
-                                    :href="
-                                        route('admin.properties.show', {
-                                            slug: property.slug,
-                                        })
-                                    "
-                                    class="text-blue-500 hover:text-blue-600"
-                                >
-                                    <font-awesome-icon
-                                        icon="pen-to-square"
-                                        class="size-5"
-                                    />
-                                </Link>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <font-awesome-icon
+                                icon="pen-to-square"
+                                class="size-5"
+                            />
+                        </Link>
+                    </template>
+                </PropertyTable>
             </div>
-
             <!-- Pagination -->
             <Pagination :links="props.properties.links" />
         </div>
@@ -271,6 +132,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Pagination from "@/Components/Pagination.vue";
+import PropertyTable from "@/Components/PropertiesTable.vue";
 
 const { t } = useI18n();
 
@@ -279,15 +141,6 @@ const props = defineProps({
     categories: Array,
     query: String,
 });
-
-const formatPrice = (price) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-const showCategories = (category_id) => {
-    const category = props.categories.find((cate) => cate.id === category_id);
-    return t(`properties-form.${category.name}`);
-};
 
 const query = ref("");
 

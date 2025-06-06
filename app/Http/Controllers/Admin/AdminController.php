@@ -66,8 +66,6 @@ class AdminController extends Controller
             $properties = Property::search($query)->get();
         }
 
-        $properties->load('media');
-
         return Inertia::render('Admin/Properties', [
             'properties' => $properties,
             'categories' => $categories,

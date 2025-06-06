@@ -24,25 +24,18 @@
                     {{ t("purchase-form.property-info") }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel :value="t('purchase-form.property')" />
-                        <p class="text-gray-900">{{ property.title }}</p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.address')" />
-                        <p class="text-gray-900">
-                            {{ property.address }}, {{ property.city }},
-                            {{ property.district }}, {{ property.postal_code }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel
-                            :value="t('purchase-form.price-rent-per-month')"
-                        />
-                        <p class="text-gray-900">
-                            {{ formatPrice(property.price) }}€
-                        </p>
-                    </div>
+                    <DetailItem
+                        :label="t('purchase-form.property')"
+                        :value="property.title"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.address')"
+                        :value="`${property.address}, ${property.city}, ${property.district}, ${property.postal_code}`"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.sale-price')"
+                        :value="formatPrice(property.price + '€')"
+                    />
                 </div>
             </div>
 
@@ -51,43 +44,33 @@
                     {{ t("purchase-form.landlord-info") }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel :value="t('purchase-form.landlord')" />
-                        <p class="text-gray-900">{{ landlord.name }}</p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.cc-number')" />
-                        <p class="text-gray-900">
-                            {{ landlord.identification_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.nif')" />
-                        <p class="text-gray-900">
-                            {{ landlord.tax_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.email')" />
-                        <p class="text-gray-900">
-                            {{ landlord.email }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.phone')" />
-                        <p class="text-gray-900">
-                            {{ landlord.phone_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <InputLabel :value="t('purchase-form.date-birth')" />
-                        <p class="text-gray-900">
-                            {{
-                                landlord.date_of_birth ||
-                                t("purchase-form.undisclosed")
-                            }}
-                        </p>
-                    </div>
+                    <DetailItem
+                        :label="t('purchase-form.landlord')"
+                        :value="landlord.name"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.cc-number')"
+                        :value="landlord.identification_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.nif')"
+                        :value="landlord.tax_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.email')"
+                        :value="landlord.email"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.phone')"
+                        :value="landlord.phone_number"
+                    />
+                    <DetailItem
+                        :label="t('purchase-form.date-birth')"
+                        :value="
+                            landlord.date_of_birth ||
+                            t('purchase-form.undisclosed')
+                        "
+                    />
                 </div>
             </div>
 
@@ -130,71 +113,45 @@
                             class="bg-gray-50 rounded-lg p-4"
                         >
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.buyer-name')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id).name
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.cc-number')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id)
-                                                .identification_number
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.nif')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id)
-                                                .tax_number
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.date-birth')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id)
-                                                .date_of_birth ||
-                                            t("purchase-form.undisclosed")
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.email')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id).email
-                                        }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        :value="t('purchase-form.phone')"
-                                    />
-                                    <p class="text-gray-900">
-                                        {{
-                                            showBuyersInfo(form.tenant_id)
-                                                .phone_number
-                                        }}
-                                    </p>
-                                </div>
+                                <DetailItem
+                                    :label="t('purchase-form.buyer-name')"
+                                    :value="showBuyersInfo(form.tenant_id).name"
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.cc-number')"
+                                    :value="
+                                        showBuyersInfo(form.tenant_id)
+                                            .identification_number
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.nif')"
+                                    :value="
+                                        showBuyersInfo(form.tenant_id)
+                                            .tax_number
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.date-birth')"
+                                    :value="
+                                        showBuyersInfo(form.tenant_id)
+                                            .date_of_birth ||
+                                        t('purchase-form.undisclosed')
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.email')"
+                                    :value="
+                                        showBuyersInfo(form.tenant_id).email
+                                    "
+                                />
+                                <DetailItem
+                                    :label="t('purchase-form.phone')"
+                                    :value="
+                                        showBuyersInfo(form.tenant_id)
+                                            .phone_number
+                                    "
+                                />
                             </div>
                         </div>
                     </div>
@@ -309,6 +266,7 @@ import { useI18n } from "vue-i18n";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import DetailItem from "@/Components/DetailItem.vue";
 
 const { t } = useI18n();
 
