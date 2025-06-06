@@ -473,15 +473,16 @@
     },
 
     "clients": {
-        "title": "Clientes",
-        "all-clients": "Todos os clientes",
+        "title": "Gestão de clientes",
+        "all-clients": "Clientes",
         "name": "Nome",
         "id-number": "Número cartão de cidadão",
         "tax-number": "Número de contribuinte",
         "email": "Email",
         "actions": "Ações",
         "view-properties": "Visualizar imóveis",
-        "edit": "Editar"
+        "edit": "Editar",
+        "placeholder-search": "Nome, email, ..."
     },
 
     "clients-details": {
@@ -494,6 +495,7 @@
         "email": "Email",
         "phone": "Número de telefone",
         "date_of_birth": "Data de nascimento",
-        "properties": "Imóveis"
+        "properties": "Imóveis",
+        "no-property": "Nenhum imóvel disponível"
     }
 }

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +54,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function searchableAs(): string
+    {
+        return 'clients_index';
+    }
+
+
+    public function toSearchableArray(): array
+    {
+        $search = [
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+
+        return array_merge($search);
+    }
+
 
     public function property(): HasMany
     {

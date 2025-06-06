@@ -12,6 +12,20 @@
                     </h2>
                 </div>
 
+                <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <InputLabel :value="t('admin-dashboard.search')" />
+                            <TextInput
+                                :placeholder="t('clients.placeholder-search')"
+                                type="text"
+                                v-model="query"
+                                @keyup.enter="search"
+                            />
+                        </div>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -71,7 +85,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <Pagination :links="clients.links" class="mt-4" />
             </div>
         </div>
@@ -79,22 +92,39 @@
 </template>
 
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Pagination from "@/Components/Pagination.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { ref } from "vue";
 
 const { t } = useI18n();
 
 const props = defineProps({
     clients: [Object, Array],
+    query: String,
 });
 
 const redirectsTopage = (client) => {
-    console.log("client.id:", client.id);
-
     return (window.location.href = route("admin.clients.show", {
         client: client.id,
     }));
+};
+
+const query = ref("");
+
+const search = () => {
+    router.get(
+        route("admin.clients"),
+        {
+            query: query.value,
+        },
+        {
+            preserveState: true,
+            preserveScroll: true,
+        }
+    );
 };
 </script>

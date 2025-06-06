@@ -475,15 +475,16 @@
     },
 
     "clients": {
-        "title": "Clients",
-        "all-clients": "All clients",
+        "title": "Client management",
+        "all-clients": "Clients",
         "name": "Name",
         "id-number": "Identification number",
         "tax-number": "Tax number",
         "email": "Email",
         "actions": "Actions",
         "view-properties": "View properties",
-        "edit": "Edit"
+        "edit": "Edit",
+        "placeholder-search": "Name, email, ..."
     },
 
     "clients-details": {
@@ -496,6 +497,7 @@
         "email": "Email",
         "phone": "Phone number",
         "date_of_birth": "Date of birth",
-        "properties": "Properties"
+        "properties": "Properties",
+        "no-property": "No property available"
     }
 }

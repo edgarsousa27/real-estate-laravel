@@ -139,15 +139,18 @@ return [
     */
 
     'meilisearch' => [
-    'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
-    'key' => env('MEILISEARCH_KEY'),
-    'index-settings' => [
-        Property::class => [
-            'filterableAttributes'=> ['district', 'city', 'postal_code', 'transaction_id'],
-            'sortableAttributes' => ['price', '-price', 'created_at', '-created_at', 'square_meters', '-square_meters']
+        'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
+        'key' => env('MEILISEARCH_KEY'),
+        'index-settings' => [
+            Property::class => [
+                'filterableAttributes' => ['district', 'city', 'postal_code', 'transaction_id'],
+                'sortableAttributes' => ['price', '-price', 'created_at', '-created_at', 'square_meters', '-square_meters']
+            ],
+            User::class => [
+                'filterableAttributes' => ['name', 'email']
+            ],
         ],
     ],
-],
 
     /*
     |--------------------------------------------------------------------------

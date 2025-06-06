@@ -76,8 +76,34 @@
             />
         </div>
 
+        <h3 class="text-lg font-medium text-gray-900 mb-4">
+            {{ t("admin-dashboard.recent-properties") }}
+        </h3>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <RecentPropertiesTable :properties="props.properties" />
+            <div
+                class="lg:col-span-2 bg-white rounded-lg shadow overflow-hidden"
+            >
+                <div class="overflow-x-auto">
+                    <PropertyTable
+                        :properties="props.properties"
+                        :categories="props.categories"
+                        :headers="[
+                            t('admin-dashboard.properties'),
+                            t('admin-dashboard.type'),
+                            t('admin-dashboard.price'),
+                            t('admin-dashboard.status'),
+                            t('admin-dashboard.actions'),
+                        ]"
+                        :action-url="
+                            (property) =>
+                                route('admin.properties.show', {
+                                    slug: property.slug,
+                                })
+                        "
+                    >
+                    </PropertyTable>
+                </div>
+            </div>
             <QuickActionsTable />
         </div>
     </AdminLayout>
@@ -86,10 +112,10 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import StatCard from "@/Components/StatCard.vue";
-import RecentPropertiesTable from "@/Components/RecentPropertiesTable.vue";
 import QuickActionsTable from "@/Components/QuickActionsTable.vue";
 import { useI18n } from "vue-i18n";
 import { Head, Link } from "@inertiajs/vue3";
+import PropertyTable from "@/Components/PropertiesTable.vue";
 
 const { t } = useI18n();
 
@@ -101,6 +127,7 @@ const props = defineProps({
     sold_properties: Number,
     rented_properties: Number,
     revenue: Number,
+    categories: Array,
 });
 
 const formatPrice = (price) => {

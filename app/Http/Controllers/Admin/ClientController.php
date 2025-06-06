@@ -13,12 +13,19 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $clients = User::where('id', '!=', 1)->paginate(15);
 
+        $query = $request->input('query');
+
+        if ($query) {
+            $clients = User::search($query)->paginate(15);
+        }
+
         return Inertia::render('Admin/Clients', [
             'clients' => $clients,
+            'query' => $query
         ]);
     }
 

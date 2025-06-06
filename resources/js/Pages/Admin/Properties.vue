@@ -101,21 +101,6 @@
                             })
                     "
                 >
-                    <template #actions="{ property }">
-                        <Link
-                            :href="
-                                route('admin.properties.show', {
-                                    slug: property.slug,
-                                })
-                            "
-                            class="text-blue-500 hover:text-blue-600 mr-2"
-                        >
-                            <font-awesome-icon
-                                icon="pen-to-square"
-                                class="size-5"
-                            />
-                        </Link>
-                    </template>
                 </PropertyTable>
             </div>
             <!-- Pagination -->

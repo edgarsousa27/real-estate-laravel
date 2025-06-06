@@ -80,6 +80,11 @@
                     </slot>
                 </td>
             </tr>
+            <tr v-if="props.properties.length === 0">
+                <td>
+                    <h1>{{ t("clients-details.no-property") }}</h1>
+                </td>
+            </tr>
         </tbody>
     </table>
 </template>

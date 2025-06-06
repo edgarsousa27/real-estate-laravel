@@ -22,13 +22,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id', 'category_id')->orderBy('id', 'desc')->take(5)->get();
 
         $revenueSales = SalesContract::sum('total_revenue');
         $revenueRents = RentsContract::sum('total_revenue');
         $total_revenue = $revenueRents + $revenueSales;
 
         $properties->load('media');
+        $categories = Category::select('id', 'name')->get();
+
 
         $total_properties = Property::count();
         $active_properties = Property::where('status', 'active')->count();
@@ -44,6 +46,7 @@ class AdminController extends Controller
             'revenue' => $total_revenue,
             'sold_properties' => $sold_properties,
             'rented_properties' => $rented_properties,
+            'categories' => $categories
         ]);
     }
 
