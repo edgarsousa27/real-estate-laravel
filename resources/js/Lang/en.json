@@ -498,6 +498,7 @@
         "phone": "Phone number",
         "date_of_birth": "Date of birth",
         "properties": "Properties",
-        "no-property": "No property available"
+        "no-property": "No property available",
+        "no-client": "No clients found"
     }
 }

@@ -82,6 +82,14 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr v-if="clients.data.length === 0">
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-center"
+                                    colspan="4"
+                                >
+                                    {{ t("clients-details.no-client") }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

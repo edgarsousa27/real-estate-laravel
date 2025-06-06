@@ -496,6 +496,7 @@
         "phone": "Número de telefone",
         "date_of_birth": "Data de nascimento",
         "properties": "Imóveis",
-        "no-property": "Nenhum imóvel disponível"
+        "no-property": "Nenhum imóvel disponível",
+        "no-client": "Nenhum cliente encontrado"
     }
 }

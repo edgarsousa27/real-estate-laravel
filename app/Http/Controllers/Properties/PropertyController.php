@@ -27,7 +27,7 @@ class PropertyController extends Controller
         $properties_buy = Property::select('id')->where('transaction_id', 1)->where('status', 'active');
         $properties_rent = Property::select('id')->where('transaction_id', 2)->where('status', 'active');
 
-        $properties = Property::select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->orderBy('id', 'desc')->where('status', 'active')->take(9)->get();
+        $properties = Property::orderBy('id', 'desc')->where('status', 'active')->take(9)->get();
 
         $properties->load('media');
 
@@ -61,19 +61,19 @@ class PropertyController extends Controller
         $sort = $request->input('sort');
         $meiliSort = $this->meiliSorts($sort);
 
-        if($query){
-            $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort){
+        if ($query) {
+            $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort) {
                 $options['filter'] = 'transaction_id = 1';
 
-                if($meiliSort){
+                if ($meiliSort) {
                     $options['sort'] = $meiliSort;
                 }
 
                 return $meilisearch->search($query, $options);
             })->paginate(15);
-        } 
+        }
 
-        if($properties->isEmpty()){
+        if ($properties->isEmpty()) {
             return Inertia::render('Properties/NoResults', [
                 'count' => $properties->total(),
                 'query' => $query
@@ -84,12 +84,12 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
-            return Inertia::render('Properties/Search', [
-                'properties' => $properties,
-                'categories' => $categories,
-                'count' => $properties->total(),
-                'query' => $query
-            ]);
+        return Inertia::render('Properties/Search', [
+            'properties' => $properties,
+            'categories' => $categories,
+            'count' => $properties->total(),
+            'query' => $query
+        ]);
     }
 
     public function searchRent(Request $request)
@@ -98,19 +98,19 @@ class PropertyController extends Controller
         $sort = $request->input('sort');
         $meiliSort = $this->meiliSorts($sort);
 
-        if($query){
+        if ($query) {
             $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort) {
                 $options['filter'] = 'transaction_id = 2';
 
-                if($meiliSort){
+                if ($meiliSort) {
                     $options['sort'] = $meiliSort;
                 }
 
                 return $meilisearch->search($query, $options);
             })->paginate(15);
-        } 
+        }
 
-        if($properties->isEmpty()){
+        if ($properties->isEmpty()) {
             return Inertia::render('Properties/NoResults', [
                 'count' => $properties->total(),
                 'query' => $query
@@ -121,12 +121,12 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
-            return Inertia::render('Properties/Search', [
-                'properties' => $properties,
-                'categories' => $categories,
-                'count' => $properties->total(),
-                'query' => $query
-            ]);
+        return Inertia::render('Properties/Search', [
+            'properties' => $properties,
+            'categories' => $categories,
+            'count' => $properties->total(),
+            'query' => $query
+        ]);
     }
     /**
      * Display a listing of the resource.
@@ -135,18 +135,18 @@ class PropertyController extends Controller
     {
 
         $query = QueryBuilder::for(Property::class)
-        ->allowedFilters([
-            AllowedFilter::custom('type', new TypePropertyFilter),
-            AllowedFilter::custom('transaction', new TransactionFilter)
-        ])
-        ->allowedSorts([
-            AllowedSort::custom('price', new SortbyPrice(), 'price'),
-            AllowedSort::custom('date', new SortByDate(), 'created_at'),
-            AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
-        ])
-        ->with('media');
-        
-        $properties = $query->select('id','category_id', 'transaction_id','price','square_meters','city', 'district','bathrooms','bedrooms', 'slug')->where('status', 'active')->paginate(15)->appends(request()->query());
+            ->allowedFilters([
+                AllowedFilter::custom('type', new TypePropertyFilter),
+                AllowedFilter::custom('transaction', new TransactionFilter)
+            ])
+            ->allowedSorts([
+                AllowedSort::custom('price', new SortbyPrice(), 'price'),
+                AllowedSort::custom('date', new SortByDate(), 'created_at'),
+                AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
+            ])
+            ->with('media');
+
+        $properties = $query->where('status', 'active')->paginate(15)->appends(request()->query());
 
         $categories = Category::select('id', 'name')->get();
 
@@ -164,13 +164,13 @@ class PropertyController extends Controller
     {
         $json = File::get(resource_path('data/districts.json'));
         $data = json_decode($json, true);
-    
+
         $districts = collect($data['distritos'])
-            ->keys()        
+            ->keys()
             ->sort()
             ->values();
 
-        $cities = collect($data['distritos'])->map(function($citiesinDistrict){
+        $cities = collect($data['distritos'])->map(function ($citiesinDistrict) {
             return collect($citiesinDistrict)->pluck('name');
         });
 
@@ -179,7 +179,7 @@ class PropertyController extends Controller
                 return ["{$districtName}|{$city['name']}" => $city['postal_code']];
             });
         });
-    
+
         return Inertia::render('Properties/Create', [
             'properties' => $property,
             'district' => $districts,
@@ -207,7 +207,7 @@ class PropertyController extends Controller
             'bedrooms' => ['integer', 'nullable'],
             'parking_spaces' => ['integer', 'nullable'],
             'images.*' => ['image', 'nullable', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
-            'documents.*' => ['file', 'nullable', 'mimes:pdf,doc,docx,txt', 'max:5120'], 
+            'documents.*' => ['file', 'nullable', 'mimes:pdf,doc,docx,txt', 'max:5120'],
             'postal_code' => ['required', 'integer'],
             'heating' => ['boolean'],
             'cooling' => ['boolean'],
@@ -238,34 +238,34 @@ class PropertyController extends Controller
             'electricity' => ['boolean'],
             'energy_consumption' => ['integer', 'nullable'],
             'gas_emission' => ['integer', 'nullable'],
-          ]);
+        ]);
 
         $properties = Auth::user()->property()->create($validator);
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as  $image) {
                 $properties->addMedia($image)
-                ->withResponsiveImages()
-                ->toMediaCollection('images');
+                    ->withResponsiveImages()
+                    ->toMediaCollection('images');
             }
         }
 
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as  $documents) {
                 $properties->addMedia($documents)
-                ->toMediaCollection('documents');
+                    ->toMediaCollection('documents');
             }
         }
 
         return to_route('dashboard');
-      }
+    }
 
     /**
      * Display the specified resource.
      */
     public function userProperties()
     {
-        $properties = Auth::user()->property()->select('id','category_id', 'transaction_id','price', 'description', 'address', 'parking_spaces', 'square_meters','city','district','country','bathrooms','bedrooms','postal_code', 'slug', 'status')->paginate(15);
+        $properties = Auth::user()->property()->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -273,13 +273,13 @@ class PropertyController extends Controller
 
         $json = File::get(resource_path('data/districts.json'));
         $data = json_decode($json, true);
-    
+
         $districts = collect($data['distritos'])
-            ->keys()        
+            ->keys()
             ->sort()
             ->values();
 
-        $cities = collect($data['distritos'])->map(function($citiesinDistrict){
+        $cities = collect($data['distritos'])->map(function ($citiesinDistrict) {
             return collect($citiesinDistrict)->pluck('name');
         });
 
@@ -302,7 +302,7 @@ class PropertyController extends Controller
     {
         $properties = $property->with('user')->where('slug', $slug)->firstOrFail();
 
-        $contact = Contact::select('property_id','name', 'lastname', 'email', 'phone_number', 'message')->get();
+        $contact = Contact::get();
 
         $properties->load('media');
 
@@ -311,7 +311,6 @@ class PropertyController extends Controller
             'contact' => $contact,
             'authUser' => Auth::id()
         ]);
-        
     }
 
     /**
@@ -329,7 +328,7 @@ class PropertyController extends Controller
             'postal_code' => 'required',
         ]);
 
-        
+
         $property->update([
             'price' => $request->price,
             'bedrooms' => $request->bedrooms,
@@ -339,18 +338,18 @@ class PropertyController extends Controller
             'district' => $request->district,
             'postal_code' => $request->postal_code
         ]);
-        
-                
+
+
         return Inertia::location(route('properties.userProperties'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request) 
+    public function destroy(Request $request)
     {
         $properties = Property::find($request->id);
-        
+
         if ($properties) {
             $properties->delete();
         }

@@ -22,7 +22,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $properties = Property::select('id', 'title', 'price', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id', 'category_id')->orderBy('id', 'desc')->take(5)->get();
+        $properties = Property::orderBy('id', 'desc')->take(5)->get();
 
         $revenueSales = SalesContract::sum('total_revenue');
         $revenueRents = RentsContract::sum('total_revenue');
@@ -59,14 +59,14 @@ class AdminController extends Controller
                 AllowedFilter::custom('status', new StatusPropertyFilter),
             ]);
 
-        $properties = $filters->select('id', 'category_id', 'title', 'price', 'address', 'city', 'district', 'status', 'slug', 'final_price', 'transaction_id')->orderBy('id', 'desc')->paginate(15);
+        $properties = $filters->orderBy('id', 'desc')->paginate(15);
 
         $categories = Category::select('id', 'name')->get();
 
         $query = $request->input('query');
 
         if ($query) {
-            $properties = Property::search($query)->get();
+            $properties = Property::search($query)->paginate(10);
         }
 
         return Inertia::render('Admin/Properties', [

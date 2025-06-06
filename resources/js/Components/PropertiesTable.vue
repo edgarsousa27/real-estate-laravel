@@ -81,7 +81,7 @@
                 </td>
             </tr>
             <tr v-if="props.properties.length === 0">
-                <td>
+                <td class="px-6 py-4 whitespace-nowrap text-center" colspan="5">
                     <h1>{{ t("clients-details.no-property") }}</h1>
                 </td>
             </tr>
