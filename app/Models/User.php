@@ -65,6 +65,8 @@ class User extends Authenticatable
     {
         $search = [
             'name' => $this->name,
+            'identification_number' => $this->identification_number,
+            'tax_number' => $this->tax_number,
             'email' => $this->email,
         ];
 

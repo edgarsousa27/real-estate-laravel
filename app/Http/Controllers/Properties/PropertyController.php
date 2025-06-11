@@ -29,7 +29,9 @@ class PropertyController extends Controller
 
         $properties = Property::orderBy('id', 'desc')->where('status', 'active')->take(9)->get();
 
-        $properties->load('media');
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -269,7 +271,9 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
-        $properties->load('media');
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
 
         $json = File::get(resource_path('data/districts.json'));
         $data = json_decode($json, true);
@@ -304,7 +308,9 @@ class PropertyController extends Controller
 
         $contact = Contact::get();
 
-        $properties->load('media');
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
 
         return Inertia::render('Properties/Show', [
             'properties' => $properties,

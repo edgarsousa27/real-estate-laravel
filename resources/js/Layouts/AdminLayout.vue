@@ -47,15 +47,6 @@
                     }}</span>
                 </NavLink>
                 <NavLink
-                    href="/admin/agents"
-                    :active="$page.url.startsWith('/admin/agents')"
-                >
-                    <font-awesome-icon icon="users" class="mr-3 text-white" />
-                    <span class="text-white">{{
-                        t("admin-dashboard.agents")
-                    }}</span>
-                </NavLink>
-                <NavLink
                     :href="route('admin.clients')"
                     :active="$page.url.startsWith('/admin/clients')"
                 >

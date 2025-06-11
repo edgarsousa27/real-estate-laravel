@@ -147,7 +147,7 @@ return [
                 'sortableAttributes' => ['price', '-price', 'created_at', '-created_at', 'square_meters', '-square_meters']
             ],
             User::class => [
-                'filterableAttributes' => ['name', 'email']
+                'filterableAttributes' => ['name', 'identification_number', 'tax_number', 'email']
             ],
         ],
     ],

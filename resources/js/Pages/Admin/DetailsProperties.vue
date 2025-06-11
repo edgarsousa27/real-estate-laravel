@@ -124,6 +124,7 @@
                         {{ props.property.title }}
                     </h2>
                     <p class="text-gray-600">
+                        <font-awesome-icon icon="location-dot" class="mr-2"/>
                         {{ props.property.address }}, {{ props.property.city }},
                         {{ props.property.district }} -
                         {{ props.property.postal_code }}
@@ -852,6 +853,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

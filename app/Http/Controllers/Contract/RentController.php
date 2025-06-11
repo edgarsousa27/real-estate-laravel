@@ -83,21 +83,17 @@ class RentController extends Controller
         if ($contract) {
             $html = view('contracts.rent', ['rental_contract' => $contract])->render();
 
-            $path = storage_path("app/public/property-contract-rent-{$contract->id}.pdf");
-
-            Browsershot::html($html)
+            $pdf = Browsershot::html($html)
                 ->format('A4')
-                ->save($path);
+                ->pdf();
 
-            return Inertia::location(route('contract.rent.download', $contract->id));
+            $property->addMediaFromString($pdf)
+                ->usingFileName("property-rent-{$contract->id}-contract.pdf")
+                ->toMediaCollection('documents');
+
+            return Inertia::location(route('admin.properties', $property->slug));
         }
 
         return Inertia::location(route('admin.properties', $property->slug));
-    }
-
-    public function downloadRentContracts($id)
-    {
-        $path = storage_path("app/public/property-contract-rent-{$id}.pdf");
-        return Response::download($path)->deleteFileAfterSend(true);
     }
 }

@@ -70,21 +70,17 @@ class SaleController extends Controller
         if ($contract) {
             $html = view('contracts.sale', ['sales_contract' => $contract])->render();
 
-            $path = storage_path("app/public/property-contract-sale-{$contract->id}.pdf");
-
-            Browsershot::html($html)
+            $pdf = Browsershot::html($html)
                 ->format('A4')
-                ->save($path);
+                ->pdf();
 
-            return Inertia::location(route('contract.sale.download', $contract->id));
+            $property->addMediaFromString($pdf)
+                ->usingFileName("property-sale-{$contract->id}-contract.pdf")
+                ->toMediaCollection('documents');
+
+            return Inertia::location(route('admin.properties', $property->slug));
         }
 
         return Inertia::location(route('admin.properties', $property->slug));
-    }
-
-    public function downloadSalesContracts($id)
-    {
-        $path = storage_path("app/public/property-contract-sale-{$id}.pdf");
-        return Response::download($path)->deleteFileAfterSend(true);
     }
 }

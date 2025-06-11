@@ -28,9 +28,7 @@ class AdminController extends Controller
         $revenueRents = RentsContract::sum('total_revenue');
         $total_revenue = $revenueRents + $revenueSales;
 
-        $properties->load('media');
         $categories = Category::select('id', 'name')->get();
-
 
         $total_properties = Property::count();
         $active_properties = Property::where('status', 'active')->count();
@@ -81,7 +79,11 @@ class AdminController extends Controller
      */
     public function show(Property $property)
     {
-        $property->load(['media', 'user']);
+        $property->load(['user']);
+
+        $property->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
 
         $categories = Category::select('id', 'name')->get();
 
@@ -104,7 +106,12 @@ class AdminController extends Controller
     {
         $downloads = $property->getMedia('documents');
 
-        return MediaStream::create('documents.zip')->addMedia($downloads);
+
+        if ($downloads->isEmpty()) {
+            abort(404, 'Nenhum documento encontrado para este imóvel.');
+        }
+
+        return MediaStream::create("property-{$property->id}-documents.zip")->addMedia($downloads);
     }
 
 
