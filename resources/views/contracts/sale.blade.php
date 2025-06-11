@@ -83,7 +83,7 @@
         <section class="mb-3">
             <h2 class="text-base font-semibold border-b border-gray-200 pb-1 mb-2">2. Objeto e Valor</h2>
             <p class="text-xs">
-                <span class="font-medium">Imóvel:</span> {{ $sales_contract->property->title }}<br>
+                <span class="font-medium">Imóvel:</span> {{ $sales_contract->property->id }}<br>
                 <span class="font-medium">Localização:</span> {{ $sales_contract->property->address }}, {{ $sales_contract->property->city }}<br>
                 <span class="font-medium">Valor de Venda:</span> {{ number_format($sales_contract->final_price, 2, ',', '.') }} €<br>
                 <span class="font-medium">Forma de Pagamento:</span> {{ $sales_contract->payment_method }}

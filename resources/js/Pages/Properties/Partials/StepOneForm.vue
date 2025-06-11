@@ -45,17 +45,6 @@
             <InputError :message="form.errors.transaction_id" />
         </div>
 
-        <div class="mt-3">
-            <InputLabel for="title" :value="t('properties-form.title')" />
-            <TextInput
-                type="text"
-                id="title"
-                v-model="form.title"
-                @input="fieldUpdated('title')"
-            />
-            <InputError :message="form.errors.title" class="mt-2" />
-        </div>
-
         <div class="grid grid-cols-2 gap-4 mt-3">
             <div v-if="form.transaction_id === 2">
                 <InputLabel

@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>{{ props.properties.title }}</title>
+        <title>{{ $t(props.properties.title, props.properties.title_params) }}</title>
     </Head>
     <DefaultLayout>
         <div class="py-4 md:px-4 w-full sm:px-6 lg:px-8">
@@ -91,7 +91,7 @@
                         <h1
                             class="ml-3 text-xl sm:text-2xl font-bold text-gray-800 break-words max-w-sm"
                         >
-                            {{ props.properties.title }}
+                        {{ $t(props.properties.title, props.properties.title_params) }}
                         </h1>
                         <h1
                             class="ml-3 text-xl sm:text-2xl font-bold text-blue-500"

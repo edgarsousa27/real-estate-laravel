@@ -122,7 +122,6 @@ const validateStepOne = () => {
         form.setError("category_id", t("form-errors.category"));
     if (!form.transaction_id)
         form.setError("transaction_id", t("form-errors.transaction"));
-    if (!form.title) form.setError("title", t("form-errors.title"));
     if (!form.price) form.setError("price", t("form-errors.price"));
     if (!form.square_meters)
         form.setError("square_meters", t("form-errors.square_meters"));

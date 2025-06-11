@@ -9,7 +9,13 @@
         "bedroom": "quartos",
         "wc": "WC",
         "rooms": "divisões",
-        "per-month": "por mês"
+        "per-month": "por mês",
+        "house_buy": "Casa T{bedrooms} para venda • {square_meters}m²",
+        "apartment_buy": "Apartmento T{bedrooms} para venda • {square_meters}m²",
+        "land_buy": "Terreno para venda • {square_meters}m²",
+        "house_rent": "Casa T{bedrooms} para arrendar • {square_meters}m²",
+        "apartment_rent": "Apartmento T{bedrooms} para arrendar • {square_meters}m²",
+        "land_rent": "Terreno para arrendar • {square_meters}m²"
     },
 
     "properties-form": {

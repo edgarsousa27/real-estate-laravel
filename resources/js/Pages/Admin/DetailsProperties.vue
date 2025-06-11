@@ -121,7 +121,7 @@
             >
                 <div>
                     <h2 class="text-2xl font-semibold text-gray-800">
-                        {{ props.property.title }}
+                         {{ $t(props.property.title, props.property.title_params) }}
                     </h2>
                     <p class="text-gray-600">
                         <font-awesome-icon icon="location-dot" class="mr-2"/>

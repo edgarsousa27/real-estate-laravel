@@ -84,7 +84,7 @@
         <section class="mb-3">
             <h2 class="text-base font-semibold border-b border-gray-200 pb-1 mb-2">2. Objeto do Contrato</h2>
             <p class="text-xs">
-                <span class="font-medium">Imóvel:</span> {{ $rental_contract->property->title }}<br>
+                <span class="font-medium">Imóvel:</span> {{ $rental_contract->property->id }}<br>
                 <span class="font-medium">Localização:</span> {{ $rental_contract->property->address }}, {{ $rental_contract->property->city }}
             </p>
         </section>

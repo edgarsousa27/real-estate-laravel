@@ -64,7 +64,13 @@ class Property extends Model implements HasMedia
         'energy_consumption',
         'gas_emission',
         'final_price',
+        'title_params'
     ];
+
+    protected $casts = [
+        'title_params' => 'array',
+    ];
+
 
     public function getSlugOptions(): SlugOptions
     {

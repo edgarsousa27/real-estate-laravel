@@ -82,7 +82,10 @@ class PropertyController extends Controller
             ]);
         }
 
-        $properties->load('media');
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
+
 
         $categories = Category::select('id', 'name')->get();
 
@@ -119,7 +122,10 @@ class PropertyController extends Controller
             ]);
         }
 
-        $properties->load('media');
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
+
 
         $categories = Category::select('id', 'name')->get();
 
@@ -190,11 +196,40 @@ class PropertyController extends Controller
         ]);
     }
 
-    /**
+    /**<
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $bedrooms = $request->bedrooms;
+        $square_meters = $request->square_meters;
+
+        $titleParams = [
+            'bedrooms' => $bedrooms,
+            'square_meters' => $square_meters
+        ];
+
+        if ($request->category_id == 1 && $request->transaction_id == 1) {
+            $title = "properties.house_buy";
+        } else if ($request->category_id == 2 && $request->transaction_id == 1) {
+            $title = "properties.apartment_buy";
+        } elseif ($request->category_id == 3 && $request->transaction_id == 1) {
+            $title = "properties.land_buy";
+        } else if ($request->category_id == 1 && $request->transaction_id == 2) {
+            $title = "properties.house_rent";
+        } else if ($request->category_id == 2 && $request->transaction_id == 2) {
+            $title = "properties.apartment_rent";
+        } else if ($request->category_id == 3 && $request->transaction_id == 2) {
+            $title = "properties.land_rent";
+        } else {
+            $title = $request->title;
+        }
+
+        $request->merge([
+            'title' => $title,
+            'title_params' => $titleParams
+        ]);
+
         $validator = $request->validate([
             'category_id' => ['required', 'integer'],
             'transaction_id' => ['required', 'integer'],
@@ -240,6 +275,7 @@ class PropertyController extends Controller
             'electricity' => ['boolean'],
             'energy_consumption' => ['integer', 'nullable'],
             'gas_emission' => ['integer', 'nullable'],
+            'title_params' => ['required']
         ]);
 
         $properties = Auth::user()->property()->create($validator);

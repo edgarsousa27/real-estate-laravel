@@ -10,7 +10,13 @@
         "bedroom": "bedrooms",
         "wc": "WC",
         "rooms": "rooms",
-        "per-month": "per month"
+        "per-month": "per month",
+        "house_buy": "House T{bedrooms} for sale • {square_meters}m²",
+        "apartment_buy": "Apartment T{bedrooms} for sale • {square_meters}m²",
+        "land_buy": "Land for sale • {square_meters}m²",
+        "house_rent": "House T{bedrooms} for rent • {square_meters}m²",
+        "apartment_rent": "Apartment T{bedrooms} for rent • {square_meters}m²",
+        "land_rent": "Land for rent • {square_meters}m²"
     },
 
     "properties-form": {
