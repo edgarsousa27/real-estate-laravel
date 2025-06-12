@@ -167,6 +167,9 @@
                         :properties="props.properties"
                         :contact="props.contact"
                     />
+                <div class="mt-10" v-if="props.properties.transaction_id === 1">
+                    <CreditSimulator :properties="props.properties" />
+                </div>
                 </div>
             </div>
         </div>
@@ -181,6 +184,7 @@ import InteriorHighlights from "./Partials/InteriorHighlights.vue";
 import OutdoorHighlights from "./Partials/OutdoorHighlights.vue";
 import ContactForm from "@/Components/ContactForm.vue";
 import EnergyBalance from "./Partials/EnergyBalance.vue";
+import CreditSimulator from "@/Components/CreditSimulator.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
