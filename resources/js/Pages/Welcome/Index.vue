@@ -9,6 +9,7 @@
         <LatestProperties
             :properties="props.properties"
             :categories="props.categories"
+            :favorites="props.favorites"
         />
     </DefaultLayout>
 </template>
@@ -30,5 +31,6 @@ const props = defineProps({
     count_rent: Number,
     properties: Array,
     categories: Array,
+    favorites: Array,
 });
 </script>

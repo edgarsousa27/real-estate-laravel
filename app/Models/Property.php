@@ -151,4 +151,8 @@ class Property extends Model implements HasMedia
     {
         return $this->hasOne(RentsContract::class);
     }
+    public function favorites()
+    {
+        return $this->hasMany(Favorites::class);
+    }
 }

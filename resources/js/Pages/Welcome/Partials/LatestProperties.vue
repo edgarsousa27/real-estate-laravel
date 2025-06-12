@@ -8,6 +8,7 @@
             <PropertiesHorizontal
                 :properties="props.properties"
                 :categories="props.categories"
+                :favorites="props.favorites"
             />
         </div>
     </div>
@@ -21,5 +22,6 @@ const { t } = useI18n();
 const props = defineProps({
     properties: Array,
     categories: Array,
+    favorites: Array,
 });
 </script>

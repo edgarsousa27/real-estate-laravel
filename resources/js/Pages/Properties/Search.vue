@@ -19,6 +19,7 @@
             <Properties
                 :properties="props.properties.data"
                 :categories="props.categories"
+                :favorites="props.favorites"
             />
             <Pagination :links="props.properties.links" />
         </div>
@@ -39,6 +40,7 @@ const props = defineProps({
     categories: Array,
     count: Number,
     query: String,
+    favorites: Array,
 });
 const { t } = useI18n();
 </script>

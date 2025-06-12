@@ -82,7 +82,9 @@
                         <PropertiesShow
                             :images="props.properties.media"
                             :properties="props.properties"
+                            :favorites="props.favorites"
                         />
+                        
                     </div>
 
                     <div
@@ -194,9 +196,12 @@ const props = defineProps({
     media: Array,
     contact: Object,
     authUser: Number,
+    favorites: Array
 });
 
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+
 </script>

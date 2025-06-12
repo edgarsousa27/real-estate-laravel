@@ -196,6 +196,7 @@
                             <PropertiesShow
                                 :images="props.property.media"
                                 :properties="props.property"
+                                :favorites="props.favorites"
                             />
                         </div>
                         <div class="grid grid-cols-4 gap-2 mt-2"></div>
@@ -914,7 +915,8 @@ const props = defineProps({
     categories: Array,
     downloads: Array,
     sales_contract: Object,
-    rents_contract: Object
+    rents_contract: Object,
+    favorites: Array,
 });
 
 const showContract = (property_id) => {

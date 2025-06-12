@@ -6,10 +6,12 @@ use App\Filters\StatusPropertyFilter;
 use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Favorites;
 use App\Models\Property;
 use App\Models\RentsContract;
 use App\Models\SalesContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\MediaLibrary\Support\MediaStream;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -93,12 +95,15 @@ class AdminController extends Controller
 
         $downloads = $property->getMedia('downloads');
 
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
         return Inertia::render('Admin/DetailsProperties', [
             'property' => $property,
             'categories' => $categories,
             'downloads' => $downloads,
             'sales_contract' => $sales_contract,
-            'rents_contract' => $rents_contract
+            'rents_contract' => $rents_contract,
+            'favorites' => $favorites
         ]);
     }
 

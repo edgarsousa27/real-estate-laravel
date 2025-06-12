@@ -16,6 +16,10 @@
                     'opacity-0': currentIndex !== index,
                 }"
             />
+            <FavoriteButton
+                :favorites="props.favorites"
+                :properties="props.properties"
+            />
         </div>
 
         <!-- Navigation Arrows -->
@@ -62,6 +66,7 @@
 <script setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import FavoriteButton from "./FavoriteButton.vue";
 
 const props = defineProps({
     images: {
@@ -70,6 +75,10 @@ const props = defineProps({
     },
     properties: {
         type: Object,
+        required: true,
+    },
+    favorites: {
+        type: Array,
         required: true,
     },
 });

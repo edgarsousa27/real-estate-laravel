@@ -17,14 +17,11 @@
                                 :images="proper.media"
                                 :property="proper"
                             ></PropertySlideShow>
-                            <div
-                                class="absolute right-1 top-1 rounded-full m-2 bg-white p-2 flex items-center justify-between hover:bg-blue-500 cursor-pointer transition-colors duration-150"
-                            >
-                                <font-awesome-icon
-                                    icon="heart"
-                                    class="size-5 text-neutral-300 hover:fill-white"
-                                />
-                            </div>
+
+                            <FavoriteButton
+                                :favorites="props.favorites"
+                                :properties="proper"
+                            />
                             <div
                                 class="absolute bottom-0 left-0 right-0 bg-white shadow-lg m-2 rounded-lg px-4 py-2 flex"
                             >
@@ -103,7 +100,7 @@
                                     </div>
                                     <!-- Envelope icon moved here -->
                                     <font-awesome-icon
-                                        :icon="['far', 'envelope']"
+                                        icon="envelope"
                                         class="w-6 h-6 text-neutral-300 hover:text-blue-500 cursor-pointer"
                                     />
                                 </div>
@@ -126,10 +123,12 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import PropertySlideShow from "@/Components/PropertySlideShow.vue";
+import FavoriteButton from "./FavoriteButton.vue";
 
 const props = defineProps({
     properties: Object,
     categories: Array,
+    favorites: Array,
 });
 
 const { t } = useI18n();

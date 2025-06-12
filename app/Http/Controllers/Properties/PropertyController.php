@@ -13,6 +13,7 @@ use App\Filters\TransactionFilter;
 use App\Filters\TypePropertyFilter;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Favorites;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
 use Illuminate\Support\Facades\Auth;
@@ -35,11 +36,14 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
         return Inertia::render('Welcome/Index', [
             'count_buy' => $properties_buy->count(),
             'count_rent' => $properties_rent->count(),
             'properties' => $properties,
-            'categories' => $categories
+            'categories' => $categories,
+            'favorites' => $favorites
         ]);
     }
 
@@ -89,11 +93,14 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
         return Inertia::render('Properties/Search', [
             'properties' => $properties,
             'categories' => $categories,
             'count' => $properties->total(),
-            'query' => $query
+            'query' => $query,
+            'favorites' => $favorites
         ]);
     }
 
@@ -129,11 +136,14 @@ class PropertyController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
         return Inertia::render('Properties/Search', [
             'properties' => $properties,
             'categories' => $categories,
             'count' => $properties->total(),
-            'query' => $query
+            'query' => $query,
+            'favorites' => $favorites
         ]);
     }
     /**
@@ -156,12 +166,16 @@ class PropertyController extends Controller
 
         $properties = $query->where('status', 'active')->paginate(15)->appends(request()->query());
 
+
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
         $categories = Category::select('id', 'name')->get();
 
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
             'categories' => $categories,
-            'count' => $properties->count()
+            'count' => $properties->count(),
+            'favorites' => $favorites
         ]);
     }
 
@@ -348,10 +362,14 @@ class PropertyController extends Controller
             $query->where('collection_name', 'images');
         }]);
 
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
+
         return Inertia::render('Properties/Show', [
             'properties' => $properties,
             'contact' => $contact,
-            'authUser' => Auth::id()
+            'authUser' => Auth::id(),
+            'favorites' => $favorites
         ]);
     }
 
@@ -397,5 +415,32 @@ class PropertyController extends Controller
         }
 
         return Inertia::location(route('properties.userProperties'));
+    }
+
+    public function storeFavorites(Request $request)
+    {
+        $request->validate([
+            'property_id' => 'required'
+        ]);
+
+        if (!Auth::user()) {
+            return Inertia::location(route('register'));
+        }
+
+        Favorites::firstOrCreate([
+            'user_id' => Auth::user()->id,
+            'property_id' => $request->property_id
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function destroyFavorites($id)
+    {
+        Favorites::where('user_id', Auth::user()->id)
+            ->where('property_id', $id)
+            ->delete();
+
+        return redirect()->back();
     }
 }

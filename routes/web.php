@@ -8,6 +8,12 @@ use Inertia\Inertia;
 
 Route::get('/', [PropertyController::class, 'welcome'])->name('welcome');
 
+Route::post('/favorites', [PropertyController::class, 'storeFavorites'])
+    ->name('store.favorites');
+
+Route::delete('/favorites/{id}', [PropertyController::class, 'destroyFavorites'])
+    ->name('destroy.favorites');
+
 Route::prefix('search')->group(function () {
     Route::get('/buy', [PropertyController::class, 'searchBuy'])->name('search.buy');
     Route::get('/rent', [PropertyController::class, 'searchRent'])->name('search.rent');
