@@ -59,6 +59,16 @@
                     }}</span>
                 </NavLink>
                 <NavLink
+                    :href="route('admin.calendar')"
+                    :active="$page.url.startsWith('/admin/calendar')"
+                >
+                    <font-awesome-icon
+                        icon="calendar-days"
+                        class="mr-3 text-white"
+                    />
+                    <span class="text-white">{{ t("calendar.page") }}</span>
+                </NavLink>
+                <NavLink
                     href="/admin/reports"
                     :active="$page.url.startsWith('/admin/reports')"
                 >

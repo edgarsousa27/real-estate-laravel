@@ -10,18 +10,21 @@
                 <span> {{ t("admin-dashboard.create-report") }}</span>
                 <font-awesome-icon icon="file-export" />
             </button>
-            <button
-                class="w-full flex items-center justify-between p-4 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition"
-            >
-                <span>{{ t("admin-dashboard.calendar") }}</span>
-                <font-awesome-icon icon="calendar-days" />
-            </button>
+            <Link :href="route('admin.calendar')">
+                <button
+                    class="mt-4 w-full flex items-center justify-between p-4 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition"
+                >
+                    <span>{{ t("admin-dashboard.calendar") }}</span>
+                    <font-awesome-icon icon="calendar-days" />
+                </button>
+            </Link>
         </div>
     </div>
 </template>
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import { Link } from "@inertiajs/vue3";
 
 const { t } = useI18n();
 </script>

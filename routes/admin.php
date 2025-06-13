@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Contract\RentController;
 use App\Http\Controllers\Contract\SaleController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])
@@ -39,4 +41,13 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/clients/{client}', [ClientController::class, 'show'])
         ->name('admin.clients.show');
+
+    Route::get('/admin/calendar', [CalendarController::class, 'index'])
+        ->name('admin.calendar');
+
+    Route::post('/admin/calendar', [CalendarController::class, 'store'])
+        ->name('admin.calendar.store');
+
+    Route::get('/admin/calendar/json', [CalendarController::class, 'json'])
+        ->name('admin.calendar.json');
 });

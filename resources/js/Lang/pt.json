@@ -509,5 +509,20 @@
     "favorites": {
         "title": "Favoritos",
         "my": "Meus favoritos"
+    },
+
+    "calendar": {
+        "page": "Calendário",
+        "add-event": "Adicionar evento",
+        "title": "Título",
+        "all-day": "Dia inteiro",
+        "many-days": "Vários dias",
+        "important": "Importante",
+        "start-date": "Data de início",
+        "start-time": "Hora de início",
+        "end-date": "Data final",
+        "end-time": "Hora de fim",
+        "url": "Link url (opcional)",
+        "description": "Descrição (opcional)"
     }
 }

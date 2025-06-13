@@ -511,5 +511,20 @@
     "favorites": {
         "title": "Favorites",
         "my": "My favorites"
+    },
+
+    "calendar": {
+        "page": "Calendar",
+        "add-event": "Add Event",
+        "title": "Title",
+        "all-day": "All day",
+        "many-days": "Several days",
+        "important": "Important",
+        "start-date": "Start date",
+        "start-time": "Start time",
+        "end-date": "End date",
+        "end-time": "End time",
+        "url": "Url link (Optional)",
+        "description": "Description (Optional)"
     }
 }
