@@ -504,5 +504,10 @@
         "properties": "Imóveis",
         "no-property": "Nenhum imóvel disponível",
         "no-client": "Nenhum cliente encontrado"
+    },
+
+    "favorites": {
+        "title": "Favoritos",
+        "my": "Meus favoritos"
     }
 }

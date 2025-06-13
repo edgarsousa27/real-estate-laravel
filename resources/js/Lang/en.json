@@ -506,5 +506,10 @@
         "properties": "Properties",
         "no-property": "No property available",
         "no-client": "No clients found"
+    },
+
+    "favorites": {
+        "title": "Favorites",
+        "my": "My favorites"
     }
 }

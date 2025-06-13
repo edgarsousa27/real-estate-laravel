@@ -166,7 +166,6 @@ class PropertyController extends Controller
 
         $properties = $query->where('status', 'active')->paginate(15)->appends(request()->query());
 
-
         $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
 
         $categories = Category::select('id', 'name')->get();
@@ -442,5 +441,31 @@ class PropertyController extends Controller
             ->delete();
 
         return redirect()->back();
+    }
+
+    public function showFavorites()
+
+    {
+        $properties = Property::whereHas('favorites', function ($query) {
+            $query->where('user_id', Auth::id());
+        })
+            ->with(['media' => function ($query) {
+                $query->where('collection_name', 'images');
+            }])
+            ->paginate(15);
+
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
+
+        $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
+
+        $categories = Category::select('id', 'name')->get();
+
+        return Inertia::render('Properties/Favorites', [
+            'properties' => $properties,
+            'categories' => $categories,
+            'favorites' => $favorites
+        ]);
     }
 }

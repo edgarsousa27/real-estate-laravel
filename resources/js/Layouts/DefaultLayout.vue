@@ -232,21 +232,39 @@
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
+                            <!-- Favorites Link -->
+                            <div class="relative ms-3 flex items-center">
+                                <font-awesome-icon
+                                    icon="heart"
+                                    class="size-4 mr-2 text-red-600"
+                                />
+                                <NavLink
+                                    class="hover:text-gray-700 transition-colors"
+                                    :href="route('show.favorites')"
+                                >
+                                    {{ t("favorites.my") }}
+                                </NavLink>
+                            </div>
+
+                            <!-- User Dropdown -->
                             <div
                                 class="relative ms-3"
                                 v-if="$page.props.auth.user"
                             >
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
+                                <div class="flex items-center">
+                                    <font-awesome-icon
+                                        icon="user"
+                                        class="size-4 mr-2 text-gray-600"
+                                    />
+                                    <Dropdown align="right" width="48">
+                                        <template #trigger>
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-md font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus:outline-none"
                                             >
                                                 {{ $page.props.auth.user.name }}
                                                 <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
+                                                    class="ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -258,45 +276,53 @@
                                                     />
                                                 </svg>
                                             </button>
-                                        </span>
-                                    </template>
+                                        </template>
 
-                                    <template #content>
-                                        <DropdownLink
-                                            v-if="isAdmin"
-                                            :href="route('admin.dashboard')"
-                                        >
-                                            Gestão
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            v-if="isUser"
-                                            :href="route('dashboard')"
-                                        >
-                                            {{ t("authenticated.dashboard") }}
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            v-if="isUser"
-                                            :href="route('profile.edit')"
-                                        >
-                                            {{ t("authenticated.profile") }}
-                                        </DropdownLink>
-
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                        >
-                                            {{ t("authenticated.logout") }}
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
+                                        <template #content>
+                                            <DropdownLink
+                                                v-if="isAdmin"
+                                                :href="route('admin.dashboard')"
+                                            >
+                                                Gestão
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                v-if="isUser"
+                                                :href="route('dashboard')"
+                                            >
+                                                {{
+                                                    t("authenticated.dashboard")
+                                                }}
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                v-if="isUser"
+                                                :href="route('profile.edit')"
+                                            >
+                                                {{ t("authenticated.profile") }}
+                                            </DropdownLink>
+                                            <DropdownLink
+                                                :href="route('logout')"
+                                                method="post"
+                                                as="button"
+                                            >
+                                                {{ t("authenticated.logout") }}
+                                            </DropdownLink>
+                                        </template>
+                                    </Dropdown>
+                                </div>
                             </div>
-                            <div v-else>
-                                <NavLink :href="route('register')">
+
+                            <!-- Guest Link -->
+                            <div v-else class="relative ms-3">
+                                <NavLink
+                                    :href="route('register')"
+                                    class="hover:text-gray-700 transition-colors"
+                                >
                                     {{ t("buttons.my-account") }}
                                 </NavLink>
                             </div>
-                            <ChangeLanguage class="pl-5"></ChangeLanguage>
+
+                            <!-- Language Selector -->
+                            <ChangeLanguage class="ms-5" />
                         </div>
 
                         <!-- Hamburger -->

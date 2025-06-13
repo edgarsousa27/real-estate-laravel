@@ -14,6 +14,10 @@ Route::post('/favorites', [PropertyController::class, 'storeFavorites'])
 Route::delete('/favorites/{id}', [PropertyController::class, 'destroyFavorites'])
     ->name('destroy.favorites');
 
+Route::get('/favorites', [PropertyController::class, 'showFavorites'])
+    ->middleware('auth', 'role:user')
+    ->name('show.favorites');
+
 Route::prefix('search')->group(function () {
     Route::get('/buy', [PropertyController::class, 'searchBuy'])->name('search.buy');
     Route::get('/rent', [PropertyController::class, 'searchRent'])->name('search.rent');
