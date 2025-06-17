@@ -525,6 +525,24 @@
         "end-date": "End date",
         "end-time": "End time",
         "url": "Url link (Optional)",
-        "description": "Description (Optional)"
+        "description": "Description",
+        "date": "Date",
+        "update-event": "Update Event",
+        "delete-event": "Delete Event",
+        "event": "Event",
+        "holidays": {
+            "title": "Holidays",
+            "name": "Name of the holiday",
+            "date": "Date",
+            "info": "More information"
+        },
+        "update": {
+            "title": "Update Event",
+            "save": "Update"
+        },
+        "delete": {
+            "title": "Delete Event",
+            "confirm": "Are you sure you want to delete this event?"
+        }
     }
 }

@@ -5,8 +5,9 @@ use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Contract\RentController;
 use App\Http\Controllers\Contract\SaleController;
+use App\Models\CalendarEvents;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+
 
 Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])
@@ -50,4 +51,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::get('/admin/calendar/json', [CalendarController::class, 'json'])
         ->name('admin.calendar.json');
+
+    Route::delete('/admin/calendar/{id}', [CalendarController::class, 'destroy'])
+        ->name('admin.calendar.destroy');
+
+    Route::patch('/admin/calendar/{id}', [CalendarController::class, 'update'])
+        ->name('admin.calendar.update');
 });

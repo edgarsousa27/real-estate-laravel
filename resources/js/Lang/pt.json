@@ -523,6 +523,24 @@
         "end-date": "Data final",
         "end-time": "Hora de fim",
         "url": "Link url (opcional)",
-        "description": "Descrição (opcional)"
+        "description": "Descrição",
+        "date": "Data",
+        "update-event": "Atualizar Evento",
+        "delete-event": "Eliminar Evento",
+        "event": "Evento",
+        "holidays": {
+            "title": "Feriados",
+            "name": "Nome",
+            "date": "Data",
+            "info": "Mais informações"
+        },
+        "update": {
+            "title": "Atualizar Evento",
+            "save": "Atualizar"
+        },
+        "delete": {
+            "title": "Eliminar Evento",
+            "confirm": "Tem a certeza de que pretende apagar este evento?"
+        }
     }
 }
