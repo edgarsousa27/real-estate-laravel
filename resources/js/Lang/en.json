@@ -558,5 +558,42 @@
         "period": "Amortization period (years)",
         "years": "Years",
         "montly-payment": "Monthly payment"
+    },
+
+    "analytics": {
+        "title": "Analytics",
+        "monthly-listings": "Monthly property listings",
+        "property-status": "Status of the property",
+        "category-listings": "Listings by category / type of property",
+        "revenue-overtime": "Revenues over time",
+        "properties": "Properties",
+        "months": "Months",
+        "properties-number": "Number of properties",
+        "categories": "Categories / Property types",
+        "monthly-revenue": "Monthly revenue",
+        "revenue": "Revenue"
+    },
+
+    "months": {
+        "January": "January",
+        "February": "February",
+        "March": "March",
+        "April": "April",
+        "May": "May",
+        "June": "June",
+        "July": "July",
+        "August": "August",
+        "September": "September",
+        "October": "October",
+        "November": "November",
+        "December": "December"
+    },
+
+    "status": {
+        "pending": "Pending",
+        "sold": "Sold",
+        "rented": "Rented",
+        "active": "Active",
+        "refused": "Refused"
     }
 }

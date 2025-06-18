@@ -556,5 +556,42 @@
         "period": "Período de amortização (anos)",
         "years": "Anos",
         "montly-payment": "Pagamento mensal"
+    },
+
+    "analytics": {
+        "title": "Analytics",
+        "monthly-listings": "Listagens mensais de imóveis",
+        "property-status": "Situação do imóvel",
+        "category-listings": "Listagens por categoria / tipo de imóvel",
+        "revenue-overtime": "Receitas ao longo do tempo",
+        "properties": "Imóveis",
+        "months": "Meses",
+        "properties-number": "Número de imóveis",
+        "categories": "Categorias / Tipos de imóveis",
+        "monthly-revenue": "Receitas mensais",
+        "revenue": "Receitas"
+    },
+
+    "months": {
+        "January": "Janeiro",
+        "February": "Fevereiro",
+        "March": "Março",
+        "April": "Abril",
+        "May": "Maio",
+        "June": "Junho",
+        "July": "Julho",
+        "August": "Agosto",
+        "September": "Setembro",
+        "October": "Outubro",
+        "November": "Novembro",
+        "December": "Dezembro"
+    },
+
+    "status": {
+        "pending": "Pendente",
+        "sold": "Vendido",
+        "rented": "Arrendado",
+        "active": "Ativo",
+        "refused": "Recusado"
     }
 }

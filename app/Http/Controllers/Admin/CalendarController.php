@@ -38,14 +38,6 @@ class CalendarController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        #
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)

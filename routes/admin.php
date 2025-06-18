@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CalendarController;
+use App\Http\Controllers\Admin\ChartsController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Contract\RentController;
 use App\Http\Controllers\Contract\SaleController;
@@ -57,4 +58,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     Route::patch('/admin/calendar/{id}', [CalendarController::class, 'update'])
         ->name('admin.calendar.update');
+
+    Route::get('/admin/analytics', [ChartsController::class, 'index'])
+        ->name('admin.analytics');
 });

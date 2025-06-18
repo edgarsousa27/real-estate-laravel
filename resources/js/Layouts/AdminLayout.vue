@@ -69,8 +69,8 @@
                     <span class="text-white">{{ t("calendar.page") }}</span>
                 </NavLink>
                 <NavLink
-                    href="/admin/reports"
-                    :active="$page.url.startsWith('/admin/reports')"
+                    href="/admin/analytics"
+                    :active="$page.url.startsWith('/admin/analytics')"
                 >
                     <font-awesome-icon
                         icon="chart-bar"
