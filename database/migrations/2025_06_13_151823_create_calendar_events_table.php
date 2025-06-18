@@ -21,7 +21,6 @@ return new class extends Migration
             $table->time('start_time')->nullable();
             $table->date('end_date')->nullable();
             $table->time('end_time')->nullable();
-            $table->string('url')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

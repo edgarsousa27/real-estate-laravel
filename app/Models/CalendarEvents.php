@@ -17,7 +17,6 @@ class CalendarEvents extends Model
         'start_time',
         'end_date',
         'end_time',
-        'url',
         'description',
         'color'
     ];

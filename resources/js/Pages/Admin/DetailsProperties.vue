@@ -330,7 +330,7 @@
                 <!-- User Info and Sidebar -->
                 <div class="space-y-6">
                     <!-- Owner/Agent Info -->
-                    <div v-if="props.property.status === 'active'"
+                    <div v-if="props.property.status === 'active' || props.property.status === 'pending'"
                         class="bg-white border border-gray-200 rounded-lg shadow p-4"
                     >
                         <h3 class="text-lg font-medium text-gray-800 mb-4"> 

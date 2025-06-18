@@ -2,13 +2,16 @@
     <div class="bg-white shadow-lg rounded-lg p-6 md:p-8 lg:p-10 space-y-6">
         <div>
             <h1 class="text-2xl font-semibold text-blue-500">
-                Simulador de crédito
+                {{ t("credit-simulator.title") }}
             </h1>
         </div>
 
         <div class="space-y-4">
             <div>
-                <InputLabel for="propertyValue" value="Valor do imóvel" />
+                <InputLabel
+                    for="propertyValue"
+                    :value="t('credit-simulator.property-value')"
+                />
                 <p class="w-full">
                     {{ formatPrice(props.properties.price) + "€" }}
                 </p>
@@ -18,7 +21,7 @@
                 <div>
                     <InputLabel
                         for="downPaymentValue"
-                        value="Valor de entrada"
+                        :value="t('credit-simulator.entry-value')"
                     />
                     <TextInput
                         type="number"
@@ -28,7 +31,10 @@
                     />
                 </div>
                 <div>
-                    <InputLabel for="downPaymentPercent" value="% de entrada" />
+                    <InputLabel
+                        for="downPaymentPercent"
+                        :value="t('credit-simulator.%-value')"
+                    />
                     <TextInput
                         type="number"
                         id="downPaymentPercent"
@@ -43,7 +49,7 @@
             <div>
                 <InputLabel
                     for="amortizationPeriod"
-                    value="Prazo de Amortização (anos)"
+                    :value="t('credit-simulator.period')"
                 />
                 <div class="flex items-center space-x-4">
                     <input
@@ -55,13 +61,16 @@
                         v-model="amortizationPeriod"
                     />
                     <span class="text-gray-700 min-w-[40px]">
-                        {{ amortizationPeriod }} anos
+                        {{ amortizationPeriod }}
+                        {{ t("credit-simulator.years") }}
                     </span>
                 </div>
             </div>
 
             <div class="pt-4 border-t border-gray-200">
-                <h2 class="text-lg font-semibold">Prestação Mensal</h2>
+                <h2 class="text-lg font-semibold">
+                    {{ t("credit-simulator.montly-payment") }}
+                </h2>
                 <p class="text-2xl font-bold text-blue-500">
                     {{ monthlyPayment }} €
                 </p>
@@ -74,6 +83,9 @@
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { ref, watch, computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
     properties: Object,

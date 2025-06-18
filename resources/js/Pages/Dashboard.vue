@@ -29,8 +29,17 @@
                     class="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg"
                 >
                     <div class="p-6 text-gray-900">
+                        <NavLink :href="route('store.favorites')">
+                            {{ t("authenticated.favorites") }}
+                        </NavLink>
+                    </div>
+                </div>
+                <div
+                    class="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg"
+                >
+                    <div class="p-6 text-gray-900">
                         <NavLink :href="route('notifications')">
-                            Notificações
+                            {{ t("authenticated.notifications") }}
                         </NavLink>
                     </div>
                 </div>

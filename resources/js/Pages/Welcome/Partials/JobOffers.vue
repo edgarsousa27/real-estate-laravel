@@ -27,7 +27,7 @@
                     >
                         <img
                             class="w-full h-full min-h-[200px] object-cover"
-                            src="storage/images/persons.jpg"
+                            src="storage/images/persons.png"
                             alt="employees"
                         />
                     </div>

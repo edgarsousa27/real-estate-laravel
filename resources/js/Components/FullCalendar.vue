@@ -70,9 +70,6 @@
                     <TextInput type="time" v-model="form.end_time" />
                 </div>
 
-                <InputLabel :value="t('calendar.url')" class="mt-3" />
-                <TextInput type="text" v-model="form.url" />
-
                 <InputLabel :value="t('calendar.description')" class="mt-3" />
                 <TextInput type="text" v-model="form.description" />
             </div>
@@ -259,9 +256,6 @@
                         <TextInput type="time" v-model="form.end_time" />
                     </div>
 
-                    <InputLabel :value="t('calendar.url')" class="mt-3" />
-                    <TextInput type="text" v-model="form.url" />
-
                     <InputLabel
                         :value="t('calendar.description')"
                         class="mt-3"
@@ -411,7 +405,6 @@ const calendarOptions = computed(() => ({
                 info.event.end?.toISOString().substring(0, 10) || null;
             form.end_time =
                 info.event.end?.toTimeString()?.substring(0, 5) || null;
-            form.url = info.event.url || "";
             form.description = info.event.extendedProps?.description || "";
             openUpdateModal();
         }
@@ -478,7 +471,6 @@ const form = useForm({
     start_time: null,
     end_date: null,
     end_time: null,
-    url: "",
     description: "",
     color: "",
 });

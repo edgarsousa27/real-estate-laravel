@@ -45,7 +45,9 @@
         "bedrooms": "Bedrooms (nº)",
         "parking-spaces": "Parking Spaces (nº)",
         "floors": "Floors (nº)",
-        "image": "Upload of images",
+        "files-upload": "Files upload",
+        "image": "Images",
+        "documents": "Documents",
         "postalcode": "Postal code",
         "yes": "Yes",
         "heating": "Central heating",
@@ -109,7 +111,9 @@
         "properties": "Advertise a property",
         "my-properties": "My properties",
         "logout": "Log Out",
-        "logged": "Welcome back, "
+        "logged": "Welcome back, ",
+        "notifications": "Notifications",
+        "favorites": "Favorites"
     },
 
     "profile": {
@@ -544,5 +548,15 @@
             "title": "Delete Event",
             "confirm": "Are you sure you want to delete this event?"
         }
+    },
+
+    "credit-simulator": {
+        "title": "Credit simulator",
+        "property-value": "Property value",
+        "entry-value": "Entry value",
+        "%-value": "(%) Entry value",
+        "period": "Amortization period (years)",
+        "years": "Years",
+        "montly-payment": "Monthly payment"
     }
 }

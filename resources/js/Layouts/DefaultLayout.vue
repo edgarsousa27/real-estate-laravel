@@ -426,6 +426,12 @@
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 v-if="isUser"
+                                :href="route('show.favorites')"
+                            >
+                                {{ t("favorites.my") }}
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                v-if="isUser"
                                 :href="route('profile.edit')"
                             >
                                 {{ t("authenticated.profile") }}

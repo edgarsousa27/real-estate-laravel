@@ -44,7 +44,9 @@
         "bedrooms": "Quartos (nº)",
         "parking-spaces": "Vagas de estacionamento (nº)",
         "floors": "Andares (nº)",
-        "image": "Upload de imagens",
+        "files-upload": "Carregamento de ficheiros",
+        "image": "Imagens",
+        "documents": "Documentos",
         "postalcode": "Código postal",
         "yes": "Sim",
         "heating": "Aquecimento central",
@@ -108,7 +110,9 @@
         "properties": "Publicar um imóvel",
         "my-properties": "Meus imóveis",
         "logout": "Terminar sessão",
-        "logged": "Bem vindo, "
+        "logged": "Bem vindo, ",
+        "notifications": "Notificações",
+        "favorites": "Favoritos"
     },
 
     "profile": {
@@ -542,5 +546,15 @@
             "title": "Eliminar Evento",
             "confirm": "Tem a certeza de que pretende apagar este evento?"
         }
+    },
+
+    "credit-simulator": {
+        "title": "Simulador de crédito",
+        "property-value": "Valor do imóvel",
+        "entry-value": "Valor de entrada",
+        "%-value": "(%) de entrada",
+        "period": "Período de amortização (anos)",
+        "years": "Anos",
+        "montly-payment": "Pagamento mensal"
     }
 }

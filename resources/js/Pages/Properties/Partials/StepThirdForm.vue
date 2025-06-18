@@ -87,7 +87,7 @@
         </div>
         <div class="mt-3">
             <h1 class="text-xl text-center">
-                {{ t("properties-form.image") }}
+                {{ t("properties-form.files-upload") }}
             </h1>
             <InputLabel for="upload" :value="t('properties-form.image')" />
             <input
@@ -100,10 +100,7 @@
             <InputError :message="form.errors.images" class="mt-2" />
         </div>
         <div class="mt-3">
-            <h1 class="text-xl text-center">
-                {{ t("properties-form.image") }}
-            </h1>
-            <InputLabel for="upload" value="Upload Documentos" />
+            <InputLabel for="upload" :value="t('properties-form.documents')" />
             <input
                 type="file"
                 @change="handleDocumentChange"

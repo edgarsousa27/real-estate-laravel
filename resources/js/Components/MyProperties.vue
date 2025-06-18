@@ -170,68 +170,54 @@
 
     <InputModal
         :isOpen="isModalOpen"
-        :title="t('update-form.delete-properties')"
+        :title="t('update-form.properties')"
         @close="closeModal"
     >
         <form @submit.prevent="updateProperty" class="space-y-4">
             <input type="hidden" v-model="selectedProperty.id" />
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.price") }}
-                </label>
-                <input
-                    v-model="selectedProperty.price"
+                <InputLabel :value="t('update-form.price')" />
+                <TextInput
                     type="number"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    v-model="selectedProperty.price"
                     required
                 />
             </div>
 
             <div v-if="selectedProperty.bedrooms > 0">
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.bedrooms") }}
-                </label>
-                <input
-                    v-model="selectedProperty.bedrooms"
+                <InputLabel :value="t('update-form.bedrooms')" />
+                <TextInput
                     type="number"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    v-model="selectedProperty.bedrooms"
                     required
                 />
             </div>
 
             <div v-if="selectedProperty.bathrooms > 0">
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.bathrooms") }}
-                </label>
-                <input
+                <InputLabel :value="t('update-form.bathrooms')" />
+                <TextInput
+                    type="number"
                     v-model="selectedProperty.bathrooms"
-                    type="number"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.surface") }}
-                </label>
-                <input
+                <InputLabel :value="t('update-form.surface')" />
+                <TextInput
+                    type="number"
                     v-model="selectedProperty.square_meters"
-                    type="number"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.district") }}
-                </label>
+                <InputLabel :value="t('update-form.district')" />
                 <select
                     id="district"
                     name="district"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
                     v-model="selectedProperty.district"
                 >
                     <option v-for="dist in district" :key="dist" :value="dist">
@@ -241,16 +227,14 @@
             </div>
 
             <div>
-                <label
+                <InputLabel
                     v-if="selectedProperty.district"
-                    class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                    {{ t("update-form.city") }}
-                </label>
+                    :value="t('update-form.city')"
+                />
                 <select
                     id="district"
                     name="district"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
+                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
                     v-if="selectedProperty.district"
                     v-model="selectedProperty.city"
                 >
@@ -265,9 +249,7 @@
             </div>
 
             <div v-if="selectedProperty.city">
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ t("update-form.postal_code") }}
-                </label>
+                <InputLabel :value="t('update-form.postal_code')" />
                 <input
                     v-model="selectedProperty.postal_code"
                     type="text"
@@ -334,6 +316,8 @@ import PropertySlideShow from "@/Components/PropertySlideShow.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import InputModal from "./InputModal.vue";
+import TextInput from "./TextInput.vue";
+import InputLabel from "./InputLabel.vue";
 
 const props = defineProps({
     properties: [Array, Object],
