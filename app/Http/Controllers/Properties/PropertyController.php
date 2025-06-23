@@ -355,18 +355,14 @@ class PropertyController extends Controller
     {
         $properties = $property->with('user')->where('slug', $slug)->firstOrFail();
 
-        $contact = Contact::get();
-
         $properties->load(['media' => function ($query) {
             $query->where('collection_name', 'images');
         }]);
 
         $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
 
-
         return Inertia::render('Properties/Show', [
             'properties' => $properties,
-            'contact' => $contact,
             'authUser' => Auth::id(),
             'favorites' => $favorites
         ]);

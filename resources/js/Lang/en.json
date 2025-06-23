@@ -411,7 +411,6 @@
         "buyers-price": "Buyer's price:",
         "final-price": "Final price for the seller",
         "property-rent-price": "Rental price:",
-
         "initial-rent-process": "Start the rental process",
         "months-contract": "Contract months",
         "price-agreed": "Agreed rental price",
@@ -422,7 +421,8 @@
         "our-total-revenue-per-month": "Our total revenue per month",
         "rented-by": "Rented By",
         "start-contract": "Start of contract",
-        "end-contract": "End of contract"
+        "end-contract": "End of contract",
+        "logout": "Log Out"
     },
 
     "purchase-form": {

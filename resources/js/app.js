@@ -75,6 +75,7 @@ import {
     faSpinner,
     faUser,
     faCircleInfo,
+    faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -151,7 +152,8 @@ library.add(
     faArrowLeft,
     faSpinner,
     faUser,
-    faCircleInfo
+    faCircleInfo,
+    faArrowRightFromBracket
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

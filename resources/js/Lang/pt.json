@@ -409,7 +409,6 @@
         "buyers-price": "Preço do comprador:",
         "final-price": "Preço final para o vendedor",
         "property-rent-price": "Preço do aluguer:",
-
         "initial-rent-process": "Iniciar o processo de arrendamento",
         "months-contract": "Meses de contrato",
         "price-agreed": "Preço da renda acordado",
@@ -420,7 +419,8 @@
         "our-total-revenue-per-month": "A nossa receita total por mês",
         "rented-by": "Arrendado por",
         "start-contract": "Início do contrato",
-        "end-contract": "Fim do contrato"
+        "end-contract": "Fim do contrato",
+        "logout": "Terminar sessão"
     },
 
     "purchase-form": {

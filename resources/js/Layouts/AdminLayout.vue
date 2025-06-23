@@ -81,12 +81,16 @@
                     }}</span>
                 </NavLink>
                 <NavLink
-                    href="/admin/settings"
+                    :href="route('logout')"
+                    method="post"
                     :active="$page.url.startsWith('/admin/settings')"
                 >
-                    <font-awesome-icon icon="gear" class="mr-3 text-white" />
+                    <font-awesome-icon
+                        icon="arrow-right-from-bracket"
+                        class="mr-3 text-white"
+                    />
                     <span class="text-white">{{
-                        t("admin-dashboard.settings")
+                        t("admin-dashboard.logout")
                     }}</span>
                 </NavLink>
             </nav>
@@ -132,7 +136,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import NavLink from "@/Components/NavLink.vue";
 import ChangeLanguage from "@/Components/ChangeLanguage.vue";
@@ -143,6 +147,10 @@ const isSidebarOpen = ref(false);
 defineProps({
     title: String,
 });
+
+const logout = () => {
+    console.log("Logging out...");
+};
 </script>
 
 <style scoped>
