@@ -343,7 +343,7 @@
         "properties": "Imóveis",
         "agents": "Agentes",
         "clients": "Clientes",
-        "reports": "Relatórios",
+        "reports": "Análises",
         "settings": "Definições",
         "total-properties": "Total de imóveis",
         "active-properties": "Imóveis ativos",
@@ -559,7 +559,7 @@
     },
 
     "analytics": {
-        "title": "Analytics",
+        "title": "Análises",
         "monthly-listings": "Listagens mensais de imóveis",
         "property-status": "Situação do imóvel",
         "category-listings": "Listagens por categoria / tipo de imóvel",
