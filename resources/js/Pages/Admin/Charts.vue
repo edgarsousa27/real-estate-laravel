@@ -148,6 +148,8 @@ const chartDataStatusListing = computed(() => ({
             hoverBorderColor: "#ffffff",
             hoverOffset: 5,
             spacing: 2,
+            cutout: "60%",
+            radius: "70%",
         },
     ],
 }));
