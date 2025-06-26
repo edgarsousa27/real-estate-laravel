@@ -8,6 +8,8 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import { createI18n } from "vue-i18n";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 import {
     faBath,
@@ -182,6 +184,22 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(i18n)
+            .use(Toast, {
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: false,
+                draggable: false,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: false,
+                rtl: false,
+                transition: "Vue-Toastification__fade",
+                maxToasts: 20,
+                newestOnTop: true,
+            })
             .component("font-awesome-icon", FontAwesomeIcon)
             .mount(el);
     },

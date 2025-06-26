@@ -169,8 +169,10 @@ import TextInput from "@/Components/TextInput.vue";
 import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 const form = useForm({
     name: "",
@@ -184,7 +186,14 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("register"), {
-        onFinish: () => form.reset("password", "password_confirmation"),
+        onSuccess: () => {
+            toast.info(t("notifications.auth.register"));
+            form.reset("password", "password_confirmation");
+        },
+        onError: () => {
+            toast.error(t("notifications.error.register"));
+            form.reset("password", "password_confirmation");
+        },
     });
 };
 </script>

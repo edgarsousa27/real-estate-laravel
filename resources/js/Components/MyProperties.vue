@@ -318,6 +318,7 @@ import { router } from "@inertiajs/vue3";
 import InputModal from "./InputModal.vue";
 import TextInput from "./TextInput.vue";
 import InputLabel from "./InputLabel.vue";
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     properties: [Array, Object],
@@ -350,6 +351,7 @@ const selectedProperty = ref({
 });
 
 const { t } = useI18n();
+const toast = useToast();
 
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -389,16 +391,29 @@ watch(
 
 const updateProperty = () => {
     router.patch(
-        route("properties.update", {
-            onSuccess: () => closeModal(),
-        }),
-        selectedProperty.value
+        route("properties.update", selectedProperty.value.id),
+        { ...selectedProperty.value },
+        {
+            onSuccess: () => {
+                toast.success(t("notifications.property.update"));
+                closeModal();
+            },
+            onError: () => {
+                toast.error("Ocorreu um erro ao atualizar o imóvel");
+            },
+        }
     );
 };
 
 const deleteProperty = () => {
     router.delete(route("properties.destroy", selectedProperty.value.id), {
-        onSuccess: () => closeDeleteModal(),
+        onSuccess: () => {
+            toast.success(t("notifications.property.delete"));
+            closeDeleteModal();
+        },
+        onError: () => {
+            toast.error(t("notifications.error.update-property"));
+        },
     });
 };
 

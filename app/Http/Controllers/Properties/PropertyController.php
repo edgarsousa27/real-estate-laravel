@@ -374,7 +374,7 @@ class PropertyController extends Controller
     public function update(Request $request, Property $property)
     {
         $request->validate([
-            'price' => 'required|numeric',
+            'price' => 'required',
             'bedrooms' => 'nullable|integer',
             'bathrooms' => 'nullable|integer',
             'square_meters' => 'required|numeric',
@@ -382,7 +382,6 @@ class PropertyController extends Controller
             'district' => 'required',
             'postal_code' => 'required',
         ]);
-
 
         $property->update([
             'price' => $request->price,
@@ -394,8 +393,7 @@ class PropertyController extends Controller
             'postal_code' => $request->postal_code
         ]);
 
-
-        return Inertia::location(route('properties.userProperties'));
+        return redirect()->route('properties.userProperties');
     }
 
     /**
@@ -409,7 +407,7 @@ class PropertyController extends Controller
             $properties->delete();
         }
 
-        return Inertia::location(route('properties.userProperties'));
+        return redirect()->route('properties.userProperties');
     }
 
     public function storeFavorites(Request $request)

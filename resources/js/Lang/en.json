@@ -595,5 +595,42 @@
         "rented": "Rented",
         "active": "Active",
         "refused": "Refused"
+    },
+
+    "notifications": {
+        "calendar": {
+            "add": "Event successfully created!",
+            "update": "Event successfully updated!",
+            "delete": "Event successfully removed!"
+        },
+        "property": {
+            "accept": "Property successfully accepted!",
+            "refuse": "Property successfully refused!",
+            "add": "Property successfully created!",
+            "update": "Property successfully updated!",
+            "delete": "Property successfully deleted!"
+        },
+        "auth": {
+            "login": "Login successful!",
+            "register": "Account successfully created!"
+        },
+        "profile": {
+            "update": "Profile successfully updated!",
+            "delete": "Profile successfully deleted!"
+        },
+        "error": {
+            "login": "An error occurred while logging in",
+            "register": "A registration error occurred",
+            "create-property": "An error occurred when creating the property",
+            "update-property": "There was an error updating the property",
+            "update-profile": "An error occurred when updating the profile",
+            "update-password": "An error occurred while updating the password",
+            "delete-profile": "There was an error deleting the profile",
+            "buy-contract": "An error occurred when creating the purchase contract",
+            "rent-contract": "An error occurred when creating the lease contract",
+            "add-calendar": "An error occurred when adding an event",
+            "update-calendar": "An error occurred when updating the event",
+            "delete-calendar": "An error occurred when deleting the event"
+        }
     }
 }

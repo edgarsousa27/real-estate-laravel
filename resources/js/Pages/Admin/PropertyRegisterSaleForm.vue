@@ -247,8 +247,10 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import DetailItem from "@/Components/DetailItem.vue";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
     property: Object,
@@ -279,7 +281,10 @@ const submitForm = () => {
         {
             preserveScroll: true,
             onSuccess: () => {
-                closeModal();
+                toast.info("Contrato de compra criado!");
+            },
+            onError: () => {
+                toast.error(t("notifications.error.buy-contract"));
             },
         }
     );

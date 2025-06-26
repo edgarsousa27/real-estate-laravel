@@ -78,7 +78,7 @@ class SaleController extends Controller
                 ->usingFileName("property-sale-{$contract->id}-contract.pdf")
                 ->toMediaCollection('documents');
 
-            return Inertia::location(route('admin.properties', $property->slug));
+            return redirect()->route('admin.properties', $property->slug);
         }
 
         return Inertia::location(route('admin.properties', $property->slug));

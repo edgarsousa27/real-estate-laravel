@@ -54,8 +54,10 @@ import StepTwoForm from "./StepTwoForm.vue";
 import StepThirdForm from "./StepThirdForm.vue";
 import { useForm } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
     properties: Array,
@@ -158,7 +160,11 @@ const nextStep = () => {
         form.post(route("properties.store"), {
             forceFormData: true,
             onSuccess: () => {
+                toast.success(t("notifications.property.add"));
                 form.reset();
+            },
+            onError: () => {
+                toast.error(t("notifications.error.create-property"));
             },
         });
     }

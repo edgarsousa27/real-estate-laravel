@@ -73,8 +73,10 @@ import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -92,8 +94,14 @@ const confirmUserDeletion = () => {
 const deleteUser = () => {
     form.delete(route("profile.destroy"), {
         preserveScroll: true,
-        onSuccess: () => closeModal(),
-        onError: () => passwordInput.value.focus(),
+        onSuccess: () => {
+            toast.success(t("notifications.profile.delete"));
+            closeModal();
+        },
+        onError: () => {
+            toast.error(t("notifications.error.delete-profile"));
+            passwordInput.value.focus();
+        },
         onFinish: () => form.reset(),
     });
 };

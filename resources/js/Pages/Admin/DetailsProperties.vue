@@ -907,8 +907,11 @@ import { enUS } from "date-fns/locale";
 import { useI18n } from "vue-i18n";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
+import { faTachometerFast } from "@fortawesome/free-solid-svg-icons";
 
 const { locale, t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
     property: Object,
@@ -965,6 +968,12 @@ const activeProperty = () => {
         route("admin.properties.update", { property: props.property.slug }),
         {
             preserveScroll: true,
+            onSuccess: () => {
+                toast.success(t("notifications.property.accept"))
+            },
+            onError: () => {
+                toast.error('Ocorreu um erro ao aceitar o imóvel')
+            }
         },
     );
 };
@@ -978,7 +987,11 @@ const refuseProperty = () => {
             preserveScroll: true,
             onSuccess: () => {
                 closeModal();
+                toast.error(t("notifications.property.refuse"))
             },
+            onError: () => {
+                toast.error('Ocorreu um erro ao recusar o imóvel')
+            }
         }
     );
 };

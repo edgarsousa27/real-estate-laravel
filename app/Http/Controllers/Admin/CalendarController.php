@@ -65,7 +65,7 @@ class CalendarController extends Controller
 
         CalendarEvents::create($validator);
 
-        return Inertia::location(route('admin.calendar'));
+        return redirect()->route('admin.calendar');
     }
 
     /**
@@ -97,7 +97,7 @@ class CalendarController extends Controller
 
         $calendarEvent->update($validator);
 
-        return Inertia::location(route('admin.calendar'));
+        return redirect()->route('admin.calendar');
     }
 
     /**
@@ -111,6 +111,6 @@ class CalendarController extends Controller
             $events->delete();
         }
 
-        return Inertia::location(route('admin.calendar'));
+        return redirect()->route('admin.calendar');
     }
 }

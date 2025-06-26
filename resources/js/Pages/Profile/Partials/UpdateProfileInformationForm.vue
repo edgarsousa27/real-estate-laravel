@@ -10,10 +10,7 @@
             </p>
         </header>
 
-        <form
-            @submit.prevent="form.patch(route('profile.update'))"
-            class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="updateProfileInfo()" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" :value="t('profile.name')" />
 
@@ -220,20 +217,6 @@
                 <PrimaryButton :disabled="form.processing">{{
                     t("profile.save")
                 }}</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
-                        {{ t("profile.saved") }}
-                    </p>
-                </Transition>
             </div>
         </form>
     </section>
@@ -247,8 +230,10 @@ import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 defineProps({
     mustVerifyEmail: {
@@ -275,4 +260,15 @@ const form = useForm({
 });
 
 const display = ref(false);
+
+const updateProfileInfo = () => {
+    form.patch(route("profile.update"), {
+        onSuccess: () => {
+            toast.info(t("notifications.profile.update"));
+        },
+        onError: () => {
+            toast.error(t("notifications.error.update-profile"));
+        },
+    });
+};
 </script>

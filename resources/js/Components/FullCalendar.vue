@@ -150,7 +150,7 @@
         <InputModal
             :isOpen="isModalDeleteOpen"
             :title="t('calendar.delete.title')"
-            @close="closeModal"
+            @close="closeDeleteModal"
         >
             <form @submit.prevent="deleteEvent" class="space-y-4">
                 <input type="hidden" v-model="form.id" />
@@ -333,11 +333,13 @@ import TextInput from "./TextInput.vue";
 import InputLabel from "./InputLabel.vue";
 import Checkbox from "./Checkbox.vue";
 import { useForm } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     checked: [Array, Boolean],
 });
 
+const toast = useToast();
 const { locale, t } = useI18n();
 
 const calendarKey = ref(0);
@@ -476,11 +478,30 @@ const form = useForm({
 });
 
 const addEvent = () => {
-    form.post(route("admin.calendar.store"));
+    form.post(route("admin.calendar.store"), {
+        onSuccess: () => {
+            closeModal();
+            toast.success(t("notifications.calendar.add"));
+            calendarKey.value++;
+        },
+        onError: () => {
+            toast.error(t("notifications.error.add-calendar"));
+        },
+    });
 };
 
 const deleteEvent = () => {
-    form.delete(route("admin.calendar.destroy", form.id));
+    form.delete(route("admin.calendar.destroy", form.id), {
+        onSuccess: () => {
+            closeDeleteModal();
+            closeUpdateModal();
+            toast.success(t("notifications.calendar.delete"));
+            calendarKey.value++;
+        },
+        onError: () => {
+            toast.error(t("notifications.error.delete-calendar"));
+        },
+    });
 };
 
 const updateEvent = () => {
@@ -488,7 +509,11 @@ const updateEvent = () => {
         onSuccess: () => {
             closeUpdateEventModal();
             closeUpdateModal();
+            toast.success(t("notifications.calendar.update"));
             calendarKey.value++;
+        },
+        onError: () => {
+            toast.error(t("notifications.error.update-calendar"));
         },
     });
 };

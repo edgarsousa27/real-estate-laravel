@@ -134,6 +134,6 @@ class AdminController extends Controller
 
         $property->save();
 
-        return Inertia::location(route('admin.properties', $property->slug));
+        return redirect()->route('admin.properties');
     }
 }

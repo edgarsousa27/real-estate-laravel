@@ -91,7 +91,7 @@ class RentController extends Controller
                 ->usingFileName("property-rent-{$contract->id}-contract.pdf")
                 ->toMediaCollection('documents');
 
-            return Inertia::location(route('admin.properties', $property->slug));
+            return redirect()->route('admin.properties', $property->slug);
         }
 
         return Inertia::location(route('admin.properties', $property->slug));

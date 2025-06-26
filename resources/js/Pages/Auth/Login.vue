@@ -87,9 +87,11 @@ import TextInput from "@/Components/TextInput.vue";
 import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
 const { locale } = useI18n();
+const toast = useToast();
 
 defineProps({
     canResetPassword: {
@@ -108,7 +110,14 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("login"), {
-        onFinish: () => form.reset("password"),
+        onSuccess: () => {
+            toast.success(t("notifications.auth.login"));
+            form.reset("password");
+        },
+        onError: () => {
+            toast.error(t("notifications.error.login"));
+            form.reset("password");
+        },
     });
 };
 </script>

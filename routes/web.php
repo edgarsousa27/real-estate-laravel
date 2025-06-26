@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +35,7 @@ Route::middleware('auth', 'role:user')->group(function () {
     Route::get('properties/list', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties/list', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('properties/my-properties', [PropertyController::class, 'userProperties'])->name('properties.userProperties');
-    Route::patch('properties/my-properties', [PropertyController::class, 'update'])->name('properties.update');
+    Route::patch('properties/my-properties/{property}', [PropertyController::class, 'update'])->name('properties.update');
     Route::delete('properties/my-properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
 

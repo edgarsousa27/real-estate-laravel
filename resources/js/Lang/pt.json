@@ -593,5 +593,42 @@
         "rented": "Arrendado",
         "active": "Ativo",
         "refused": "Recusado"
+    },
+
+    "notifications": {
+        "calendar": {
+            "add": "Evento criado com sucesso!",
+            "update": "Evento atualizado com sucesso!",
+            "delete": "Evento removido com sucesso!"
+        },
+        "property": {
+            "accept": "Imóvel foi aceite com sucesso!",
+            "refuse": "Imóvel foi recusado com sucesso!",
+            "add": "Imóvel criado com sucesso!",
+            "update": "Imóvel atualizado com sucesso!",
+            "delete": "Imóvel eliminado com sucesso!"
+        },
+        "auth": {
+            "login": "Login realizado com sucesso!",
+            "register": "Conta criada com sucesso!"
+        },
+        "profile": {
+            "update": "Perfil atualizado com sucesso!",
+            "delete": "Perfil eliminado com sucesso!"
+        },
+        "error": {
+            "login": "Ocorreu um erro ao efetuar o login",
+            "register": "Ocorreu um erro no registo",
+            "create-property": "Ocorreu um erro ao criar o imóvel",
+            "update-property": "Ocorreu um erro ao atualizar o imóvel",
+            "update-profile": "Ocorreu um erro ao atualizar o perfil",
+            "update-password": "Ocorreu um erro ao atualizar a palavra-passe",
+            "delete-profile": "Ocorreu um erro ao eliminar o perfil",
+            "buy-contract": "Ocorreu um erro ao criar o contrato de compra",
+            "rent-contract": "Ocorreu um erro ao criar o contrato de arrendamento",
+            "add-calendar": "Ocorreu um erro ao adicionar um evento",
+            "update-calendar": "Ocorreu um erro ao atualizar o evento",
+            "delete-calendar": "Ocorreu um erro ao eliminar o evento"
+        }
     }
 }
