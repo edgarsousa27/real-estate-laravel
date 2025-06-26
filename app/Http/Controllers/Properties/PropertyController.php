@@ -166,6 +166,13 @@ class PropertyController extends Controller
 
         $properties = $query->where('status', 'active')->paginate(15)->appends(request()->query());
 
+        if ($properties->isEmpty()) {
+            return Inertia::render('Properties/NoResults', [
+                'count' => $properties->total(),
+                'query' => $query
+            ]);
+        }
+
         $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
 
         $categories = Category::select('id', 'name')->get();

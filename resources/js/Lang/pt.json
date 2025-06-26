@@ -167,8 +167,8 @@
         "date-down": "Mais antigos",
         "surface-up": "Maior área de superfície",
         "surface-down": "Menor área de superfície",
-        "results": "imóveis em",
-        "results-1": "imóvel em"
+        "results": "resultados",
+        "results-1": "resultado"
     },
 
     "services": {
@@ -188,9 +188,10 @@
 
     "noresults": {
         "title": "Não encontramos o imóvel perfeito para ti!",
-        "count": "imóveis encontrados na pesquisa em:",
+        "count-query": "imóveis encontrados na pesquisa em:",
         "search": "Por favor tente uma nova pesquisa",
-        "button": "Nova pesquisa"
+        "button": "Nova pesquisa",
+        "count": "imóveis encontrados"
     },
 
     "last-properties": {
@@ -511,8 +512,9 @@
     },
 
     "favorites": {
-        "title": "Favoritos",
-        "my": "Meus favoritos"
+        "title": "Meus Favoritos",
+        "my": "Meus favoritos",
+        "text": "Sua seleção de imóveis favoritos está vazia. Pesquise facilmente e guarde os seus imóveis favoritos para encontrá-los aqui com mais facilidade"
     },
 
     "calendar": {

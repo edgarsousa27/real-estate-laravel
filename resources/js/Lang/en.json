@@ -168,8 +168,8 @@
         "date-down": "Oldest",
         "surface-up": "Larger surface area",
         "surface-down": "Smaller surface area",
-        "results": "properties in ",
-        "results-1": "property in "
+        "results": "results ",
+        "results-1": "result "
     },
 
     "services": {
@@ -513,8 +513,9 @@
     },
 
     "favorites": {
-        "title": "Favorites",
-        "my": "My favorites"
+        "title": "My Favorites",
+        "my": "My favorites",
+        "text": "Your selection of favorite properties is empty. Easily search and save your favorite properties to find them here more easily"
     },
 
     "calendar": {

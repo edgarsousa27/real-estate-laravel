@@ -12,10 +12,7 @@
             <div
                 class="px-2 max-w-6xl max-h-5xl mx-auto flex justify-left items-center gap-3"
             >
-                <Count
-                    :count="props.count"
-                    class="text-lg font-bold text-blue-500"
-                />
+                <Count :count="props.count" class="text-lg font-bold" />
                 <Sort />
             </div>
 

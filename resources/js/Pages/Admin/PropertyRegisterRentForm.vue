@@ -26,7 +26,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <DetailItem
                         :label="t('purchase-form.property')"
-                        :value="property.title"
+                        :value="$t(property.title, property.title_params)"
                     />
                     <DetailItem
                         :label="t('purchase-form.address')"

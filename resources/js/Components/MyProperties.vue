@@ -126,7 +126,11 @@
                                         class="absolute mt-2 w-36 bg-white border rounded-md shadow-lg z-40"
                                     >
                                         <ul class="py-1 text-sm text-gray-700">
-                                            <li>
+                                            <li
+                                                v-if="
+                                                    proper.status !== 'active'
+                                                "
+                                            >
                                                 <button
                                                     @click="
                                                         openUpdateModal(proper)

@@ -7,14 +7,26 @@
             <h1
                 class="mb-6 text-2xl font-bold text-gray-900 sm:text-4xl lg:mb-8 lg:text-center text-center sm:text-center"
             >
-                {{ t("favorites.title") }}
+                {{ t("favorites.title") }} ({{ props.favorites.length }})
+            </h1>
+            <p class="text-gray-500 text-center" v-if="!props.favorites.length">
+                {{ t("favorites.text") }}
+            </p>
+            <h1
+                v-if="props.favorites.length"
+                class="px-4 sm:px-4 lg:px-4 max-w-6xl max-h-6xl mx-auto text-xl"
+            >
+                {{ t("properties.page") }}
             </h1>
             <Properties
                 :properties="props.properties.data"
                 :categories="props.categories"
                 :favorites="props.favorites"
             />
-            <Pagination :links="props.properties.links" />
+            <Pagination
+                v-if="props.favorites.length"
+                :links="props.properties.links"
+            />
         </div>
     </AuthenticatedLayout>
 </template>

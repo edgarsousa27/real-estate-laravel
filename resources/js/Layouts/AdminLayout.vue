@@ -136,7 +136,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import NavLink from "@/Components/NavLink.vue";
 import ChangeLanguage from "@/Components/ChangeLanguage.vue";
@@ -147,10 +147,6 @@ const isSidebarOpen = ref(false);
 defineProps({
     title: String,
 });
-
-const logout = () => {
-    console.log("Logging out...");
-};
 </script>
 
 <style scoped>

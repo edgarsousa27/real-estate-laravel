@@ -10,13 +10,16 @@
                         <h1
                             class="text-xl sm:text-2xl md:text-3xl text-center mb-3 text-gray-800"
                         >
-                            <div class="text-8xl mb-5">🥲</div>
+                            <div class="text-9xl mb-5">🥲</div>
                             {{ t("noresults.title") }}
                         </h1>
-                        <p class="text-center text-lg text-gray-900 mb-3">
+                        <p
+                            v-if="count == 0"
+                            class="text-center text-lg text-gray-900 mb-3"
+                        >
                             {{ count }} {{ t("noresults.count") }}
-                            <span class="font-semibold">{{ query }}</span>
                         </p>
+
                         <p class="text-center text-lg text-gray-600">
                             {{ t("noresults.search") }}
                         </p>
