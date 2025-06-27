@@ -24,7 +24,8 @@
                     </h1>
                 </a>
             </div>
-            <nav class="mt-4">
+            <!--admin-->
+            <nav class="mt-4" v-if="$page.props.auth.roles.includes('admin')">
                 <NavLink
                     :href="route('admin.dashboard')"
                     :active="$page.url === '/admin/dashboard'"
@@ -94,6 +95,58 @@
                     }}</span>
                 </NavLink>
             </nav>
+
+            <!--user-->
+            <nav class="mt-4" v-if="$page.props.auth.roles.includes('user')">
+                <NavLink
+                    :href="route('dashboard')"
+                    :active="$page.url === '/dashboard'"
+                >
+                    <font-awesome-icon
+                        icon="gauge-high"
+                        class="mr-3 text-white"
+                    />
+                    <span class="text-white">
+                        {{ t("admin-dashboard.dashboard") }}</span
+                    >
+                </NavLink>
+                <NavLink
+                    :href="route('properties.userProperties')"
+                    :active="$page.url.startsWith('properties/my-properties')"
+                >
+                    <font-awesome-icon icon="home" class="mr-3 text-white" />
+                    <span class="text-white">{{
+                        t("admin-dashboard.properties")
+                    }}</span>
+                </NavLink>
+                <NavLink
+                    :href="route('show.favorites')"
+                    :active="$page.url.startsWith('/favorites')"
+                >
+                    <font-awesome-icon icon="heart" class="mr-3 text-white" />
+                    <span class="text-white">{{
+                        t("admin-dashboard.favorites")
+                    }}</span>
+                </NavLink>
+                <NavLink
+                    :href="route('properties.create')"
+                    :active="$page.url.startsWith('/properties/list')"
+                >
+                    <font-awesome-icon icon="plus" class="mr-3 text-white" />
+                    <span class="text-white">{{
+                        t("admin-dashboard.add-properties")
+                    }}</span>
+                </NavLink>
+                <NavLink :href="route('logout')" method="post">
+                    <font-awesome-icon
+                        icon="arrow-right-from-bracket"
+                        class="mr-3 text-white"
+                    />
+                    <span class="text-white">{{
+                        t("admin-dashboard.logout")
+                    }}</span>
+                </NavLink>
+            </nav>
         </div>
 
         <!-- Main Content -->
@@ -120,7 +173,8 @@
                         </button>
                         <div class="flex items-center">
                             <span class="ml-2 text-md font-medium">{{
-                                "Olá, " + $page.props.auth.user.name
+                                t("admin-dashboard.hi") +
+                                $page.props.auth.user.name
                             }}</span>
                         </div>
                     </div>

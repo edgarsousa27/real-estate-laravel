@@ -108,12 +108,15 @@
     "authenticated": {
         "dashboard": "Dashboard",
         "profile": "Profile",
-        "properties": "Advertise a property",
-        "my-properties": "My properties",
-        "logout": "Log Out",
-        "logged": "Welcome back, ",
-        "notifications": "Notifications",
-        "favorites": "Favorites"
+        "properties": "Publish a property",
+        "my-properties": "My Properties",
+        "my-properties-text": "Manage your properties",
+        "logout": "Log out",
+        "favorites": "My Favorites",
+        "favorites-text": "Your favorite properties",
+        "welcome": "Welcome",
+        "announce": "Advertise Property",
+        "announce-text": "Want to sell or rent?"
     },
 
     "profile": {
@@ -422,7 +425,11 @@
         "rented-by": "Rented By",
         "start-contract": "Start of contract",
         "end-contract": "End of contract",
-        "logout": "Log Out"
+        "logout": "Log Out",
+
+        "favorites": "Favorites",
+        "add-properties": "Advertise properties",
+        "hi": "Hi, "
     },
 
     "purchase-form": {

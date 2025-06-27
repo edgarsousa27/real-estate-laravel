@@ -108,11 +108,16 @@
         "dashboard": "Dashboard",
         "profile": "Perfil",
         "properties": "Publicar um imóvel",
-        "my-properties": "Meus imóveis",
+        "my-properties": "Meus Imóveis",
+        "my-properties-text": "Gerencie os seus imóveis",
         "logout": "Terminar sessão",
         "logged": "Bem vindo, ",
         "notifications": "Notificações",
-        "favorites": "Favoritos"
+        "favorites": "Meus Favoritos",
+        "favorites-text": "Seus imóveis favoritos",
+        "welcome": "Bem-vindo",
+        "announce": "Anunciar Imóvel",
+        "announce-text": "Quer vender ou alugar?"
     },
 
     "profile": {
@@ -421,7 +426,11 @@
         "rented-by": "Arrendado por",
         "start-contract": "Início do contrato",
         "end-contract": "Fim do contrato",
-        "logout": "Terminar sessão"
+        "logout": "Terminar sessão",
+
+        "favorites": "Favoritos",
+        "add-properties": "Anunciar imóveis",
+        "hi": "Olá, "
     },
 
     "purchase-form": {
