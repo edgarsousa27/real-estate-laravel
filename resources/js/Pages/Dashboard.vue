@@ -10,11 +10,11 @@
             />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            <Link :href="route('properties.userProperties')">
+            <Link :href="route('properties.create')">
                 <StatCard
                     :title="t('authenticated.announce-text')"
                     :value="t('authenticated.announce')"
-                    icon="home"
+                    icon="house-circle-check"
                     icon-bg-color="bg-green-500"
                 />
             </Link>
@@ -22,7 +22,7 @@
                 <StatCard
                     :title="t('authenticated.my-properties-text')"
                     :value="t('authenticated.my-properties')"
-                    icon="home"
+                    icon="house-user"
                 />
             </Link>
             <Link :href="route('store.favorites')">

@@ -324,24 +324,6 @@
         "send": "Send"
     },
 
-    "notifications-page": {
-        "notifications": "Notifications",
-        "property": "Property",
-        "name": "Name",
-        "lastname": "Lastname",
-        "email": "Email",
-        "phone": "Phone",
-        "message": "Message",
-        "message-receive": "message received",
-        "messages-receive": "messages received",
-        "reply": "Reply message",
-        "contacts": "Contacts",
-        "client-message": "Client message",
-        "reply-message": "Reply",
-        "send": "Send",
-        "cancel": "Cancel"
-    },
-
     "admin-dashboard": {
         "realestate": "Real Estate",
         "dashboard": "Dashboard",
@@ -522,7 +504,8 @@
     "favorites": {
         "title": "My Favorites",
         "my": "My favorites",
-        "text": "Your selection of favorite properties is empty. Easily search and save your favorite properties to find them here more easily"
+        "text": "Your selection of favorite properties is empty",
+        "text2": "Easily search and save your favorite properties to find them here more easily"
     },
 
     "calendar": {
@@ -640,5 +623,10 @@
             "update-calendar": "An error occurred when updating the event",
             "delete-calendar": "An error occurred when deleting the event"
         }
+    },
+
+    "myproperties": {
+        "text": "You haven't advertised any properties yet.",
+        "text2": "Click on the “Advertise Property” button to start promoting your properties and attracting interested parties easily."
     }
 }

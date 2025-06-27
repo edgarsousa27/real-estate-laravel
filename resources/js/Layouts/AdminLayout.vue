@@ -111,8 +111,17 @@
                     >
                 </NavLink>
                 <NavLink
+                    :href="route('properties.create')"
+                    :active="$page.url.startsWith('/properties/list')"
+                >
+                    <font-awesome-icon icon="plus" class="mr-3 text-white" />
+                    <span class="text-white">{{
+                        t("admin-dashboard.add-properties")
+                    }}</span>
+                </NavLink>
+                <NavLink
                     :href="route('properties.userProperties')"
-                    :active="$page.url.startsWith('properties/my-properties')"
+                    :active="$page.url.startsWith('/dashboard/my-properties')"
                 >
                     <font-awesome-icon icon="home" class="mr-3 text-white" />
                     <span class="text-white">{{
@@ -128,15 +137,7 @@
                         t("admin-dashboard.favorites")
                     }}</span>
                 </NavLink>
-                <NavLink
-                    :href="route('properties.create')"
-                    :active="$page.url.startsWith('/properties/list')"
-                >
-                    <font-awesome-icon icon="plus" class="mr-3 text-white" />
-                    <span class="text-white">{{
-                        t("admin-dashboard.add-properties")
-                    }}</span>
-                </NavLink>
+
                 <NavLink :href="route('logout')" method="post">
                     <font-awesome-icon
                         icon="arrow-right-from-bracket"

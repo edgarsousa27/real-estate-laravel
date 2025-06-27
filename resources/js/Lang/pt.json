@@ -325,24 +325,6 @@
         "send": "Enviar"
     },
 
-    "notifications-page": {
-        "notifications": "Notificações",
-        "property": "Imóveis",
-        "name": "Nome",
-        "lastname": "Sobrenome",
-        "email": "Email",
-        "phone": "Telemóvel",
-        "message": "Mensagem",
-        "message-receive": "mensagem recebida",
-        "messages-receive": "mensagens recebidas",
-        "reply": "Responder mensagem",
-        "contacts": "Contactos",
-        "client-message": "Mensagem do cliente",
-        "reply-message": "Responder",
-        "send": "Enviar",
-        "cancel": "Cancelar"
-    },
-
     "admin-dashboard": {
         "realestate": "Real Estate",
         "dashboard": "Dashboard",
@@ -427,7 +409,6 @@
         "start-contract": "Início do contrato",
         "end-contract": "Fim do contrato",
         "logout": "Terminar sessão",
-
         "favorites": "Favoritos",
         "add-properties": "Anunciar imóveis",
         "hi": "Olá, "
@@ -523,7 +504,8 @@
     "favorites": {
         "title": "Meus Favoritos",
         "my": "Meus favoritos",
-        "text": "Sua seleção de imóveis favoritos está vazia. Pesquise facilmente e guarde os seus imóveis favoritos para encontrá-los aqui com mais facilidade"
+        "text": "Sua seleção de imóveis favoritos está vazia",
+        "text2": "Pesquise facilmente e guarde os seus imóveis favoritos para encontrá-los aqui com mais facilidade"
     },
 
     "calendar": {
@@ -641,5 +623,10 @@
             "update-calendar": "Ocorreu um erro ao atualizar o evento",
             "delete-calendar": "Ocorreu um erro ao eliminar o evento"
         }
+    },
+
+    "myproperties": {
+        "text": "Você ainda não anunciou nenhum imóvel.",
+        "text2": "Clique no botão “Anunciar Imóvel” para começar a divulgar os seus imóveis e atrair interessados facilmente."
     }
 }
