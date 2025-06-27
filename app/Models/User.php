@@ -30,6 +30,7 @@ class User extends Authenticatable
         'phone_number',
         'date_of_birth',
         'password',
+        'last_login_at'
     ];
 
     /**

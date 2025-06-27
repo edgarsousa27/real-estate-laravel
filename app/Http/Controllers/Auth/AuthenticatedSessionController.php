@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,11 +37,15 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if($user->hasRole('user')){
+        $user->last_login_at = Carbon::now();
+
+        $user->save();
+
+        if ($user->hasRole('user')) {
             return redirect()->intended(route('dashboard', absolute: false));
         };
 
-        if($user->hasRole('admin')){
+        if ($user->hasRole('admin')) {
             return redirect()->intended(route('admin.dashboard', absolute: false));
         }
     }
