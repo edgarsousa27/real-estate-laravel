@@ -64,7 +64,9 @@ class Property extends Model implements HasMedia
         'energy_consumption',
         'gas_emission',
         'final_price',
-        'title_params'
+        'title_params',
+        'latitude',
+        'longitude'
     ];
 
     protected $casts = [

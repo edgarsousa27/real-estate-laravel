@@ -233,6 +233,8 @@
                     </div>
                 </div>
             </div>
+
+            <Map :properties="props.properties" />
         </div>
     </DefaultLayout>
 </template>
@@ -246,6 +248,7 @@ import OutdoorHighlights from "./Partials/OutdoorHighlights.vue";
 import ContactForm from "@/Components/ContactForm.vue";
 import EnergyBalance from "./Partials/EnergyBalance.vue";
 import CreditSimulator from "@/Components/CreditSimulator.vue";
+import Map from "@/Components/Map.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
