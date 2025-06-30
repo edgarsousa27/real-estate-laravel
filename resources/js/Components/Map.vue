@@ -39,6 +39,8 @@ const long = computed(() => {
 const initializeMap = async () => {
     await nextTick();
 
+    const key = import.meta.env.VITE_MAPTILER_API_KEY;
+
     try {
         map = L.map(mapContainer.value, {
             center: [lat.value, long.value],
@@ -46,11 +48,17 @@ const initializeMap = async () => {
             scrollWheelZoom: true,
         });
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxZoom: 19,
-        }).addTo(map);
+        L.tileLayer(
+            `https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=${key}`,
+            {
+                tileSize: 512,
+                zoomOffset: -1,
+                minZoom: 1,
+                attribution:
+                    ' \u003ca href="https://www.openstreetmap.org/copyright" target="_blank"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e',
+                crossOrigin: true,
+            }
+        ).addTo(map);
 
         L.circle([lat.value, long.value], {
             color: "#77c648",

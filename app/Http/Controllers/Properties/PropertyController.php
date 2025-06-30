@@ -14,6 +14,7 @@ use App\Filters\TypePropertyFilter;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Favorites;
+use App\Services\OpenCageService;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
 use Illuminate\Support\Facades\Auth;
@@ -219,7 +220,7 @@ class PropertyController extends Controller
     /**<
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, OpenCageService $geo)
     {
         $bedrooms = $request->bedrooms;
         $square_meters = $request->square_meters;
@@ -255,7 +256,7 @@ class PropertyController extends Controller
             'transaction_id' => ['required', 'integer'],
             'title' => ['required'],
             'description' => ['required'],
-            'address' => ['required'],
+            'address' => ['required', 'string', 'max:255'],
             'price' => ['required', 'integer'],
             'square_meters' => ['required', 'numeric'],
             'city' => ['required'],
@@ -295,10 +296,17 @@ class PropertyController extends Controller
             'electricity' => ['boolean'],
             'energy_consumption' => ['integer', 'nullable'],
             'gas_emission' => ['integer', 'nullable'],
-            'title_params' => ['required']
+            'title_params' => ['required'],
         ]);
 
-        $properties = Auth::user()->property()->create($validator);
+        $coords = $geo->forwardGeoLocation($request->input('address'));
+
+        $data = $validator;
+
+        $data['latitude'] = $coords['latitude'];
+        $data['longitude'] = $coords['longitude'];
+
+        $properties = Auth::user()->property()->create($data);
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as  $image) {

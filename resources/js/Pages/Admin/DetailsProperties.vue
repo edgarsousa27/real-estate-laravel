@@ -325,6 +325,8 @@
                             props.property.category_id === 1 ||
                             props.property.category_id === 2
                         "/>
+
+                    <Map :properties="props.property" />
                 </div>
 
                 <!-- User Info and Sidebar -->
@@ -901,6 +903,7 @@ import InputModal from "@/Components/InputModal.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import EnergyBalance from "../Properties/Partials/EnergyBalance.vue";
+import Map from "@/Components/Map.vue"
 import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
@@ -908,7 +911,6 @@ import { useI18n } from "vue-i18n";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
-import { faTachometerFast } from "@fortawesome/free-solid-svg-icons";
 
 const { locale, t } = useI18n();
 const toast = useToast();
