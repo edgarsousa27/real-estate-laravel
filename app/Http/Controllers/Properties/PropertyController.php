@@ -62,7 +62,7 @@ class PropertyController extends Controller
     }
 
 
-    public function searchBuy(Request $request)
+    public function searchBuy(Request $request, Property $properties)
     {
         $query = $request->input('query');
         $sort = $request->input('sort');
@@ -105,7 +105,7 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function searchRent(Request $request)
+    public function searchRent(Request $request, Property $properties)
     {
         $query = $request->input('query');
         $sort = $request->input('sort');
