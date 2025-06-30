@@ -160,7 +160,7 @@ class PropertyController extends Controller
             ])
             ->allowedSorts([
                 AllowedSort::custom('price', new SortbyPrice(), 'price'),
-                AllowedSort::custom('date', new SortByDate(), 'created_at'),
+                AllowedSort::custom('created_at', new SortByDate(), 'created_at'),
                 AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
             ])
             ->with('media');
