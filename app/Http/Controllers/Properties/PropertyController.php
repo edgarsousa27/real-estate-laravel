@@ -366,20 +366,41 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show($slug, Property $property)
+    public function show($slug)
     {
-        $properties = $property->with('user')->where('slug', $slug)->firstOrFail();
+        $property = Property::with('user')->where('slug', $slug)->firstOrFail();
 
-        $properties->load(['media' => function ($query) {
+        $property->load(['media' => function ($query) {
             $query->where('collection_name', 'images');
         }]);
 
         $favorites = Auth::check() ? Favorites::where('user_id', Auth::user()->id)->pluck('property_id') : collect();
 
+        $propertyCurrentPrice = $property->price;
+        $propertyPriceRange = $propertyCurrentPrice * 0.3;
+
+        $propertyMinPrice = $propertyCurrentPrice - $propertyPriceRange;
+        $propertyMaxPrice = $propertyCurrentPrice + $propertyPriceRange;
+
+
+        $similarProperties = Property::where('category_id', $property->category->id)
+            ->where('transaction_id',  $property->transaction->id)
+            ->where('id', '!=', $property->id)
+            ->where('district', $property->district)
+            ->where('status', 'active')
+            ->whereBetween('price', [$propertyMinPrice, $propertyMaxPrice])
+            ->take(9)
+            ->get();
+
+        $similarProperties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
+
         return Inertia::render('Properties/Show', [
-            'properties' => $properties,
+            'properties' => $property,
             'authUser' => Auth::id(),
-            'favorites' => $favorites
+            'favorites' => $favorites,
+            'similarProperties' => $similarProperties
         ]);
     }
 

@@ -1,12 +1,12 @@
 <template>
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
         <hr class="my-8" />
         <h1 class="text-xl font-semibold mb-4 mt-4">
             {{ t("details-page.map") }}
         </h1>
         <div
             ref="mapContainer"
-            class="h-[400px] max-w-6xl mx-auto rounded-xl bg-gray-200 border-2 border-gray-300"
+            class="h-[400px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-xl bg-gray-200 border-2 border-gray-300"
         ></div>
     </div>
 </template>

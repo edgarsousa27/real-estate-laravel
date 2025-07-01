@@ -235,6 +235,24 @@
             </div>
 
             <Map :properties="props.properties" />
+            e
+            <div
+                class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+                v-if="props.similarProperties.length > 0"
+            >
+                <div class="mt-10 text-center text-2xl text-gray-900 mb-12">
+                    <span class="font-bold">{{
+                        t("details-page.other-properties")
+                    }}</span>
+                    {{ t("details-page.other-properties2") }}
+                </div>
+                <Properties
+                    :images="props.properties.media"
+                    :properties="props.similarProperties"
+                    :categories="props.categories"
+                    :favorites="props.favorites"
+                />
+            </div>
         </div>
     </DefaultLayout>
 </template>
@@ -249,16 +267,16 @@ import ContactForm from "@/Components/ContactForm.vue";
 import EnergyBalance from "./Partials/EnergyBalance.vue";
 import CreditSimulator from "@/Components/CreditSimulator.vue";
 import Map from "@/Components/Map.vue";
+import Properties from "@/Components/Properties.vue";
 import { Head } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const props = defineProps({
     properties: Object,
-    media: Array,
-    contact: Object,
     authUser: Number,
     favorites: Array,
+    similarProperties: Array,
 });
 
 const formatPrice = (price) => {

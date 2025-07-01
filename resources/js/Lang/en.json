@@ -310,7 +310,9 @@
         "energy-balance": "Energy Balance",
         "energy-consumption": "Energy Consumption",
         "gas-emission": "Gas emission",
-        "map": "Map"
+        "map": "Map",
+        "other-properties": "Other similar",
+        "other-properties2": "properties"
     },
 
     "contact-form": {
