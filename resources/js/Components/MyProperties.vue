@@ -23,6 +23,8 @@
                                             proper.status === 'rented',
                                         'bg-red-100 text-red-800':
                                             proper.status === 'refused',
+                                        'bg-emerald-300 text-emerald-800':
+                                            proper.status === 'sold',
                                     }"
                                 >
                                     {{ t(`admin-dashboard.${proper.status}`) }}

@@ -1,83 +1,264 @@
 <template>
-    <div class="max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-md">
+    <div
+        class="max-w-5xl mx-auto p-4 sm:p-6 md:p-10 bg-white rounded-2xl shadow-md"
+    >
         <div v-if="form.category_id === 1 || form.category_id === 2">
-            <h1 class="text-lg sm:text-xl text-center mb-4">
-                {{ t("properties-form.features") }}
-            </h1>
-
-            <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-            >
-                <div class="space-y-2">
-                    <InputLabel
-                        for="bathrooms"
-                        :value="t('properties-form.bathrooms')"
-                    />
-                    <TextInput
-                        type="number"
-                        id="bathrooms"
-                        v-model="form.bathrooms"
-                        @input="fieldUpdated('bathrooms')"
-                        class="w-full"
-                    />
-                    <InputError :message="form.errors.bathrooms" class="mt-1" />
-                </div>
-
-                <div class="space-y-2">
-                    <InputLabel
-                        for="bedrooms"
-                        :value="t('properties-form.bedrooms')"
-                    />
-                    <TextInput
-                        type="number"
-                        id="bedrooms"
-                        v-model="form.bedrooms"
-                        @input="fieldUpdated('bedrooms')"
-                        class="w-full"
-                    />
+            <!-- Bedrooms Section -->
+            <div class="mt-3 mb-6 sm:mb-10">
+                <h1 class="font-bold text-sm sm:text-base">Quantos quartos?</h1>
+                <div class="mt-3 sm:mt-5">
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <div>
+                            <input
+                                type="radio"
+                                :value="1"
+                                id="bedroom-1"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-1"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                1
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="2"
+                                id="bedroom-2"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-2"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                2
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="3"
+                                id="bedroom-3"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-3"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                3
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="4"
+                                id="bedroom-4"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-4"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                4
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="5"
+                                id="bedroom-5"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-5"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                5
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="6"
+                                id="bedroom-6"
+                                v-model="form.bedrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bedroom-6"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                6
+                            </label>
+                        </div>
+                        <div class="w-full sm:w-auto mt-2 sm:mt-0">
+                            <span
+                                class="text-sm sm:text-base cursor-pointer text-blue-500 hover:text-blue-700"
+                                @click="openInputBedrooms = !openInputBedrooms"
+                            >
+                                Personalizado
+                            </span>
+                        </div>
+                    </div>
+                    <div v-if="openInputBedrooms" class="mt-3 sm:mt-5">
+                        <InputLabel value="Quantos quartos?" />
+                        <TextInput
+                            type="text"
+                            v-model="form.bedrooms"
+                            class="w-full sm:w-1/2"
+                        />
+                    </div>
                     <InputError :message="form.errors.bedrooms" class="mt-1" />
                 </div>
+            </div>
 
-                <div class="space-y-2">
-                    <InputLabel
-                        for="parking-spaces"
-                        :value="t('properties-form.parking-spaces')"
-                    />
-                    <TextInput
-                        type="number"
-                        id="parking_spaces"
-                        v-model="form.parking_spaces"
-                        class="w-full"
-                    />
-                    <InputError
-                        :message="form.errors.parking_spaces"
-                        class="mt-1"
-                    />
-                </div>
-
-                <div class="sm:col-span-2 lg:col-span-3 space-y-2">
-                    <HighLightsForm :form="props.form" />
+            <!-- Bathrooms Section -->
+            <div class="mt-3 mb-6 sm:mb-10">
+                <h1 class="font-bold text-sm sm:text-base">
+                    Quantas casas de banho?
+                </h1>
+                <div class="mt-3 sm:mt-5">
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <div>
+                            <input
+                                type="radio"
+                                :value="1"
+                                id="bath-1"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-1"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                1
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="2"
+                                id="bath-2"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-2"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                2
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="3"
+                                id="bath-3"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-3"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                3
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="4"
+                                id="bath-4"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-4"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                4
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="5"
+                                id="bath-5"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-5"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                5
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                :value="6"
+                                id="bath-6"
+                                v-model="form.bathrooms"
+                                class="hidden peer"
+                            />
+                            <label
+                                for="bath-6"
+                                class="inline-block px-3 sm:px-5 py-1 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg cursor-pointer peer-checked:bg-blue-500 peer-checked:text-white"
+                            >
+                                6
+                            </label>
+                        </div>
+                        <div class="w-full sm:w-auto mt-2 sm:mt-0">
+                            <span
+                                class="text-sm sm:text-base cursor-pointer text-blue-500 hover:text-blue-700"
+                                @click="
+                                    openInputBathrooms = !openInputBathrooms
+                                "
+                            >
+                                Personalizado
+                            </span>
+                        </div>
+                    </div>
+                    <div v-if="openInputBathrooms" class="mt-3 sm:mt-5">
+                        <InputLabel value="Quantas casas de banho?" />
+                        <TextInput
+                            type="text"
+                            v-model="form.bathrooms"
+                            class="w-full sm:w-1/2"
+                        />
+                    </div>
+                    <InputError :message="form.errors.bedrooms" class="mt-1" />
                 </div>
             </div>
         </div>
-        <div v-if="form.category_id === 3">
-            <h1 class="text-lg sm:text-xl text-center mb-4">
-                {{ t("properties-form.features") }}
-            </h1>
 
-            <div class="sm:col-span-2 lg:col-span-3 space-y-2">
-                <HighLightsForm :form="props.form" />
-            </div>
+        <div class="sm:col-span-2 lg:col-span-3 space-y-2">
+            <h1 class="font-bold text-sm sm:text-base">Quais equipamentos?</h1>
+            <HighLightsForm :form="props.form" />
+        </div>
+    </div>
+    <div v-if="form.category_id === 3">
+        <div class="sm:col-span-2 lg:col-span-3 space-y-2">
+            <HighLightsForm :form="props.form" />
         </div>
     </div>
 </template>
 
 <script setup>
 import { useI18n } from "vue-i18n";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import HighLightsForm from "./HighLightsForm.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { ref } from "vue";
 
 const { t } = useI18n();
 
@@ -93,4 +274,7 @@ const emit = defineEmits(["field-updated"]);
 const fieldUpdated = (fieldName) => {
     emit("field-updated", fieldName);
 };
+
+const openInputBedrooms = ref(false);
+const openInputBathrooms = ref(false);
 </script>

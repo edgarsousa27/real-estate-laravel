@@ -389,7 +389,7 @@ class PropertyController extends Controller
             ->where('district', $property->district)
             ->where('status', 'active')
             ->whereBetween('price', [$propertyMinPrice, $propertyMaxPrice])
-            ->take(9)
+            ->take(3)
             ->get();
 
         $similarProperties->load(['media' => function ($query) {

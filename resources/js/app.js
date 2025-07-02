@@ -79,6 +79,10 @@ import {
     faCircleInfo,
     faArrowRightFromBracket,
     faHandsClapping,
+    faShieldHalved,
+    faKitchenSet,
+    faHouseChimney,
+    faArrowRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -157,7 +161,11 @@ library.add(
     faUser,
     faCircleInfo,
     faArrowRightFromBracket,
-    faHandsClapping
+    faHandsClapping,
+    faShieldHalved,
+    faKitchenSet,
+    faHouseChimney,
+    faArrowRotateLeft
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";
