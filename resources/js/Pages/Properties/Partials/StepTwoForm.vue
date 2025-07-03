@@ -4,8 +4,11 @@
     >
         <div v-if="form.category_id === 1 || form.category_id === 2">
             <!-- Bedrooms Section -->
-            <div class="mt-3 mb-6 sm:mb-10">
-                <h1 class="font-bold text-sm sm:text-base">Quantos quartos?</h1>
+            <div class="mt-6 sm:mt-10 space-y-2">
+                <h1 class="font-bold text-sm sm:text-base">
+                    {{ t("properties-form.bedrooms") }}
+                </h1>
+
                 <div class="mt-3 sm:mt-5">
                     <div class="flex flex-wrap gap-2 sm:gap-3">
                         <div>
@@ -103,7 +106,7 @@
                                 class="text-sm sm:text-base cursor-pointer text-blue-500 hover:text-blue-700"
                                 @click="openInputBedrooms = !openInputBedrooms"
                             >
-                                Personalizado
+                                {{ t("properties-form.custom") }}
                             </span>
                         </div>
                     </div>
@@ -120,9 +123,9 @@
             </div>
 
             <!-- Bathrooms Section -->
-            <div class="mt-3 mb-6 sm:mb-10">
+            <div class="mt-6 sm:mt-10 space-y-2">
                 <h1 class="font-bold text-sm sm:text-base">
-                    Quantas casas de banho?
+                    {{ t("properties-form.bathrooms") }}
                 </h1>
                 <div class="mt-3 sm:mt-5">
                     <div class="flex flex-wrap gap-2 sm:gap-3">
@@ -223,7 +226,7 @@
                                     openInputBathrooms = !openInputBathrooms
                                 "
                             >
-                                Personalizado
+                                {{ t("properties-form.custom") }}
                             </span>
                         </div>
                     </div>
@@ -241,13 +244,15 @@
         </div>
 
         <div class="mt-6 sm:mt-10 space-y-2">
-            <h1 class="font-bold text-sm sm:text-base">Quais equipamentos?</h1>
+            <h1 class="font-bold text-sm sm:text-base">
+                {{ t("properties-form.features") }}
+            </h1>
             <HighLightsForm :form="props.form" />
         </div>
 
         <div class="mt-6 sm:mt-10 space-y-2">
             <h1 class="font-bold text-sm sm:text-base">
-                Qual a eficiencia energética do imóvel?
+                {{ t("properties-form.energy") }}
             </h1>
             <div class="mt-3 sm:mt-5">
                 <div class="flex flex-wrap gap-2 sm:gap-3">

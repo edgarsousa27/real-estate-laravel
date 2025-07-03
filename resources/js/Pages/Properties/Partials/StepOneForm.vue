@@ -10,14 +10,16 @@
                 >
                     <span class="mr-2"
                         ><font-awesome-icon icon="arrow-rotate-left" /></span
-                    >Reiniciar
+                    >{{ t("properties-form.reset") }}
                 </h1>
             </div>
         </div>
 
         <!-- Transaction Type -->
         <div class="mt-3 space-y-2">
-            <h1 class="text-md font-bold">Você quer?</h1>
+            <h1 class="text-md font-bold">
+                {{ t("properties-form.transaction") }}
+            </h1>
             <div class="flex flex-wrap items-center gap-4">
                 <label class="inline-flex items-center gap-2 cursor-pointer">
                     <input
@@ -41,7 +43,7 @@
             <InputError :message="form.errors.transaction_id" />
         </div>
         <div class="mt-6 md:mt-8 space-y-2">
-            <h1 class="text-md font-bold">Tipo de imóvel?</h1>
+            <h1 class="text-md font-bold">{{ t("properties-form.type") }}</h1>
             <div class="flex flex-wrap items-center gap-4">
                 <label class="inline-flex items-center gap-2 cursor-pointer">
                     <input
@@ -89,14 +91,16 @@
                     <span
                         class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
                     >
-                        € / por mês
+                        € / {{ t("properties.per-month") }}
                     </span>
                 </div>
                 <InputError :message="form.errors.price" />
             </div>
 
             <div v-if="form.transaction_id === 1" class="space-y-2">
-                <h1 class="text-md font-bold">Qual o valor do imóvel?</h1>
+                <h1 class="text-md font-bold">
+                    {{ t("properties-form.price-sell") }}
+                </h1>
                 <div class="relative">
                     <TextInput
                         type="number"
@@ -118,7 +122,9 @@
                 v-if="form.transaction_id === 1 || form.transaction_id === 2"
                 class="space-y-2"
             >
-                <h1 class="text-md font-bold">Qual a área de superfície?</h1>
+                <h1 class="text-md font-bold">
+                    {{ t("properties-form.surface") }}
+                </h1>
                 <div class="relative">
                     <TextInput
                         type="number"
@@ -141,7 +147,9 @@
             class="mt-6 md:mt-8 space-y-2"
             v-if="form.transaction_id === 1 || form.transaction_id === 2"
         >
-            <h1 class="text-md font-bold">Qual a morada do imóvel?</h1>
+            <h1 class="text-md font-bold">
+                {{ t("properties-form.address") }}
+            </h1>
             <TextInput
                 type="text"
                 id="address"
@@ -156,7 +164,7 @@
             v-if="form.transaction_id === 1 || form.transaction_id === 2"
         >
             <h1 class="text-md font-bold">
-                Qual distrito está localizado o imóvel?
+                {{ t("properties-form.district") }}
             </h1>
             <select
                 id="district"
@@ -174,7 +182,7 @@
 
         <div class="mt-6 md:mt-8 space-y-2" v-if="form.district">
             <h1 class="text-md font-bold">
-                Qual cidade está localizado o imóvel no distrito selecionado?
+                {{ t("properties-form.city") }}
             </h1>
             <select
                 id="district"
@@ -195,7 +203,7 @@
             <InputError :message="form.errors.city" class="mt-2" />
         </div>
 
-        <div v-if="form.city" class="mt-4 mb-4">
+        <div v-if="form.city" class="mt-6 md:mt-8 space-y-2">
             <h1 class="text-md font-bold">
                 {{ t("properties-form.postalcode") }}
             </h1>
