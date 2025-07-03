@@ -54,9 +54,6 @@ const { t } = useI18n();
 
 const props = defineProps({
     form: Object,
-    district: Array,
-    cities: Object,
-    postal_code: Object,
 });
 
 const handleImageChange = (e) => {

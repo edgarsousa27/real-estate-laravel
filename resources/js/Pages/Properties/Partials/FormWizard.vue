@@ -20,14 +20,12 @@
             />
         </div>
 
+        <div v-if="step === 2 && form.category_id === 3">
+            <StepThirdForm :form="form" @field-updated="clearError" />
+        </div>
+
         <div v-if="step === 3">
-            <StepThirdForm
-                :form="form"
-                :district="props.district"
-                :cities="props.cities"
-                :postal_code="props.postal_code"
-                @field-updated="clearError"
-            />
+            <StepThirdForm :form="form" @field-updated="clearError" />
         </div>
 
         <div class="flex justify-center mt-4 space-x-4">
@@ -155,13 +153,6 @@ const validateSecondStep = () => {
     return Object.keys(form.errors).length === 0;
 };
 
-const validateThirdStep = () => {
-    if (!form.images) form.setError("images", t("form-errors.images"));
-    if (!form.documents) form.setError("documents", t("form-errors.documents"));
-
-    return Object.keys(form.errors).length === 0;
-};
-
 const clearError = (fieldName) => {
     if (form.errors[fieldName]) {
         form.clearErrors(fieldName);
@@ -171,7 +162,6 @@ const clearError = (fieldName) => {
 const nextStep = () => {
     if (step.value === 1 && !validateStepOne()) return;
     if (step.value === 2 && !validateSecondStep()) return;
-    if (step.value === 3 && !validateThirdStep()) return;
 
     if (step.value < totalSteps) {
         step.value++;
