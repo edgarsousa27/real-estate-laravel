@@ -1,114 +1,34 @@
 <template>
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <div>
-            <div v-if="form.category_id === 1 || form.category_id === 2">
+            <div class="mt-3">
                 <h1 class="text-xl text-center">
-                    Consumo de Energia e Emissão de gás
+                    {{ t("properties-form.files-upload") }}
                 </h1>
-                <div class="mt-3">
-                    <InputLabel for="name" value="Consumo de energia" />
-                    <TextInput
-                        type="number"
-                        v-model="form.energy_consumption"
-                    />
-                </div>
-                <div class="mt-3">
-                    <InputLabel for="name" value="Emissão de gás" />
-                    <TextInput type="number" v-model="form.gas_emission" />
-                </div>
-            </div>
-            <h1 class="text-xl text-center">
-                {{ t("properties-form.localization") }}
-            </h1>
-            <div class="mt-3">
-                <InputLabel
-                    for="address"
-                    :value="t('properties-form.address')"
+                <InputLabel for="upload" :value="t('properties-form.image')" />
+                <input
+                    type="file"
+                    @change="handleImageChange"
+                    multiple
+                    name="images[]"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
-                <TextInput
-                    type="text"
-                    id="address"
-                    v-model="form.address"
-                    @input="fieldUpdated('address')"
-                />
-                <InputError :message="form.errors.address" class="mt-2" />
+                <InputError :message="form.errors.images" class="mt-2" />
             </div>
             <div class="mt-3">
                 <InputLabel
-                    for="district"
-                    :value="t('properties-form.district')"
+                    for="upload"
+                    :value="t('properties-form.documents')"
                 />
-                <select
-                    id="district"
-                    name="district"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
-                    v-model="form.district"
-                    @change="fieldUpdated('district')"
-                >
-                    <option v-for="dist in district" :key="dist" :value="dist">
-                        {{ dist }}
-                    </option>
-                </select>
-                <InputError :message="form.errors.district" class="mt-2" />
-            </div>
-            <div class="mt-3" v-if="form.district">
-                <InputLabel for="city" :value="t('properties-form.city')" />
-                <select
-                    id="district"
-                    name="district"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 pl-3 pr-10"
-                    v-if="form.district"
-                    v-model="form.city"
-                    @change="fieldUpdated('city')"
-                >
-                    <option
-                        v-for="city in cities[form.district]"
-                        :key="city"
-                        :value="city"
-                    >
-                        {{ city }}
-                    </option>
-                </select>
-                <InputError :message="form.errors.city" class="mt-2" />
-            </div>
-            <div v-if="form.city" class="mt-4 mb-4">
-                <InputLabel
-                    for="postal_code"
-                    :value="t('properties-form.postalcode')"
+                <input
+                    type="file"
+                    @change="handleDocumentChange"
+                    multiple
+                    name="documents[]"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
-                <TextInput
-                    type="text"
-                    id="postal_code"
-                    readonly
-                    class="bg-gray-100"
-                    v-model="form.postal_code"
-                />
+                <InputError :message="form.errors.documents" class="mt-2" />
             </div>
-        </div>
-        <div class="mt-3">
-            <h1 class="text-xl text-center">
-                {{ t("properties-form.files-upload") }}
-            </h1>
-            <InputLabel for="upload" :value="t('properties-form.image')" />
-            <input
-                type="file"
-                @change="handleImageChange"
-                multiple
-                name="images[]"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            />
-            <InputError :message="form.errors.images" class="mt-2" />
-        </div>
-        <div class="mt-3">
-            <InputLabel for="upload" :value="t('properties-form.documents')" />
-            <input
-                type="file"
-                @change="handleDocumentChange"
-                multiple
-                name="documents[]"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            />
-            <InputError :message="form.errors.documents" class="mt-2" />
         </div>
     </div>
 </template>

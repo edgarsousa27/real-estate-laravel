@@ -294,8 +294,7 @@ class PropertyController extends Controller
             'kitchen' => ['boolean'],
             'well_water' => ['boolean'],
             'electricity' => ['boolean'],
-            'energy_consumption' => ['integer', 'nullable'],
-            'gas_emission' => ['integer', 'nullable'],
+            'energy_consumption' => ['string', 'nullable'],
             'title_params' => ['required'],
         ]);
 

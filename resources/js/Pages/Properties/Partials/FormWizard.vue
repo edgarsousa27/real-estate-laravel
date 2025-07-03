@@ -1,7 +1,13 @@
 <template>
     <div>
         <div v-if="step === 1">
-            <StepOneForm :form="form" @field-updated="clearError" />
+            <StepOneForm
+                :form="form"
+                @field-updated="clearError"
+                :district="props.district"
+                :cities="props.cities"
+                :postal_code="props.postal_code"
+            />
         </div>
 
         <div v-if="step === 2">
@@ -114,7 +120,6 @@ const form = useForm({
     well_water: false,
     electricity: false,
     energy_consumption: null,
-    gas_emission: null,
 });
 
 const validateStepOne = () => {
@@ -129,14 +134,28 @@ const validateStepOne = () => {
         form.setError("square_meters", t("form-errors.square_meters"));
     if (!form.description)
         form.setError("description", t("form-errors.description"));
+    if (!form.address) form.setError("address", t("form-errors.address"));
+    if (!form.district) form.setError("district", t("form-errors.district"));
+    if (!form.city) form.setError("city", t("form-errors.city"));
+
+    return Object.keys(form.errors).length === 0;
+};
+
+const validateSecondStep = () => {
+    form.clearErrors();
+
+    if (!form.bathrooms) form.setError("bathrooms", t("form-errors.bathrooms"));
+    if (!form.bedrooms) form.setError("bedrooms", t("form-errors.bedrooms"));
+    if (!form.energy_consumption)
+        form.setError(
+            "energy_consumption",
+            t("form-errors.energy_consumption")
+        );
 
     return Object.keys(form.errors).length === 0;
 };
 
 const validateThirdStep = () => {
-    if (!form.address) form.setError("address", t("form-errors.address"));
-    if (!form.district) form.setError("district", t("form-errors.district"));
-    if (!form.city) form.setError("city", t("form-errors.city"));
     if (!form.images) form.setError("images", t("form-errors.images"));
     if (!form.documents) form.setError("documents", t("form-errors.documents"));
 
@@ -151,6 +170,7 @@ const clearError = (fieldName) => {
 
 const nextStep = () => {
     if (step.value === 1 && !validateStepOne()) return;
+    if (step.value === 2 && !validateSecondStep()) return;
     if (step.value === 3 && !validateThirdStep()) return;
 
     if (step.value < totalSteps) {

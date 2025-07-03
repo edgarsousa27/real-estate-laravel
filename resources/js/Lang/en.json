@@ -264,7 +264,8 @@
         "address": "Address required",
         "city": "City required",
         "district": "District required",
-        "images": "Images required"
+        "images": "Images required",
+        "energy_consumption": "Energy consumption required"
     },
 
     "details-page": {

@@ -266,7 +266,8 @@
         "address": "Morada necessária",
         "city": "Cidade necessária",
         "district": "Distrito necessário",
-        "images": "Imagens necessárias"
+        "images": "Imagens necessárias",
+        "energy_consumption": "Eficiência energética necessária"
     },
 
     "details-page": {

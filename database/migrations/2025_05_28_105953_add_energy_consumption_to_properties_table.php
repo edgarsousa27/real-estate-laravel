@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('properties', function (Blueprint $table) {
-            $table->integer('energy_consumption')->nullable();
-            $table->integer('gas_emission')->nullable();
+            $table->string('energy_consumption')->nullable();
         });
     }
 
