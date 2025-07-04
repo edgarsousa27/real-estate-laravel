@@ -153,6 +153,17 @@ const validateSecondStep = () => {
     return Object.keys(form.errors).length === 0;
 };
 
+const validateThirdStep = () => {
+    form.clearErrors();
+
+    if (form.images.length <= 0)
+        form.setError("images", t("form-errors.images"));
+    if (form.documents.length <= 0)
+        form.setError("documents", t("form-errors.documents"));
+
+    return Object.keys(form.errors).length === 0;
+};
+
 const clearError = (fieldName) => {
     if (form.errors[fieldName]) {
         form.clearErrors(fieldName);
@@ -162,7 +173,7 @@ const clearError = (fieldName) => {
 const nextStep = () => {
     if (step.value === 1 && !validateStepOne()) return;
     if (step.value === 2 && !validateSecondStep()) return;
-
+    if (step.value === 3 && !validateThirdStep()) return;
     if (step.value < totalSteps) {
         step.value++;
         form.clearErrors();

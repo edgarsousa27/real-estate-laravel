@@ -1,6 +1,21 @@
 <template>
     <div v-if="form.category_id == 1 || form.category_id == 2">
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div>
+                <Checkbox
+                    id="kitchen"
+                    :value="true"
+                    v-model:checked="form.kitchen"
+                    class="hidden peer"
+                />
+                <label
+                    for="kitchen"
+                    class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500"
+                >
+                    <font-awesome-icon icon="utensils" class="w-4 h-4 mr-2" />
+                    <span>{{ t("properties-form.kitchen") }}</span>
+                </label>
+            </div>
             <!-- Garage -->
             <div>
                 <Checkbox
@@ -412,6 +427,38 @@
                 >
                     <font-awesome-icon icon="elevator" class="w-4 h-4 mr-2" />
                     {{ t("properties-form.elevator") }}
+                </label>
+            </div>
+            <!--Electricity-->
+            <div>
+                <Checkbox
+                    id="electricity"
+                    :value="true"
+                    v-model:checked="form.electricity"
+                    class="hidden peer"
+                />
+                <label
+                    for="electricity"
+                    class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500"
+                >
+                    <font-awesome-icon icon="plug" class="w-4 h-4 mr-2" />
+                    {{ t("properties-form.electricity") }}
+                </label>
+            </div>
+            <!--Well water-->
+            <div>
+                <Checkbox
+                    id="well_water"
+                    :value="true"
+                    v-model:checked="form.well_water"
+                    class="hidden peer"
+                />
+                <label
+                    for="well_water"
+                    class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500"
+                >
+                    <font-awesome-icon icon="droplet" class="w-4 h-4 mr-2" />
+                    {{ t("properties-form.well_water") }}
                 </label>
             </div>
         </div>
