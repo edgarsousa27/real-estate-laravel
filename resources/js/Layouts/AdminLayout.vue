@@ -112,7 +112,7 @@
                 </NavLink>
                 <NavLink
                     :href="route('profile.edit')"
-                    :active="$page.url.startsWith('/profile')"
+                    :active="$page.url.startsWith('/dashboard/profile')"
                 >
                     <font-awesome-icon icon="user" class="mr-3 text-white" />
                     <span class="text-white">{{
@@ -121,7 +121,7 @@
                 </NavLink>
                 <NavLink
                     :href="route('properties.create')"
-                    :active="$page.url.startsWith('/properties/list')"
+                    :active="$page.url.startsWith('/dashboard/properties/list')"
                 >
                     <font-awesome-icon icon="plus" class="mr-3 text-white" />
                     <span class="text-white">{{
@@ -139,7 +139,7 @@
                 </NavLink>
                 <NavLink
                     :href="route('show.favorites')"
-                    :active="$page.url.startsWith('/favorites')"
+                    :active="$page.url.startsWith('/dashboard/favorites')"
                 >
                     <font-awesome-icon icon="heart" class="mr-3 text-white" />
                     <span class="text-white">{{

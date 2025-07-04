@@ -35,7 +35,7 @@
                     icon="house-user"
                 />
             </Link>
-            <Link :href="route('store.favorites')">
+            <Link :href="route('show.favorites')">
                 <StatCard
                     :title="t('authenticated.favorites-text')"
                     :value="t('authenticated.favorites')"
