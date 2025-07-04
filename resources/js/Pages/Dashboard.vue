@@ -12,6 +12,14 @@
             />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <Link :href="route('profile.edit')">
+                <StatCard
+                    :title="t('authenticated.edit-profile-text')"
+                    :value="t('authenticated.edit-profile')"
+                    icon="user"
+                    icon-bg-color="bg-blue-700"
+                />
+            </Link>
             <Link :href="route('properties.create')">
                 <StatCard
                     :title="t('authenticated.announce-text')"

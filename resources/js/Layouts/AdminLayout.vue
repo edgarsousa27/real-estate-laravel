@@ -111,6 +111,15 @@
                     >
                 </NavLink>
                 <NavLink
+                    :href="route('profile.edit')"
+                    :active="$page.url.startsWith('/profile')"
+                >
+                    <font-awesome-icon icon="user" class="mr-3 text-white" />
+                    <span class="text-white">{{
+                        t("admin-dashboard.edit-profile")
+                    }}</span>
+                </NavLink>
+                <NavLink
                     :href="route('properties.create')"
                     :active="$page.url.startsWith('/properties/list')"
                 >

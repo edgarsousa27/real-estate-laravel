@@ -1,7 +1,7 @@
 <template>
     <Head :title="t('profile.page')" />
 
-    <AuthenticatedLayout>
+    <AdminLayout :title="t('profile.page')">
         <div class="py-8 px-4 sm:px-6 lg:px-8">
             <h1
                 class="mb-6 text-2xl font-bold text-gray-900 sm:text-4xl lg:mb-8 lg:text-center text-center sm:text-center"
@@ -27,11 +27,11 @@
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AdminLayout>
 </template>
 
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import DeleteUserForm from "./Partials/DeleteUserForm.vue";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";

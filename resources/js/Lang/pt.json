@@ -115,7 +115,9 @@
         "favorites-text": "Seus imóveis favoritos",
         "welcome": "Bem-vindo",
         "announce": "Anunciar Imóvel",
-        "announce-text": "Quer vender ou alugar?"
+        "announce-text": "Quer vender ou alugar?",
+        "edit-profile": "Editar perfil",
+        "edit-profile-text": "Quer editar ou configurar o seu perfil?"
     },
 
     "profile": {
@@ -253,19 +255,19 @@
     },
 
     "form-errors": {
-        "category": "Categoria requerida",
-        "transaction": "Transação necessária",
-        "title": "Título necessário",
-        "price": "Preço requerido",
-        "square_meters": "Metros quadrados necessários",
-        "description": "Descrição necessária",
-        "bathrooms": "Pelo menos 1 casa de banho",
-        "bedrooms": "Pelo menos 1 quarto",
-        "address": "Morada necessária",
-        "city": "Cidade necessária",
-        "district": "Distrito necessário",
-        "images": "Imagens necessárias",
-        "energy_consumption": "Eficiência energética necessária"
+        "category": "Selecione pelo menos um tipo de imóvel",
+        "transaction": "Selecione pelo menos um tipo de transação",
+        "price": "O valor do imóvel é obrigatório",
+        "square_meters": "A área de superfície é obrigatória",
+        "address": "A morada do imóvel é obrigatória",
+        "district": "O distrito do imóvel é obrigatório.",
+        "city": "A cidade do imóvel é obrigatória",
+        "description": "A descrição do imóvel é obrigatória.",
+        "bathrooms": "O imóvel deve ter pelo menos uma casa de banho",
+        "bedrooms": "O imóvel deve ter pelo menos 1 quarto",
+        "images": "Selecione pelo menos uma imagem do imóvel",
+        "documents": "Selecione pelo menos um documento do imóvel",
+        "energy_consumption": "A eficiência energética é obrigatória"
     },
 
     "details-page": {
@@ -413,7 +415,8 @@
         "logout": "Terminar sessão",
         "favorites": "Favoritos",
         "add-properties": "Anunciar imóveis",
-        "hi": "Olá, "
+        "hi": "Olá, ",
+        "edit-profile": "Editar perfil"
     },
 
     "purchase-form": {

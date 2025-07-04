@@ -114,7 +114,9 @@
         "favorites-text": "Your favorite properties",
         "welcome": "Welcome",
         "announce": "Advertise Property",
-        "announce-text": "Want to sell or rent?"
+        "announce-text": "Want to sell or rent?",
+        "edit-profile": "Edit profile",
+        "edit-profile-text": "Want to edit or configure your profile?"
     },
 
     "profile": {
@@ -251,19 +253,19 @@
     },
 
     "form-errors": {
-        "category": "Category required",
-        "transaction": "Transaction required",
-        "title": "Title required",
-        "price": "Price required",
-        "square_meters": "Square meters required",
-        "description": "Description required",
-        "bathrooms": "Minimum 1 bathroom",
-        "bedrooms": "Minimum 1 bedroom",
-        "address": "Address required",
-        "city": "City required",
-        "district": "District required",
-        "images": "Images required",
-        "energy_consumption": "Energy consumption required"
+        "category": "Select at least one type of property",
+        "transaction": "Select at least one type of transaction",
+        "price": "The value of the property is mandatory",
+        "square_meters": "The surface area is mandatory",
+        "address": "The address of the property is mandatory",
+        "district": "The district of the property is mandatory.",
+        "city": "The city of the property is mandatory",
+        "description": "The description of the property is mandatory.",
+        "bathrooms": "The property must have at least one bathroom",
+        "bedrooms": "The property must have at least 1 bedroom",
+        "images": "Select at least one image of the property",
+        "documents": "Select at least one document of the property",
+        "energy_consumption": "Energy efficiency is mandatory"
     },
 
     "details-page": {
@@ -413,7 +415,8 @@
 
         "favorites": "Favorites",
         "add-properties": "Advertise properties",
-        "hi": "Hi, "
+        "hi": "Hi, ",
+        "edit-profile": "Edit profile"
     },
 
     "purchase-form": {
