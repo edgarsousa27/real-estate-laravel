@@ -220,10 +220,7 @@
                         v-if="authUser !== props.properties.user_id"
                         class="bg-white rounded-lg shadow-md overflow-hidden"
                     >
-                        <ContactForm
-                            :properties="props.properties"
-                            :contact="props.contact"
-                        />
+                        <ContactForm :properties="props.properties" />
                         <div
                             v-if="props.properties.transaction_id === 1"
                             class="mt-6 border-t border-gray-100"

@@ -12,7 +12,7 @@
                 >
                     {{ t("contact-form.number") }}
                 </button>
-                <a href="tel:{{ props.properties.user.phone_number }}">
+                <a :href="`tel:${props.properties.user.phone_number}`">
                     <button
                         v-if="number"
                         class="border bg-blue-500 border-blue-500 text-white rounded-full p-1 mt-2"
@@ -22,6 +22,7 @@
                 </a>
             </div>
         </div>
+
         <div class="mt-4">
             <h1 class="text-xl font-semibold text-blue-500">
                 {{ t("contact-form.title") }}
@@ -30,61 +31,14 @@
                 {{ t("contact-form.subtitle") }}
             </p>
         </div>
+
         <form class="space-y-4" @submit.prevent="submit">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <InputLabel
-                        for="firstName"
-                        :value="t('contact-form.name')"
-                    />
-                    <TextInput
-                        type="text"
-                        id="firstName"
-                        v-model="form.name"
-                        class="w-full"
-                    />
-                </div>
-                <div>
-                    <InputLabel
-                        for="lastName"
-                        :value="t('contact-form.lastname')"
-                    />
-                    <TextInput
-                        type="text"
-                        id="lastName"
-                        v-model="form.lastname"
-                        class="w-full"
-                    />
-                </div>
-            </div>
-
-            <div>
-                <InputLabel for="email" :value="t('contact-form.email')" />
-                <TextInput
-                    type="email"
-                    id="email"
-                    class="w-full"
-                    v-model="form.email"
-                />
-            </div>
-
-            <div>
-                <InputLabel for="phone" :value="t('contact-form.phone')" />
-                <TextInput
-                    type="tel"
-                    id="phone"
-                    class="w-full"
-                    placeholder="912345678"
-                    v-model="form.phone_number"
-                />
-            </div>
-
             <div>
                 <InputLabel for="message" :value="t('contact-form.message')" />
                 <textarea
                     id="message"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-32"
-                    v-model="form.message"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-16"
+                    v-model="form.body"
                 ></textarea>
             </div>
 
@@ -102,34 +56,26 @@
 
 <script setup>
 import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
 import { useI18n } from "vue-i18n";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
+const { t } = useI18n();
 const number = ref(false);
 
-const { t } = useI18n();
 const props = defineProps({
     properties: Object,
 });
 
 const form = useForm({
     property_id: props.properties.id,
-    name: "",
-    lastname: "",
-    email: "",
-    phone_number: "",
-    message: "",
-});
-
-onMounted(() => {
-    form.property_id = props.properties.id;
+    receiver_id: props.properties.user.id,
+    body: "",
 });
 
 function submit() {
-    form.post(route("properties.contact", { slug: props.properties.slug }), {
-        onSuccess: () => form.reset(),
+    form.post(route("message.store", { slug: props.properties.slug }), {
+        onSuccess: () => form.reset("body"),
     });
 }
 </script>
