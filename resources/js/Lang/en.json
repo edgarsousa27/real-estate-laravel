@@ -416,7 +416,8 @@
         "favorites": "Favorites",
         "add-properties": "Advertise properties",
         "hi": "Hi, ",
-        "edit-profile": "Edit profile"
+        "edit-profile": "Edit profile",
+        "messages": "Messages"
     },
 
     "purchase-form": {
@@ -633,5 +634,17 @@
     "myproperties": {
         "text": "You haven't advertised any properties yet.",
         "text2": "Click on the “Advertise Property” button to start promoting your properties and attracting interested parties easily."
+    },
+
+    "messages": {
+        "title": "My Messages",
+        "text": "No message was found.",
+        "to": "To: ",
+        "from": "From: ",
+        "property": "Property ",
+        "message": "Message",
+        "message-from": "Message from",
+        "cancel": "Cancel",
+        "reply": "Reply"
     }
 }

@@ -83,6 +83,7 @@ import {
     faKitchenSet,
     faHouseChimney,
     faArrowRotateLeft,
+    faComments,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -165,7 +166,8 @@ library.add(
     faShieldHalved,
     faKitchenSet,
     faHouseChimney,
-    faArrowRotateLeft
+    faArrowRotateLeft,
+    faComments
 );
 
 const appName = import.meta.env.VITE_APP_NAME || "Real Estate";

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,10 @@ Route::middleware('auth', 'role:user')->prefix('dashboard')->group(function () {
 
     Route::delete('my-properties/{id}', [PropertyController::class, 'destroy'])
         ->name('properties.destroy');
+
+    Route::get('/message', [MessageController::class, 'show'])
+        ->name('message.show');
+
+    Route::post('/message/{property:slug}', [MessageController::class, 'store'])
+        ->name('message.store');
 });

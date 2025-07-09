@@ -73,9 +73,9 @@ const form = useForm({
     body: "",
 });
 
-function submit() {
-    form.post(route("message.store", { slug: props.properties.slug }), {
+const submit = () => {
+    form.post(route("message.store", { property: props.properties.slug }), {
         onSuccess: () => form.reset("body"),
     });
-}
+};
 </script>

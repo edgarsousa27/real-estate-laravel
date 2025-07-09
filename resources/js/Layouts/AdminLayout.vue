@@ -138,6 +138,18 @@
                     }}</span>
                 </NavLink>
                 <NavLink
+                    :href="route('message.show')"
+                    :active="$page.url.startsWith('/dashboard/message')"
+                >
+                    <font-awesome-icon
+                        icon="comments"
+                        class="mr-3 text-white"
+                    />
+                    <span class="text-white">{{
+                        t("admin-dashboard.messages")
+                    }}</span>
+                </NavLink>
+                <NavLink
                     :href="route('show.favorites')"
                     :active="$page.url.startsWith('/dashboard/favorites')"
                 >

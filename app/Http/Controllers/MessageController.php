@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\Property;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class MessageController extends Controller
 {
@@ -32,26 +34,41 @@ class MessageController extends Controller
     {
         $sender = Auth::user();
 
-        $validator = $request->validate([
-            'body' => ['required', 'string', 'max:255']
+        $validated = $request->validate([
+            'body' => ['required', 'string', 'max:255'],
+            'receiver_id' => ['required', 'exists:users,id'],
         ]);
 
-        $message = Message::create([
+        Message::create([
             'property_id' => $property->id,
             'sender_id' => $sender->id,
-            'receiver_id' => $property->user_id,
-            'body' => $validator['body']
+            'receiver_id' => $validated['receiver_id'],
+            'body' => $validated['body'],
         ]);
 
-        return response()->json($message);
+        return redirect()->back();
     }
+
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Property $property)
     {
-        //
+        $user = Auth::user();
+
+        $messages = Message::with(['sender', 'receiver', 'property'])
+            ->where('receiver_id', $user->id)
+            ->orWhere('sender_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+        return Inertia::render('Properties/Messages', [
+            'messages' => $messages,
+            'property' => $property
+        ]);
     }
 
     /**

@@ -416,7 +416,8 @@
         "favorites": "Favoritos",
         "add-properties": "Anunciar imóveis",
         "hi": "Olá, ",
-        "edit-profile": "Editar perfil"
+        "edit-profile": "Editar perfil",
+        "messages": "Mensagens"
     },
 
     "purchase-form": {
@@ -633,5 +634,17 @@
     "myproperties": {
         "text": "Você ainda não anunciou nenhum imóvel.",
         "text2": "Clique no botão “Anunciar Imóvel” para começar a divulgar os seus imóveis e atrair interessados facilmente."
+    },
+
+    "messages": {
+        "title": "As minhas mensagens",
+        "text": "NNão foi encontrada nenhuma mensagem.",
+        "to": "Para: ",
+        "from": "De: ",
+        "property": "Imóvel",
+        "message": "Mensagem",
+        "message-from": "Mensagem de",
+        "cancel": "Cancelar",
+        "reply": "Responder"
     }
 }
