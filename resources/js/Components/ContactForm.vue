@@ -59,6 +59,9 @@ import InputLabel from "@/Components/InputLabel.vue";
 import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const { t } = useI18n();
 const number = ref(false);
@@ -75,7 +78,9 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("message.store", { property: props.properties.slug }), {
-        onSuccess: () => form.reset("body"),
+        onSuccess: () => {
+            toast.success("Mensagem enviada!"), form.reset("body");
+        },
     });
 };
 </script>

@@ -118,8 +118,10 @@ import { useI18n } from "vue-i18n";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputModal from "@/Components/InputModal.vue";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const { t } = useI18n();
+const toast = useToast();
 
 const props = defineProps({
     messages: Array,
@@ -152,6 +154,7 @@ const closeModal = () => {
 const submit = () => {
     form.post(route("message.store", { property: form.property_slug }), {
         onSuccess: () => {
+            toast.success("Mensagem enviada!");
             form.reset();
             closeModal();
         },

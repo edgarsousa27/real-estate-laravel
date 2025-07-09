@@ -66,15 +66,12 @@ const initializeMap = async () => {
             fillOpacity: 0.6,
             radius: 500,
         }).addTo(map);
-
-        console.log("Map initialized successfully");
     } catch (error) {
         console.error("Error initializing map:", error);
     }
 };
 
 onMounted(() => {
-    console.log("Component mounted, initializing map...");
     initializeMap();
 });
 </script>
