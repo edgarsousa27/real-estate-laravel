@@ -12,11 +12,11 @@ use App\Sorts\SortByPrice;
 use App\Filters\TransactionFilter;
 use App\Filters\TypePropertyFilter;
 use App\Models\Category;
-use App\Models\Contact;
 use App\Models\Favorites;
 use App\Services\OpenCageService;
 use App\Sorts\SortByDate;
 use App\Sorts\SortBySurfaceArea;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedSort;
 use Illuminate\Support\Facades\File;
@@ -399,7 +399,8 @@ class PropertyController extends Controller
             'properties' => $property,
             'authUser' => Auth::id(),
             'favorites' => $favorites,
-            'similarProperties' => $similarProperties
+            'similarProperties' => $similarProperties,
+            'breadcrumbs' => Breadcrumbs::generate('properties.show', $property)
         ]);
     }
 

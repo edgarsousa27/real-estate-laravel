@@ -90,6 +90,45 @@
                     class="w-full sm:w-full md:w-full lg:w-2/3 xl:w-2/3 sm:rounded-lg md:rounded-xl overflow-hidden"
                 >
                     <div>
+                        <nav
+                            aria-label="breadcrumb"
+                            class="text-sm text-gray-600 py-3"
+                        >
+                            <ol class="flex space-x-2">
+                                <li
+                                    v-for="(crumb, index) in breadcrumbs"
+                                    :key="index"
+                                    class="flex items-center"
+                                >
+                                    <template v-if="crumb.url">
+                                        <a
+                                            :href="crumb.url"
+                                            class="hover:underline font-semibold"
+                                            :class="{
+                                                'text-blue-500':
+                                                    index ===
+                                                    breadcrumbs.length - 1,
+                                            }"
+                                            >{{ crumb.title }}</a
+                                        >
+                                    </template>
+                                    <template v-else>
+                                        <span class="text-gray-400">{{
+                                            crumb.title
+                                        }}</span>
+                                    </template>
+
+                                    <span
+                                        v-if="index !== breadcrumbs.length - 1"
+                                        class="mx-1 text-xl"
+                                        >></span
+                                    >
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div>
                         <PropertiesShow
                             :images="props.properties.media"
                             :properties="props.properties"
@@ -264,18 +303,29 @@ import EnergyBalance from "./Partials/EnergyBalance.vue";
 import CreditSimulator from "@/Components/CreditSimulator.vue";
 import Map from "@/Components/Map.vue";
 import Properties from "@/Components/Properties.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+import { watch } from "vue";
+
+const $page = usePage();
 
 const props = defineProps({
     properties: Object,
     authUser: Number,
     favorites: Array,
     similarProperties: Array,
+    breadcrumbs: Array,
 });
 
 const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+watch(
+    () => $page.props.locale,
+    (newLocale) => {
+        locale.value = newLocale;
+    }
+);
 </script>
