@@ -646,5 +646,18 @@
         "message-from": "Message from",
         "cancel": "Cancel",
         "reply": "Reply"
+    },
+
+    "breadcrumbs": {
+        "home": "Home",
+        "properties": "Properties",
+        "district": "District of {district}",
+        "buy-house": "Buy a house in {city}",
+        "buy-apart": "Buy an apartment in {city}",
+        "buy-land": "Buy land in {city}",
+        "rent-house": "Rent a house in {city}",
+        "rent-apart": "Rent an apartment in {city}",
+        "rent-land": "Rent a land in {city}",
+        "announce": "Property"
     }
 }

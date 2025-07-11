@@ -109,13 +109,17 @@
                                                     index ===
                                                     breadcrumbs.length - 1,
                                             }"
-                                            >{{ crumb.title }}</a
+                                            >{{
+                                                t(crumb.title, crumb.params)
+                                            }}</a
                                         >
                                     </template>
                                     <template v-else>
-                                        <span class="text-gray-400">{{
-                                            crumb.title
-                                        }}</span>
+                                        <span class="text-gray-400">
+                                            {{
+                                                t(crumb.title, crumb.params)
+                                            }}</span
+                                        >
                                     </template>
 
                                     <span

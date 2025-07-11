@@ -646,5 +646,18 @@
         "message-from": "Mensagem de",
         "cancel": "Cancelar",
         "reply": "Responder"
+    },
+
+    "breadcrumbs": {
+        "home": "Home",
+        "properties": "Imóveis",
+        "district": "Distrito de {district}",
+        "buy-house": "Comprar uma casa em {city}",
+        "buy-apart": "Comprar um apartamento em {city}",
+        "buy-land": "Comprar um terreno em {city}",
+        "rent-house": "Arrendar uma casa em {city}",
+        "rent-apart": "Arrendar um apartamento em {city}",
+        "rent-land": "Arrendar um terreno em {city}",
+        "announce": "Imóvel"
     }
 }
