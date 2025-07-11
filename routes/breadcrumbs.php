@@ -44,67 +44,7 @@ Breadcrumbs::for('properties.city', function (BreadcrumbTrail $trail, $propertie
     }
 });
 
-Breadcrumbs::for('search', function (BreadcrumbTrail $trail, $properties) {
-    $trail->parent('properties.city', $properties);
-
-    if ($properties->transaction_id == 1) {
-        if ($properties->category_id == 1) {
-            $trail->push(
-                'breadcrumbs.buy-house',
-                route('search.buy', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city],
-                ]
-            );
-        } else if ($properties->category_id == 2) {
-            $trail->push(
-                'breadcrumbs.buy-apart',
-                route('search.buy', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city],
-                ]
-            );
-        } else {
-            $trail->push(
-                'breadcrumbs-buy-land',
-                route('search.buy', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city]
-                ]
-            );
-        }
-    }
-
-    if ($properties->transaction_id == 2) {
-        if ($properties->category_id == 1) {
-            $trail->push(
-                'breadcrumbs.rent-house',
-                route('search.rent', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city]
-                ]
-            );
-        } else if ($properties->category_id == 2) {
-            $trail->push(
-                'breadcrumbs.rent-apart',
-                route('search.rent', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city]
-                ]
-            );
-        } else {
-            $trail->push(
-                'breadcrumbs.rent-land',
-                route('search.rent', ['query' => $properties->city]),
-                [
-                    'params' => ['city' => $properties->city]
-                ]
-            );
-        }
-    }
-});
-
 Breadcrumbs::for('properties.show', function (BreadcrumbTrail $trail, $properties) {
-    $trail->parent('search', $properties);
+    $trail->parent('properties.city', $properties);
     $trail->push('breadcrumbs.announce');
 });

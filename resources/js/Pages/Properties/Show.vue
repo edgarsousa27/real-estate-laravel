@@ -92,9 +92,9 @@
                     <div>
                         <nav
                             aria-label="breadcrumb"
-                            class="text-sm text-gray-600 py-3"
+                            class="text-sm text-gray-600 py-3 overflow-x-auto"
                         >
-                            <ol class="flex space-x-2">
+                            <ol class="flex space-x-2 whitespace-nowrap">
                                 <li
                                     v-for="(crumb, index) in breadcrumbs"
                                     :key="index"
@@ -103,30 +103,28 @@
                                     <template v-if="crumb.url">
                                         <a
                                             :href="crumb.url"
-                                            class="hover:underline font-semibold"
+                                            class="hover:underline font-normal"
                                             :class="{
                                                 'text-blue-500':
                                                     index ===
                                                     breadcrumbs.length - 1,
                                             }"
-                                            >{{
-                                                t(crumb.title, crumb.params)
-                                            }}</a
                                         >
+                                            {{ t(crumb.title, crumb.params) }}
+                                        </a>
                                     </template>
                                     <template v-else>
-                                        <span class="text-gray-400">
-                                            {{
-                                                t(crumb.title, crumb.params)
-                                            }}</span
-                                        >
+                                        <span class="text-blue-500 font-bold">
+                                            {{ t(crumb.title, crumb.params) }}
+                                        </span>
                                     </template>
 
                                     <span
                                         v-if="index !== breadcrumbs.length - 1"
-                                        class="mx-1 text-xl"
-                                        >></span
+                                        class="mx-1 text-lg"
                                     >
+                                        >
+                                    </span>
                                 </li>
                             </ol>
                         </nav>
