@@ -143,7 +143,7 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             Property::class => [
-                'filterableAttributes' => ['district', 'city', 'postal_code', 'transaction_id'],
+                'filterableAttributes' => ['district', 'city', 'postal_code', 'transaction_id', 'status'],
                 'sortableAttributes' => ['price', '-price', 'created_at', '-created_at', 'square_meters', '-square_meters']
             ],
             User::class => [

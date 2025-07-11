@@ -111,6 +111,7 @@ class Property extends Model implements HasMedia
             'price' => (float)$this->price,
             'created_at' => $this->created_at->toISOString(),
             'square_meters' => (int)$this->square_meters,
+            'status' => $this->status,
         ];
 
         return array_merge($array, $search);

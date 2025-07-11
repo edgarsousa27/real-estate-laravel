@@ -47,6 +47,5 @@ const { t } = useI18n();
 
 const props = defineProps({
     count: Number,
-    query: String,
 });
 </script>

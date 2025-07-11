@@ -70,7 +70,7 @@ class PropertyController extends Controller
 
         if ($query) {
             $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort) {
-                $options['filter'] = 'transaction_id = 1';
+                $options['filter'] = ['transaction_id = 1', 'status = "active"'];
 
                 if ($meiliSort) {
                     $options['sort'] = $meiliSort;
@@ -80,10 +80,9 @@ class PropertyController extends Controller
             })->paginate(15);
         }
 
-        if ($properties->isEmpty()) {
+        if ($properties->total() == 0) {
             return Inertia::render('Properties/NoResults', [
-                'count' => $properties->total(),
-                'query' => $query
+                'count' => 0,
             ]);
         }
 
@@ -113,7 +112,7 @@ class PropertyController extends Controller
 
         if ($query) {
             $properties = Property::search($query, function ($meilisearch, $query, $options) use ($meiliSort) {
-                $options['filter'] = 'transaction_id = 2';
+                $options['filter'] = ['transaction_id = 2', 'status = "active"'];
 
                 if ($meiliSort) {
                     $options['sort'] = $meiliSort;
@@ -123,9 +122,9 @@ class PropertyController extends Controller
             })->paginate(15);
         }
 
-        if ($properties->isEmpty()) {
+        if ($properties->total() == 0) {
             return Inertia::render('Properties/NoResults', [
-                'count' => $properties->total(),
+                'count' => 0,
                 'query' => $query
             ]);
         }
@@ -133,7 +132,6 @@ class PropertyController extends Controller
         $properties->load(['media' => function ($query) {
             $query->where('collection_name', 'images');
         }]);
-
 
         $categories = Category::select('id', 'name')->get();
 
