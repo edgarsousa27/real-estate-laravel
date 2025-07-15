@@ -658,6 +658,7 @@
         "rent-house": "Rent a house in {city}",
         "rent-apart": "Rent an apartment in {city}",
         "rent-land": "Rent a land in {city}",
-        "announce": "Property"
+        "announce": "Property",
+        "lands": "Lands"
     }
 }

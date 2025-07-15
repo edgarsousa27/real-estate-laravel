@@ -7,13 +7,17 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('breadcrumbs.home', route(('welcome')));
 });
 
-Breadcrumbs::for('properties', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('properties', function (BreadcrumbTrail $trail, $properties) {
     $trail->parent('home');
-    $trail->push('breadcrumbs.properties', route('properties'));
+    if ($properties->category_id !== 3) {
+        $trail->push('breadcrumbs.properties', route('properties'));
+    } else {
+        $trail->push('breadcrumbs.lands', route('properties'));
+    }
 });
 
 Breadcrumbs::for('properties.district', function (BreadcrumbTrail $trail, $properties) {
-    $trail->parent('properties');
+    $trail->parent('properties', $properties);
 
     if ($properties->transaction_id == 1) {
         $trail->push(

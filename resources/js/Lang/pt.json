@@ -658,6 +658,7 @@
         "rent-house": "Arrendar uma casa em {city}",
         "rent-apart": "Arrendar um apartamento em {city}",
         "rent-land": "Arrendar um terreno em {city}",
-        "announce": "Imóvel"
+        "announce": "Imóvel",
+        "lands": "Terrenos"
     }
 }
