@@ -10,7 +10,7 @@
             />
         </div>
 
-        <div v-if="step === 2">
+        <div v-if="step === 2 && form.category_id !== 3">
             <StepTwoForm
                 :form="form"
                 :district="props.district"
@@ -20,11 +20,12 @@
             />
         </div>
 
-        <div v-if="step === 2 && form.category_id === 3">
-            <StepThirdForm :form="form" @field-updated="clearError" />
-        </div>
-
-        <div v-if="step === 3">
+        <div
+            v-if="
+                (step === 2 && form.category_id === 3) ||
+                (step === 3 && form.category_id !== 3)
+            "
+        >
             <StepThirdForm :form="form" @field-updated="clearError" />
         </div>
 
@@ -42,7 +43,7 @@
                 class="px-6 py-2 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
                 {{
-                    step === totalSteps
+                    isLastStep
                         ? t("properties-form.submit")
                         : t("properties-form.next")
                 }}
@@ -52,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import StepOneForm from "./StepOneForm.vue";
 import StepTwoForm from "./StepTwoForm.vue";
 import StepThirdForm from "./StepThirdForm.vue";
@@ -71,7 +72,14 @@ const props = defineProps({
 });
 
 const step = ref(1);
-const totalSteps = 3;
+
+const totalSteps = computed(() => {
+    return form.category_id === 3 ? 2 : 3;
+});
+
+const isLastStep = computed(() => {
+    return step.value === totalSteps.value;
+});
 
 const form = useForm({
     category_id: null,
@@ -172,22 +180,32 @@ const clearError = (fieldName) => {
 
 const nextStep = () => {
     if (step.value === 1 && !validateStepOne()) return;
-    if (step.value === 2 && !validateSecondStep()) return;
-    if (step.value === 3 && !validateThirdStep()) return;
-    if (step.value < totalSteps) {
-        step.value++;
-        form.clearErrors();
-    } else {
+    if (step.value === 2) {
+        if (form.category_id === 3) {
+            if (!validateThirdStep()) return;
+        } else {
+            if (!validateSecondStep()) return;
+        }
+    }
+
+    if (step.value === 3 && form.category_id !== 3 && !validateThirdStep())
+        return;
+
+    if (isLastStep.value) {
         form.post(route("properties.store"), {
             forceFormData: true,
             onSuccess: () => {
                 toast.success(t("notifications.property.add"));
                 form.reset();
+                step.value = 1;
             },
             onError: () => {
                 toast.error(t("notifications.error.create-property"));
             },
         });
+    } else {
+        step.value++;
+        form.clearErrors();
     }
 };
 
@@ -197,6 +215,16 @@ const prevStep = () => {
         form.clearErrors();
     }
 };
+
+watch(
+    () => form.category_id,
+    (newCategory, oldCategory) => {
+        if (newCategory !== oldCategory && step.value > 1) {
+            step.value = 1;
+            form.clearErrors();
+        }
+    }
+);
 
 watch(
     () => form.city,
