@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Filters\StatusPropertyFilter;
 use App\Filters\TypePropertyFilter;
 use App\Http\Controllers\Controller;
+use App\Mail\PropertyActivated;
+use App\Mail\PropertyDeclined;
 use App\Models\Category;
 use App\Models\Favorites;
 use App\Models\Property;
@@ -12,7 +14,9 @@ use App\Models\RentsContract;
 use App\Models\SalesContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
+use PHPUnit\Architecture\Asserts\Properties\Elements\PropertyDescription;
 use Spatie\MediaLibrary\Support\MediaStream;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -131,6 +135,15 @@ class AdminController extends Controller
             'status' => $request->status,
             'reason_for_refusal' => $request->reason_for_refusal,
         ]);
+
+        if ($property->status === 'active') {
+            Mail::to($property->user->email)->send(new PropertyActivated($property));
+        }
+
+        if ($property->status === 'refused') {
+            Mail::to($property->user->email)->send(new PropertyDeclined($property));
+        }
+
 
         $property->save();
 
