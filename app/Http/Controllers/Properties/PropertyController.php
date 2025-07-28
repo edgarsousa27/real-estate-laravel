@@ -160,10 +160,13 @@ class PropertyController extends Controller
                 AllowedSort::custom('price', new SortbyPrice(), 'price'),
                 AllowedSort::custom('created_at', new SortByDate(), 'created_at'),
                 AllowedSort::custom('surface', new SortBySurfaceArea(), 'square_meters')
-            ])
-            ->with('media');
+            ]);
 
         $properties = $query->where('status', 'active')->paginate(15)->appends(request()->query());
+
+        $properties->load(['media' => function ($query) {
+            $query->where('collection_name', 'images');
+        }]);
 
         if ($properties->isEmpty()) {
             return Inertia::render('Properties/NoResults', [
